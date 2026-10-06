@@ -836,12 +836,12 @@ html.desk-stage #tour #p-coord .web{max-height:min(480px,70%)}
 .ways-card .mini-phone .screen{border-radius:10px;min-height:200px}
 /* Full chat card (f-response / f-urgent) — same visual language as ways-card, room for every beat */
 .chat-card{width:100%;max-width:440px;background:#fff;border-radius:16px;box-shadow:0 8px 22px rgba(10,36,107,.12);
-  display:grid;grid-template-rows:auto minmax(0,1fr);min-height:0;max-height:100%;overflow:hidden;text-align:left;align-self:stretch}
+  display:grid;grid-template-rows:auto auto;height:auto;min-height:0;max-height:100%;overflow:hidden;text-align:left;align-self:center}
 .chat-card-top{display:flex;align-items:center;gap:10px;padding:12px 14px;border-bottom:1px solid rgba(10,36,107,.08);background:#FAFBFE}
 .chat-card-top i{width:28px;height:28px;border-radius:50%;background:var(--grad-btn);flex:none;display:block}
 .chat-card-top b{font:700 13px/1.2 var(--font-display);color:var(--ink)}
 .chat-card-top small{display:block;font:500 11px/1.2 var(--font-body);color:var(--ink-soft);margin-top:2px}
-.chat-thread{padding:12px 14px;display:flex;flex-direction:column;justify-content:flex-end;gap:6px;min-height:0;overflow:hidden;overscroll-behavior:contain}
+.chat-thread{padding:12px 14px;display:flex;flex-direction:column;justify-content:flex-start;gap:6px;min-height:0;overflow:auto;overscroll-behavior:contain}
 .chat-thread .msg-line{display:flex;gap:8px;align-items:flex-end;max-width:100%}
 .chat-thread .msg-line.me{align-self:flex-end;flex-direction:row-reverse}
 .chat-thread .msg-line.them{align-self:flex-start}
@@ -1241,8 +1241,8 @@ article.slide[data-close="1"] .close-foot{
   #f-response .frame,#f-urgent .frame{gap:8px;max-width:100%;overflow:hidden}
   #f-response .cap,#f-urgent .cap{font-size:22px}
   #f-response .sub,#f-urgent .sub,#f-urgent .pack-note{font-size:13px;margin:0}
-  #f-response .chat-card,#f-urgent .chat-card{width:100%;max-width:100%;max-height:min(46vh,360px)}
-  #f-response .chat-thread,#f-urgent .chat-thread{padding:10px;gap:5px}
+  #f-response .chat-card,#f-urgent .chat-card{width:100%;max-width:100%;max-height:min(58vh,440px);height:auto;align-self:stretch}
+  #f-response .chat-thread,#f-urgent .chat-thread{padding:10px;gap:5px;overflow:auto;justify-content:flex-start}
   #f-response .bub,#f-urgent .bub{font-size:12px;padding:8px 10px}
   #f-response .meta,#f-urgent .meta{font-size:11px}
   #f-response .join-chip,#f-urgent .join-chip{font-size:11px;padding:5px 10px}
@@ -1347,9 +1347,9 @@ html.desk-stage #f-time .legend{flex-wrap:wrap;gap:8px 12px;margin-top:8px}
 html.desk-stage #f-time .ev,html.desk-stage #f-time .gap span{font-size:11px}
 html.desk-stage #f-time .panel-label{font-size:12px}
 html.desk-stage #tour #f-response .chat-card,
-html.desk-stage #tour #f-urgent .chat-card{width:100%;max-width:440px;height:100%;max-height:100%;min-height:0;align-self:stretch}
+html.desk-stage #tour #f-urgent .chat-card{width:100%;max-width:440px;height:auto;max-height:100%;min-height:0;align-self:center}
 html.desk-stage #tour #f-response .desk-hero,
-html.desk-stage #tour #f-urgent .desk-hero{align-content:stretch;min-height:0;overflow:hidden;height:100%}
+html.desk-stage #tour #f-urgent .desk-hero{place-items:center;align-content:center;min-height:0;overflow:hidden;height:100%}
 html:not(.desk-stage) #p-time .desk-callout{display:none!important}
 html:not(.desk-stage) #p-time .phone-callout{display:grid}
 html.desk-stage #tour article[data-close="1"] .frame{
@@ -1927,26 +1927,26 @@ html.demo-embed #tour .hint2{display:none}
             <h3>What your team member feels <small>Sample data</small></h3>
             <div class="spark">
               <div class="spark-top"><b>Stress</b><span>↓ over time</span></div>
-              <svg viewBox="0 0 100 52" aria-hidden="true">
-                <line x1="14" y1="6" x2="14" y2="40" stroke="rgba(10,36,107,.25)" stroke-width="1"/>
-                <line x1="14" y1="36" x2="94" y2="40" stroke="rgba(10,36,107,.25)" stroke-width="1"/>
-                <text x="2" y="12" fill="#0A246B" font-size="8" font-weight="600">Stress</text>
-                <text x="78" y="50" fill="#0A246B" font-size="8" font-weight="600">Time</text>
-                <circle class="base-mark pop" data-at="1400" cx="18" cy="10" r="2.2" fill="#D81088"/>
-                <text x="22" y="8" fill="#0A246B" font-size="7" font-weight="600">Start</text>
-                <path class="draw" data-at="1500" pathLength="1" d="M18 10 C 40 14, 62 24, 90 32" fill="none" stroke="#D81088" stroke-width="2.5" stroke-linecap="round"/>
+              <svg viewBox="0 0 110 62" aria-hidden="true">
+                <text transform="rotate(-90 10 28)" x="10" y="28" fill="#0A246B" font-size="8" font-weight="700" text-anchor="middle">Stress</text>
+                <line x1="22" y1="8" x2="22" y2="44" stroke="rgba(10,36,107,.25)" stroke-width="1"/>
+                <line x1="22" y1="44" x2="102" y2="44" stroke="rgba(10,36,107,.25)" stroke-width="1"/>
+                <text x="102" y="58" fill="#0A246B" font-size="8" font-weight="700" text-anchor="end">Time</text>
+                <circle class="base-mark pop" data-at="1400" cx="28" cy="12" r="2.2" fill="#D81088"/>
+                <text x="32" y="22" fill="#0A246B" font-size="7" font-weight="600">Start</text>
+                <path class="draw" data-at="1500" pathLength="1" d="M28 12 C 50 16, 72 26, 98 36" fill="none" stroke="#D81088" stroke-width="2.5" stroke-linecap="round"/>
               </svg>
             </div>
             <div class="spark">
               <div class="spark-top"><b>Focus</b><span>↑ over time</span></div>
-              <svg viewBox="0 0 100 52" aria-hidden="true">
-                <line x1="14" y1="6" x2="14" y2="40" stroke="rgba(10,36,107,.25)" stroke-width="1"/>
-                <line x1="14" y1="36" x2="94" y2="40" stroke="rgba(10,36,107,.25)" stroke-width="1"/>
-                <text x="2" y="12" fill="#0A246B" font-size="8" font-weight="600">Focus</text>
-                <text x="78" y="50" fill="#0A246B" font-size="8" font-weight="600">Time</text>
-                <circle class="base-mark pop" data-at="1900" cx="18" cy="36" r="2.2" fill="#0A6B3A"/>
-                <text x="22" y="40" fill="#0A246B" font-size="7" font-weight="600">Start</text>
-                <path class="draw" data-at="2000" pathLength="1" d="M18 32 C 40 28, 62 16, 90 8" fill="none" stroke="#0A6B3A" stroke-width="2.5" stroke-linecap="round"/>
+              <svg viewBox="0 0 110 62" aria-hidden="true">
+                <text transform="rotate(-90 10 28)" x="10" y="28" fill="#0A246B" font-size="8" font-weight="700" text-anchor="middle">Focus</text>
+                <line x1="22" y1="8" x2="22" y2="44" stroke="rgba(10,36,107,.25)" stroke-width="1"/>
+                <line x1="22" y1="44" x2="102" y2="44" stroke="rgba(10,36,107,.25)" stroke-width="1"/>
+                <text x="102" y="58" fill="#0A246B" font-size="8" font-weight="700" text-anchor="end">Time</text>
+                <circle class="base-mark pop" data-at="1900" cx="28" cy="38" r="2.2" fill="#0A6B3A"/>
+                <text x="32" y="50" fill="#0A246B" font-size="7" font-weight="600">Start</text>
+                <path class="draw" data-at="2000" pathLength="1" d="M28 38 C 50 32, 72 18, 98 12" fill="none" stroke="#0A6B3A" stroke-width="2.5" stroke-linecap="round"/>
               </svg>
             </div>
           </div>
@@ -1955,24 +1955,24 @@ html.demo-embed #tour .hint2{display:none}
             <p class="spark-cap">Aggregate trends, groups of 10+.</p>
             <div class="spark">
               <div class="spark-top"><b>Team stress</b><span>Groups of 10+</span></div>
-              <svg viewBox="0 0 100 52" aria-hidden="true">
-                <line x1="14" y1="6" x2="14" y2="40" stroke="rgba(10,36,107,.25)" stroke-width="1"/>
-                <line x1="14" y1="36" x2="94" y2="40" stroke="rgba(10,36,107,.25)" stroke-width="1"/>
-                <text x="2" y="12" fill="#0A246B" font-size="8" font-weight="600">Stress</text>
-                <text x="78" y="50" fill="#0A246B" font-size="8" font-weight="600">Time</text>
-                <circle class="base-mark pop" data-at="2300" cx="18" cy="12" r="2.2" fill="#D81088"/>
-                <path class="draw" data-at="2400" pathLength="1" d="M18 12 C 42 14, 66 24, 90 30" fill="none" stroke="#D81088" stroke-width="2.5" stroke-linecap="round"/>
+              <svg viewBox="0 0 110 62" aria-hidden="true">
+                <text transform="rotate(-90 10 28)" x="10" y="28" fill="#0A246B" font-size="8" font-weight="700" text-anchor="middle">Stress</text>
+                <line x1="22" y1="8" x2="22" y2="44" stroke="rgba(10,36,107,.25)" stroke-width="1"/>
+                <line x1="22" y1="44" x2="102" y2="44" stroke="rgba(10,36,107,.25)" stroke-width="1"/>
+                <text x="102" y="58" fill="#0A246B" font-size="8" font-weight="700" text-anchor="end">Time</text>
+                <circle class="base-mark pop" data-at="2300" cx="28" cy="14" r="2.2" fill="#D81088"/>
+                <path class="draw" data-at="2400" pathLength="1" d="M28 14 C 52 16, 76 26, 98 34" fill="none" stroke="#D81088" stroke-width="2.5" stroke-linecap="round"/>
               </svg>
             </div>
             <div class="spark">
               <div class="spark-top"><b>Team focus</b><span>Aggregate only</span></div>
-              <svg viewBox="0 0 100 52" aria-hidden="true">
-                <line x1="14" y1="6" x2="14" y2="40" stroke="rgba(10,36,107,.25)" stroke-width="1"/>
-                <line x1="14" y1="36" x2="94" y2="40" stroke="rgba(10,36,107,.25)" stroke-width="1"/>
-                <text x="2" y="12" fill="#0A246B" font-size="8" font-weight="600">Focus</text>
-                <text x="78" y="50" fill="#0A246B" font-size="8" font-weight="600">Time</text>
-                <circle class="base-mark pop" data-at="2800" cx="18" cy="34" r="2.2" fill="#0A6B3A"/>
-                <path class="draw" data-at="2900" pathLength="1" d="M18 30 C 42 26, 66 14, 90 8" fill="none" stroke="#0A6B3A" stroke-width="2.5" stroke-linecap="round"/>
+              <svg viewBox="0 0 110 62" aria-hidden="true">
+                <text transform="rotate(-90 10 28)" x="10" y="28" fill="#0A246B" font-size="8" font-weight="700" text-anchor="middle">Focus</text>
+                <line x1="22" y1="8" x2="22" y2="44" stroke="rgba(10,36,107,.25)" stroke-width="1"/>
+                <line x1="22" y1="44" x2="102" y2="44" stroke="rgba(10,36,107,.25)" stroke-width="1"/>
+                <text x="102" y="58" fill="#0A246B" font-size="8" font-weight="700" text-anchor="end">Time</text>
+                <circle class="base-mark pop" data-at="2800" cx="28" cy="36" r="2.2" fill="#0A6B3A"/>
+                <path class="draw" data-at="2900" pathLength="1" d="M28 36 C 52 30, 76 18, 98 12" fill="none" stroke="#0A6B3A" stroke-width="2.5" stroke-linecap="round"/>
               </svg>
             </div>
           </div>
@@ -2919,6 +2919,7 @@ window.__employerDemo={
     const scrib=$('appsScribble');
     if(scrib && s.id==='p-coord') scrib.classList.add('on');
     s.style.filter='none';
+    pinChatThread(s,true);
     fitFor=-1; scheduleFit();
   },
   lastBuildMs(){
@@ -2930,6 +2931,14 @@ window.__employerDemo={
     return m;
   }
 };
+function pinChatThread(s,finalFrame){
+  const thread=s&&s.querySelector('.chat-thread');
+  if(!thread)return;
+  const pending=[...thread.querySelectorAll('[data-at]')].some(el=>!el.classList.contains('in'));
+  /* Urgent final: keep the first message in view. Else follow the latest beat. */
+  if((finalFrame||!pending)&&s.id==='f-urgent'){thread.scrollTop=0;return;}
+  if(thread.scrollHeight>thread.clientHeight+8)thread.scrollTop=thread.scrollHeight;
+}
 function collectSlides(){
   applyDemoFlags();
   const phone=isPhoneLayout();
@@ -3231,8 +3240,7 @@ function enterSlide(i,opts){
     lastChatReveal=now+wait;
     const doScroll=()=>{
       if(!chatThread||slides[cur]!==s)return;
-      const overflow=chatThread.scrollHeight>chatThread.clientHeight+8;
-      if(overflow)chatThread.scrollTo({top:chatThread.scrollHeight,behavior:reduce?'auto':'smooth'});
+      pinChatThread(s,false);
     };
     if(wait>0)slideTimeout(doScroll,wait); else doScroll();
   };
@@ -3247,6 +3255,7 @@ function enterSlide(i,opts){
   s.classList.add('active','entering');
   s.style.opacity='';s.style.visibility='';
   if(reduce||opts.final)fireAll();
+  if(chatThread)pinChatThread(s,!!opts.final);
   if(s.hasAttribute('data-walk')){
     if(opts.final){
       elapsed=Math.max(elapsed,(WALK_LAST+1)*WALK_MS);

@@ -1,4 +1,4 @@
-# Transition check AFTER `7c0d0e58`
+# Transition check AFTER `2d1da2b3`
 
 ## Diagnose summary (fixed)
 - Leave/enter state machine (LEAVING 280ms → hide/reset → ENTERING); builds start only on enter.
