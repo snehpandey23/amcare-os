@@ -1,4 +1,6 @@
-# Transition check AFTER `debb1a07`
+# Transition check AFTER `e162838c`
+
+_Generated on cleanup tree immediately before commit `e162838c` (demo.html identical to pre-commit tip)._
 
 ## Diagnose summary (fixed)
 - Leave/enter state machine (LEAVING 280ms → hide/reset → ENTERING); builds start only on enter.

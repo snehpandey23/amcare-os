@@ -1,4 +1,4 @@
-# Release gate report 
+# Release gate report `e162838c`
 
 - **css-coverage**: PASS — MISSING 0
 - **content-grep**: PASS — no free-care claims; ok
