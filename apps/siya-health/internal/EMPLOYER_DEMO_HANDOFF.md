@@ -2,7 +2,7 @@
 
 **Page:** `siya.health/employers/demo`
 **Design source of truth:** `apps/siya-health/internal/employer-demo-prototype.html`
-**Last updated:** 2026-10-02
+**Last updated:** 2026-10-03
 
 ---
 
@@ -24,25 +24,51 @@ For each feedback item:
 2. Pick a real-world reference the viewer already knows (a calendar app day view, a phone lock-screen notification, a voicemail list, a chat app) and follow its conventions. Never use abstract chips or floating labels to stand in for a real object.
 3. Write a short design spec before coding: layout, elements, copy, timing, and a separate phone layout (390×844). Reuse the existing build classes and slide engine; no one-off styles.
 4. Build it.
-5. Render screenshots at 1440×900 and 390×844 after all builds on the slide have finished, and inspect them against this checklist:
+5. Render screenshots at 1440×900 and 390×844 **only after the slide’s last build event + 1 second**, with **no transition in progress**. Mid-animation or mid-build captures are not valid QA. Then inspect against this checklist:
    - Nothing overlaps (headings, captions, nodes, cards, the control bar)
    - Nothing clipped or off-screen
    - All text readable (size and contrast)
    - Everything meant to be inside an object (phone, calendar) is inside it
    - It looks like the real-world reference, not a diagram of it
    - It matches the intent from step 1
+   - On desktop, the tour is the phone layout inside a scaled 390×844 frame (pixel-identical to 390×844) — not a separate desktop layout
 6. Fix every failure and re-check once.
-7. Deploy. In the reply, include per slide: the intent, the reference used, the checklist results, and anything unsure.
+7. **Fresh-load phone smoke test (required before every deploy).** At **390×844**, open the page from scratch in each of these user agents — never by resizing a desktop window:
+   - iPhone Safari (current WebKit / iOS Safari UA)
+   - Android Chrome
+   - One in-app browser UA (WhatsApp, LinkedIn, Gmail, or Instagram)
+   For each: load the page cold, wait until the intro is ready, play the intro, then advance **3 slides**. **Fail the deploy** if any console error or pageerror occurs (including script init failures). A resize-from-desktop check does not count.
+8. Deploy. In the reply, include per slide: the intent, the reference used, the checklist results, the smoke-test UAs and pass/fail, and anything unsure.
 
 If a request is ambiguous, or there is no good real-world reference, ask before building. Do not guess.
 
 A new or redesigned visual still comes from the prototype when one exists. A text-only request for a new visual is not enough to invent a design: ask for a prototype, or follow this protocol only after the intent and reference are explicit.
 
-## Mobile-first rule
+## Layout rule (A.1+)
 
-- Design every slide for 390×844 first, then desktop.
-- One idea per screen on phones. If a slide's content does not fit above the control bar at 390×844 without scaling the frame below 90%, split it into two or more slides on phones. Desktop may keep one slide. Do not shrink text to make it fit.
-- Minimum sizes on phones: body text 14px, labels and captions 12px, tap targets 44px.
+- **Phone (≤640px):** portrait phone slides (`data-surface="phone"` / `both`). Design for **390×844** and also fit **360×800** (small Android). Short chapter labels; if they still won’t fit, show only the current chapter + segment track (no ellipsis).
+- **Desktop (≥641px):** native desk surfaces (`data-surface="desk"` / `both`). The 390 iframe portrait host is **feature-flagged off** (re-enable with `?portrait=1` only). Do not treat portrait-frame-on-desktop as the default.
+- One idea per screen on phone. If content does not fit above the control bar without scaling the frame below 90%, split into two or more slides. Do not shrink text to make it fit.
+- Minimum sizes: body text 14px, labels and captions 12px, tap targets 44px. Body/caption lines use `text-wrap: balance`.
+- **Screenshot timing:** wait until the slide’s last `[data-at]` / `[data-out]` time **+ 1s**, and confirm `.slide.active` has `filter: none` and full opacity before capturing.
+
+## Planned batches (do not start until the prior batch is promoted / approved)
+
+### A.1 (preview → phone check → promote on “promote A.1”)
+Short chapter labels, text-light vertical centering, portrait iframe off on desktop, tiny phone polish (`text-wrap: balance`, chapter label baseline-aligned with Back/Play/Next).
+
+### DESKTOP STAGE (before B1)
+- Fixed design canvas **1280×720** (16:9), uniformly scaled (`transform: scale`) into the viewport on the blurred brand backdrop. Letterbox as needed. **No responsive reflow inside the stage.**
+- Same slide copy/facts as phone; desktop arrangement = left column ~40% (eyebrow/headline/sub), right ~60% hero (larger than phone), generous whitespace, gradient phrase in every headline, same builds/animations.
+- Control bar + chapter progress designed for the 16:9 stage (bottom, full width): **distribute/center chapter links; no dead gap between chapters and Play.**
+- **Close slide hero:** “What happens next” 4-step strip under the CTA — Inquiry → short call → package tailored to your team → private link employees join voluntarily — existing icon set + build animation. No empty bottom third.
+- Design-check first (5 slides final-state): welcome, problem/time, Meet Siya, cost, close — at **1440×900, 1366×768, 1280×720** and **390×844, 360×800**. Nothing clipped; whole slide visible without scrolling at 1366×768. Then convert the rest.
+
+### B1 (after DESKTOP STAGE)
+Meet Siya differentiators + Part 4 (from `employer-demo-part4-wip` rebased on A.1). Built for **both phone and desktop stage**. Meet Siya redesign must fit cleanly at **360×800** — no cards touching edges or crossing ring lines.
+
+### B2 (hold until B1 ships)
+Missing Part 3 items: “Sound familiar”, whole-person checklist, time-away framing, doctor-joins-chat in urgent pink-eye consult, chat-vs-book path chooser with provider pages/reviews.
 
 ## Automated checks
 
@@ -53,6 +79,7 @@ Run with Playwright on every slide, at 1440×900 and 390×844, after all builds 
 - **Contrast:** for every visible text element, compute its color against the actual background behind it, including gradients and images. Sample the darkest and lightest point. Flag anything under 4.5:1 for normal text, or under 3:1 for large text (24px or larger, or 19px or larger and bold).
 - **Size:** flag text below the phone minimums above.
 - **Containment:** flag anything meant to be inside a phone, calendar, or card that renders outside it.
+- **Fresh-load smoke (deploy gate):** at 390×844 only, with a **new browser context** per UA (iPhone Safari, Android Chrome, one in-app browser). Cold-load `/employers/demo`, play intro, advance 3 slides. Any `pageerror` or console `error` fails the deploy. Do not emulate phone by resizing a desktop viewport after load.
 
 ## Audit report format
 
@@ -81,17 +108,29 @@ The progress bar is six labelled segments. Tap a label to jump to the first slid
 
 1. The problem
 2. Meet Siya
-3. How it works — the click-through employee journey uses the same phone as the voicemail slide. “How your people get care” is removed. “Getting started as an employer” stays. The video step shows the website photo of Dr. Sneh Pandey, MD, Medical Director, and a silhouette labelled You.
-4. The care, 5. Cost & privacy, and the founder video are specified and not in the tour yet. The employee progress chart stays on Privacy until the outcomes slide is built. The founder file, when it exists, is `employers/demo/media/founder.mp4` with `founder.vtt`.
-6. Proof — the numbers and the homepage reviews, then close.
+3. How it works — “Getting started as an employer” stays; “How your people get care” is removed. The click-through employee journey uses the same phone as the voicemail slide. The video step shows the website photo of Dr. Sneh Pandey, MD, and a silhouette labelled You.
+4. The care — outcomes (baseline folded into the subline + Baseline markers on each trend line; charts labelled Sample · illustrative). The “coming soon” card stays in the HTML (`#outcomesSoon`) but is hidden. `realOutcomes=false` keeps `#realOutcomes` hidden. Then the clinicians / experience slide.
+5. Cost & privacy — cost comparison on desktop; on phones “The usual way” then “With Siya.” Privacy points employees to The care for personal progress (Sample · illustrative) and shows the employer aggregate sample only. No employee charts on Privacy.
+6. Proof — the numbers and the homepage reviews, then close. The founder slide stays in the code behind `showFounder=false` (parked). When enabled: “A word from our founder”; `employers/demo/media/founder.mp4` + `founder.vtt` when they exist, otherwise poster + “Video coming soon.”
+
+### Feature flags (in the tour script)
+
+| Flag | v1 value | Effect |
+|---|---|---|
+| `showFounder` | `false` | Parks the founder slide (`data-founder`). Set `true` to play it in Proof. |
+| `realOutcomes` | `false` | Keeps `#realOutcomes` hidden. Population outcomes stay off for v1. |
+
+### Background music (Web Audio, no files)
+
+Soft ~96 BPM pad + plucked arpeggio + low pulse, generated in the browser like the intro chime. Starts with a 2s fade-in after the intro bell, continues through welcome and the tour, ducks with Pause, follows Mute (`Sound on` / `Sound off`), fades out over 3s on the close slide. Off under `prefers-reduced-motion`.
 
 ## 2. Structure of the page
 
 One full-screen stage with three layers, shown in this order:
 
 1. **Intro** (`<canvas id="stage">`): dark starfield → stars converge into the "Siya Health" wordmark → tagline → cream bloom.
-2. **Welcome** (`#welcome`): cream screen, "For HR and benefits leaders / See how Siya Health works for your people / Start the tour." Click anywhere starts the tour.
-3. **Tour** (`#tour`): 16 full-screen slides that auto-play like a video, with a story-style progress bar and Back / Pause / Next.
+2. **Welcome** (`#welcome`): cream screen, "For HR and benefits leaders / See how Siya Health works for your people / A short guided tour." Click anywhere starts the tour.
+3. **Tour** (`#tour`): full-screen slides that auto-play like a video (20 autoplay slides on desktop + close; 24 on phone + close; founder parked while `showFounder=false`), with a story-style progress bar and Back / Pause / Next.
 
 The page never scrolls. Every slide must fit the viewport at 1440×900 and 390×844.
 
@@ -184,7 +223,7 @@ The page never scrolls. Every slide must fit the viewport at 1440×900 and 390×
 ## 5. Content and compliance guardrails
 
 - **Numbers come from `employer-pilot-facts.mjs`**, never hardcoded: patients treated, clinical evaluations, Google rating and review count, licensed states, concierge response time. If a number the tour needs isn't in that file, **stop and ask** before adding it.
-- **No pricing** anywhere in the tour.
+- **No prices, dollar amounts, rates or savings/ROI claims.** The conceptual cost comparison is approved.
 - **Keep these labels exactly:** "Illustrative · demo data" (getting-started slide), "Sample" (privacy report), "During business hours" (response slide), and "Aggregate reports only, for groups of 10 or more. Never who, or why."
 - **Don't show** weekend/after-hours appointments, urgent care, therapy, or any outcome/ROI claim.
 - **Health wording:** conditions "often show up together" / "connected." Never claim stress *causes* them.
@@ -205,31 +244,45 @@ The page never scrolls. Every slide must fit the viewport at 1440×900 and 390×
 
 ## 7. Slide list (current approved version)
 
-All of these play. Care hours and the reply standard come from `employer-pilot-facts.mjs` (6 AM – 10 PM, 7 days, patient's local time; replies within 1 hour in that window).
+All of these play. Care hours and reply/doctor standards come from `employer-pilot-facts.mjs` (visits 24/7; care-team replies within 30 minutes 24/7; a doctor within 2 hours any time).
 
-| # | Id | Theme label | Headline | Auto-advance |
-|---|---|---|---|---|
-| 0 | statement | The problem | Healthcare still runs on a schedule your people can't keep. | 4.8s |
-| 1 | p-time | Time | Shared Monday calendar, 9 AM–6 PM. Appointments that don't fit a workday. | 12.5s |
-| 2 | p-response | Response | Voicemail story, all inside the phone. Caption: Messages that go unanswered for days. | 14.5s |
-| 3 | p-whole | The whole person | It's all connected. Their care isn't. | 10s |
-| 4 | p-coord | Coordination | Five apps. Five logins. Badges 1–5 clockwise from the top. | 9s |
-| 5 | question | — | But is it there when they need it? | 7s |
-| 6 | turn | Introducing | Meet Siya Health. Ring of cards and a travelling light. Tagline is not repeated here. | 6.5s |
-| 7 | f-time | How we help | Same Monday calendar. Care that works around their schedule. | 8s |
-| 8 | f-hours | How we help | Evenings, weekends and holidays too. Hours line from employer-pilot-facts.mjs. | 10s |
-| 9 | f-response | How we help | Real replies, from people who know them. | 11s |
-| 10 | f-urgent | How we help | Something urgent? We'll get them seen tonight. | 9s |
-| 11 | f-whole | How we help | One team that sees the whole picture. | 10s |
-| 12 | employer | Getting started | Four-card rail. Phone splits into employer-a and employer-b. | 9s |
-| 13 | people | How your people get care | Chat and booking, side by side. Phone uses people-chat then people-book. | 9s |
-| 14 | people-after | How your people get care | Email, video visit, checklist. Same slide on both sizes. | 9s |
-| 15 | privacy | Privacy | Two sample panels. Phone uses privacy-emp then privacy-you. | 9s |
-| 16 | clinicians | Experience | Condition tiles, then practice chips. | 8s |
-| 17 | proof | Proof | Counts, then three homepage reviews. Phone uses proof-nums then proof-revs. | 9s |
-| 18 | close | Siya Health | See it live. One button: Submit an inquiry. | — |
+Desktop plays the `desk`/`both` rows; phone plays the `phone`/`both` rows (employer, cost, privacy, and proof split on phones). Founder is parked while `showFounder=false`.
 
-Exact copy, timings and build order are in the prototype. Add a stable `id` to each slide when porting (used for analytics and deep links).
+| # | Id | Surface | Theme label | Headline | Auto-advance |
+|---|---|---|---|---|---|
+| 0 | statement | both | The problem | Healthcare still runs on a schedule your people can't keep. | 3.2s |
+| 1 | p-time | both | Time | Appointments that don't fit a workday. | 12.7s |
+| 2 | p-response | both | Response | Messages that go unanswered for days. | 12.3s |
+| 3 | p-whole | both | The whole person | It's all connected. Their care isn't. | 8.4s |
+| 4 | p-coord | both | Coordination | Five apps. Five logins. No one connecting the dots. | 6.7s |
+| 5 | question | both | — | But is it there when they need it? | 3.7s |
+| 6 | turn | both | Introducing | Meet Siya Health. | 6.2s |
+| 7 | f-time | both | How we help | Care that works around their schedule. | 6.3s |
+| 8 | f-hours | both | How we help | Evenings, weekends and holidays too. | 6.7s |
+| 9 | f-response | both | How we help | Real replies, from people who know them. | 7.1s |
+| 10 | f-urgent | both | How we help | Something urgent? We'll get them seen tonight. | 6.1s |
+| 11 | f-whole | both | How we help | One team that sees the whole picture. | 6.9s |
+| 12 | employer | desk | Getting started | As an employer. | 6.3s |
+| 12a | employer-a | phone | Getting started | Inquiry, then a meeting. | 3.1s |
+| 12b | employer-b | phone | Getting started | Package, then your link. | 5.1s |
+| 13 | journey | both | How it works | From their link to the follow-up. (7 steps × 3s) | 21s |
+| 14 | outcomes | both | The care | Progress they feel. Trends you can see. (baseline in subline) | 8.2s |
+| 15 | clinicians | both | Experience | Clinicians who've seen it all. | 5.7s |
+| 16 | cost | desk | Cost | One team. No network maze. | 8.2s |
+| 16a | cost-usual | phone | Cost | One team. No network maze. | 8.2s |
+| 16b | cost-siya | phone | Cost | Parked — merged into cost-usual. | — |
+| 17 | privacy | desk | Privacy | They get the whole picture. You get the big picture. | 7.0s |
+| 17a | privacy-emp | phone | Privacy | Health details stay with the care team. | 5.2s |
+| 17b | privacy-you | phone | Privacy | Aggregate trends only (10+). | 5.6s |
+| 18 | proof | desk | Proof | Don't just take our word for it. | 8.0s |
+| 18a | proof-nums | phone | Proof | Don't just take our word for it. | 7.0s |
+| — | proof-revs | — | Proof | **Removed** — quotes lacked marketplace source + date for health marketing. | — |
+| — | founder | both | Proof | A word from our founder. (**parked**, `showFounder=false`) | 2.6s |
+| 19 | close | both | Siya Health | See it live. One button: Submit an inquiry → `/employers#employer-inquiry-form`. | — |
+
+Exact copy, timings and build order are in the prototype. Stable `id` / `data-slide-id` on each slide for analytics and deep links.
+
+**Autoplay run time** (sum of playing `data-dur`, intro/welcome excluded; close does not auto-advance; founder parked): desktop **≈2 min 33s** (153.3s); phone **≈2 min 43s** (163.3s). Both ≤ 2:45.
 
 ## 8. Handling change requests
 

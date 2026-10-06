@@ -59,7 +59,7 @@ export const CALIFORNIA_POSTS = [
               <li>Distinguishes psychoeducation versus diagnosis claims.</li>
             </ul>
 
-            <p>For readers across states: <a href="/blog/online-adhd-diagnosis-texas">Online ADHD diagnosis in Texas</a> illustrates parallel evaluation themes so you contrast regional pricing culture against California landscapes.</p>
+            <p>For readers across states: <a href="/adhd-care">Online ADHD diagnosis in Texas</a> illustrates parallel evaluation themes so you contrast regional pricing culture against California landscapes.</p>
 
             <div class="cta-block blog-cta"><a class="button" href="https://book.carepatron.com/Siya-Health?p=X9PN3zKZR22FpD8jVPKsOA&amp;i=ftxOxenx" target="_blank" rel="noopener">Book Your Free 15-Minute ADHD Consultation</a></div><p class="cta-microcopy">Discuss whether structured evaluation aligns with your story.</p>
 

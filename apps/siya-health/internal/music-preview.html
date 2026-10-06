@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Employer demo music preview — A vs B</title>
+<style>
+  :root{--ink:#0A246B;--pink:#D81088;--bg:#F7F5F0;--card:#fff}
+  *{box-sizing:border-box}
+  body{margin:0;font:400 15px/1.45 system-ui,sans-serif;background:var(--bg);color:var(--ink);padding:24px}
+  h1{font:700 22px/1.2 system-ui;margin:0 0 8px}
+  .note{color:#445;margin:0 0 20px;max-width:52rem}
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;max-width:920px}
+  @media(max-width:720px){.grid{grid-template-columns:1fr}}
+  .card{background:var(--card);border-radius:16px;padding:18px;box-shadow:0 10px 28px rgba(10,36,107,.1)}
+  .card h2{margin:0 0 6px;font:700 18px/1.2 system-ui}
+  .card p{margin:0 0 14px;color:#445;font-size:13px}
+  .row{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+  button{appearance:none;border:0;border-radius:999px;padding:10px 16px;font:700 13px/1 system-ui;cursor:pointer;background:linear-gradient(135deg,#D81088,#7B2D8E);color:#fff}
+  button.ghost{background:#fff;color:var(--ink);box-shadow:inset 0 0 0 1.5px rgba(10,36,107,.2)}
+  button[aria-pressed="true"]{outline:3px solid rgba(216,16,136,.35)}
+  .meta{margin-top:12px;font:600 12px/1.4 system-ui;color:#556}
+  .pick{margin-top:22px;max-width:920px;padding:14px 16px;border-radius:12px;background:#fff;border:1.5px dashed rgba(216,16,136,.35)}
+</style>
+</head>
+<body>
+  <h1>Employer demo music — preview only</h1>
+  <p class="note">Nothing ships until a founder pick. Both versions keep the existing chord progression and 8-bar lifts, at about <strong>+30% volume</strong> vs the current demo bed. A ≈ 108 BPM synth-keyboard lead. B ≈ 112 BPM with a brighter arpeggio.</p>
+  <div class="grid">
+    <section class="card" data-ver="A">
+      <h2>Version A · ~108 BPM</h2>
+      <p>Soft saw/square pad + plucked synth arpeggio. Calmer lift.</p>
+      <div class="row">
+        <button type="button" data-play="A">Play A</button>
+        <button type="button" class="ghost" data-stop="A">Stop</button>
+      </div>
+      <div class="meta">Pad peak · Arp peak · Pulse — keyboard-forward, 108 BPM</div>
+    </section>
+    <section class="card" data-ver="B">
+      <h2>Version B · ~112 BPM</h2>
+      <p>Same progression; brighter triangle/saw arpeggio and slightly punchier lifts.</p>
+      <div class="row">
+        <button type="button" data-play="B">Play B</button>
+        <button type="button" class="ghost" data-stop="B">Stop</button>
+      </div>
+      <div class="meta">Brighter arp · 112 BPM · same chords + lifts</div>
+    </section>
+  </div>
+  <div class="pick"><strong>Picked: B</strong> (2026-10-04) — shipped into employer demo bed. A kept for reference only.</div>
+<script>
+(() => {
+  const LEVEL = 1.3; // +30% vs current MUSIC_LEVEL=1 into master ~0.9
+  const VERSIONS = {
+    A: { bpm: 108, pad: 0.072, arp: 0.048, pulse: 0.045, arpType: 'triangle', bright: 0.85 },
+    B: { bpm: 112, pad: 0.068, arp: 0.058, pulse: 0.048, arpType: 'sawtooth', bright: 1.15 },
+  };
+  let audio = null, active = null;
+
+  function makeAudio() {
+    const AC = window.AudioContext || window.webkitAudioContext;
+    if (!AC) return null;
+    const ac = new AC();
+    const master = ac.createGain();
+    master.gain.value = 0.9;
+    const len = ac.sampleRate * 2.2;
+    const imp = ac.createBuffer(2, len, ac.sampleRate);
+    for (let c = 0; c < 2; c++) {
+      const b = imp.getChannelData(c);
+      for (let i = 0; i < len; i++) b[i] = (Math.random() * 2 - 1) * Math.pow(1 - i / len, 2.4);
+    }
+    const verb = ac.createConvolver();
+    verb.buffer = imp;
+    const wet = ac.createGain();
+    wet.gain.value = 0.55;
+    verb.connect(wet);
+    wet.connect(master);
+    master.connect(ac.destination);
+    return { ac, master, verb, music: null };
+  }
+
+  function stop() {
+    if (!audio || !audio.music) return;
+    clearInterval(audio.music.timer);
+    try {
+      const g = audio.music.musicGain.gain;
+      const t = audio.ac.currentTime;
+      g.cancelScheduledValues(t);
+      g.setTargetAtTime(0.0001, t, 0.08);
+    } catch {}
+    audio.music = null;
+    active = null;
+    document.querySelectorAll('[data-play]').forEach((b) => b.setAttribute('aria-pressed', 'false'));
+  }
+
+  function start(ver) {
+    const cfg = VERSIONS[ver];
+    if (!cfg) return;
+    audio = audio || makeAudio();
+    if (!audio) return alert('Web Audio not available');
+    stop();
+    active = ver;
+    document.querySelector(`[data-play="${ver}"]`)?.setAttribute('aria-pressed', 'true');
+    const { ac, master, verb } = audio;
+    const resume = () => {
+      const musicGain = ac.createGain();
+      musicGain.gain.value = 0.0001;
+      const filter = ac.createBiquadFilter();
+      filter.type = 'lowpass';
+      filter.frequency.value = ver === 'B' ? 2200 : 1600;
+      filter.Q.value = 0.5;
+      musicGain.connect(filter);
+      filter.connect(master);
+      const wet = ac.createGain();
+      wet.gain.value = 0.32;
+      filter.connect(wet);
+      wet.connect(verb);
+
+      const BPM = cfg.bpm;
+      const beat = 60 / BPM;
+      const step = beat / 2;
+      const chordLen = beat * 8;
+      const barEighths = 8;
+      const cycleBars = 8;
+      const liftBars = 2;
+      const cycleEighths = cycleBars * barEighths;
+      const liftStart = (cycleBars - liftBars) * barEighths;
+      const progression = [
+        [130.81, 196.0, 261.63, 329.63],
+        [98.0, 146.83, 196.0, 246.94],
+        [110.0, 164.81, 220.0, 261.63],
+        [87.31, 130.81, 174.61, 220.0],
+      ];
+      const arp = [0, 2, 1, 3, 2, 0, 1, 2];
+      let nextT = ac.currentTime + 0.05;
+      let chordIdx = 0;
+      let eighth = 0;
+
+      const voice = (t, freq, type, peak, attack, release) => {
+        const o = ac.createOscillator();
+        const g = ac.createGain();
+        o.type = type;
+        o.frequency.value = freq;
+        g.gain.setValueAtTime(0.0001, t);
+        g.gain.exponentialRampToValueAtTime(Math.max(peak, 0.0002), t + attack);
+        g.gain.exponentialRampToValueAtTime(0.0001, t + release);
+        o.connect(g);
+        g.connect(musicGain);
+        o.start(t);
+        o.stop(t + release + 0.02);
+      };
+
+      const softAccent = (t) => {
+        [523.25, 659.25, 783.99].forEach((hz, i) => {
+          const o = ac.createOscillator();
+          const g = ac.createGain();
+          o.type = 'sine';
+          o.frequency.value = hz * (ver === 'B' ? 1.01 : 1);
+          const peak = 0.05 * (1 - i * 0.18) * cfg.bright;
+          const start = t + i * 0.04;
+          g.gain.setValueAtTime(0.0001, start);
+          g.gain.exponentialRampToValueAtTime(peak, start + 0.014);
+          g.gain.exponentialRampToValueAtTime(0.0001, start + 1.5 - i * 0.25);
+          o.connect(g);
+          g.connect(musicGain);
+          g.connect(verb);
+          o.start(start);
+          o.stop(start + 2);
+        });
+      };
+
+      const schedule = () => {
+        if (!audio.music || audio.ac.state !== 'running') return;
+        const now = ac.currentTime;
+        if (nextT < now - 0.25) {
+          const missed = Math.ceil((now - nextT) / step);
+          eighth += missed;
+          chordIdx = Math.floor(eighth / 16) % 4;
+          nextT += missed * step;
+          if (nextT < now) nextT = now + 0.05;
+        }
+        while (nextT < now + 0.9) {
+          const ch = progression[chordIdx];
+          const t = nextT;
+          const pos = eighth % cycleEighths;
+          const lifting = pos >= liftStart;
+          const amt = lifting ? (pos - liftStart + 1) / (liftBars * barEighths) : 0;
+          const dyn = lifting ? 1 + 0.45 * amt : 1;
+          if (eighth % 16 === 0) {
+            ch.forEach((hz, i) => {
+              voice(t, hz, i % 2 ? 'square' : 'sawtooth', (i === 0 ? cfg.pad : cfg.pad * 0.6) * dyn, 0.32, chordLen * 0.98);
+              if (lifting) voice(t, hz * 2, 'sine', cfg.pad * 0.3 * amt * cfg.bright, 0.35, chordLen * 0.9);
+            });
+          }
+          voice(
+            t,
+            ch[arp[eighth % 8]] * (ver === 'B' ? 2.02 : 2),
+            cfg.arpType,
+            cfg.arp * (lifting ? 1 + 0.4 * amt : 1) * cfg.bright,
+            0.012,
+            step * (ver === 'B' ? 0.7 : 0.8),
+          );
+          if (eighth % 8 === 0 || eighth % 8 === 4) {
+            voice(t, 55, 'sine', cfg.pulse * (lifting ? 1 + 0.25 * amt : 1), 0.02, beat * 0.65);
+          }
+          if (pos === cycleEighths - 1) softAccent(t + step * 0.15);
+          eighth++;
+          if (eighth % 16 === 0) chordIdx = (chordIdx + 1) % 4;
+          nextT += step;
+        }
+      };
+
+      const t0 = ac.currentTime;
+      musicGain.gain.setValueAtTime(0.0001, t0);
+      musicGain.gain.linearRampToValueAtTime(LEVEL, t0 + 1.2);
+      const timer = setInterval(schedule, 160);
+      schedule();
+      audio.music = { musicGain, timer };
+    };
+    const p = ac.resume();
+    if (p && typeof p.then === 'function') p.then(resume); else resume();
+  }
+
+  document.querySelectorAll('[data-play]').forEach((btn) => {
+    btn.addEventListener('click', () => start(btn.getAttribute('data-play')));
+  });
+  document.querySelectorAll('[data-stop]').forEach((btn) => {
+    btn.addEventListener('click', stop);
+  });
+})();
+</script>
+</body>
+</html>
