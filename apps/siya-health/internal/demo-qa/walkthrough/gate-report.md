@@ -1,4 +1,4 @@
-# Release gate report `4ef2730e`
+# Release gate report `7c0d0e58`
 
 - **css-coverage**: PASS — MISSING 0
 - **content-grep**: PASS — no free-care claims; ok

@@ -1,6 +1,6 @@
-# Contact sheets `fb2556bc`
+# Contact sheets `7c0d0e58`
 
-Built from `_cs_desk/` / `_cs_phone/` via PIL (not browser). Reshot + stamped `fb2556bc`.
+Built from `_cs_desk/` / `_cs_phone/` via PIL (not browser). Reshot + stamped `7c0d0e58`.
 
 ## Desk (2×4, tile 900×562 — ≥900px wide)
 
