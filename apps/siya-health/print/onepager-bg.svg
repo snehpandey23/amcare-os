@@ -1,52 +1,70 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" width="1200" height="800" role="presentation">
+<!-- Portrait Letter print background (816×1056). Homepage2 colours, light opacity. -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 816 1056" width="816" height="1056" role="presentation">
   <defs>
-    <linearGradient id="siyaHeroCream" x1="0%" y1="0%" x2="100%" y2="100%">
+    <linearGradient id="opCream" x1="0%" y1="0%" x2="100%" y2="100%">
       <stop offset="0%" stop-color="#F4EFE7"/>
-      <stop offset="55%" stop-color="#E8EEF8"/>
+      <stop offset="50%" stop-color="#E8EEF8"/>
       <stop offset="100%" stop-color="#F7F2EC"/>
     </linearGradient>
-    <radialGradient id="siyaHeroGlowA" cx="50%" cy="50%" r="50%">
-      <stop offset="0%" stop-color="#D81088" stop-opacity="0.18"/>
+    <radialGradient id="opGlowA" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#D81088" stop-opacity="0.20"/>
       <stop offset="45%" stop-color="#D81088" stop-opacity="0.08"/>
       <stop offset="100%" stop-color="#D81088" stop-opacity="0"/>
     </radialGradient>
-    <radialGradient id="siyaHeroGlowB" cx="50%" cy="50%" r="50%">
-      <stop offset="0%" stop-color="#001878" stop-opacity="0.14"/>
-      <stop offset="50%" stop-color="#0A246B" stop-opacity="0.06"/>
+    <radialGradient id="opGlowB" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#001878" stop-opacity="0.16"/>
+      <stop offset="50%" stop-color="#0A246B" stop-opacity="0.07"/>
       <stop offset="100%" stop-color="#001878" stop-opacity="0"/>
     </radialGradient>
-    <radialGradient id="siyaHeroGlowC" cx="50%" cy="50%" r="50%">
-      <stop offset="0%" stop-color="#7B2D8E" stop-opacity="0.14"/>
-      <stop offset="55%" stop-color="#0A246B" stop-opacity="0.05"/>
+    <radialGradient id="opGlowC" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#7B2D8E" stop-opacity="0.16"/>
+      <stop offset="55%" stop-color="#0A246B" stop-opacity="0.06"/>
       <stop offset="100%" stop-color="#0A246B" stop-opacity="0"/>
     </radialGradient>
   </defs>
-  <rect width="1200" height="800" fill="url(#siyaHeroCream)"/>
+  <rect width="816" height="1056" fill="url(#opCream)"/>
+
+  <!-- Orbs spread top → bottom (portrait) -->
   <g>
-    <circle cx="240" cy="220" r="190" fill="url(#siyaHeroGlowA)"/>
-    <circle cx="240" cy="220" r="88" fill="none" stroke="#D81088" stroke-width="2.75" stroke-opacity="0.28"/>
-    <circle cx="240" cy="220" r="132" fill="none" stroke="#D81088" stroke-width="1.6" stroke-opacity="0.18"/>
+    <circle cx="140" cy="120" r="150" fill="url(#opGlowA)"/>
+    <circle cx="140" cy="120" r="70" fill="none" stroke="#D81088" stroke-width="2.2" stroke-opacity="0.26"/>
+    <circle cx="140" cy="120" r="105" fill="none" stroke="#D81088" stroke-width="1.4" stroke-opacity="0.16"/>
   </g>
   <g>
-    <circle cx="940" cy="500" r="230" fill="url(#siyaHeroGlowB)"/>
-    <circle cx="940" cy="500" r="108" fill="none" stroke="#001878" stroke-width="2.75" stroke-opacity="0.26"/>
-    <circle cx="940" cy="500" r="156" fill="none" stroke="#0A246B" stroke-width="1.6" stroke-opacity="0.16"/>
+    <circle cx="680" cy="180" r="170" fill="url(#opGlowB)"/>
+    <circle cx="680" cy="180" r="80" fill="none" stroke="#001878" stroke-width="2.2" stroke-opacity="0.24"/>
+    <circle cx="680" cy="180" r="118" fill="none" stroke="#0A246B" stroke-width="1.4" stroke-opacity="0.15"/>
   </g>
   <g>
-    <circle cx="700" cy="150" r="160" fill="url(#siyaHeroGlowC)"/>
-    <circle cx="700" cy="150" r="72" fill="none" stroke="#7B2D8E" stroke-width="2.5" stroke-opacity="0.24"/>
-    <circle cx="700" cy="150" r="112" fill="none" stroke="#D81088" stroke-width="1.5" stroke-opacity="0.16"/>
+    <circle cx="420" cy="360" r="140" fill="url(#opGlowC)"/>
+    <circle cx="420" cy="360" r="64" fill="none" stroke="#7B2D8E" stroke-width="2" stroke-opacity="0.22"/>
+    <circle cx="420" cy="360" r="96" fill="none" stroke="#D81088" stroke-width="1.3" stroke-opacity="0.14"/>
   </g>
   <g>
-    <circle cx="130" cy="680" r="150" fill="url(#siyaHeroGlowB)"/>
-    <circle cx="130" cy="680" r="70" fill="none" stroke="#001878" stroke-width="2.25" stroke-opacity="0.22"/>
-    <circle cx="1080" cy="110" r="120" fill="url(#siyaHeroGlowA)"/>
-    <circle cx="1080" cy="110" r="58" fill="none" stroke="#D81088" stroke-width="2.25" stroke-opacity="0.22"/>
+    <circle cx="90" cy="560" r="130" fill="url(#opGlowB)"/>
+    <circle cx="90" cy="560" r="58" fill="none" stroke="#001878" stroke-width="2" stroke-opacity="0.22"/>
   </g>
   <g>
-    <path d="M40 620 C 220 500, 380 700, 560 560 S 900 480, 1180 380" fill="none" stroke="#D81088" stroke-width="2.75" stroke-linecap="round" stroke-opacity="0.22"/>
-    <path d="M20 300 C 200 380, 360 180, 540 280 S 840 360, 1160 200" fill="none" stroke="#001878" stroke-width="2.5" stroke-linecap="round" stroke-opacity="0.2"/>
-    <path d="M60 740 C 300 660, 480 780, 700 680 S 980 620, 1180 540" fill="none" stroke="#C4A574" stroke-width="2.25" stroke-linecap="round" stroke-opacity="0.22"/>
+    <circle cx="720" cy="620" r="155" fill="url(#opGlowA)"/>
+    <circle cx="720" cy="620" r="72" fill="none" stroke="#D81088" stroke-width="2.1" stroke-opacity="0.24"/>
+    <circle cx="720" cy="620" r="108" fill="none" stroke="#D81088" stroke-width="1.3" stroke-opacity="0.14"/>
+  </g>
+  <g>
+    <circle cx="260" cy="820" r="145" fill="url(#opGlowC)"/>
+    <circle cx="260" cy="820" r="66" fill="none" stroke="#7B2D8E" stroke-width="2" stroke-opacity="0.2"/>
+  </g>
+  <g>
+    <circle cx="560" cy="960" r="160" fill="url(#opGlowB)"/>
+    <circle cx="560" cy="960" r="74" fill="none" stroke="#001878" stroke-width="2.1" stroke-opacity="0.22"/>
+    <circle cx="560" cy="960" r="110" fill="none" stroke="#0A246B" stroke-width="1.3" stroke-opacity="0.14"/>
+  </g>
+
+  <!-- Wavy lines across full height -->
+  <g fill="none" stroke-linecap="round">
+    <path d="M20 160 C 160 90, 280 230, 420 150 S 640 80, 800 170" stroke="#D81088" stroke-width="2.4" stroke-opacity="0.22"/>
+    <path d="M-10 380 C 140 300, 300 460, 460 380 S 680 300, 830 400" stroke="#001878" stroke-width="2.2" stroke-opacity="0.2"/>
+    <path d="M30 640 C 200 560, 340 720, 500 640 S 700 560, 820 680" stroke="#C4A574" stroke-width="2.1" stroke-opacity="0.22"/>
+    <path d="M10 880 C 180 800, 320 960, 480 880 S 690 800, 830 920" stroke="#D81088" stroke-width="2.2" stroke-opacity="0.18"/>
   </g>
 </svg>
