@@ -235,17 +235,19 @@
       }
       .hero-grid {
         display: grid;
-        grid-template-columns: minmax(0, 1.25fr) minmax(240px, 0.95fr);
-        column-gap: 28px;
+        grid-template-columns: 52% 48%;
+        column-gap: 24px;
         align-items: center;
       }
       .hero-copy {
         min-width: 0;
+        width: 100%;
         max-width: 100%;
         overflow: hidden;
         display: flex;
         flex-direction: column;
         justify-content: center;
+        padding-right: 4px;
       }
       .eyebrow {
         margin: 0 0 8px;
@@ -258,12 +260,13 @@
         margin: 0 0 10px;
         font-family: var(--font-display);
         font-weight: 700;
-        font-size: 36px;
-        line-height: 1.14;
+        font-size: 34px;
+        line-height: 1.15;
         letter-spacing: -0.025em;
         color: var(--ink);
-        max-width: 100%;
-        text-wrap: balance;
+        max-width: 11.5ch;
+        width: 100%;
+        text-wrap: pretty;
         border: 0 !important;
         outline: 0 !important;
         box-shadow: none !important;
@@ -332,6 +335,8 @@
         height: 268px;
         align-self: center;
         width: 100%;
+        z-index: 2;
+        position: relative;
       }
       .hero-photo img {
         display: block;
@@ -675,10 +680,9 @@
               <div class="hero-copy">
                 <p class="eyebrow">An integrated care experience for busy professionals</p>
                 <h1>
-                  <span class="h1-line">Your business runs</span>
-                  <span class="h1-line">on brain power.</span>
-                  <span class="h1-line siya-em">Who’s looking</span>
-                  <span class="h1-line siya-em">after it?</span>
+                  Your business runs<br />
+                  on brain power.<br />
+                  <span class="siya-em">Who’s looking<br />after it?</span>
                 </h1>
                 <p class="hero-lead">
                   One physician-led team for stress, focus, memory and sleep — alongside everyday
