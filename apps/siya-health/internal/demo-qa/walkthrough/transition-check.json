@@ -1,5 +1,5 @@
 {
-  "HASH": "8e58be98",
+  "HASH": "c818f4fa",
   "failures": [],
   "tables": [
     {
@@ -8,9 +8,9 @@
         {
           "id": "statement",
           "handDur": 0,
-          "lastAt": 2412,
-          "buildEnd": 3112,
-          "advance": 6432,
+          "lastAt": 900,
+          "buildEnd": 1600,
+          "advance": 2680,
           "ok": true
         },
         {
@@ -18,7 +18,7 @@
           "handDur": 0,
           "lastAt": 4556,
           "buildEnd": 5356,
-          "advance": 8576,
+          "advance": 7504,
           "ok": true
         },
         {
@@ -26,7 +26,7 @@
           "handDur": 0,
           "lastAt": 4824,
           "buildEnd": 5624,
-          "advance": 10720,
+          "advance": 9112,
           "ok": true
         },
         {
@@ -42,7 +42,7 @@
           "handDur": 0,
           "lastAt": 4288,
           "buildEnd": 5088,
-          "advance": 10720,
+          "advance": 8576,
           "ok": true
         },
         {
@@ -56,9 +56,9 @@
         {
           "id": "p-coord",
           "handDur": 0,
-          "lastAt": 5896,
-          "buildEnd": 6996,
-          "advance": 8576,
+          "lastAt": 4288,
+          "buildEnd": 5388,
+          "advance": 6968,
           "ok": true
         },
         {
@@ -66,7 +66,7 @@
           "handDur": 0,
           "lastAt": 1608,
           "buildEnd": 2408,
-          "advance": 6432,
+          "advance": 4288,
           "ok": true
         },
         {
@@ -74,7 +74,7 @@
           "handDur": 0,
           "lastAt": 4288,
           "buildEnd": 4988,
-          "advance": 10720,
+          "advance": 6968,
           "ok": true
         },
         {
@@ -90,7 +90,7 @@
           "handDur": 0,
           "lastAt": 4288,
           "buildEnd": 4988,
-          "advance": 10720,
+          "advance": 8576,
           "ok": true
         },
         {
@@ -98,7 +98,7 @@
           "handDur": 0,
           "lastAt": 3752,
           "buildEnd": 4552,
-          "advance": 8576,
+          "advance": 8040,
           "ok": true
         },
         {
@@ -106,7 +106,7 @@
           "handDur": 0,
           "lastAt": 3752,
           "buildEnd": 4552,
-          "advance": 8576,
+          "advance": 8040,
           "ok": true
         },
         {
@@ -122,7 +122,7 @@
           "handDur": 0,
           "lastAt": 2680,
           "buildEnd": 3480,
-          "advance": 8576,
+          "advance": 6968,
           "ok": true
         },
         {
@@ -130,7 +130,7 @@
           "handDur": 0,
           "lastAt": 3216,
           "buildEnd": 3916,
-          "advance": 8576,
+          "advance": 7504,
           "ok": true
         },
         {
@@ -146,7 +146,7 @@
           "handDur": 0,
           "lastAt": 4288,
           "buildEnd": 5120,
-          "advance": 10720,
+          "advance": 9112,
           "ok": true
         },
         {
@@ -162,7 +162,7 @@
           "handDur": 0,
           "lastAt": 3216,
           "buildEnd": 4016,
-          "advance": 8576,
+          "advance": 6968,
           "ok": true
         },
         {
@@ -170,7 +170,7 @@
           "handDur": 0,
           "lastAt": 3752,
           "buildEnd": 4552,
-          "advance": 8576,
+          "advance": 6432,
           "ok": true
         },
         {
@@ -178,7 +178,7 @@
           "handDur": 0,
           "lastAt": 2680,
           "buildEnd": 3380,
-          "advance": 6432,
+          "advance": 4824,
           "ok": true
         },
         {
@@ -197,9 +197,9 @@
         {
           "id": "statement",
           "handDur": 0,
-          "lastAt": 2412,
-          "buildEnd": 3112,
-          "advance": 6432,
+          "lastAt": 900,
+          "buildEnd": 1600,
+          "advance": 2680,
           "ok": true
         },
         {
@@ -207,7 +207,7 @@
           "handDur": 0,
           "lastAt": 4556,
           "buildEnd": 5356,
-          "advance": 8576,
+          "advance": 7504,
           "ok": true
         },
         {
@@ -215,7 +215,7 @@
           "handDur": 0,
           "lastAt": 4824,
           "buildEnd": 5624,
-          "advance": 10720,
+          "advance": 9112,
           "ok": true
         },
         {
@@ -231,7 +231,7 @@
           "handDur": 0,
           "lastAt": 4288,
           "buildEnd": 5088,
-          "advance": 10720,
+          "advance": 8576,
           "ok": true
         },
         {
@@ -239,7 +239,7 @@
           "handDur": 0,
           "lastAt": 3484,
           "buildEnd": 4184,
-          "advance": 8576,
+          "advance": 8040,
           "ok": true
         },
         {
@@ -255,7 +255,7 @@
           "handDur": 0,
           "lastAt": 1608,
           "buildEnd": 2408,
-          "advance": 6432,
+          "advance": 4288,
           "ok": true
         },
         {
@@ -263,7 +263,7 @@
           "handDur": 0,
           "lastAt": 4288,
           "buildEnd": 4988,
-          "advance": 10720,
+          "advance": 6968,
           "ok": true
         },
         {
@@ -279,7 +279,7 @@
           "handDur": 0,
           "lastAt": 4288,
           "buildEnd": 4988,
-          "advance": 10720,
+          "advance": 8576,
           "ok": true
         },
         {
@@ -287,7 +287,7 @@
           "handDur": 0,
           "lastAt": 3752,
           "buildEnd": 4552,
-          "advance": 8576,
+          "advance": 8040,
           "ok": true
         },
         {
@@ -295,7 +295,7 @@
           "handDur": 0,
           "lastAt": 3752,
           "buildEnd": 4552,
-          "advance": 8576,
+          "advance": 8040,
           "ok": true
         },
         {
@@ -311,7 +311,7 @@
           "handDur": 0,
           "lastAt": 2680,
           "buildEnd": 3480,
-          "advance": 8576,
+          "advance": 6968,
           "ok": true
         },
         {
@@ -319,7 +319,7 @@
           "handDur": 0,
           "lastAt": 3216,
           "buildEnd": 3916,
-          "advance": 8576,
+          "advance": 7504,
           "ok": true
         },
         {
@@ -335,7 +335,7 @@
           "handDur": 0,
           "lastAt": 4288,
           "buildEnd": 5120,
-          "advance": 10720,
+          "advance": 9112,
           "ok": true
         },
         {
@@ -351,7 +351,7 @@
           "handDur": 0,
           "lastAt": 3216,
           "buildEnd": 4016,
-          "advance": 8576,
+          "advance": 6968,
           "ok": true
         },
         {
@@ -359,7 +359,7 @@
           "handDur": 0,
           "lastAt": 3752,
           "buildEnd": 4552,
-          "advance": 8576,
+          "advance": 6432,
           "ok": true
         },
         {
@@ -367,7 +367,7 @@
           "handDur": 0,
           "lastAt": 2680,
           "buildEnd": 3380,
-          "advance": 6432,
+          "advance": 4824,
           "ok": true
         },
         {

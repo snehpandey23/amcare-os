@@ -1,26 +1,26 @@
 {
-  "totalMs": 197248,
-  "totalMin": 3.29,
+  "totalMs": 168304,
+  "totalMin": 2.81,
   "rows": [
     {
       "id": "statement",
-      "build": 2948,
-      "dwell": 1500,
-      "total": 6432,
+      "build": 1436,
+      "dwell": 1200,
+      "total": 2680,
       "words": 2
     },
     {
       "id": "p-time",
       "build": 5092,
       "dwell": 2000,
-      "total": 8576,
+      "total": 7504,
       "words": 10
     },
     {
       "id": "p-away",
       "build": 5360,
-      "dwell": 4000,
-      "total": 10720,
+      "dwell": 3500,
+      "total": 9112,
       "words": 40
     },
     {
@@ -33,85 +33,85 @@
     {
       "id": "p-response",
       "build": 4824,
-      "dwell": 4000,
-      "total": 10720,
+      "dwell": 3500,
+      "total": 8576,
       "words": 22
     },
     {
       "id": "p-whole",
       "build": 4556,
-      "dwell": 4000,
+      "dwell": 3500,
       "total": 8576,
       "words": 26
     },
     {
       "id": "p-coord",
-      "build": 6968,
+      "build": 5360,
       "dwell": 1600,
-      "total": 8576,
+      "total": 6968,
       "words": 8
     },
     {
       "id": "question",
       "build": 2144,
-      "dwell": 3400,
-      "total": 6432,
+      "dwell": 2000,
+      "total": 4288,
       "words": 17
     },
     {
       "id": "turn",
       "build": 4824,
-      "dwell": 4000,
-      "total": 10720,
+      "dwell": 2000,
+      "total": 6968,
       "words": 20
     },
     {
       "id": "care-checklist",
       "build": 3752,
-      "dwell": 4000,
+      "dwell": 3500,
       "total": 8576,
       "words": 21
     },
     {
       "id": "f-time",
       "build": 4888,
-      "dwell": 4000,
-      "total": 10720,
+      "dwell": 3500,
+      "total": 8576,
       "words": 37
     },
     {
       "id": "f-ways",
       "build": 4288,
-      "dwell": 4000,
-      "total": 8576,
+      "dwell": 3500,
+      "total": 8040,
       "words": 22
     },
     {
       "id": "f-response",
       "build": 4288,
-      "dwell": 3600,
-      "total": 8576,
+      "dwell": 3500,
+      "total": 8040,
       "words": 18
     },
     {
       "id": "f-urgent",
       "build": 4556,
-      "dwell": 4000,
+      "dwell": 3500,
       "total": 8576,
       "words": 31
     },
     {
       "id": "f-whole",
       "build": 3216,
-      "dwell": 4000,
-      "total": 8576,
+      "dwell": 3500,
+      "total": 6968,
       "words": 24
     },
     {
       "id": "employer",
       "build": 3752,
       "dwell": 3400,
-      "total": 8576,
+      "total": 7504,
       "words": 17
     },
     {
@@ -124,8 +124,8 @@
     {
       "id": "outcomes",
       "build": 5092,
-      "dwell": 4000,
-      "total": 10720,
+      "dwell": 3500,
+      "total": 9112,
       "words": 24
     },
     {
@@ -139,21 +139,21 @@
       "id": "cost",
       "build": 3752,
       "dwell": 3200,
-      "total": 8576,
+      "total": 6968,
       "words": 16
     },
     {
       "id": "privacy",
       "build": 4288,
-      "dwell": 2400,
-      "total": 8576,
+      "dwell": 2000,
+      "total": 6432,
       "words": 12
     },
     {
       "id": "proof",
       "build": 3216,
       "dwell": 1600,
-      "total": 6432,
+      "total": 4824,
       "words": 8
     },
     {
@@ -165,5 +165,17 @@
     }
   ],
   "BEAT": 536,
-  "BAR": 2144
+  "BAR": 2144,
+  "label": "About 3 minutes",
+  "BUILD_EXEMPT": [
+    "journey",
+    "p-response"
+  ],
+  "SHORT": [
+    "statement",
+    "question",
+    "proof",
+    "privacy",
+    "turn"
+  ]
 }
