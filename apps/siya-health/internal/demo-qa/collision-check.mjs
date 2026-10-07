@@ -22,6 +22,9 @@ const VIEWS = [
   [1366, 768],
   [390, 844],
   [360, 800],
+  [390, 664],
+  [393, 659],
+  [375, 553],
 ];
 
 const TEXT_SELECTOR = [
@@ -249,6 +252,18 @@ async function check(page, slideId, viewport) {
         fails.push({
           slideId, viewport, type: 'days-stacked', count: days.length,
           words: days.map((d) => d.textContent.trim()),
+        });
+      }
+    }
+
+    /* ---- 3) Headline must stay in the visible viewport (not centered off-screen) ---- */
+    const head = slide.querySelector('.cap, .big, h2, .q2') || slide.querySelector('.eyebrow');
+    if (head && visible(head)) {
+      const hr = head.getBoundingClientRect();
+      if (hr.top < -1) {
+        fails.push({
+          slideId, viewport, type: 'headline-above-visible',
+          el: labelOf(head), top: Math.round(hr.top), text: textOf(head),
         });
       }
     }

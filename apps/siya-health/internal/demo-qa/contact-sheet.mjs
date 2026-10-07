@@ -107,6 +107,7 @@ figure{margin:0;background:rgba(255,255,255,.06);border-radius:8px;padding:6px}i
 
 await shoot(1440, 900, 'desk');
 await shoot(390, 844, 'phone');
+await shoot(390, 664, 'phone-390x664');
 await browser.close();
 server.close();
 console.log('done', HASH);

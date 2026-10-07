@@ -244,6 +244,7 @@ async function autoplaySample(w, h, label) {
 
 const desk = await autoplaySample(1440, 900, 'desk-1440');
 const phone = await autoplaySample(390, 844, 'phone-390');
+const phoneToolbar = await autoplaySample(390, 664, 'phone-390x664');
 
 let md = `# Transition check AFTER \`${HASH}\`\n\n`;
 md += `## Diagnose summary (fixed)\n`;
