@@ -19,6 +19,24 @@
           "value": "noindex, nofollow"
         }
       ]
+    },
+    {
+      "source": "/employers/one-pager",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, nofollow"
+        }
+      ]
+    },
+    {
+      "source": "/employers/one-pager.html",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, nofollow"
+        }
+      ]
     }
   ],
   "buildCommand": "npm run build",
