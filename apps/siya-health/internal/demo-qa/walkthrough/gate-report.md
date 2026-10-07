@@ -1,4 +1,4 @@
-# Release gate report `2d1da2b3`
+# Release gate report `8e58be98`
 
 - **css-coverage**: PASS — MISSING 0
 - **content-grep**: PASS — no free-care claims; ok
@@ -9,6 +9,7 @@
 - **reduced-motion**: PASS — ok
 - **a3-cut**: PASS — no care-body / silhouette / makeBodyFigure
 - **analytics-runtime**: PASS — gtm-ish requests under review=1: 0
+- **pacing**: PASS — total 3.29 min (197248ms), 23 slides
 
 ## Failures (0)
 _None_

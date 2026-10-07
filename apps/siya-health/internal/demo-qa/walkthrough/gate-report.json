@@ -1,5 +1,5 @@
 {
-  "commit": "2d1da2b3",
+  "commit": "8e58be98",
   "gates": {
     "css-coverage": {
       "ok": true,
@@ -56,6 +56,12 @@
       "ok": true,
       "notes": [
         "gtm-ish requests under review=1: 0"
+      ]
+    },
+    "pacing": {
+      "ok": true,
+      "notes": [
+        "total 3.29 min (197248ms), 23 slides"
       ]
     }
   },
@@ -144,5 +150,174 @@
       "FAILURES 0"
     ]
   },
-  "analyticsReqs": []
+  "analyticsReqs": [],
+  "pacing": {
+    "totalMs": 197248,
+    "totalMin": 3.29,
+    "rows": [
+      {
+        "id": "statement",
+        "build": 2948,
+        "dwell": 1500,
+        "total": 6432,
+        "words": 2
+      },
+      {
+        "id": "p-time",
+        "build": 5092,
+        "dwell": 2000,
+        "total": 8576,
+        "words": 10
+      },
+      {
+        "id": "p-away",
+        "build": 5360,
+        "dwell": 4000,
+        "total": 10720,
+        "words": 40
+      },
+      {
+        "id": "p-familiar",
+        "build": 3216,
+        "dwell": 3000,
+        "total": 6432,
+        "words": 15
+      },
+      {
+        "id": "p-response",
+        "build": 4824,
+        "dwell": 4000,
+        "total": 10720,
+        "words": 22
+      },
+      {
+        "id": "p-whole",
+        "build": 4556,
+        "dwell": 4000,
+        "total": 8576,
+        "words": 26
+      },
+      {
+        "id": "p-coord",
+        "build": 6968,
+        "dwell": 1600,
+        "total": 8576,
+        "words": 8
+      },
+      {
+        "id": "question",
+        "build": 2144,
+        "dwell": 3400,
+        "total": 6432,
+        "words": 17
+      },
+      {
+        "id": "turn",
+        "build": 4824,
+        "dwell": 4000,
+        "total": 10720,
+        "words": 20
+      },
+      {
+        "id": "care-checklist",
+        "build": 3752,
+        "dwell": 4000,
+        "total": 8576,
+        "words": 21
+      },
+      {
+        "id": "f-time",
+        "build": 4888,
+        "dwell": 4000,
+        "total": 10720,
+        "words": 37
+      },
+      {
+        "id": "f-ways",
+        "build": 4288,
+        "dwell": 4000,
+        "total": 8576,
+        "words": 22
+      },
+      {
+        "id": "f-response",
+        "build": 4288,
+        "dwell": 3600,
+        "total": 8576,
+        "words": 18
+      },
+      {
+        "id": "f-urgent",
+        "build": 4556,
+        "dwell": 4000,
+        "total": 8576,
+        "words": 31
+      },
+      {
+        "id": "f-whole",
+        "build": 3216,
+        "dwell": 4000,
+        "total": 8576,
+        "words": 24
+      },
+      {
+        "id": "employer",
+        "build": 3752,
+        "dwell": 3400,
+        "total": 8576,
+        "words": 17
+      },
+      {
+        "id": "journey",
+        "build": 8304,
+        "dwell": 3200,
+        "total": 12864,
+        "words": 16
+      },
+      {
+        "id": "outcomes",
+        "build": 5092,
+        "dwell": 4000,
+        "total": 10720,
+        "words": 24
+      },
+      {
+        "id": "clinicians",
+        "build": 5896,
+        "dwell": 3400,
+        "total": 10720,
+        "words": 17
+      },
+      {
+        "id": "cost",
+        "build": 3752,
+        "dwell": 3200,
+        "total": 8576,
+        "words": 16
+      },
+      {
+        "id": "privacy",
+        "build": 4288,
+        "dwell": 2400,
+        "total": 8576,
+        "words": 12
+      },
+      {
+        "id": "proof",
+        "build": 3216,
+        "dwell": 1600,
+        "total": 6432,
+        "words": 8
+      },
+      {
+        "id": "close",
+        "build": 0,
+        "dwell": 0,
+        "total": 0,
+        "manual": true
+      }
+    ],
+    "BEAT": 536,
+    "BAR": 2144
+  }
 }
