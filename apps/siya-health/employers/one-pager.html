@@ -7,7 +7,7 @@
     <title>For Employers · California pilot | Siya Health</title>
     <meta
       name="description"
-      content="California employer pilot leave-behind: physician-led virtual primary care at $0 to employees. Preview only — not for search indexing."
+      content="California employer pilot leave-behind. Preview only — not for search indexing."
     />
     <link rel="canonical" href="https://siya.health/employers/one-pager" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -18,60 +18,49 @@
     />
     <style>
       /*
-        Homepage2 tokens only (brand/HOMEPAGE2-BRAND-THEME.md).
-        Standalone leave-behind — not linked from nav.
+        Homepage2 tokens. Print leave-behind — noindex, not in nav.
 
-        Headline options (prompt §1):
-        A) A care team that knows your people, available whenever they need it.
-        B) Integrated care for busy professionals — one team, whenever they need it.
-        C) One care team for your people, at any hour they need it.
-        Selected: A (closest to the brief; “available whenever” = access without hype).
+        Care-flow steps (names from live homepage; do not invent):
+        1) "Tell us EVERYTHING" — apps/siya-health/index.html §#how-it-works
+           .siya-h2-care-flow__card[data-step="1"]
+        2) "Comprehensive clinical evaluation" — same section, data-step="2";
+           cognitive line from creyos-adhd-testing.html (attention / cognitive tasks)
+           + employers/demo.html (“cognitive testing” under one team)
+        3) "Tracked & escalated" — index.html §#how-it-works data-step="6";
+           focus tracking phrase from employers.html #sample-visit founder vision
+           (“track … focus, sleep, energy…”)
+
+        Eyebrow = live homepage H1 word-for-word (index.html hero).
       */
       :root {
         --cream: #f4efe7;
         --cream-light: #f7f2ec;
         --mist: #e8eef8;
-        --white: #ffffff;
         --navy: #001878;
         --ink: #0a246b;
-        --ink-soft: rgba(10, 36, 107, 0.78);
-        --ink-mute: rgba(10, 36, 107, 0.76); /* ≥4.5:1 on cream */
+        --ink-soft: rgba(10, 36, 107, 0.8);
+        --ink-mute: rgba(10, 36, 107, 0.76);
         --magenta: #d81088;
-        --mid-magenta: #a81490;
+        --magenta-bright: #ff4db8; /* solid on navy; WCAG AA */
         --violet: #7b2d8e;
-        --champagne: #c4a574;
-        --line: rgba(0, 24, 120, 0.1);
-        --card: rgba(255, 255, 255, 0.55);
+        --line: rgba(0, 24, 120, 0.12);
         --radius: 1.1rem;
         --font-display: "Poppins", ui-sans-serif, system-ui, sans-serif;
         --font-body: "Inter", ui-sans-serif, system-ui, sans-serif;
-        --grad-emphasis: linear-gradient(
-          90deg,
-          #d81088 0%,
-          #a81490 48%,
-          #0a246b 68%,
-          #001878 100%
-        );
         --grad-btn: linear-gradient(135deg, #d81088 0%, #7b2d8e 48%, #001878 100%);
-        --grad-hero: linear-gradient(145deg, #001878 0%, #0a246b 58%, #3a1260 100%);
+        --grad-hero: linear-gradient(145deg, #001878 0%, #0a246b 62%, #2a1058 100%);
       }
 
       * {
         box-sizing: border-box;
       }
-
       html,
       body {
         margin: 0;
-        padding: 0;
         background: var(--cream);
         color: var(--ink);
         font-family: var(--font-body);
         -webkit-font-smoothing: antialiased;
-      }
-
-      body {
-        min-height: 100vh;
       }
 
       .screen-bar {
@@ -83,39 +72,29 @@
         justify-content: space-between;
         gap: 12px;
         padding: 10px 16px;
-        background: rgba(244, 239, 231, 0.92);
+        background: rgba(244, 239, 231, 0.94);
         border-bottom: 1px solid var(--line);
-        backdrop-filter: blur(8px);
       }
-
       .screen-bar p {
         margin: 0;
-        font-size: 12px;
+        font-size: 13px;
         color: var(--ink-mute);
         font-weight: 500;
       }
-
       .btn-print {
-        appearance: none;
         border: none;
         cursor: pointer;
         font-family: var(--font-display);
         font-weight: 600;
-        font-size: 13px;
+        font-size: 14px;
         color: #fff;
-        padding: 10px 18px;
+        padding: 11px 20px;
         border-radius: 999px;
         background: var(--grad-btn);
         box-shadow: 0 10px 28px rgba(216, 16, 136, 0.22);
-        text-decoration: none;
-        white-space: nowrap;
       }
-
-      .btn-print:hover {
-        filter: brightness(1.05);
-      }
-
-      .btn-print:focus-visible {
+      .btn-print:focus-visible,
+      .cta-btn:focus-visible {
         outline: 2px solid var(--magenta);
         outline-offset: 3px;
       }
@@ -126,406 +105,349 @@
         justify-content: center;
       }
 
-      /* Screen preview of US Letter */
+      /* US Letter sheet — flex column fills top→bottom */
       .sheet {
-        position: relative;
         width: min(100%, 8.5in);
-        min-height: 11in;
-        background: var(--cream);
+        height: 11in;
+        background: #fff;
         border: 1px solid var(--line);
-        border-radius: 12px;
+        border-radius: 10px;
         overflow: hidden;
         box-shadow: 0 18px 48px rgba(0, 24, 120, 0.08);
-      }
-
-      .sheet::before,
-      .sheet::after {
-        content: "";
-        position: absolute;
-        border-radius: 50%;
-        pointer-events: none;
-        z-index: 0;
-        filter: blur(40px);
-      }
-
-      .sheet::before {
-        width: 280px;
-        height: 280px;
-        top: -80px;
-        right: -60px;
-        background: radial-gradient(circle, rgba(216, 16, 136, 0.14), transparent 70%);
-      }
-
-      .sheet::after {
-        width: 320px;
-        height: 320px;
-        bottom: 120px;
-        left: -100px;
-        background: radial-gradient(circle, rgba(0, 24, 120, 0.1), transparent 70%);
-      }
-
-      .sheet-inner {
-        position: relative;
-        z-index: 1;
         display: flex;
         flex-direction: column;
-        min-height: 11in;
-        padding: 0;
       }
 
-      /* —— Hero —— */
+      /* —— 1. HERO —— */
       .hero {
+        flex: 0 0 auto;
         background: var(--grad-hero);
         color: #fff;
-        padding: 18px 22px 16px;
+        padding: 22px 28px 24px;
       }
-
       .hero-top {
         display: flex;
         align-items: center;
         justify-content: space-between;
         gap: 12px;
-        margin-bottom: 14px;
+        margin-bottom: 18px;
       }
-
       .brand {
-        display: flex;
+        display: inline-flex;
         align-items: center;
-        gap: 8px;
+        gap: 10px;
         text-decoration: none;
         color: #fff;
       }
-
       .brand img {
-        width: 28px;
-        height: 28px;
-        border-radius: 7px;
+        width: 40px;
+        height: 40px;
+        border-radius: 9px;
         background: #fff;
+        object-fit: contain;
       }
-
-      .brand span {
+      .brand .wordmark {
         font-family: var(--font-display);
-        font-weight: 700;
-        font-size: 15px;
-        letter-spacing: -0.01em;
+        font-weight: 600;
+        font-size: 20px;
+        letter-spacing: -0.02em;
+        line-height: 1.1;
       }
-
-      .eyebrow {
+      .brand .reg {
+        font-size: 0.55em;
+        font-weight: 600;
+        vertical-align: super;
+        margin-left: 0.06em;
+        line-height: 0;
+      }
+      .pilot-tag {
         margin: 0;
-        font-size: 10px;
+        font-size: 11px;
         font-weight: 600;
         letter-spacing: 0.14em;
         text-transform: uppercase;
-        color: rgba(255, 255, 255, 0.78);
-      }
-
-      .hero h1 {
-        margin: 0 0 8px;
-        font-family: var(--font-display);
-        font-weight: 700;
-        font-size: clamp(22px, 3.6vw, 28px);
-        line-height: 1.15;
-        letter-spacing: -0.02em;
-        max-width: 34ch;
-      }
-
-      .hero h1 .em {
-        background: linear-gradient(90deg, #ff5cb8 0%, #fff 55%, #e8eef8 100%);
-        -webkit-background-clip: text;
-        background-clip: text;
-        color: transparent;
-      }
-
-      .hero-lead {
-        margin: 0 0 14px;
-        font-size: 13px;
-        line-height: 1.45;
-        color: rgba(255, 255, 255, 0.9);
-        max-width: 62ch;
-      }
-
-      .access {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 8px;
-      }
-
-      .access-card {
-        background: rgba(255, 255, 255, 0.1);
-        border: 1px solid rgba(255, 255, 255, 0.18);
-        border-radius: 12px;
-        padding: 10px 10px 9px;
-      }
-
-      .access-card strong {
-        display: block;
-        font-family: var(--font-display);
-        font-size: 18px;
-        font-weight: 700;
-        line-height: 1.1;
-        margin-bottom: 2px;
-      }
-
-      .access-card span {
-        display: block;
-        font-size: 11px;
-        line-height: 1.3;
         color: rgba(255, 255, 255, 0.82);
       }
 
-      /* —— Body —— */
-      .body {
-        flex: 1;
-        padding: 14px 22px 10px;
+      .hero-grid {
         display: grid;
-        grid-template-columns: 1.15fr 0.85fr;
-        gap: 14px 18px;
-        align-content: start;
+        grid-template-columns: 1.2fr 0.9fr;
+        gap: 22px;
+        align-items: center;
       }
-
-      .col h2 {
+      .eyebrow {
         margin: 0 0 8px;
-        font-family: var(--font-display);
-        font-size: 15px;
-        font-weight: 700;
-        color: var(--ink);
-        letter-spacing: -0.01em;
-      }
-
-      .include-list {
-        list-style: none;
-        margin: 0;
-        padding: 0;
-        display: grid;
-        gap: 4px;
-      }
-
-      .include-list li {
-        display: grid;
-        grid-template-columns: 14px 1fr;
-        gap: 7px;
-        align-items: start;
-        font-size: 12px;
-        line-height: 1.35;
-        color: var(--ink-soft);
-      }
-
-      .include-list li::before {
-        content: "";
-        width: 14px;
-        height: 14px;
-        margin-top: 1px;
-        border-radius: 50%;
-        background: var(--magenta)
-          url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath fill='none' stroke='%23fff' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round' d='M3.5 8.2l2.8 2.8 6.2-6.2'/%3E%3C/svg%3E")
-          center / 10px 10px no-repeat;
-      }
-
-      .unlimited {
-        margin: 8px 0 0;
-        font-size: 12px;
+        font-size: 13px;
         font-weight: 600;
-        color: var(--ink);
+        letter-spacing: 0.02em;
+        color: rgba(255, 255, 255, 0.88);
         line-height: 1.35;
+        max-width: 36ch;
       }
-
-      .billed {
-        margin-top: 10px;
-        padding-top: 9px;
-        border-top: 1px solid var(--line);
-      }
-
-      .billed h3 {
-        margin: 0 0 4px;
-        font-size: 10px;
+      .hero h1 {
+        margin: 0 0 14px;
+        font-family: var(--font-display);
         font-weight: 700;
-        letter-spacing: 0.12em;
-        text-transform: uppercase;
-        color: var(--ink-mute);
+        font-size: 52px;
+        line-height: 1.08;
+        letter-spacing: -0.025em;
+        max-width: 14ch;
       }
-
-      .billed p {
-        margin: 0;
-        font-size: 11px;
+      /* Solid bright magenta on navy — not gradient (illegible) */
+      .hero h1 .line2 {
+        color: var(--magenta-bright);
+        -webkit-text-fill-color: var(--magenta-bright);
+        text-decoration: underline;
+        text-decoration-color: rgba(255, 77, 184, 0.55);
+        text-underline-offset: 0.12em;
+        text-decoration-thickness: 3px;
+      }
+      .hero-lead {
+        margin: 0 0 16px;
+        font-size: 17px;
         line-height: 1.4;
-        color: var(--ink-soft);
+        color: rgba(255, 255, 255, 0.94);
+        max-width: 38ch;
       }
-
-      .pilot {
-        background: linear-gradient(160deg, rgba(255, 255, 255, 0.72), rgba(232, 238, 248, 0.55));
-        border: 1px solid var(--line);
-        border-radius: var(--radius);
-        padding: 12px 13px 11px;
+      .zero-badge {
+        display: inline-flex;
+        align-items: baseline;
+        gap: 8px;
+        padding: 10px 16px;
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.14);
+        border: 1px solid rgba(255, 255, 255, 0.35);
       }
-
-      .pilot-label {
-        margin: 0 0 6px;
-        font-size: 10px;
-        font-weight: 700;
-        letter-spacing: 0.14em;
-        text-transform: uppercase;
-        color: var(--magenta);
-      }
-
-      .price {
-        margin: 0;
+      .zero-badge .amt {
         font-family: var(--font-display);
         font-weight: 700;
         font-size: 28px;
         line-height: 1;
-        color: var(--ink);
-        letter-spacing: -0.02em;
+        color: #fff;
       }
-
-      .price span {
-        font-size: 12px;
+      .zero-badge .lbl {
+        font-size: 15px;
         font-weight: 600;
-        font-family: var(--font-body);
-        color: var(--ink-soft);
-        letter-spacing: 0;
+        color: rgba(255, 255, 255, 0.95);
       }
-
-      .price-note {
-        margin: 4px 0 8px;
-        font-size: 11px;
-        font-weight: 600;
-        color: var(--ink);
-      }
-
-      .pilot ul {
-        margin: 0;
-        padding: 8px 0 0;
-        border-top: 1px solid var(--line);
-        list-style: none;
-        display: grid;
-        gap: 4px;
-      }
-
-      .pilot li {
-        position: relative;
-        padding-left: 11px;
-        font-size: 11px;
-        line-height: 1.35;
-        color: var(--ink-soft);
-      }
-
-      .pilot li::before {
-        content: "";
-        position: absolute;
-        left: 0;
-        top: 0.45em;
-        width: 5px;
-        height: 5px;
-        border-radius: 50%;
-        background: var(--magenta);
-      }
-
-      .proof {
-        margin: 10px 0 0;
-        padding: 0;
-        list-style: none;
-        display: grid;
-        gap: 3px;
-      }
-
-      .proof li {
-        font-size: 11px;
-        line-height: 1.35;
-        color: var(--ink-soft);
-      }
-
-      .proof strong {
-        color: var(--ink);
+      .zero-badge sup {
+        font-size: 0.55em;
         font-weight: 700;
       }
 
-      /* —— How it works —— */
-      .how {
-        grid-column: 1 / -1;
-        margin-top: 2px;
+      .hero-photo {
+        margin: 0;
+        border-radius: 16px;
+        overflow: hidden;
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        box-shadow: 0 14px 32px rgba(0, 0, 0, 0.25);
+        aspect-ratio: 4 / 3;
+        background: rgba(255, 255, 255, 0.08);
+      }
+      .hero-photo img {
+        display: block;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center 28%;
       }
 
-      .how h2 {
-        margin-bottom: 8px;
+      /* —— 2. CARE FLOW —— */
+      .care-flow {
+        flex: 1 1 auto;
+        padding: 22px 28px 8px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        gap: 14px;
+        background: var(--cream-light);
+        border-bottom: 1px solid var(--line);
       }
-
+      .care-flow > h2 {
+        margin: 0;
+        font-family: var(--font-display);
+        font-size: 15px;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: var(--magenta);
+      }
       .steps {
         display: grid;
         grid-template-columns: repeat(3, 1fr);
-        gap: 8px;
+        gap: 16px;
       }
-
       .step {
-        background: var(--card);
+        background: rgba(255, 255, 255, 0.72);
         border: 1px solid var(--line);
-        border-radius: 14px;
-        padding: 10px 11px;
+        border-radius: var(--radius);
+        padding: 18px 16px;
+        min-height: 100%;
       }
-
       .step-num {
         display: inline-grid;
         place-items: center;
-        width: 22px;
-        height: 22px;
+        width: 28px;
+        height: 28px;
         border-radius: 50%;
-        font-size: 11px;
+        font-size: 13px;
         font-weight: 700;
         color: #fff;
         background: linear-gradient(145deg, #001878 0%, #0a246b 55%, #d81088 140%);
-        margin-bottom: 5px;
+        margin-bottom: 10px;
       }
-
       .step h3 {
-        margin: 0 0 3px;
+        margin: 0 0 8px;
         font-family: var(--font-display);
-        font-size: 12px;
+        font-size: 22px;
         font-weight: 700;
         color: var(--ink);
+        line-height: 1.2;
+        letter-spacing: -0.02em;
       }
-
+      .step h3 .all {
+        color: var(--magenta);
+      }
       .step p {
         margin: 0;
-        font-size: 11px;
+        font-size: 16px;
         line-height: 1.35;
         color: var(--ink-soft);
       }
 
-      /* —— CTA + footer —— */
-      .cta-band {
-        margin-top: auto;
-        padding: 12px 22px 10px;
-        border-top: 1px solid var(--line);
-        background: linear-gradient(180deg, transparent, rgba(232, 238, 248, 0.45));
+      /* —— 3. PRIVACY —— */
+      .privacy {
+        flex: 0 0 auto;
+        margin: 0;
+        padding: 16px 28px;
         display: flex;
-        align-items: center;
-        justify-content: space-between;
         gap: 12px;
-        flex-wrap: wrap;
+        align-items: flex-start;
+        background: rgba(216, 16, 136, 0.08);
+        border-top: 1px solid rgba(216, 16, 136, 0.16);
+        border-bottom: 1px solid rgba(216, 16, 136, 0.16);
+      }
+      .privacy svg {
+        flex-shrink: 0;
+        width: 22px;
+        height: 22px;
+        margin-top: 2px;
+        color: var(--magenta);
+      }
+      .privacy p {
+        margin: 0;
+        font-size: 16px;
+        line-height: 1.4;
+        color: var(--ink-soft);
+      }
+      .privacy strong {
+        color: var(--ink);
+        font-weight: 700;
       }
 
-      .cta-copy h2 {
-        margin: 0 0 2px;
+      /* —— 4. FACT STRIP —— */
+      .facts {
+        flex: 0 0 auto;
+        padding: 18px 28px;
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 0;
+        background: #fff;
+        border-bottom: 1px solid var(--line);
+      }
+      .fact {
+        text-align: center;
+        padding: 4px 10px;
+      }
+      .fact:not(:last-child) {
+        border-right: 1px solid var(--line);
+      }
+      .fact strong {
+        display: block;
         font-family: var(--font-display);
-        font-size: 16px;
+        font-size: 26px;
         font-weight: 700;
         color: var(--ink);
+        line-height: 1.1;
       }
-
-      .cta-copy p {
-        margin: 0;
-        font-size: 12px;
+      .fact span {
+        display: block;
+        margin-top: 4px;
+        font-size: 14px;
+        line-height: 1.3;
         color: var(--ink-soft);
       }
 
+      /* —— 5. SOCIAL PROOF —— */
+      .proof {
+        flex: 0 0 auto;
+        padding: 18px 28px;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 16px;
+        background: linear-gradient(180deg, var(--mist), var(--cream-light));
+        border-bottom: 1px solid var(--line);
+      }
+      .proof-card {
+        background: rgba(255, 255, 255, 0.65);
+        border: 1px solid var(--line);
+        border-radius: var(--radius);
+        padding: 14px 18px;
+      }
+      .proof-card strong {
+        display: block;
+        font-family: var(--font-display);
+        font-size: 36px;
+        font-weight: 700;
+        color: var(--ink);
+        line-height: 1;
+        letter-spacing: -0.02em;
+      }
+      .proof-card span {
+        display: block;
+        margin-top: 6px;
+        font-size: 16px;
+        font-weight: 500;
+        color: var(--ink-soft);
+        line-height: 1.3;
+      }
+
+      /* —— 6. CTA —— */
+      .cta {
+        flex: 0 0 auto;
+        margin: 0;
+        padding: 18px 28px;
+        background: #fff;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 18px;
+        border-bottom: 1px solid var(--line);
+      }
+      .cta h2 {
+        margin: 0 0 6px;
+        font-family: var(--font-display);
+        font-size: 24px;
+        font-weight: 700;
+        color: var(--ink);
+        letter-spacing: -0.02em;
+      }
+      .cta .meta {
+        margin: 0;
+        font-size: 15px;
+        line-height: 1.4;
+        color: var(--ink-soft);
+      }
       .cta-btn {
+        flex-shrink: 0;
         display: inline-flex;
         align-items: center;
         justify-content: center;
-        padding: 11px 20px;
+        padding: 16px 26px;
         border-radius: 999px;
         font-family: var(--font-display);
-        font-weight: 600;
-        font-size: 13px;
+        font-weight: 700;
+        font-size: 16px;
         color: #fff;
         text-decoration: none;
         background: var(--grad-btn);
@@ -533,181 +455,158 @@
         white-space: nowrap;
       }
 
-      .cta-btn:hover {
-        filter: brightness(1.05);
-      }
-
-      .cta-btn:focus-visible {
-        outline: 2px solid var(--magenta);
-        outline-offset: 3px;
-      }
-
+      /* —— 7. FOOTNOTES —— */
       .legal {
-        padding: 0 22px 12px;
+        flex: 0 0 auto;
+        padding: 12px 28px 16px;
+        background: var(--cream);
       }
-
       .legal p {
-        margin: 0;
-        font-size: 9.5px;
+        margin: 0 0 4px;
+        font-size: 12px;
         line-height: 1.4;
         color: var(--ink-mute);
       }
-
+      .legal p:last-child {
+        margin-bottom: 0;
+      }
       .legal .em-911 {
         color: var(--ink);
         font-weight: 600;
       }
 
-      /* —— Mobile (screen) —— */
       @media (max-width: 720px) {
-        .access {
-          grid-template-columns: 1fr;
-        }
-
-        .body {
-          grid-template-columns: 1fr;
-        }
-
-        .steps {
-          grid-template-columns: 1fr;
-        }
-
         .sheet {
-          min-height: 0;
-          border-radius: 10px;
-        }
-
-        .sheet-inner {
+          height: auto;
           min-height: 0;
         }
-
-        .cta-band {
+        .hero h1 {
+          font-size: 36px;
+          max-width: none;
+        }
+        .hero-grid,
+        .steps,
+        .facts,
+        .proof {
+          grid-template-columns: 1fr;
+        }
+        .fact:not(:last-child) {
+          border-right: none;
+          border-bottom: 1px solid var(--line);
+          padding-bottom: 10px;
+          margin-bottom: 8px;
+        }
+        .cta {
+          flex-direction: column;
           align-items: stretch;
         }
-
         .cta-btn {
           width: 100%;
         }
       }
 
-      /* —— Print: exact US Letter, one page —— */
       @page {
         size: letter portrait;
-        margin: 0.38in;
+        margin: 0.35in;
       }
-
       @media print {
         .screen-bar {
           display: none !important;
         }
-
         html,
         body {
           background: #fff;
         }
-
         .page-wrap {
           padding: 0;
         }
-
         .sheet {
           width: 100%;
-          min-height: 0;
+          height: 10.3in; /* Letter minus @page margins */
           border: none;
           border-radius: 0;
           box-shadow: none;
-          overflow: visible;
         }
-
-        .sheet::before,
-        .sheet::after {
-          display: none;
+        .hero,
+        .care-flow,
+        .privacy,
+        .proof,
+        .cta-btn,
+        .step,
+        .zero-badge,
+        .proof-card {
+          -webkit-print-color-adjust: exact;
+          print-color-adjust: exact;
         }
-
-        .sheet-inner {
-          min-height: 0;
-        }
-
         .hero {
-          -webkit-print-color-adjust: exact;
-          print-color-adjust: exact;
-          padding: 12px 14px 11px;
+          padding: 16px 20px 18px;
         }
-
         .hero h1 {
-          font-size: 22px;
+          font-size: 48px;
         }
-
         .hero-lead {
-          font-size: 11.5px;
-          margin-bottom: 10px;
-        }
-
-        .access-card {
-          -webkit-print-color-adjust: exact;
-          print-color-adjust: exact;
-          padding: 7px 8px;
-        }
-
-        .access-card strong {
           font-size: 15px;
         }
-
-        .access-card span {
-          font-size: 9.5px;
-        }
-
-        .body {
-          padding: 10px 14px 6px;
-          gap: 10px 14px;
-        }
-
-        .include-list li,
-        .unlimited,
-        .step p,
-        .pilot li,
-        .proof li {
-          font-size: 10px;
-        }
-
-        .price {
+        .zero-badge .amt {
           font-size: 24px;
         }
-
+        .care-flow {
+          padding: 14px 20px 6px;
+        }
         .step {
-          -webkit-print-color-adjust: exact;
-          print-color-adjust: exact;
-          padding: 8px 9px;
+          padding: 12px 12px;
         }
-
-        .pilot {
-          -webkit-print-color-adjust: exact;
-          print-color-adjust: exact;
-          padding: 10px 11px;
+        .step h3 {
+          font-size: 18px;
         }
-
-        .cta-band {
-          padding: 8px 14px 6px;
-          background: transparent;
+        .step p,
+        .privacy p {
+          font-size: 13px;
         }
-
+        .privacy {
+          padding: 12px 20px;
+        }
+        .facts {
+          padding: 12px 20px;
+        }
+        .fact strong {
+          font-size: 22px;
+        }
+        .fact span {
+          font-size: 12px;
+        }
+        .proof {
+          padding: 12px 20px;
+        }
+        .proof-card strong {
+          font-size: 28px;
+        }
+        .proof-card span {
+          font-size: 13px;
+        }
+        .cta {
+          padding: 12px 20px;
+        }
+        .cta h2 {
+          font-size: 20px;
+        }
+        .cta .meta {
+          font-size: 13px;
+        }
         .cta-btn {
-          -webkit-print-color-adjust: exact;
-          print-color-adjust: exact;
           box-shadow: none;
+          font-size: 14px;
+          padding: 12px 18px;
         }
-
         .legal {
-          padding: 0 14px 0;
+          padding: 8px 20px 10px;
         }
-
         .legal p {
-          font-size: 8.5px;
+          font-size: 10px;
         }
-
         a {
-          color: inherit;
           text-decoration: none;
+          color: inherit;
         }
       }
     </style>
@@ -720,143 +619,152 @@
 
     <div class="page-wrap">
       <article class="sheet" aria-label="For Employers California pilot one-pager">
-        <div class="sheet-inner">
-          <header class="hero">
-            <div class="hero-top">
-              <a class="brand" href="https://siya.health/" aria-label="Siya Health">
-                <img
-                  src="/assets/images/siya-health-mark.png"
-                  alt=""
-                  width="28"
-                  height="28"
-                  decoding="async"
-                />
-                <span>Siya Health</span>
-              </a>
-              <p class="eyebrow">For employers · California pilot</p>
-            </div>
-            <h1>
-              A care team that knows your people,
-              <span class="em">available whenever they need it</span>
-            </h1>
-            <p class="hero-lead">
-              Physician-led virtual primary care for busy professionals. $0 to your employees, the
-              same clinician every visit, on top of the health plan you already offer. Clinical
-              services provided by Siya Healthcare PC.
-            </p>
-            <div class="access" aria-label="Access standards">
-              <div class="access-card">
-                <strong>24/7</strong>
-                <span>care team, weekends and holidays<sup>*</sup></span>
-              </div>
-              <div class="access-card">
-                <strong>30 min</strong>
-                <span>secure messages answered</span>
-              </div>
-              <div class="access-card">
-                <strong>2 hours</strong>
-                <span>urgent needs seen by a licensed clinician<sup>*</sup></span>
-              </div>
-            </div>
-          </header>
-
-          <div class="body">
-            <div class="col">
-              <h2>Included at $0 to employees</h2>
-              <ul class="include-list">
-                <li>Primary and urgent care visits</li>
-                <li>ADHD evaluation and management</li>
-                <li>Mental health care</li>
-                <li>Cognitive assessment</li>
-                <li>Weight and metabolic health</li>
-                <li>Hormonal health</li>
-                <li>Sleep and migraine care</li>
-                <li>Secure messaging and care navigation</li>
-                <li>Ongoing care management by our care team</li>
-              </ul>
-              <p class="unlimited">
-                Unlimited visits, with one dedicated clinician who gets to know each employee.
+        <header class="hero">
+          <div class="hero-top">
+            <a class="brand" href="https://siya.health/" aria-label="Siya Health home">
+              <img
+                src="/assets/images/siya-health-mark.png"
+                alt=""
+                width="40"
+                height="40"
+                decoding="async"
+              />
+              <span class="wordmark">Siya Health<sup class="reg" aria-hidden="true">®</sup></span>
+            </a>
+            <p class="pilot-tag">For employers · California pilot</p>
+          </div>
+          <div class="hero-grid">
+            <div>
+              <!-- Exact live homepage H1 (index.html hero), used as positioning eyebrow -->
+              <p class="eyebrow">Welcome to an integrated care experience for busy professionals</p>
+              <h1>
+                Your business runs on brain power.<br />
+                <span class="line2">Who’s looking after it?</span>
+              </h1>
+              <p class="hero-lead">
+                One physician-led team for stress, focus, memory and sleep — alongside everyday
+                primary care.
               </p>
-              <div class="billed">
-                <h3>Billed separately</h3>
-                <p>
-                  Medications, filled at the employee’s own pharmacy · Labs, at discounted pricing
-                  through our lab portal · Specialist consultations, with referrals coordinated by
-                  our team
-                </p>
+              <div class="zero-badge" aria-label="Zero cost to employees">
+                <span class="amt">$0</span>
+                <span class="lbl">to your employees<sup>†</sup></span>
               </div>
             </div>
-
-            <aside class="col">
-              <div class="pilot">
-                <p class="pilot-label">Pilot terms</p>
-                <p class="price">$100 <span>per enrolled employee per month</span></p>
-                <p class="price-note">Minimum 250 employees</p>
-                <ul>
-                  <li>6-month pilot with reviews at month 3 and month 6</li>
-                  <li>Rate locked for 12 months after the pilot</li>
-                  <li>HSA-compatible</li>
-                  <li>Employees only (no dependents in the pilot)</li>
-                  <li>
-                    Aggregate, de-identified reporting only (groups of 10+); no individual health
-                    information is shared with the employer
-                  </li>
-                </ul>
-              </div>
-              <ul class="proof">
-                <li><strong>2,700+</strong> patients cared for</li>
-                <li>More than half are working professionals</li>
-                <li>Licensed in California, Texas, Pennsylvania and Florida</li>
-              </ul>
-            </aside>
-
-            <section class="how" aria-labelledby="how-heading">
-              <h2 id="how-heading">How it works</h2>
-              <div class="steps">
-                <div class="step">
-                  <span class="step-num" aria-hidden="true">1</span>
-                  <h3>Share your link</h3>
-                  <p>You share a private enrollment link. Joining is voluntary.</p>
-                </div>
-                <div class="step">
-                  <span class="step-num" aria-hidden="true">2</span>
-                  <h3>Employees join</h3>
-                  <p>They join through the Spruce app and get their own care profile.</p>
-                </div>
-                <div class="step">
-                  <span class="step-num" aria-hidden="true">3</span>
-                  <h3>They get care</h3>
-                  <p>
-                    Book with their own provider or message the care team. Urgent concerns are
-                    triaged first and seen within 2 hours.
-                  </p>
-                </div>
-              </div>
-            </section>
+            <figure class="hero-photo">
+              <img
+                src="/assets/images/editorial-finally-heard.jpg"
+                alt="Adult on a calm telehealth visit at a desk in natural light"
+                width="900"
+                height="675"
+                decoding="async"
+              />
+            </figure>
           </div>
+        </header>
 
-          <div class="cta-band">
-            <div class="cta-copy">
-              <h2>Start a pilot conversation</h2>
-              <p>Tell us about your team and we will scope a pilot with you.</p>
+        <section class="care-flow" aria-labelledby="care-flow-heading">
+          <h2 id="care-flow-heading">Our care model</h2>
+          <div class="steps">
+            <!--
+              Step sources (homepage care flow — index.html #how-it-works):
+              1. Tell us EVERYTHING — data-step="1" detail condensed
+              2. Comprehensive clinical evaluation — data-step="2"; cognitive tasks
+                 from creyos-adhd-testing.html + employers/demo.html “cognitive testing”
+              3. Tracked & escalated — data-step="6"; focus tracking from
+                 employers.html #sample-visit founder vision
+            -->
+            <div class="step">
+              <span class="step-num" aria-hidden="true">1</span>
+              <h3>Tell us <span class="all">EVERYTHING</span></h3>
+              <p>Share every concern — physical and mental — without filtering to one issue.</p>
             </div>
-            <a
-              class="cta-btn"
-              href="https://siya.health/employers#employer-inquiry-form"
-              data-siya-track="employer_one_pager_cta"
-              data-intent="employer"
-              >siya.health/employers</a
-            >
+            <div class="step">
+              <span class="step-num" aria-hidden="true">2</span>
+              <h3>Comprehensive clinical evaluation</h3>
+              <p>
+                Unhurried evaluation; cognitive tasks that measure attention, as needed.
+              </p>
+            </div>
+            <div class="step">
+              <span class="step-num" aria-hidden="true">3</span>
+              <h3>Tracked &amp; escalated</h3>
+              <p>
+                Subjective + objective tracking over time; a second look when something shifts.
+              </p>
+            </div>
           </div>
+        </section>
 
-          <footer class="legal">
-            <p>
-              <span class="em-911">For medical emergencies, call 911.</span>
-              <sup>*</sup>24/7 availability applies to the California pilot. · Siya Health, Inc. ·
-              Clinical services by Siya Healthcare PC.
-            </p>
-          </footer>
+        <div class="privacy">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <rect x="5" y="11" width="14" height="10" rx="2" />
+            <path d="M8 11V8a4 4 0 0 1 8 0v3" />
+          </svg>
+          <p>
+            <strong>Private by design.</strong> Results stay between each employee and their
+            clinician. You see de-identified group trends only (groups of 10+).
+          </p>
         </div>
+
+        <div class="facts" aria-label="Access standards">
+          <div class="fact">
+            <strong>$0</strong>
+            <span>to employees</span>
+          </div>
+          <div class="fact">
+            <strong>24/7*</strong>
+            <span>care team, incl. weekends</span>
+          </div>
+          <div class="fact">
+            <strong>30 min</strong>
+            <span>message replies</span>
+          </div>
+          <div class="fact">
+            <strong>2 hours*</strong>
+            <span>urgent needs seen by a licensed clinician</span>
+          </div>
+        </div>
+
+        <section class="proof" aria-label="Social proof">
+          <div class="proof-card">
+            <strong>2,700+</strong>
+            <span>patients cared for</span>
+          </div>
+          <div class="proof-card">
+            <strong>More than half</strong>
+            <span>are working professionals</span>
+          </div>
+        </section>
+
+        <div class="cta">
+          <div>
+            <h2>Start a pilot conversation</h2>
+            <p class="meta">
+              $100 per enrolled employee per month · minimum 250 · 6-month pilot · HSA-compatible
+            </p>
+          </div>
+          <a
+            class="cta-btn"
+            href="https://siya.health/employers#employer-inquiry-form"
+            data-siya-track="employer_one_pager_cta"
+            data-intent="employer"
+            >siya.health/employers</a
+          >
+        </div>
+
+        <footer class="legal">
+          <p>
+            *24/7 availability and 2-hour urgent response apply to the California pilot.
+          </p>
+          <p>
+            †Covers visits, check-ins and care coordination. Medications, labs and specialist
+            visits are billed separately.
+          </p>
+          <p>
+            <span class="em-911">For medical emergencies, call 911.</span> Siya Health, Inc. ·
+            Clinical services by Siya Healthcare PC.
+          </p>
+        </footer>
       </article>
     </div>
 
