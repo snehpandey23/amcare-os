@@ -154,6 +154,13 @@ if [[ "$WANT_PROD" -ne 1 ]]; then
   exit 1
 fi
 
+echo "==> no-scroll + visible-top gate (must pass before prod)"
+if ! (cd "$ROOT/apps/siya-health" && node internal/demo-qa/no-scroll-gate.mjs); then
+  echo "REFUSING --prod: no-scroll-visible-top gate failed." >&2
+  log_attempt "production" "REFUSED" "no-scroll-visible-top gate"
+  exit 1
+fi
+
 log_attempt "production" "STARTED" "$SUBJECT"
 npx vercel deploy --prod --yes
 npx vercel cache purge --type cdn --yes

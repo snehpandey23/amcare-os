@@ -162,8 +162,8 @@ const browser = await chromium.launch();
 {
   try {
     const out = execSync(
-      'node internal/demo-qa/collision-check.mjs journey f-time-a f-time-b f-response f-urgent f-time p-response cost privacy p-familiar',
-      { cwd: ROOT, encoding: 'utf8', timeout: 180000 },
+      'node internal/demo-qa/collision-check.mjs journey f-time-a f-time-b f-response f-urgent f-time p-response cost privacy p-familiar f-ways outcomes',
+      { cwd: ROOT, encoding: 'utf8', timeout: 600000 },
     );
     const n = Number((out.match(/FAILURES\s+(\d+)/) || [])[1] || 0);
     report.collision = { count: n, sample: out.trim().split('\n').slice(0, 40) };
@@ -193,12 +193,13 @@ const browser = await chromium.launch();
 /* Gate 2: UA smoke */
 {
   const uas = [
-    ['iPhone Safari', 'Mozilla/5.0 (iPhone; CPU iPhone OS 17_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.0 Mobile/15E148 Safari/604.1'],
-    ['Android Chrome', 'Mozilla/5.0 (Linux; Android 13; Pixel 7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Mobile Safari/537.36'],
-    ['Instagram', 'Mozilla/5.0 (iPhone; CPU iPhone OS 17_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148 Instagram 302.0.0.0'],
+    ['iPhone Safari', 'Mozilla/5.0 (iPhone; CPU iPhone OS 17_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.0 Mobile/15E148 Safari/604.1', 390, 844],
+    ['Android Chrome toolbar', 'Mozilla/5.0 (Linux; Android 13; Pixel 7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Mobile Safari/537.36', 390, 664],
+    ['iPhone SE toolbar', 'Mozilla/5.0 (iPhone; CPU iPhone OS 17_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.0 Mobile/15E148 Safari/604.1', 375, 553],
+    ['Instagram', 'Mozilla/5.0 (iPhone; CPU iPhone OS 17_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148 Instagram 302.0.0.0', 390, 844],
   ];
-  for (const [name, ua] of uas) {
-    const ctx = await browser.newContext({ userAgent: ua, viewport: { width: 390, height: 844 }, isMobile: true, hasTouch: true });
+  for (const [name, ua, vw, vh] of uas) {
+    const ctx = await browser.newContext({ userAgent: ua, viewport: { width: vw, height: vh }, isMobile: true, hasTouch: true });
     const page = await ctx.newPage();
     const errors = [];
     const failed = [];
@@ -266,6 +267,24 @@ const browser = await chromium.launch();
   await ctx.close();
 }
 
+
+/* Gate: no-scroll + visible-top (toolbar phones + tall) */
+{
+  try {
+    const out = execSync('node internal/demo-qa/no-scroll-gate.mjs', {
+      cwd: ROOT, encoding: 'utf8', timeout: 1200000,
+    });
+    const n = Number((out.match(/FAILURES\s+(\d+)/) || [])[1] || 0);
+    report.noScroll = { count: n, tail: out.trim().split('\n').slice(-20) };
+    if (n) fail('no-scroll-visible-top', `FAILURES ${n}`);
+    else pass('no-scroll-visible-top', out.trim().split('\n').find((l) => l.includes('Failures')) || 'PASS');
+  } catch (e) {
+    const msg = String(e.stdout || e.stderr || e.message || e).slice(0, 800);
+    const n = Number((msg.match(/FAILURES\s+(\d+)/) || [])[1] || 1);
+    fail('no-scroll-visible-top', msg.slice(0, 400));
+    report.noScroll = { count: n, err: msg.slice(0, 400) };
+  }
+}
 
 /* Gate: pacing — beat snap; dwell ≤3.5s (short slides ≤2s); build ≤3 bars (exc. journey/Access); total ≤3:05 */
 {
