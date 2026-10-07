@@ -55,6 +55,10 @@ function pass(gate, note) {
     [/\boptimise\b|\borganise\b|\bcolour\b|\bpractise\b|\bcentre\b/i, 'British spelling'],
     [/shutterstock|getty images|istock/i, 'stock watermark'],
     [/GoodRx|SingleCare|RxSaver/i, 'discount brand'],
+    [/Add here/i, 'Add here'],
+    [/\bLorem\b/i, 'Lorem'],
+    [/\bTBD\b/, 'TBD'],
+    [/\bXX\b/, 'XX'],
   ];
   // Allow "free slot" / "15 min free" in calendar UI; ban free-care product claims.
   for (const [re, label] of banned) {
@@ -263,7 +267,7 @@ const browser = await chromium.launch();
 }
 
 
-/* Gate: pacing — dwell ≤4s after last element; total autoplay ≤3:45 (engine computeAdvanceMs) */
+/* Gate: pacing — beat snap; dwell ≤3.5s (short slides ≤2s); build ≤3 bars (exc. journey/Access); total ≤3:05 */
 {
   const ctx = await browser.newContext({ viewport: { width: 1280, height: 720 } });
   const page = await ctx.newPage();
@@ -278,8 +282,10 @@ const browser = await chromium.launch();
     document.getElementById('tour').classList.add('on');
     const slides = [...document.querySelectorAll('#tour article.slide:not(.parked)')].filter((s) => {
       const surf = s.dataset.surface || 'both';
-      return surf !== 'phone'; /* desk viewport */
+      return surf !== 'phone';
     });
+    const SHORT = new Set(['statement', 'question', 'proof', 'privacy', 'turn']);
+    const BUILD_EXEMPT = new Set(['journey', 'p-response']);
     const rows = [];
     let total = 0;
     for (const s of slides) {
@@ -297,23 +303,70 @@ const browser = await chromium.launch();
       });
       s.querySelectorAll('[data-out]').forEach((el) => { lastEnd = Math.max(lastEnd, +el.dataset.out + 600); });
       if (s.hasAttribute('data-walk')) lastEnd = Math.max(lastEnd, 7 * WALK + 800);
-      const dwell = adv - lastEnd;
-      /* dwell portion before bar-snap: recompute raw */
       const bits = [...s.querySelectorAll('.eyebrow,.cap,.sub,.pack-note,.q1,.q2,.away-src,.sample-cap')]
         .map((el) => (el.textContent || '').trim()).join(' ');
       const words = (bits.match(/[A-Za-z0-9']+/g) || []).length;
-      const rawDwell = Math.min(4000, Math.max(1500, Math.round(words / 5 * 1000)));
+      let rawDwell = Math.min(3500, Math.max(1200, Math.round(words / 5 * 1000)));
+      if (SHORT.has(s.id)) rawDwell = Math.min(rawDwell, 2000);
       rows.push({ id: s.id || '?', build: lastEnd, dwell: rawDwell, total: adv, words });
       total += adv;
     }
-    return { totalMs: total, totalMin: +(total / 60000).toFixed(2), rows, BEAT, BAR };
+    const label = (document.querySelector('.begin-time') || {}).textContent || '';
+    return { totalMs: total, totalMin: +(total / 60000).toFixed(2), rows, BEAT, BAR, label, BUILD_EXEMPT: [...BUILD_EXEMPT], SHORT: [...SHORT] };
   });
   report.pacing = pacing;
-  const badDwell = (pacing.rows || []).filter((r) => !r.manual && r.dwell > 4000);
-  if (badDwell.length) fail('pacing', `dwell >4s on ${badDwell.map((r) => r.id).join(',')}`);
-  if (pacing.totalMs > 225000) fail('pacing', `total runtime ${pacing.totalMs}ms > 3:45`);
-  else pass('pacing', `total ${pacing.totalMin} min (${pacing.totalMs}ms), ${pacing.rows.length} slides`);
+  const BAR = 2144;
+  const badDwell = (pacing.rows || []).filter((r) => !r.manual && r.dwell > 3500);
+  if (badDwell.length) fail('pacing', `dwell >3.5s on ${badDwell.map((r) => r.id).join(',')}`);
+  const shortBad = (pacing.rows || []).filter((r) => (pacing.SHORT || []).includes(r.id) && !r.manual && r.dwell > 2000);
+  if (shortBad.length) fail('pacing', `short-copy dwell >2s on ${shortBad.map((r) => r.id).join(',')}`);
+  const buildBad = (pacing.rows || []).filter((r) => {
+    if (r.manual || (pacing.BUILD_EXEMPT || []).includes(r.id)) return false;
+    if (r.id === 'statement') return r.build > 1600;
+    return r.build > BAR * 3;
+  });
+  if (buildBad.length) fail('pacing', `build over cap on ${buildBad.map((r) => `${r.id}:${r.build}`).join(',')}`);
+  /* Target ≈2:45–3:00; hard fail above 3:05 */
+  if (pacing.totalMs > 185000) fail('pacing', `total runtime ${pacing.totalMs}ms > 3:05`);
+  else if (pacing.totalMs < 150000) fail('pacing', `total runtime ${pacing.totalMs}ms < 2:30 (too short)`);
+  else pass('pacing', `total ${pacing.totalMin} min (${pacing.totalMs}ms), label="${pacing.label || ''}"`);
   fs.writeFileSync(path.join(OUT, 'pacing-table.json'), JSON.stringify(pacing, null, 2));
+  await ctx.close();
+}
+
+/* Gate: content final — no visible data-count still at 0 */
+{
+  const ctx = await browser.newContext({ viewport: { width: 1280, height: 720 } });
+  const page = await ctx.newPage();
+  await page.goto(`http://127.0.0.1:${port}/employers/demo.html?review=1`, { waitUntil: 'domcontentloaded' });
+  await page.waitForFunction(() => document.documentElement.dataset.siyaReady === '1');
+  const zeros = await page.evaluate(() => {
+    const demo = window.__employerDemo;
+    document.getElementById('begin').hidden = true;
+    document.getElementById('welcome').classList.remove('on');
+    document.getElementById('tour').hidden = false;
+    document.getElementById('tour').classList.add('on');
+    const bad = [];
+    const ids = [...document.querySelectorAll('#tour article.slide:not(.parked)[id]')]
+      .filter((s) => (s.dataset.surface || 'both') !== 'phone')
+      .map((s) => s.id);
+    for (const id of ids) {
+      try { demo.showSlide(id); } catch (e) { continue; }
+      const s = document.getElementById(id);
+      if (!s) continue;
+      s.querySelectorAll('[data-count]').forEach((el) => {
+        const r = el.getBoundingClientRect();
+        if (r.width < 1 || r.height < 1) return;
+        const st = getComputedStyle(el);
+        if (st.visibility === 'hidden' || st.display === 'none' || +st.opacity === 0) return;
+        const t = (el.textContent || '').trim();
+        if (/^0(\.0+)?\+?$/.test(t)) bad.push({ id, text: t });
+      });
+    }
+    return bad;
+  });
+  if (zeros.length) fail('content-final', `counter still 0: ${zeros.map((z) => z.id).join(',')}`);
+  else pass('content-final', 'no visible zero counters at final');
   await ctx.close();
 }
 

@@ -147,7 +147,7 @@ body = body.replace(
 if (!body.includes('a.start,a.ghost{text-decoration:none')) {
   body = body.replace(
     '</style>',
-    'a.start,a.ghost{text-decoration:none;display:inline-flex;align-items:center;justify-content:center}\n</style>',
+    'a.start,a.ghost,a.talk{text-decoration:none;display:inline-flex;align-items:center;justify-content:center}\n</style>',
   );
 }
 
