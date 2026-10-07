@@ -16,21 +16,14 @@
       href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700&family=Inter:wght@400;500;600;700&display=swap"
       rel="stylesheet"
     />
+    <!-- Homepage2 surface: cream + rings + waves + Option E gradient type -->
+    <link rel="stylesheet" href="/design-system/h2-surface.css" />
     <style>
       /*
-        Homepage2 tokens. Print leave-behind — noindex, not in nav.
-
-        Care-flow steps (names from live homepage; do not invent):
-        1) "Tell us EVERYTHING" — apps/siya-health/index.html §#how-it-works
-           .siya-h2-care-flow__card[data-step="1"]
-        2) "Comprehensive clinical evaluation" — same section, data-step="2";
-           cognitive line from creyos-adhd-testing.html (attention / cognitive tasks)
-           + employers/demo.html (“cognitive testing” under one team)
-        3) "Tracked & escalated" — index.html §#how-it-works data-step="6";
-           focus tracking phrase from employers.html #sample-visit founder vision
-           (“track … focus, sleep, energy…”)
-
-        Eyebrow = live homepage H1 word-for-word (index.html hero).
+        Leave-behind on homepage2 surface (not navy slab).
+        Gradient headline uses .siya-em on cream — same as index.html.
+        Care-flow step names from index.html #how-it-works (see HTML comments).
+        Eyebrow shortened for leave-behind (see copy-change list).
       */
       :root {
         --cream: #f4efe7;
@@ -41,39 +34,59 @@
         --ink-soft: rgba(10, 36, 107, 0.8);
         --ink-mute: rgba(10, 36, 107, 0.76);
         --magenta: #d81088;
-        --magenta-bright: #ff4db8; /* solid on navy; WCAG AA */
-        --violet: #7b2d8e;
         --line: rgba(0, 24, 120, 0.12);
         --radius: 1.1rem;
         --font-display: "Poppins", ui-sans-serif, system-ui, sans-serif;
         --font-body: "Inter", ui-sans-serif, system-ui, sans-serif;
         --grad-btn: linear-gradient(135deg, #d81088 0%, #7b2d8e 48%, #001878 100%);
-        --grad-hero: linear-gradient(145deg, #001878 0%, #0a246b 62%, #2a1058 100%);
+        --grad-em: linear-gradient(
+          90deg,
+          #d81088 0%,
+          #d81088 28%,
+          #a81490 48%,
+          #0a246b 68%,
+          #001878 100%
+        );
       }
 
       * {
         box-sizing: border-box;
       }
       html,
-      body {
+      body.siya-h2-surface {
         margin: 0;
+        min-height: 100%;
         background: var(--cream);
         color: var(--ink);
         font-family: var(--font-body);
         -webkit-font-smoothing: antialiased;
       }
 
+      /* Page bg fills viewport behind the sheet */
+      body.siya-h2-surface .siya-h2-page-bg {
+        position: fixed;
+        inset: 0;
+        z-index: 0;
+        pointer-events: none;
+      }
+      body.siya-h2-surface .siya-h2-page-bg__svg {
+        width: 100%;
+        height: 100%;
+        display: block;
+      }
+
       .screen-bar {
         position: sticky;
         top: 0;
-        z-index: 20;
+        z-index: 30;
         display: flex;
         align-items: center;
         justify-content: space-between;
         gap: 12px;
         padding: 10px 16px;
-        background: rgba(244, 239, 231, 0.94);
+        background: rgba(244, 239, 231, 0.92);
         border-bottom: 1px solid var(--line);
+        backdrop-filter: blur(8px);
       }
       .screen-bar p {
         margin: 0;
@@ -100,50 +113,124 @@
       }
 
       .page-wrap {
+        position: relative;
+        z-index: 1;
         padding: 18px 16px 40px;
         display: flex;
         justify-content: center;
       }
 
-      /* US Letter sheet — flex column fills top→bottom */
       .sheet {
         width: min(100%, 8.5in);
         height: 11in;
-        background: #fff;
-        border: 1px solid var(--line);
-        border-radius: 10px;
+        position: relative;
         overflow: hidden;
-        box-shadow: 0 18px 48px rgba(0, 24, 120, 0.08);
+        border-radius: 14px;
+        border: 1px solid var(--line);
+        box-shadow: 0 18px 48px rgba(0, 24, 120, 0.1);
         display: flex;
         flex-direction: column;
+        background: var(--cream);
       }
 
-      /* —— 1. HERO —— */
+      /* Motifs only behind the hero (not through cards / privacy / stats) */
+      .sheet-bg {
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 0;
+        height: 34%;
+        z-index: 0;
+        pointer-events: none;
+        overflow: hidden;
+        opacity: 0.4; /* ~60% quieter than full-strength homepage arcs */
+      }
+      .sheet-bg .siya-h2-page-bg__svg {
+        width: 100%;
+        height: 220%;
+        display: block;
+      }
+      .sheet-bg .siya-hero-drift--wave path {
+        stroke-opacity: 0.4;
+      }
+
+      /* Soft cream wash — denser below hero so lower page stays clean */
+      .sheet-wash {
+        position: absolute;
+        inset: 0;
+        z-index: 0;
+        background: linear-gradient(
+          180deg,
+          rgba(244, 239, 231, 0.35) 0%,
+          rgba(244, 239, 231, 0.72) 32%,
+          rgba(247, 242, 236, 0.94) 48%,
+          #f4efe7 100%
+        );
+        pointer-events: none;
+      }
+      .sheet-inner {
+        position: relative;
+        z-index: 1;
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+        min-height: 0;
+        padding-bottom: 0;
+      }
+
+      /*
+        Option E magenta→navy on cream. Kill h2-surface box artifacts
+        (box-decoration-break / padding / focus rings) that print as rectangles.
+      */
+      body.siya-h2-surface .siya-em,
+      .siya-em {
+        font-style: normal !important;
+        font-weight: 700 !important;
+        display: inline !important;
+        color: transparent !important;
+        -webkit-text-fill-color: transparent !important;
+        background-image: var(--grad-em) !important;
+        background-size: 100% 100% !important;
+        background-position: 0 0 !important;
+        background-repeat: no-repeat !important;
+        background-color: transparent !important;
+        -webkit-background-clip: text !important;
+        background-clip: text !important;
+        text-decoration: none !important;
+        border: 0 !important;
+        outline: none !important;
+        box-shadow: none !important;
+        filter: none !important;
+        padding: 0 !important;
+        margin: 0 !important;
+        animation: none !important;
+        box-decoration-break: unset !important;
+        -webkit-box-decoration-break: slice !important;
+      }
+
+      /* —— Hero —— */
       .hero {
         flex: 0 0 auto;
-        background: var(--grad-hero);
-        color: #fff;
-        padding: 22px 28px 24px;
+        padding: 16px 24px 12px;
       }
       .hero-top {
         display: flex;
         align-items: center;
         justify-content: space-between;
         gap: 12px;
-        margin-bottom: 18px;
+        margin-bottom: 10px;
       }
       .brand {
         display: inline-flex;
         align-items: center;
         gap: 10px;
         text-decoration: none;
-        color: #fff;
+        color: var(--ink);
       }
       .brand img {
         width: 40px;
         height: 40px;
         border-radius: 9px;
-        background: #fff;
         object-fit: contain;
       }
       .brand .wordmark {
@@ -152,6 +239,7 @@
         font-size: 20px;
         letter-spacing: -0.02em;
         line-height: 1.1;
+        color: var(--ink);
       }
       .brand .reg {
         font-size: 0.55em;
@@ -164,85 +252,86 @@
         margin: 0;
         font-size: 11px;
         font-weight: 600;
-        letter-spacing: 0.14em;
+        letter-spacing: 0.12em;
         text-transform: uppercase;
-        color: rgba(255, 255, 255, 0.82);
+        color: var(--magenta);
       }
 
       .hero-grid {
         display: grid;
         grid-template-columns: 1.2fr 0.9fr;
-        gap: 22px;
+        gap: 20px;
         align-items: center;
       }
       .eyebrow {
-        margin: 0 0 8px;
+        margin: 0 0 6px;
         font-size: 13px;
         font-weight: 600;
-        letter-spacing: 0.02em;
-        color: rgba(255, 255, 255, 0.88);
+        color: var(--ink-soft);
         line-height: 1.35;
-        max-width: 36ch;
+        max-width: 40ch;
       }
       .hero h1 {
-        margin: 0 0 14px;
+        margin: 0 0 10px;
         font-family: var(--font-display);
         font-weight: 700;
-        font-size: 52px;
-        line-height: 1.08;
+        font-size: 38px;
+        line-height: 1.12;
         letter-spacing: -0.025em;
-        max-width: 14ch;
+        color: var(--ink);
+        max-width: 22ch;
+        text-wrap: balance;
       }
-      /* Solid bright magenta on navy — not gradient (illegible) */
-      .hero h1 .line2 {
-        color: var(--magenta-bright);
-        -webkit-text-fill-color: var(--magenta-bright);
-        text-decoration: underline;
-        text-decoration-color: rgba(255, 77, 184, 0.55);
-        text-underline-offset: 0.12em;
-        text-decoration-thickness: 3px;
+      .hero h1 .h1-line {
+        display: block;
+        white-space: nowrap;
       }
       .hero-lead {
-        margin: 0 0 16px;
-        font-size: 17px;
+        margin: 0 0 12px;
+        font-size: 15px;
         line-height: 1.4;
-        color: rgba(255, 255, 255, 0.94);
+        color: var(--ink-soft);
         max-width: 38ch;
       }
       .zero-badge {
         display: inline-flex;
         align-items: baseline;
         gap: 8px;
-        padding: 10px 16px;
+        padding: 8px 16px;
         border-radius: 999px;
-        background: rgba(255, 255, 255, 0.14);
-        border: 1px solid rgba(255, 255, 255, 0.35);
+        background: rgba(255, 255, 255, 0.72);
+        border: 1px solid var(--line);
+        box-shadow: 0 6px 18px rgba(0, 24, 120, 0.06);
       }
       .zero-badge .amt {
         font-family: var(--font-display);
         font-weight: 700;
-        font-size: 28px;
+        font-size: 26px;
         line-height: 1;
-        color: #fff;
+        color: var(--magenta);
+        -webkit-text-fill-color: var(--magenta);
+        background: none;
       }
       .zero-badge .lbl {
         font-size: 15px;
         font-weight: 600;
-        color: rgba(255, 255, 255, 0.95);
+        color: var(--ink);
       }
-      .zero-badge sup {
-        font-size: 0.55em;
+      .zero-badge .dagger {
+        font-size: 0.85em;
         font-weight: 700;
+        color: var(--magenta);
+        margin-left: 1px;
       }
 
       .hero-photo {
         margin: 0;
         border-radius: 16px;
         overflow: hidden;
-        border: 1px solid rgba(255, 255, 255, 0.3);
-        box-shadow: 0 14px 32px rgba(0, 0, 0, 0.25);
+        border: 1px solid var(--line);
+        background: rgba(255, 255, 255, 0.45);
+        box-shadow: 0 12px 28px rgba(0, 24, 120, 0.1);
         aspect-ratio: 4 / 3;
-        background: rgba(255, 255, 255, 0.08);
       }
       .hero-photo img {
         display: block;
@@ -252,80 +341,91 @@
         object-position: center 28%;
       }
 
-      /* —— 2. CARE FLOW —— */
+      /* —— Care flow —— */
       .care-flow {
-        flex: 1 1 auto;
-        padding: 22px 28px 8px;
+        flex: 0 0 auto;
+        padding: 4px 24px 8px;
         display: flex;
         flex-direction: column;
-        justify-content: center;
-        gap: 14px;
-        background: var(--cream-light);
-        border-bottom: 1px solid var(--line);
+        gap: 8px;
       }
       .care-flow > h2 {
         margin: 0;
         font-family: var(--font-display);
-        font-size: 15px;
+        font-size: 12px;
         font-weight: 700;
-        letter-spacing: 0.08em;
+        letter-spacing: 0.1em;
         text-transform: uppercase;
         color: var(--magenta);
       }
       .steps {
         display: grid;
         grid-template-columns: repeat(3, 1fr);
-        gap: 16px;
+        gap: 10px;
       }
       .step {
-        background: rgba(255, 255, 255, 0.72);
+        background: rgba(255, 255, 255, 0.78);
         border: 1px solid var(--line);
         border-radius: var(--radius);
-        padding: 18px 16px;
-        min-height: 100%;
+        padding: 12px 12px;
       }
       .step-num {
         display: inline-grid;
         place-items: center;
-        width: 28px;
-        height: 28px;
+        width: 26px;
+        height: 26px;
         border-radius: 50%;
-        font-size: 13px;
+        font-size: 12px;
         font-weight: 700;
         color: #fff;
         background: linear-gradient(145deg, #001878 0%, #0a246b 55%, #d81088 140%);
-        margin-bottom: 10px;
+        margin-bottom: 6px;
       }
       .step h3 {
-        margin: 0 0 8px;
+        margin: 0 0 5px;
         font-family: var(--font-display);
-        font-size: 22px;
+        font-size: 16px;
         font-weight: 700;
         color: var(--ink);
         line-height: 1.2;
         letter-spacing: -0.02em;
       }
+      /* Solid magenta + underline — no gradient box in print */
       .step h3 .all {
-        color: var(--magenta);
+        color: var(--magenta) !important;
+        -webkit-text-fill-color: var(--magenta) !important;
+        background: none !important;
+        -webkit-background-clip: border-box !important;
+        background-clip: border-box !important;
+        text-decoration: underline !important;
+        text-decoration-color: var(--magenta) !important;
+        text-underline-offset: 0.14em;
+        text-decoration-thickness: 2px;
+        border: 0 !important;
+        outline: none !important;
+        box-shadow: none !important;
+        padding: 0 !important;
+        box-decoration-break: unset !important;
+        -webkit-box-decoration-break: slice !important;
       }
       .step p {
         margin: 0;
-        font-size: 16px;
+        font-size: 15px;
         line-height: 1.35;
         color: var(--ink-soft);
       }
 
-      /* —— 3. PRIVACY —— */
+      /* —— Privacy —— */
       .privacy {
         flex: 0 0 auto;
-        margin: 0;
-        padding: 16px 28px;
+        margin: 0 24px;
+        padding: 10px 12px;
         display: flex;
-        gap: 12px;
+        gap: 10px;
         align-items: flex-start;
         background: rgba(216, 16, 136, 0.08);
-        border-top: 1px solid rgba(216, 16, 136, 0.16);
-        border-bottom: 1px solid rgba(216, 16, 136, 0.16);
+        border: 1px solid rgba(216, 16, 136, 0.18);
+        border-radius: 14px;
       }
       .privacy svg {
         flex-shrink: 0;
@@ -336,8 +436,8 @@
       }
       .privacy p {
         margin: 0;
-        font-size: 16px;
-        line-height: 1.4;
+        font-size: 15px;
+        line-height: 1.35;
         color: var(--ink-soft);
       }
       .privacy strong {
@@ -345,19 +445,20 @@
         font-weight: 700;
       }
 
-      /* —— 4. FACT STRIP —— */
+      /* —— Facts —— */
       .facts {
         flex: 0 0 auto;
-        padding: 18px 28px;
+        margin: 8px 24px 0;
+        padding: 10px 0;
         display: grid;
         grid-template-columns: repeat(4, 1fr);
-        gap: 0;
-        background: #fff;
-        border-bottom: 1px solid var(--line);
+        background: rgba(255, 255, 255, 0.82);
+        border: 1px solid var(--line);
+        border-radius: var(--radius);
       }
       .fact {
         text-align: center;
-        padding: 4px 10px;
+        padding: 2px 8px;
       }
       .fact:not(:last-child) {
         border-right: 1px solid var(--line);
@@ -365,39 +466,37 @@
       .fact strong {
         display: block;
         font-family: var(--font-display);
-        font-size: 26px;
+        font-size: 18px;
         font-weight: 700;
         color: var(--ink);
-        line-height: 1.1;
+        line-height: 1.15;
       }
       .fact span {
         display: block;
-        margin-top: 4px;
-        font-size: 14px;
+        margin-top: 2px;
+        font-size: 12px;
         line-height: 1.3;
         color: var(--ink-soft);
       }
 
-      /* —— 5. SOCIAL PROOF —— */
+      /* —— Proof —— */
       .proof {
         flex: 0 0 auto;
-        padding: 18px 28px;
+        margin: 8px 24px 0;
         display: grid;
         grid-template-columns: 1fr 1fr;
-        gap: 16px;
-        background: linear-gradient(180deg, var(--mist), var(--cream-light));
-        border-bottom: 1px solid var(--line);
+        gap: 10px;
       }
       .proof-card {
-        background: rgba(255, 255, 255, 0.65);
+        background: rgba(255, 255, 255, 0.82);
         border: 1px solid var(--line);
         border-radius: var(--radius);
-        padding: 14px 18px;
+        padding: 10px 14px;
       }
       .proof-card strong {
         display: block;
         font-family: var(--font-display);
-        font-size: 36px;
+        font-size: 26px;
         font-weight: 700;
         color: var(--ink);
         line-height: 1;
@@ -405,49 +504,51 @@
       }
       .proof-card span {
         display: block;
-        margin-top: 6px;
-        font-size: 16px;
+        margin-top: 4px;
+        font-size: 14px;
         font-weight: 500;
         color: var(--ink-soft);
-        line-height: 1.3;
       }
 
-      /* —— 6. CTA —— */
+      /* —— CTA —— */
       .cta {
         flex: 0 0 auto;
-        margin: 0;
-        padding: 18px 28px;
-        background: #fff;
+        margin: 8px 24px 0;
+        padding: 12px 14px;
+        border-radius: var(--radius);
+        background: rgba(255, 255, 255, 0.85);
+        border: 1px solid var(--line);
         display: flex;
         align-items: center;
         justify-content: space-between;
-        gap: 18px;
-        border-bottom: 1px solid var(--line);
+        gap: 14px;
       }
       .cta h2 {
-        margin: 0 0 6px;
+        margin: 0 0 4px;
         font-family: var(--font-display);
-        font-size: 24px;
+        font-size: 18px;
         font-weight: 700;
         color: var(--ink);
-        letter-spacing: -0.02em;
       }
       .cta .meta {
         margin: 0;
-        font-size: 15px;
-        line-height: 1.4;
+        font-size: 13px;
+        line-height: 1.35;
         color: var(--ink-soft);
+      }
+      .cta .meta .nb {
+        white-space: nowrap;
       }
       .cta-btn {
         flex-shrink: 0;
         display: inline-flex;
         align-items: center;
         justify-content: center;
-        padding: 16px 26px;
+        padding: 12px 18px;
         border-radius: 999px;
         font-family: var(--font-display);
         font-weight: 700;
-        font-size: 16px;
+        font-size: 15px;
         color: #fff;
         text-decoration: none;
         background: var(--grad-btn);
@@ -455,14 +556,14 @@
         white-space: nowrap;
       }
 
-      /* —— 7. FOOTNOTES —— */
+      /* ≥40px clear bottom margin; footnotes ≥12px */
       .legal {
         flex: 0 0 auto;
-        padding: 12px 28px 16px;
-        background: var(--cream);
+        padding: 8px 24px 40px;
+        margin-top: auto;
       }
       .legal p {
-        margin: 0 0 4px;
+        margin: 0 0 3px;
         font-size: 12px;
         line-height: 1.4;
         color: var(--ink-mute);
@@ -472,16 +573,15 @@
       }
       .legal .em-911 {
         color: var(--ink);
-        font-weight: 600;
+        font-weight: 700;
       }
 
       @media (max-width: 720px) {
         .sheet {
           height: auto;
-          min-height: 0;
         }
         .hero h1 {
-          font-size: 36px;
+          font-size: 32px;
           max-width: none;
         }
         .hero-grid,
@@ -493,8 +593,8 @@
         .fact:not(:last-child) {
           border-right: none;
           border-bottom: 1px solid var(--line);
-          padding-bottom: 10px;
-          margin-bottom: 8px;
+          padding-bottom: 8px;
+          margin-bottom: 6px;
         }
         .cta {
           flex-direction: column;
@@ -503,106 +603,104 @@
         .cta-btn {
           width: 100%;
         }
+        .privacy,
+        .facts,
+        .proof,
+        .cta {
+          margin-left: 16px;
+          margin-right: 16px;
+        }
       }
 
       @page {
         size: letter portrait;
-        margin: 0.35in;
+        margin: 0.32in;
       }
       @media print {
         .screen-bar {
           display: none !important;
         }
-        html,
-        body {
-          background: #fff;
+        body.siya-h2-surface .siya-h2-page-bg {
+          position: absolute;
+          -webkit-print-color-adjust: exact;
+          print-color-adjust: exact;
+        }
+        .siya-hero-drift {
+          animation: none !important;
         }
         .page-wrap {
           padding: 0;
         }
         .sheet {
           width: 100%;
-          height: 10.3in; /* Letter minus @page margins */
+          height: 10.36in;
           border: none;
           border-radius: 0;
           box-shadow: none;
         }
-        .hero,
-        .care-flow,
-        .privacy,
-        .proof,
-        .cta-btn,
+        .sheet-wash,
         .step,
+        .privacy,
+        .facts,
+        .proof-card,
+        .cta,
         .zero-badge,
-        .proof-card {
+        .cta-btn,
+        .siya-em,
+        .zero-badge .amt,
+        .step h3 .all {
           -webkit-print-color-adjust: exact;
           print-color-adjust: exact;
         }
         .hero {
-          padding: 16px 20px 18px;
+          padding: 14px 18px 12px;
         }
         .hero h1 {
-          font-size: 48px;
+          font-size: 36px;
         }
         .hero-lead {
           font-size: 15px;
         }
-        .zero-badge .amt {
-          font-size: 24px;
-        }
         .care-flow {
-          padding: 14px 20px 6px;
-        }
-        .step {
-          padding: 12px 12px;
+          padding: 2px 18px 6px;
         }
         .step h3 {
-          font-size: 18px;
+          font-size: 15px;
         }
         .step p,
         .privacy p {
-          font-size: 13px;
+          font-size: 15px;
         }
         .privacy {
-          padding: 12px 20px;
+          margin: 0 18px;
+          padding: 8px 10px;
         }
-        .facts {
-          padding: 12px 20px;
+        .facts,
+        .proof,
+        .cta {
+          margin-left: 18px;
+          margin-right: 18px;
         }
         .fact strong {
-          font-size: 22px;
-        }
-        .fact span {
-          font-size: 12px;
-        }
-        .proof {
-          padding: 12px 20px;
+          font-size: 16px;
         }
         .proof-card strong {
-          font-size: 28px;
-        }
-        .proof-card span {
-          font-size: 13px;
-        }
-        .cta {
-          padding: 12px 20px;
+          font-size: 22px;
         }
         .cta h2 {
-          font-size: 20px;
-        }
-        .cta .meta {
-          font-size: 13px;
+          font-size: 17px;
         }
         .cta-btn {
           box-shadow: none;
-          font-size: 14px;
-          padding: 12px 18px;
         }
         .legal {
-          padding: 8px 20px 10px;
+          padding: 6px 18px 40px;
         }
         .legal p {
-          font-size: 10px;
+          font-size: 12px;
+        }
+        .sheet-bg {
+          opacity: 0.35;
         }
         a {
           text-decoration: none;
@@ -611,160 +709,303 @@
       }
     </style>
   </head>
-  <body>
+  <body class="siya-h2-surface">
+    <!-- Exact homepage2 motion layer (partials/homepage2-bg.mjs / index.html) -->
+    <div class="siya-h2-page-bg" aria-hidden="true">
+      <svg
+        class="siya-h2-page-bg__svg"
+        viewBox="0 0 1200 800"
+        preserveAspectRatio="xMidYMid slice"
+        xmlns="http://www.w3.org/2000/svg"
+        role="presentation"
+      >
+        <defs>
+          <linearGradient id="siyaHeroCream" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#F4EFE7" />
+            <stop offset="55%" stop-color="#E8EEF8" />
+            <stop offset="100%" stop-color="#F7F2EC" />
+          </linearGradient>
+          <radialGradient id="siyaHeroGlowA" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stop-color="#D81088" stop-opacity="0.5" />
+            <stop offset="45%" stop-color="#D81088" stop-opacity="0.22" />
+            <stop offset="100%" stop-color="#D81088" stop-opacity="0" />
+          </radialGradient>
+          <radialGradient id="siyaHeroGlowB" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stop-color="#001878" stop-opacity="0.42" />
+            <stop offset="50%" stop-color="#0A246B" stop-opacity="0.18" />
+            <stop offset="100%" stop-color="#001878" stop-opacity="0" />
+          </radialGradient>
+          <radialGradient id="siyaHeroGlowC" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stop-color="#7B2D8E" stop-opacity="0.38" />
+            <stop offset="55%" stop-color="#0A246B" stop-opacity="0.14" />
+            <stop offset="100%" stop-color="#0A246B" stop-opacity="0" />
+          </radialGradient>
+        </defs>
+        <rect width="1200" height="800" fill="url(#siyaHeroCream)" />
+        <g class="siya-hero-drift siya-hero-drift--a">
+          <circle cx="240" cy="220" r="190" fill="url(#siyaHeroGlowA)" />
+          <circle class="siya-h2-ring" cx="240" cy="220" r="88" fill="none" stroke="#D81088" stroke-width="2.75" />
+          <circle class="siya-h2-ring siya-h2-ring--outer" cx="240" cy="220" r="132" fill="none" stroke="#D81088" stroke-width="1.6" />
+        </g>
+        <g class="siya-hero-drift siya-hero-drift--b">
+          <circle cx="940" cy="500" r="230" fill="url(#siyaHeroGlowB)" />
+          <circle class="siya-h2-ring" cx="940" cy="500" r="108" fill="none" stroke="#001878" stroke-width="2.75" />
+          <circle class="siya-h2-ring siya-h2-ring--outer" cx="940" cy="500" r="156" fill="none" stroke="#0A246B" stroke-width="1.6" />
+        </g>
+        <g class="siya-hero-drift siya-hero-drift--c">
+          <circle cx="700" cy="150" r="160" fill="url(#siyaHeroGlowC)" />
+          <circle class="siya-h2-ring" cx="700" cy="150" r="72" fill="none" stroke="#7B2D8E" stroke-width="2.5" />
+          <circle class="siya-h2-ring siya-h2-ring--outer" cx="700" cy="150" r="112" fill="none" stroke="#D81088" stroke-width="1.5" />
+        </g>
+        <g class="siya-hero-drift siya-hero-drift--d">
+          <circle cx="130" cy="680" r="150" fill="url(#siyaHeroGlowB)" />
+          <circle class="siya-h2-ring" cx="130" cy="680" r="70" fill="none" stroke="#001878" stroke-width="2.25" />
+          <circle cx="1080" cy="110" r="120" fill="url(#siyaHeroGlowA)" />
+          <circle class="siya-h2-ring" cx="1080" cy="110" r="58" fill="none" stroke="#D81088" stroke-width="2.25" />
+        </g>
+        <g class="siya-hero-drift siya-hero-drift--wave">
+          <path
+            d="M40 620 C 220 500, 380 700, 560 560 S 900 480, 1180 380"
+            fill="none"
+            stroke="#D81088"
+            stroke-width="2.75"
+            stroke-linecap="round"
+          />
+          <path
+            d="M20 300 C 200 380, 360 180, 540 280 S 840 360, 1160 200"
+            fill="none"
+            stroke="#001878"
+            stroke-width="2.5"
+            stroke-linecap="round"
+          />
+          <path
+            d="M60 740 C 300 660, 480 780, 700 680 S 980 620, 1180 540"
+            fill="none"
+            stroke="#C4A574"
+            stroke-width="2.25"
+            stroke-linecap="round"
+          />
+        </g>
+      </svg>
+    </div>
+
     <div class="screen-bar" role="region" aria-label="Preview controls">
-      <p>California employer pilot · leave-behind · Print → Save as PDF</p>
+      <p>Homepage2 surface · California pilot leave-behind · Print → Save as PDF</p>
       <button type="button" class="btn-print" id="download-pdf">Download PDF</button>
     </div>
 
     <div class="page-wrap">
       <article class="sheet" aria-label="For Employers California pilot one-pager">
-        <header class="hero">
-          <div class="hero-top">
-            <a class="brand" href="https://siya.health/" aria-label="Siya Health home">
-              <img
-                src="/assets/images/siya-health-mark.png"
-                alt=""
-                width="40"
-                height="40"
-                decoding="async"
-              />
-              <span class="wordmark">Siya Health<sup class="reg" aria-hidden="true">®</sup></span>
-            </a>
-            <p class="pilot-tag">For employers · California pilot</p>
-          </div>
-          <div class="hero-grid">
-            <div>
-              <!-- Exact live homepage H1 (index.html hero), used as positioning eyebrow -->
-              <p class="eyebrow">Welcome to an integrated care experience for busy professionals</p>
-              <h1>
-                Your business runs on brain power.<br />
-                <span class="line2">Who’s looking after it?</span>
-              </h1>
-              <p class="hero-lead">
-                One physician-led team for stress, focus, memory and sleep — alongside everyday
-                primary care.
-              </p>
-              <div class="zero-badge" aria-label="Zero cost to employees">
-                <span class="amt">$0</span>
-                <span class="lbl">to your employees<sup>†</sup></span>
+        <div class="sheet-bg" aria-hidden="true">
+          <svg
+            class="siya-h2-page-bg__svg"
+            viewBox="0 0 1200 800"
+            preserveAspectRatio="xMidYMid slice"
+            xmlns="http://www.w3.org/2000/svg"
+            role="presentation"
+          >
+            <defs>
+              <linearGradient id="opSheetCream" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#F4EFE7" />
+                <stop offset="55%" stop-color="#E8EEF8" />
+                <stop offset="100%" stop-color="#F7F2EC" />
+              </linearGradient>
+              <radialGradient id="opSheetGlowA" cx="50%" cy="50%" r="50%">
+                <stop offset="0%" stop-color="#D81088" stop-opacity="0.5" />
+                <stop offset="45%" stop-color="#D81088" stop-opacity="0.22" />
+                <stop offset="100%" stop-color="#D81088" stop-opacity="0" />
+              </radialGradient>
+              <radialGradient id="opSheetGlowB" cx="50%" cy="50%" r="50%">
+                <stop offset="0%" stop-color="#001878" stop-opacity="0.42" />
+                <stop offset="50%" stop-color="#0A246B" stop-opacity="0.18" />
+                <stop offset="100%" stop-color="#001878" stop-opacity="0" />
+              </radialGradient>
+              <radialGradient id="opSheetGlowC" cx="50%" cy="50%" r="50%">
+                <stop offset="0%" stop-color="#7B2D8E" stop-opacity="0.38" />
+                <stop offset="55%" stop-color="#0A246B" stop-opacity="0.14" />
+                <stop offset="100%" stop-color="#0A246B" stop-opacity="0" />
+              </radialGradient>
+            </defs>
+            <rect width="1200" height="800" fill="url(#opSheetCream)" />
+            <g class="siya-hero-drift siya-hero-drift--a">
+              <circle cx="240" cy="220" r="190" fill="url(#opSheetGlowA)" />
+              <circle class="siya-h2-ring" cx="240" cy="220" r="88" fill="none" stroke="#D81088" stroke-width="2.75" />
+              <circle class="siya-h2-ring siya-h2-ring--outer" cx="240" cy="220" r="132" fill="none" stroke="#D81088" stroke-width="1.6" />
+            </g>
+            <g class="siya-hero-drift siya-hero-drift--b">
+              <circle cx="940" cy="500" r="230" fill="url(#opSheetGlowB)" />
+              <circle class="siya-h2-ring" cx="940" cy="500" r="108" fill="none" stroke="#001878" stroke-width="2.75" />
+              <circle class="siya-h2-ring siya-h2-ring--outer" cx="940" cy="500" r="156" fill="none" stroke="#0A246B" stroke-width="1.6" />
+            </g>
+            <g class="siya-hero-drift siya-hero-drift--c">
+              <circle cx="700" cy="150" r="160" fill="url(#opSheetGlowC)" />
+              <circle class="siya-h2-ring" cx="700" cy="150" r="72" fill="none" stroke="#7B2D8E" stroke-width="2.5" />
+              <circle class="siya-h2-ring siya-h2-ring--outer" cx="700" cy="150" r="112" fill="none" stroke="#D81088" stroke-width="1.5" />
+            </g>
+            <g class="siya-hero-drift siya-hero-drift--d">
+              <circle cx="130" cy="680" r="150" fill="url(#opSheetGlowB)" />
+              <circle class="siya-h2-ring" cx="130" cy="680" r="70" fill="none" stroke="#001878" stroke-width="2.25" />
+              <circle cx="1080" cy="110" r="120" fill="url(#opSheetGlowA)" />
+              <circle class="siya-h2-ring" cx="1080" cy="110" r="58" fill="none" stroke="#D81088" stroke-width="2.25" />
+            </g>
+            <g class="siya-hero-drift siya-hero-drift--wave">
+              <path d="M40 620 C 220 500, 380 700, 560 560 S 900 480, 1180 380" fill="none" stroke="#D81088" stroke-width="2.75" stroke-linecap="round" />
+              <path d="M20 300 C 200 380, 360 180, 540 280 S 840 360, 1160 200" fill="none" stroke="#001878" stroke-width="2.5" stroke-linecap="round" />
+              <path d="M60 740 C 300 660, 480 780, 700 680 S 980 620, 1180 540" fill="none" stroke="#C4A574" stroke-width="2.25" stroke-linecap="round" />
+            </g>
+          </svg>
+        </div>
+        <div class="sheet-wash" aria-hidden="true"></div>
+        <div class="sheet-inner">
+          <header class="hero">
+            <div class="hero-top">
+              <a class="brand" href="https://siya.health/" aria-label="Siya Health home">
+                <img
+                  src="/assets/images/siya-health-mark.png"
+                  alt=""
+                  width="40"
+                  height="40"
+                  decoding="async"
+                />
+                <span class="wordmark">Siya Health<sup class="reg" aria-hidden="true">®</sup></span>
+              </a>
+              <p class="pilot-tag">For employers · California pilot</p>
+            </div>
+            <div class="hero-grid">
+              <div>
+                <p class="eyebrow">An integrated care experience for busy professionals</p>
+                <h1>
+                  <span class="h1-line">Your business runs on brain power.</span>
+                  <span class="h1-line siya-em">Who’s looking after it?</span>
+                </h1>
+                <p class="hero-lead">
+                  One physician-led team for stress, focus, memory and sleep — alongside everyday
+                  primary care.
+                </p>
+                <div class="zero-badge" aria-label="Zero cost to employees">
+                  <span class="amt">$0</span>
+                  <span class="lbl">to your employees<span class="dagger">†</span></span>
+                </div>
+              </div>
+              <figure class="hero-photo">
+                <img
+                  src="/assets/images/editorial-finally-heard.jpg"
+                  alt="Adult on a calm telehealth visit at a desk in natural light"
+                  width="900"
+                  height="675"
+                  decoding="async"
+                />
+              </figure>
+            </div>
+          </header>
+
+          <section class="care-flow" aria-labelledby="care-flow-heading">
+            <h2 id="care-flow-heading">Our care model</h2>
+            <div class="steps">
+              <!--
+                Steps from index.html #how-it-works .siya-h2-care-flow:
+                1 data-step="1" Tell us EVERYTHING
+                2 data-step="2" Comprehensive clinical evaluation (+ creyos-adhd-testing.html)
+                3 data-step="6" Tracked & escalated
+              -->
+              <div class="step">
+                <span class="step-num" aria-hidden="true">1</span>
+                <h3>Tell us <span class="all">EVERYTHING</span></h3>
+                <p>Share every concern — physical and mental — without filtering to one issue.</p>
+              </div>
+              <div class="step">
+                <span class="step-num" aria-hidden="true">2</span>
+                <h3>Comprehensive clinical evaluation</h3>
+                <p>
+                  Unhurried evaluation; cognitive tasks that measure attention, as needed.
+                </p>
+              </div>
+              <div class="step">
+                <span class="step-num" aria-hidden="true">3</span>
+                <h3>Tracked &amp; escalated</h3>
+                <p>
+                  Subjective + objective tracking over time; a second look when something shifts.
+                </p>
               </div>
             </div>
-            <figure class="hero-photo">
-              <img
-                src="/assets/images/editorial-finally-heard.jpg"
-                alt="Adult on a calm telehealth visit at a desk in natural light"
-                width="900"
-                height="675"
-                decoding="async"
-              />
-            </figure>
-          </div>
-        </header>
+          </section>
 
-        <section class="care-flow" aria-labelledby="care-flow-heading">
-          <h2 id="care-flow-heading">Our care model</h2>
-          <div class="steps">
-            <!--
-              Step sources (homepage care flow — index.html #how-it-works):
-              1. Tell us EVERYTHING — data-step="1" detail condensed
-              2. Comprehensive clinical evaluation — data-step="2"; cognitive tasks
-                 from creyos-adhd-testing.html + employers/demo.html “cognitive testing”
-              3. Tracked & escalated — data-step="6"; focus tracking from
-                 employers.html #sample-visit founder vision
-            -->
-            <div class="step">
-              <span class="step-num" aria-hidden="true">1</span>
-              <h3>Tell us <span class="all">EVERYTHING</span></h3>
-              <p>Share every concern — physical and mental — without filtering to one issue.</p>
-            </div>
-            <div class="step">
-              <span class="step-num" aria-hidden="true">2</span>
-              <h3>Comprehensive clinical evaluation</h3>
-              <p>
-                Unhurried evaluation; cognitive tasks that measure attention, as needed.
-              </p>
-            </div>
-            <div class="step">
-              <span class="step-num" aria-hidden="true">3</span>
-              <h3>Tracked &amp; escalated</h3>
-              <p>
-                Subjective + objective tracking over time; a second look when something shifts.
-              </p>
-            </div>
-          </div>
-        </section>
-
-        <div class="privacy">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-            <rect x="5" y="11" width="14" height="10" rx="2" />
-            <path d="M8 11V8a4 4 0 0 1 8 0v3" />
-          </svg>
-          <p>
-            <strong>Private by design.</strong> Results stay between each employee and their
-            clinician. You see de-identified group trends only (groups of 10+).
-          </p>
-        </div>
-
-        <div class="facts" aria-label="Access standards">
-          <div class="fact">
-            <strong>$0</strong>
-            <span>to employees</span>
-          </div>
-          <div class="fact">
-            <strong>24/7*</strong>
-            <span>care team, incl. weekends</span>
-          </div>
-          <div class="fact">
-            <strong>30 min</strong>
-            <span>message replies</span>
-          </div>
-          <div class="fact">
-            <strong>2 hours*</strong>
-            <span>urgent needs seen by a licensed clinician</span>
-          </div>
-        </div>
-
-        <section class="proof" aria-label="Social proof">
-          <div class="proof-card">
-            <strong>2,700+</strong>
-            <span>patients cared for</span>
-          </div>
-          <div class="proof-card">
-            <strong>More than half</strong>
-            <span>are working professionals</span>
-          </div>
-        </section>
-
-        <div class="cta">
-          <div>
-            <h2>Start a pilot conversation</h2>
-            <p class="meta">
-              $100 per enrolled employee per month · minimum 250 · 6-month pilot · HSA-compatible
+          <div class="privacy">
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              aria-hidden="true"
+            >
+              <rect x="5" y="11" width="14" height="10" rx="2" />
+              <path d="M8 11V8a4 4 0 0 1 8 0v3" />
+            </svg>
+            <p>
+              <strong>Private by design.</strong> Results stay between each employee and their
+              clinician. You see de-identified group trends only (groups of 10+).
             </p>
           </div>
-          <a
-            class="cta-btn"
-            href="https://siya.health/employers#employer-inquiry-form"
-            data-siya-track="employer_one_pager_cta"
-            data-intent="employer"
-            >siya.health/employers</a
-          >
-        </div>
 
-        <footer class="legal">
-          <p>
-            *24/7 availability and 2-hour urgent response apply to the California pilot.
-          </p>
-          <p>
-            †Covers visits, check-ins and care coordination. Medications, labs and specialist
-            visits are billed separately.
-          </p>
-          <p>
-            <span class="em-911">For medical emergencies, call 911.</span> Siya Health, Inc. ·
-            Clinical services by Siya Healthcare PC.
-          </p>
-        </footer>
+          <div class="facts" aria-label="Access standards">
+            <div class="fact">
+              <strong>Same clinician</strong>
+              <span>every visit</span>
+            </div>
+            <div class="fact">
+              <strong>24/7*</strong>
+              <span>care team, incl. weekends</span>
+            </div>
+            <div class="fact">
+              <strong>30 min</strong>
+              <span>message replies</span>
+            </div>
+            <div class="fact">
+              <strong>2 hours*</strong>
+              <span>urgent needs seen by a licensed clinician</span>
+            </div>
+          </div>
+
+          <section class="proof" aria-label="Social proof">
+            <div class="proof-card">
+              <strong>2,700+</strong>
+              <span>patients cared for</span>
+            </div>
+            <div class="proof-card">
+              <strong>More than half</strong>
+              <span>are working professionals</span>
+            </div>
+          </section>
+
+          <div class="cta">
+            <div>
+              <h2>Start a pilot conversation</h2>
+              <p class="meta">
+                $100 per enrolled employee per month · minimum 250 · 6-month pilot ·
+                <span class="nb">HSA&#8209;compatible</span>
+              </p>
+            </div>
+            <a
+              class="cta-btn"
+              href="https://siya.health/employers#employer-inquiry-form"
+              data-siya-track="employer_one_pager_cta"
+              data-intent="employer"
+              >siya.health/employers</a
+            >
+          </div>
+
+          <footer class="legal">
+            <p>*24/7 availability and 2-hour urgent response apply to the California pilot.</p>
+            <p>
+              †Covers visits, check-ins and care coordination. Medications, labs and specialist
+              visits are billed separately.
+            </p>
+            <p>
+              <span class="em-911">For medical emergencies, call 911.</span> Siya Health, Inc. ·
+              Clinical services by Siya Healthcare PC.
+            </p>
+          </footer>
+        </div>
       </article>
     </div>
 
