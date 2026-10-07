@@ -18,3 +18,5 @@ branch == `SIYA_HEALTH_RELEASE_BRANCH` (default `main`), and
 | 2026-10-07 07:18 IST | `release/2026-10-07b` | `0f9d6b90` | production | sp | STARTED | Merge employer-demo-journey-prod: pacing FIX 2 (~2.81 min). |
 | 2026-10-07 07:18 IST | `release/2026-10-07b` | `0f9d6b90` | production | sp | OK | Merge employer-demo-journey-prod: pacing FIX 2 (~2.81 min). |
 | 2026-10-07 09:02 IST | `release/2026-10-07c` | `49abdef9` | production | sp | REFUSED | no-scroll-visible-top gate |
+| 2026-10-07 09:02 IST | `release/2026-10-07c` | `c820ac08` | production | sp | STARTED | Log refused prod attempt on release/2026-10-07c (playwright missing). |
+| 2026-10-07 09:02 IST | `release/2026-10-07c` | `c820ac08` | production | sp | OK | mobile top-clip root fix + no-scroll gate · dpl_EnPGkP1SEufZTJcMEKMXKzwvtya6 |
