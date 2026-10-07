@@ -20,3 +20,4 @@ branch == `SIYA_HEALTH_RELEASE_BRANCH` (default `main`), and
 | 2026-10-07 09:02 IST | `release/2026-10-07c` | `49abdef9` | production | sp | REFUSED | no-scroll-visible-top gate |
 | 2026-10-07 09:02 IST | `release/2026-10-07c` | `c820ac08` | production | sp | STARTED | Log refused prod attempt on release/2026-10-07c (playwright missing). |
 | 2026-10-07 09:02 IST | `release/2026-10-07c` | `c820ac08` | production | sp | OK | mobile top-clip root fix + no-scroll gate · dpl_EnPGkP1SEufZTJcMEKMXKzwvtya6 |
+| 2026-10-07 10:24 IST | `release/2026-10-07d` | `fdb7a64a` | production | sp | REFUSED | Vercel api-deployments-free-per-day (>100); playback round gates green on tip |
