@@ -160,6 +160,18 @@ if ! (cd "$ROOT/apps/siya-health" && node internal/demo-qa/no-scroll-gate.mjs); 
   log_attempt "production" "REFUSED" "no-scroll-visible-top gate"
   exit 1
 fi
+echo "==> readable-text gate (must pass before prod)"
+if ! (cd "$ROOT/apps/siya-health" && node internal/demo-qa/readable-text-gate.mjs); then
+  echo "REFUSING --prod: readable-text gate failed." >&2
+  log_attempt "production" "REFUSED" "readable-text gate"
+  exit 1
+fi
+echo "==> pause-freeze gate (must pass before prod)"
+if ! (cd "$ROOT/apps/siya-health" && node internal/demo-qa/pause-freeze-gate.mjs); then
+  echo "REFUSING --prod: pause-freeze gate failed." >&2
+  log_attempt "production" "REFUSED" "pause-freeze gate"
+  exit 1
+fi
 
 log_attempt "production" "STARTED" "$SUBJECT"
 npx vercel deploy --prod --yes

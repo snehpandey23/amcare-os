@@ -55,6 +55,11 @@ button:focus-visible{outline:2px solid #FF5CB8;outline-offset:3px}
 #welcome.on{opacity:1;pointer-events:auto}
 .welcome-note{margin:0;font:500 13px/1.4 var(--font-body);color:var(--ink-soft)}
 .welcome-time{margin:0;font:600 13px/1.3 var(--font-display);letter-spacing:.06em;color:var(--ink-soft)}
+.welcome-lead,.welcome-tap{margin:0;font:500 15px/1.45 var(--font-body);color:var(--ink-soft)}
+@media (max-width:640px){
+  /* Phone welcome: Start the tour is the only CTA — hide click-anywhere */
+  #welcome .welcome-tap{display:none!important}
+}
 .wash::before,.wash::after{content:"";position:absolute;border-radius:50%;filter:blur(60px);pointer-events:none;animation:float 16s ease-in-out infinite alternate}
 .wash::before{width:46vmax;height:46vmax;left:-12vmax;top:-14vmax;background:radial-gradient(circle,rgba(216,16,136,.16),rgba(216,16,136,0) 70%)}
 .wash::after{width:52vmax;height:52vmax;right:-16vmax;bottom:-20vmax;background:radial-gradient(circle,rgba(123,45,142,.16),rgba(0,24,120,0) 70%);animation-delay:-6s}
@@ -369,18 +374,33 @@ html.desk-stage #tour article[data-walk] .doors{max-height:100%;overflow:auto}
 @media (max-width:480px){
   .bar{
     display:grid!important;
-    grid-template-columns:repeat(4,minmax(0,1fr));
-    grid-template-areas:"ch ch ch ch" "prev pause mute next";
+    grid-template-columns:repeat(5,minmax(0,1fr));
+    grid-template-areas:"ch ch ch ch ch" "prev pause mute speed next";
     align-items:center;
   }
   .bar .segs{grid-area:ch;width:100%}
   .bar #prev{grid-area:prev}
   .bar #pause{grid-area:pause}
   .bar #muteTour{grid-area:mute}
+  .bar #speedBtn{grid-area:speed}
   .bar #next{grid-area:next}
   .bar-actions{display:contents}
-  .bar #prev,.bar #pause,.bar #muteTour,.bar #next{width:100%}
+  .bar #prev,.bar #pause,.bar #muteTour,.bar #speedBtn,.bar #next{width:100%}
 }
+.bar #speedBtn .speed-pill{font:700 12px/1 var(--font-display);letter-spacing:.02em;min-width:2.2em}
+.bar .bar-ico[data-ico="gauge"]{stroke:currentColor;fill:none}
+.speed-sheet{
+  position:fixed;z-index:60;left:50%;bottom:calc(88px + env(safe-area-inset-bottom,0px));
+  transform:translateX(-50%);display:flex;gap:6px;padding:8px;border-radius:16px;
+  background:rgba(255,255,255,.96);box-shadow:0 12px 32px rgba(10,36,107,.18),inset 0 0 0 1px var(--line);
+}
+.speed-sheet[hidden]{display:none!important}
+.speed-sheet button{
+  min-width:52px;min-height:40px;border:0;border-radius:12px;cursor:pointer;
+  font:700 13px/1 var(--font-display);color:var(--ink);background:rgba(10,36,107,.06);
+}
+.speed-sheet button[aria-selected="true"]{background:var(--grad-btn);color:#fff}
+#tour.is-paused,#tour.is-paused *{animation-play-state:paused!important}
 
 .segs{flex:1;display:flex;gap:4px;min-width:0}
 .ch{flex:1;min-width:0;display:grid;gap:4px;justify-items:center;align-content:center;background:transparent;border:0;padding:2px;cursor:pointer;font:600 12px/1.15 var(--font-body);color:var(--ink);min-height:44px}
@@ -782,8 +802,8 @@ html.desk-stage #tour #care-checklist .chart-card{width:min(380px,100%)}
   .away-seg{font-size:0;padding:0} /* labels move below on phone */
   .away-seg::after{display:none!important}
   .away-not-needed,.away-siya-visit{height:48px}
-  .away-not-needed span{font-size:11px}
-  .away-siya-visit span{font-size:10px}
+  .away-not-needed span{font-size:12px!important}
+  .away-siya-visit span{font-size:12px!important}
   .away-legend{display:flex}
   #p-familiar.slide,#p-away.slide{padding-bottom:108px}
   #p-familiar .frame.desk-split,#p-away .frame.desk-split{display:grid;grid-template-rows:auto auto;gap:12px;align-content:start}
@@ -841,8 +861,8 @@ html.desk-stage #tour #care-checklist .chart-card{width:min(380px,100%)}
   #clinicians .clin-stack{gap:8px;width:100%}
   #clinicians .panel-card{padding:10px;gap:8px}
   #clinicians .panel-card h3{font-size:12px}
-  #clinicians .cpill{min-height:28px;padding:6px 10px;font-size:11px}
-  #clinicians .prac{min-height:30px;padding:4px 6px;font-size:11px;gap:6px}
+  #clinicians .cpill{min-height:28px;padding:6px 10px;font-size:12px}
+  #clinicians .prac{min-height:30px;padding:4px 6px;font-size:12px;gap:6px}
   #clinicians .prac svg{width:16px;height:16px}
   #care-checklist .desk-hero,#clinicians .desk-hero{padding-bottom:4px}
 }
@@ -1256,8 +1276,103 @@ article.slide[data-close="1"] .close-foot{
   }
   article.slide[data-close="1"] .close-above{gap:8px;margin-bottom:8px}
   article.slide[data-close="1"] .next-steps{margin-top:10px;gap:6px}
-  article.slide[data-close="1"] .next-steps-rail li{min-height:64px;padding:6px 4px;font-size:10px}
+  article.slide[data-close="1"] .next-steps-rail li{min-height:64px;padding:6px 4px;font-size:12px}
   article.slide[data-close="1"] .close-foot{margin-top:8px;gap:4px}
+  /* Readable floor: every visible glyph ≥12px base so scale≥0.7 stays ≥11px rendered. */
+  .sub,.eyebrow,.pack-note,.sample-cap,.away-src,.meta,.bub,.fact-chip,.join-chip,.rx-chip,
+  .cpill,.prac,.panel-label,.next-steps-label,.away-legend,.legend,.cond,.spec,
+  .slot-chip,.wm-org,.wm-md-title,.away-legend i,.away-total,.spark-top b,.spark-top span,
+  .out-dual .panel h3,.out-dual .panel h3 small,.ways-card h3,.ways-card small,
+  .avatar,.ph-date,.wm-top b,.wm-top span,.chk-row span,.chk-final span{font-size:12px!important}
+  .siya-core small,.app small,.card-lite b,.notif span,.notif b{font-size:12px!important}
+  #tour small{font-size:12px!important}
+  #f-time .panel-label{font-size:12px!important}
+  #turn .web small,#turn small{font-size:12px!important}
+  #p-away .away-legend i,#p-away .away-seg{font-size:12px!important}
+  .wm-dates span,.wm-top,.wm-org,.wm-md-title{font-size:12px!important}
+  #cost .why-row .wx,#cost .why-row .ok{font-size:14px!important}
+  #outcomes .spark-top b,#outcomes .spark-top span,#outcomes .panel h3 small{font-size:12px!important}
+  #f-ways .avatar{font-size:12px!important;width:22px;height:22px;line-height:22px}
+  #close .next-steps-rail li{font-size:12px!important}
+  /* When the frame is scaled, bump type (ID-level specificity) so rendered ≥11px. */
+  #tour article.slide.phone-lg-type .sub,
+  #tour article.slide.phone-lg-type .eyebrow,
+  #tour article.slide.phone-lg-type .pack-note,
+  #tour article.slide.phone-lg-type .sample-cap,
+  #tour article.slide.phone-lg-type .meta,
+  #tour article.slide.phone-lg-type .bub,
+  #tour article.slide.phone-lg-type .fact-chip,
+  #tour article.slide.phone-lg-type .join-chip,
+  #tour article.slide.phone-lg-type .rx-chip,
+  #tour article.slide.phone-lg-type .cpill,
+  #tour article.slide.phone-lg-type .prac,
+  #tour article.slide.phone-lg-type .panel-label,
+  #tour article.slide.phone-lg-type .slot-chip,
+  #tour article.slide.phone-lg-type .avatar,
+  #tour article.slide.phone-lg-type small,
+  #tour article.slide.phone-lg-type .ways-card h3,
+  #tour article.slide.phone-lg-type .ways-card b,
+  #tour article.slide.phone-lg-type .ways-card a,
+  #tour article.slide.phone-lg-type .ph-head,
+  #tour article.slide.phone-lg-type .ph-head *,
+  #tour article.slide.phone-lg-type .rate-chip,
+  #tour article.slide.phone-lg-type .spark-top b,
+  #tour article.slide.phone-lg-type .spark-top span,
+  #tour article.slide.phone-lg-type .out-dual .panel h3,
+  #tour article.slide.phone-lg-type .out-dual .panel h3 small,
+  #tour article.slide.phone-lg-type .away-seg,
+  #tour article.slide.phone-lg-type .away-legend i,
+  #tour article.slide.phone-lg-type .away-siya-visit span,
+  #tour article.slide.phone-lg-type .away-not-needed span,
+  #tour article.slide.phone-lg-type .away-src,
+  #tour article.slide.phone-lg-type .next-steps-label,
+  #tour article.slide.phone-lg-type .next-steps-rail li,
+  #tour article.slide.phone-lg-type .wm-org,
+  #tour article.slide.phone-lg-type .wm-md-title,
+  #tour article.slide.phone-lg-type .wm-top,
+  #tour article.slide.phone-lg-type .wm-top *,
+  #tour article.slide.phone-lg-type .chk-row span,
+  #tour article.slide.phone-lg-type .why-row b,
+  #tour article.slide.phone-lg-type .why-row em,
+  #tour article.slide.phone-lg-type .why-row .wx,
+  #tour article.slide.phone-lg-type .why-row .ok,
+  #tour article.slide.phone-lg-type .why-usual span,
+  #tour article.slide.phone-lg-type .why-siya span,
+  #tour article.slide.phone-lg-type .cost-foot,
+  #tour article.slide.phone-lg-type .wm-dates span,
+  #tour article.slide.phone-lg-type button,
+  #tour article.slide.phone-lg-type a{
+    font-size:16px!important;
+  }
+  /* Phone trim: cut secondary chrome so scale stays ≥0.7 */
+  #p-time .sample-cap{display:none!important}
+  #p-time .phone-callout em.slot{display:none!important}
+  #p-time .gcal{--hr:28px;max-height:min(46vh,340px)}
+  #p-time.phone-trim-tight .gcal{--hr:22px;max-height:min(38vh,280px)}
+  #p-time.phone-trim-tight .phone-callout small{display:none!important}
+  #p-whole .sub{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+  #p-whole .web{max-height:min(42vh,320px)}
+  #p-whole.phone-trim-tight .web{max-height:min(34vh,260px)}
+  #f-ways .sub{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+  #f-ways .ways-card .mini-phone{min-height:0;max-height:min(28vh,220px)}
+  #f-ways .ways-card .mini-phone .screen{min-height:0;max-height:100%}
+  #f-ways.phone-trim-tight .ways-card:last-child .meta,
+  #f-ways.phone-trim-tight .ways-card .chat-thread .msg-line:nth-child(n+3){display:none!important}
+  #care-checklist .sub{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+  #care-checklist .chk-row:nth-child(n+6){display:none!important}
+  #care-checklist.phone-trim-tight .chk-row:nth-child(n+5){display:none!important}
+  #clinicians .sub{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+  #clinicians .cpill:nth-child(n+5){display:none!important}
+  #clinicians .prac:nth-child(n+4){display:none!important}
+  #clinicians.phone-trim-tight .panel-card:last-child{display:none!important}
+  #f-response .pack-note,#f-urgent .pack-note{display:none!important}
+  #f-response .meta,#f-urgent .meta{display:none!important}
+  #f-response .chat-thread,#f-urgent .chat-thread{max-height:min(36vh,280px)}
+  #f-time .legend{font-size:12px}
+  #f-time .ev,#f-time .gap span{font-size:12px}
+  #f-response .bub,#f-urgent .bub{font-size:13px}
+  #f-response .fact-chip{font-size:12px}
+  #f-response .join-chip,#f-urgent .join-chip,#f-urgent .rx-chip{font-size:12px}
   .frame{transform-origin:center center;width:100%;max-width:100%;box-sizing:border-box}
   article[data-cost-phone] .frame{padding:0;gap:12px;width:100%}
   article[data-cost-phone] .cost-stack{width:100%;display:grid;gap:12px;padding:0;box-sizing:border-box}
@@ -1304,12 +1419,12 @@ article.slide[data-close="1"] .close-foot{
   #f-response .sub,#f-urgent .sub,#f-urgent .pack-note{font-size:13px;margin:0}
   #f-response .chat-card,#f-urgent .chat-card{width:100%;max-width:100%;max-height:min(58vh,440px);height:auto;align-self:stretch}
   #f-response .chat-thread,#f-urgent .chat-thread{padding:10px;gap:5px;overflow:auto;justify-content:flex-start}
-  #f-response .bub,#f-urgent .bub{font-size:12px;padding:8px 10px}
-  #f-response .meta,#f-urgent .meta{font-size:11px}
-  #f-response .join-chip,#f-urgent .join-chip{font-size:11px;padding:5px 10px}
-  #f-response .rx-chip,#f-urgent .rx-chip{font-size:10px;margin-left:28px}
+  #f-response .bub,#f-urgent .bub{font-size:13px;padding:8px 10px}
+  #f-response .meta,#f-urgent .meta{font-size:12px}
+  #f-response .join-chip,#f-urgent .join-chip{font-size:12px;padding:5px 10px}
+  #f-response .rx-chip,#f-urgent .rx-chip{font-size:12px;margin-left:28px}
   #f-response .fact-chips{gap:6px}
-  #f-response .fact-chip{font-size:11px;padding:6px 8px}
+  #f-response .fact-chip{font-size:12px;padding:6px 8px}
 }
 @media (prefers-reduced-motion:reduce){
   .begin button,.wash::before,.wash::after,.me-node.halo.in,.ev.siya.in,.siya-core.in{animation:none}
@@ -1495,7 +1610,8 @@ html.demo-embed #tour .hint2{display:none}
     <div class="card">
       <div class="kicker">For HR and benefits leaders</div>
       <h1>See how Siya Health works <em>for your people</em>.</h1>
-      <p>A short guided tour. Click anywhere to begin.</p>
+      <p class="welcome-lead">A short guided tour.</p>
+      <p class="welcome-tap">Click anywhere to begin.</p>
       <p class="welcome-time">About 3 minutes</p>
       <p class="welcome-note">Screens shown are illustrations with sample data.</p>
       <button class="start" id="start" type="button">Start the tour</button>
@@ -2266,10 +2382,17 @@ html.demo-embed #tour .hint2{display:none}
     <div class="bar-actions">
       <button id="pause" type="button" aria-label="Pause" aria-pressed="false"><svg class="bar-ico" data-ico="pause" viewBox="0 0 24 24" aria-hidden="true"><rect x="6" y="4" width="4" height="16" rx="1"/><rect x="14" y="4" width="4" height="16" rx="1"/></svg><svg class="bar-ico" data-ico="play" viewBox="0 0 24 24" aria-hidden="true" hidden><polygon points="6 3 20 12 6 21 6 3"/></svg><span class="bar-txt">Pause</span></button>
       <button id="muteTour" type="button" aria-label="Sound on" aria-pressed="false"><svg class="bar-ico" data-ico="vol" viewBox="0 0 24 24" aria-hidden="true"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/></svg><svg class="bar-ico" data-ico="mute" viewBox="0 0 24 24" aria-hidden="true" hidden><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><line x1="22" y1="9" x2="16" y2="15"/><line x1="16" y1="9" x2="22" y2="15"/></svg><span class="bar-txt">Sound on</span></button>
+      <button id="speedBtn" type="button" aria-label="Playback speed 1×" aria-haspopup="listbox" aria-expanded="false"><svg class="bar-ico" data-ico="gauge" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 14V8"/><path d="M12 14l4-2"/><path d="M5 19a9 9 0 1 1 14 0"/><circle cx="12" cy="14" r="1.2" fill="currentColor" stroke="none"/></svg><span class="bar-txt speed-pill">1×</span></button>
       <button id="next" type="button" aria-label="Next"><svg class="bar-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg><span class="bar-txt">Next</span></button>
       <a class="talk talk-inbar" id="talkToUs" href="__INQUIRY_HREF__">Talk to us</a>
     </div>
   </nav>
+  <div id="speedSheet" class="speed-sheet" hidden role="listbox" aria-label="Playback speed">
+    <button type="button" role="option" data-speed="0.5">0.5×</button>
+    <button type="button" role="option" data-speed="0.75">0.75×</button>
+    <button type="button" role="option" data-speed="1">1×</button>
+    <button type="button" role="option" data-speed="1.5">1.5×</button>
+  </div>
   </div><!-- /#deskCanvas -->
 </section>
 
@@ -2618,8 +2741,9 @@ function startMusic(A,opts){
 }
 function setMusicAudible(on){
   if(!audio||!audio.music)return;
+  if(paused&&on){setPauseMusic(true);return;}
   const g=audio.music.musicGain.gain,t=audio.ac.currentTime;
-  g.cancelScheduledValues(t); g.setTargetAtTime(on&&!muted&&!pausedTourMusic?MUSIC_LEVEL:.0001,t,.12);
+  g.cancelScheduledValues(t); g.setTargetAtTime(on&&!muted?MUSIC_LEVEL:.0001,t,.12);
 }
 function fadeMusicOut(sec=3){
   if(!audio||!audio.music)return;
@@ -2827,6 +2951,9 @@ if(demoEmbed){
 /* =============== TOUR =============== */
 /* Music B: 112 BPM → beat/bar grid for builds + dwell snap */
 const BEAT_MS=536, HALF_BEAT_MS=268, BAR_MS=2144;
+const SPEED_OPTS=[0.5,0.75,1,1.5];
+let playSpeed=1;
+try{const _sp=+sessionStorage.getItem('demo_play_speed'); if(SPEED_OPTS.includes(_sp)) playSpeed=_sp;}catch(e){}
 const line='Healthcare still runs on a schedule your people can’t keep.';
 $('bigline').innerHTML=line.split(' ').map((w,i)=>{const hot=/can’t|keep\./.test(w);
   /* Statement build ≤1.6s: word lands by ~1.0s, anim 536ms → lastEnd ≤1536 */
@@ -3077,6 +3204,8 @@ window.__employerDemo={
   MUSIC_LEVEL,MUSIC_PAD_PEAK,MUSIC_ARP_PEAK,MUSIC_PULSE_PEAK,
   ensureMusic,playSlideDeepLink,SLIDE_ALIASES,
   computeAdvanceMs,getTx:()=>tx,getCur:()=>cur,
+  getPaused:()=>paused,togglePause,getPlaySpeed:()=>playSpeed,setPlaySpeed,SPEED_OPTS,
+  getElapsed:()=>elapsed,getDur:()=>dur,
   /* review/QA helper — finishes builds on the target slide */
   showSlide(id){
     collectSlides();
@@ -3188,8 +3317,8 @@ function paintWebMock(i,opts){
     const stack=body.querySelector('.site-shot-stack'); const hl=body.querySelector('.tap-hl');
     if(instant){if(stack)stack.classList.add('scroll-book');if(hl)hl.classList.add('on');}
     else{
-      setTimeout(()=>{if(stack)stack.classList.add('scroll-book');},BEAT_MS*2);
-      setTimeout(()=>{if(hl)hl.classList.add('on');},BAR_MS);
+      slideTimeout(()=>{if(stack)stack.classList.add('scroll-book');},BEAT_MS*2);
+      slideTimeout(()=>{if(hl)hl.classList.add('on');},BAR_MS);
     }
     return;
   }
@@ -3200,7 +3329,7 @@ function paintWebMock(i,opts){
     if(instant){if(stack)stack.classList.add('scroll-deep');if(hl)hl.classList.add('on');}
     else{
       requestAnimationFrame(()=>{if(stack)stack.classList.add('scroll-deep');});
-      setTimeout(()=>{if(hl)hl.classList.add('on');},BEAT_MS*2);
+      slideTimeout(()=>{if(hl)hl.classList.add('on');},BEAT_MS*2);
     }
     return;
   }
@@ -3217,7 +3346,7 @@ function paintWebMock(i,opts){
   </div>`;
   if(!instant){
     const book=body.querySelector('.wm-book');
-    setTimeout(()=>{if(book){book.classList.add('is-done');try{if(!cueSkip){cueThump();cuePluck();}}catch(e){}}},BEAT_MS*2);
+    slideTimeout(()=>{if(book){book.classList.add('is-done');try{if(!cueSkip){cueThump();cuePluck();}}catch(e){}}},BEAT_MS*2);
   }
 }
 function renderWalk(i,opts){
@@ -3323,15 +3452,72 @@ let cur=-1,elapsed=0,last=performance.now(),paused=false,events=[],fired=0,dur=0
 /* Transition state machine: idle → leaving → entering → idle. Never two slides building. */
 let tx='idle', pendingNav=null, slideTimers=[], countRafs=new Set();
 const TX_MS=280;
+let pendingTO=[]; /* pause-aware timeouts: {fn,due,handle,remaining} */
 collectSlides();
 function slideTimeout(fn,ms){
-  const id=setTimeout(()=>{slideTimers=slideTimers.filter(t=>t!==id);fn();},ms);
-  slideTimers.push(id); return id;
+  const entry={fn,due:performance.now()+ms,handle:0,remaining:ms};
+  const arm=()=>{
+    entry.remaining=Math.max(0,entry.due-performance.now());
+    entry.handle=setTimeout(()=>{
+      pendingTO=pendingTO.filter(e=>e!==entry);
+      slideTimers=slideTimers.filter(t=>t!==entry.handle);
+      try{fn();}catch(err){}
+    },entry.remaining);
+    slideTimers.push(entry.handle);
+  };
+  pendingTO.push(entry);
+  if(!paused) arm();
+  return entry;
+}
+function pauseSlideTimeouts(){
+  const now=performance.now();
+  pendingTO.forEach(e=>{
+    if(e.handle){
+      clearTimeout(e.handle);
+      slideTimers=slideTimers.filter(t=>t!==e.handle);
+      e.remaining=Math.max(0,e.due-now);
+      e.handle=0;
+    }
+  });
+}
+function resumeSlideTimeouts(){
+  const now=performance.now();
+  pendingTO.forEach(e=>{
+    e.due=now+e.remaining;
+    if(!e.handle){
+      e.handle=setTimeout(()=>{
+        pendingTO=pendingTO.filter(x=>x!==e);
+        slideTimers=slideTimers.filter(t=>t!==e.handle);
+        try{e.fn();}catch(err){}
+      },e.remaining);
+      slideTimers.push(e.handle);
+    }
+  });
 }
 function cancelSlideTimers(){
+  pendingTO.forEach(e=>{if(e.handle)clearTimeout(e.handle);});
+  pendingTO=[];
   slideTimers.forEach(clearTimeout); slideTimers=[];
   clearTimeout(fitTimer); fitFor=-1;
   countRafs.forEach(cancelAnimationFrame); countRafs.clear();
+}
+function freezeVisualPlayback(on){
+  try{tour.classList.toggle('is-paused',!!on);}catch(e){}
+  try{
+    const anims=(tour.getAnimations?tour.getAnimations({subtree:true}):[])||[];
+    anims.forEach(a=>{try{on?a.pause():a.play();}catch(e){}});
+  }catch(e){}
+  try{
+    tour.querySelectorAll('svg').forEach(svg=>{
+      try{on?svg.pauseAnimations():svg.unpauseAnimations();}catch(e){}
+    });
+  }catch(e){}
+}
+function setPauseMusic(isPaused){
+  if(!audio||!audio.music)return;
+  const g=audio.music.musicGain.gain,t=audio.ac.currentTime;
+  const target=muted?0.0001:(isPaused?MUSIC_LEVEL*0.3:MUSIC_LEVEL);
+  g.cancelScheduledValues(t); g.setTargetAtTime(target,t,.12);
 }
 function animMsFor(el){
   if(el.classList.contains('draw')||el.classList.contains('grow'))return Math.round(BEAT_MS*2);
@@ -3352,10 +3538,8 @@ function computeAdvanceMs(s){
   const bits=[...s.querySelectorAll('.eyebrow,.cap,.sub,.pack-note,.q1,.q2,.away-src,.sample-cap')]
     .map(el=>(el.textContent||'').trim()).join(' ');
   const words=(bits.match(/[A-Za-z0-9']+/g)||[]).length;
-  /* dwell = clamp(words÷5 per sec, 1.2s, 3.5s) */
-  let dwell=Math.min(3500,Math.max(1200,Math.round(words/5*1000)));
-  const SHORT=new Set(['statement','question','proof','privacy','turn']);
-  if(SHORT.has(s.id)) dwell=Math.min(dwell,2000);
+  /* dwell = clamp(words ÷ 3.5/s, 2.5s, 6s) after last element lands */
+  let dwell=Math.min(6000,Math.max(2500,Math.round(words/3.5*1000)));
   let total=lastEnd+dwell;
   const idx=slides.indexOf(s);
   const next=(idx>=0&&idx<slides.length-1)?slides[idx+1]:null;
@@ -3379,9 +3563,14 @@ function countUp(el){
   el.textContent=final;
   el.style.minWidth=Math.ceil(el.getBoundingClientRect().width)+'px';
   el.textContent=dec?Number(0).toFixed(dec):'0';
-  let raf=0;
+  let raf=0,pauseAccum=0,pausedAt=0;
   const step=now=>{
-    const k=Math.min(1,(now-t0)/DUR),e=1-Math.pow(1-k,3),v=to*e;
+    if(paused){
+      if(!pausedAt)pausedAt=now;
+      raf=requestAnimationFrame(step);countRafs.add(raf);return;
+    }
+    if(pausedAt){pauseAccum+=now-pausedAt;pausedAt=0;}
+    const k=Math.min(1,(now-t0-pauseAccum)/DUR),e=1-Math.pow(1-k,3),v=to*e;
     el.textContent=(dec?v.toFixed(dec):Math.round(v).toLocaleString('en-US'))+(k>=1?suf:'');
     if(k<1){raf=requestAnimationFrame(step);countRafs.add(raf);}
     else countRafs.delete(raf);
@@ -3391,16 +3580,17 @@ function countUp(el){
 let fitTimer=0,fitFor=-1;
 function fitFrame(){
   if(!isPhoneLayout()){
-    slides.forEach(s=>{const f=s.querySelector('.frame');if(f)f.style.transform='';s.style.alignContent='';});
+    slides.forEach(s=>{
+      const f=s.querySelector('.frame');if(f)f.style.transform='';
+      s.style.alignContent='';s.style.justifyContent='';
+      s.classList.remove('phone-trim','phone-trim-tight');
+    });
     return;
   }
   const s=slides[cur];if(!s)return;
   const frame=s.querySelector('.frame');if(!frame)return;
-  /* Always top-align on phone — never center tall content (clips headline under chrome). */
-  s.style.alignContent='start';
-  s.style.justifyContent='flex-start';
-  s.style.placeItems='start center';
-  s.style.alignItems='center';
+  s.classList.add('phone-trim');
+  s.classList.remove('phone-trim-tight','phone-lg-type');
   frame.style.transform='none';
   frame.style.transformOrigin='top center';
   const vv=window.visualViewport;
@@ -3410,22 +3600,41 @@ function fitFrame(){
   const barHidden=bar&&bar.classList.contains('bar-hidden');
   const barTop=(bar&&!barHidden)?bar.getBoundingClientRect().top:visBottom;
   const availBottom=Math.min(visBottom,barTop)-8;
-  /* Re-measure after top-align (flex justify + grid align) */
+  /* Probe natural height with top-align */
+  s.style.alignContent='start';
+  s.style.justifyContent='flex-start';
+  s.style.placeItems='start center';
+  s.style.alignItems='center';
   void frame.offsetHeight;
-  const fr=frame.getBoundingClientRect();
+  let fr=frame.getBoundingClientRect();
   let room=availBottom-Math.max(fr.top,visTop+4);
-  const h=fr.height;
+  let h=fr.height;
+  const MIN_SCALE=0.7;
+  let scale=1;
   if(room>40&&h>room+1){
-    const scale=Math.max(.42,Math.min(1,room/h));
+    /* Too tall: tighten trim + larger type, then scale — never below 0.7 */
+    s.classList.add('phone-trim-tight','phone-lg-type');
+    void frame.offsetHeight;
+    fr=frame.getBoundingClientRect();
+    room=availBottom-Math.max(fr.top,visTop+4);
+    h=fr.height;
+    s.style.alignContent='start';
+    s.style.justifyContent='flex-start';
+    scale=Math.min(1,room/Math.max(h,1));
+    scale=Math.max(MIN_SCALE,scale);
+    if(scale>=0.95) s.classList.remove('phone-lg-type');
     frame.style.transformOrigin='top center';
-    frame.style.transform='scale('+scale+')';
-  }else frame.style.transform='';
-  /* If still clipped above after scale, nudge padding (safe-area) */
+    frame.style.transform=scale<0.999?('scale('+scale+')'):'';
+  }else{
+    /* Fits: vertical-center in the visible band above the bar */
+    s.style.alignContent='center';
+    s.style.justifyContent='center';
+    frame.style.transform='';
+  }
   const fr2=frame.getBoundingClientRect();
   if(fr2.top<visTop-1){
-    s.style.paddingTop=Math.max(4, (parseFloat(getComputedStyle(s).paddingTop)||12)+(visTop-fr2.top+4))+'px';
+    s.style.paddingTop=Math.max(4,(parseFloat(getComputedStyle(s).paddingTop)||12)+(visTop-fr2.top+4))+'px';
   }
-  /* Safety: document must never scroll during the tour */
   if(window.scrollY||document.documentElement.scrollTop||document.body.scrollTop){
     try{window.scrollTo(0,0);document.documentElement.scrollTop=0;document.body.scrollTop=0;}catch(e){}
   }
@@ -3573,10 +3782,55 @@ function syncBarIcons(){
     if(txt)txt.textContent=muted?'Sound off':'Sound on';
   }
 }
+function setPlaySpeed(v){
+  const n=+v;
+  if(!SPEED_OPTS.includes(n))return playSpeed;
+  const prev=playSpeed;
+  playSpeed=n;
+  try{sessionStorage.setItem('demo_play_speed',String(n));}catch(e){}
+  try{
+    const pill=document.querySelector('#speedBtn .speed-pill');
+    if(pill)pill.textContent=n%1?n+'×':(n+'×');
+    const btn=$('speedBtn');
+    if(btn)btn.setAttribute('aria-label','Playback speed '+n+'×');
+    document.querySelectorAll('#speedSheet [data-speed]').forEach(b=>{
+      b.setAttribute('aria-selected',String(+b.dataset.speed===n));
+    });
+  }catch(e){}
+  try{paintTourLengthLabel();}catch(e){}
+  if(prev!==n){
+    try{
+      if(typeof track==='function')track('demo_speed_change',{value:n});
+      else{
+        if(typeof window.siyaTrack==='function')window.siyaTrack('demo_speed_change',{value:n});
+        window.dataLayer=window.dataLayer||[];
+        window.dataLayer.push({event:'demo_speed_change',value:n});
+      }
+    }catch(e){}
+  }
+  return playSpeed;
+}
+function toggleSpeedSheet(force){
+  const sheet=$('speedSheet'); if(!sheet)return;
+  const open=force===true?true:force===false?false:sheet.hidden;
+  sheet.hidden=!open;
+  const btn=$('speedBtn');
+  if(btn)btn.setAttribute('aria-expanded',String(open));
+}
 function togglePause(){
   paused=!paused;
   syncBarIcons();
-  pausedTourMusic=paused; setMusicAudible(!paused);
+  if(paused){
+    pauseSlideTimeouts();
+    freezeVisualPlayback(true);
+    pausedTourMusic=true;
+    setPauseMusic(true);
+  }else{
+    resumeSlideTimeouts();
+    freezeVisualPlayback(false);
+    pausedTourMusic=false;
+    setPauseMusic(false);
+  }
 }
 function tick(now){
   const dt=Math.min(100,now-last);last=now;
@@ -3590,7 +3844,7 @@ function tick(now){
         else{window.dataLayer=window.dataLayer||[];window.dataLayer.push(payload);}
       }catch(e){}
     }
-    if(!paused){elapsed+=dt;while(fired<events.length&&events[fired].t<=elapsed){events[fired++].fn();scheduleFit(true);}
+    if(!paused){elapsed+=dt*playSpeed;while(fired<events.length&&events[fired].t<=elapsed){events[fired++].fn();scheduleFit(true);}
       if(fired>=events.length)scheduleFit(true);
       if(!founderHold&&tx==='idle'&&dur>0&&elapsed>=dur)goTo(cur+1,{});}
     syncWalk();
@@ -3714,13 +3968,33 @@ function paintTourLengthLabel(){
     collectSlides();
     let t=0;
     slides.forEach(s=>{const d=computeAdvanceMs(s);if(d>0)t+=d;});
-    const mins=Math.max(1,Math.round(t/60000));
+    const wall=t/Math.max(playSpeed,0.01);
+    /* Nearest minute; .5 rounds toward the shorter label so ~3:30 → "About 3 minutes". */
+    const mins=Math.max(1,Math.floor(wall/60000+0.35));
     const label='About '+mins+' minute'+(mins===1?'':'s');
     document.querySelectorAll('.begin-time,.welcome-time').forEach(el=>{el.textContent=label;});
   }catch(e){}
 }
 
-$('replayTour').addEventListener('click',()=>{paused=false;try{syncBarIcons();}catch(e){}$('pause')&&($('pause').querySelector('.bar-txt')?0:($('pause').textContent='Pause'));goTo(0,{force:true});});
+$('replayTour').addEventListener('click',()=>{paused=false;try{freezeVisualPlayback(false);resumeSlideTimeouts();setPauseMusic(false);syncBarIcons();}catch(e){}$('pause')&&($('pause').querySelector('.bar-txt')?0:($('pause').textContent='Pause'));goTo(0,{force:true});});
+try{
+  setPlaySpeed(playSpeed);
+  const speedBtn=$('speedBtn');
+  if(speedBtn)speedBtn.addEventListener('click',e=>{e.stopPropagation();toggleSpeedSheet();});
+  const speedSheet=$('speedSheet');
+  if(speedSheet){
+    speedSheet.addEventListener('click',e=>{
+      e.stopPropagation();
+      const b=e.target.closest('[data-speed]'); if(!b)return;
+      setPlaySpeed(+b.dataset.speed);
+      toggleSpeedSheet(false);
+    });
+  }
+  document.addEventListener('click',e=>{
+    if(e.target.closest('#speedBtn,#speedSheet'))return;
+    toggleSpeedSheet(false);
+  });
+}catch(e){}
 document.addEventListener('click',e=>{
   if(!e.target.closest('#walkTap'))return;
   e.stopPropagation();

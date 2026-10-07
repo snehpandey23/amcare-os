@@ -286,7 +286,7 @@ const browser = await chromium.launch();
   }
 }
 
-/* Gate: pacing — beat snap; dwell ≤3.5s (short slides ≤2s); build ≤3 bars (exc. journey/Access); total ≤3:05 */
+/* Gate: pacing — dwell clamp(words÷3.5/s, 2.5–6s); build ≤3 bars (exc.); total ≈3:30 at 1× */
 {
   const ctx = await browser.newContext({ viewport: { width: 1280, height: 720 } });
   const page = await ctx.newPage();
@@ -303,7 +303,6 @@ const browser = await chromium.launch();
       const surf = s.dataset.surface || 'both';
       return surf !== 'phone';
     });
-    const SHORT = new Set(['statement', 'question', 'proof', 'privacy', 'turn']);
     const BUILD_EXEMPT = new Set(['journey', 'p-response']);
     const rows = [];
     let total = 0;
@@ -325,32 +324,63 @@ const browser = await chromium.launch();
       const bits = [...s.querySelectorAll('.eyebrow,.cap,.sub,.pack-note,.q1,.q2,.away-src,.sample-cap')]
         .map((el) => (el.textContent || '').trim()).join(' ');
       const words = (bits.match(/[A-Za-z0-9']+/g) || []).length;
-      let rawDwell = Math.min(3500, Math.max(1200, Math.round(words / 5 * 1000)));
-      if (SHORT.has(s.id)) rawDwell = Math.min(rawDwell, 2000);
+      const rawDwell = Math.min(6000, Math.max(2500, Math.round(words / 3.5 * 1000)));
       rows.push({ id: s.id || '?', build: lastEnd, dwell: rawDwell, total: adv, words });
       total += adv;
     }
     const label = (document.querySelector('.begin-time') || {}).textContent || '';
-    return { totalMs: total, totalMin: +(total / 60000).toFixed(2), rows, BEAT, BAR, label, BUILD_EXEMPT: [...BUILD_EXEMPT], SHORT: [...SHORT] };
+    const speeds = {};
+    for (const sp of (demo.SPEED_OPTS || [0.5, 0.75, 1, 1.5])) {
+      speeds[sp] = { totalMs: Math.round(total / sp), totalMin: +((total / sp) / 60000).toFixed(2) };
+    }
+    return { totalMs: total, totalMin: +(total / 60000).toFixed(2), rows, BEAT, BAR, label, BUILD_EXEMPT: [...BUILD_EXEMPT], speeds };
   });
   report.pacing = pacing;
   const BAR = 2144;
-  const badDwell = (pacing.rows || []).filter((r) => !r.manual && r.dwell > 3500);
-  if (badDwell.length) fail('pacing', `dwell >3.5s on ${badDwell.map((r) => r.id).join(',')}`);
-  const shortBad = (pacing.rows || []).filter((r) => (pacing.SHORT || []).includes(r.id) && !r.manual && r.dwell > 2000);
-  if (shortBad.length) fail('pacing', `short-copy dwell >2s on ${shortBad.map((r) => r.id).join(',')}`);
+  const badDwell = (pacing.rows || []).filter((r) => !r.manual && (r.dwell > 6000 || r.dwell < 2500));
+  if (badDwell.length) fail('pacing', `dwell outside 2.5–6s on ${badDwell.map((r) => `${r.id}:${r.dwell}`).join(',')}`);
   const buildBad = (pacing.rows || []).filter((r) => {
     if (r.manual || (pacing.BUILD_EXEMPT || []).includes(r.id)) return false;
     if (r.id === 'statement') return r.build > 1600;
     return r.build > BAR * 3;
   });
   if (buildBad.length) fail('pacing', `build over cap on ${buildBad.map((r) => `${r.id}:${r.build}`).join(',')}`);
-  /* Target ≈2:45–3:00; hard fail above 3:05 */
-  if (pacing.totalMs > 185000) fail('pacing', `total runtime ${pacing.totalMs}ms > 3:05`);
-  else if (pacing.totalMs < 150000) fail('pacing', `total runtime ${pacing.totalMs}ms < 2:30 (too short)`);
+  /* Target ≈3:30 at 1×; allow 3:10–3:55 */
+  if (pacing.totalMs > 235000) fail('pacing', `total runtime ${pacing.totalMs}ms > 3:55`);
+  else if (pacing.totalMs < 190000) fail('pacing', `total runtime ${pacing.totalMs}ms < 3:10 (too short)`);
   else pass('pacing', `total ${pacing.totalMin} min (${pacing.totalMs}ms), label="${pacing.label || ''}"`);
   fs.writeFileSync(path.join(OUT, 'pacing-table.json'), JSON.stringify(pacing, null, 2));
+  const speedLines = Object.entries(pacing.speeds || {}).map(([sp, v]) => `- ${sp}× → ${v.totalMin} min (${v.totalMs}ms)`).join('\n');
+  fs.writeFileSync(path.join(OUT, 'pacing-timing.md'), `# Pacing @ 1× \`${HASH}\`\n\nTotal: **${pacing.totalMin} min** (${pacing.totalMs}ms)\n\n## By speed\n${speedLines}\n\n## Slides\n\n| Slide | Build | Dwell | Total | Words |\n|---|---:|---:|---:|---:|\n${(pacing.rows || []).map((r) => `| ${r.id} | ${r.manual ? '—' : r.build} | ${r.manual ? '—' : r.dwell} | ${r.manual ? 'manual' : r.total} | ${r.words || 0} |`).join('\n')}\n`);
   await ctx.close();
+}
+
+/* Gate: readable text (≥11px, scale ≥0.7) */
+{
+  try {
+    const out = execSync('node internal/demo-qa/readable-text-gate.mjs', {
+      cwd: ROOT, encoding: 'utf8', timeout: 600000,
+    });
+    const n = Number((out.match(/FAILURES\s+(\d+)/) || [])[1] || 0);
+    if (n) fail('readable-text', `FAILURES ${n}`);
+    else pass('readable-text', out.trim().split('\n').find((l) => l.includes('Failures')) || 'PASS');
+  } catch (e) {
+    fail('readable-text', String(e.stdout || e.stderr || e.message || e).slice(0, 400));
+  }
+}
+
+/* Gate: pause freezes everything */
+{
+  try {
+    const out = execSync('node internal/demo-qa/pause-freeze-gate.mjs', {
+      cwd: ROOT, encoding: 'utf8', timeout: 1200000,
+    });
+    const n = Number((out.match(/FAILURES\s+(\d+)/) || [])[1] || 0);
+    if (n) fail('pause-freeze', `FAILURES ${n}`);
+    else pass('pause-freeze', out.trim().split('\n').find((l) => l.includes('Failures')) || 'PASS');
+  } catch (e) {
+    fail('pause-freeze', String(e.stdout || e.stderr || e.message || e).slice(0, 400));
+  }
 }
 
 /* Gate: content final — no visible data-count still at 0 */
