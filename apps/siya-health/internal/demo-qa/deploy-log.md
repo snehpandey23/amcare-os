@@ -37,3 +37,4 @@ Log `STARTED` ≈ CLI attempts from this script (Git/Vercel auto-builds also bur
 | 2026-10-07 09:02 IST | `release/2026-10-07c` | `c820ac08` | production | sp | OK | mobile top-clip root fix + no-scroll gate · dpl_EnPGkP1SEufZTJcMEKMXKzwvtya6 |
 | 2026-10-07 10:24 IST | `release/2026-10-07d` | `fdb7a64a` | production | sp | REFUSED | Vercel api-deployments-free-per-day (>100); playback round gates green on tip |
 | 2026-10-07 17:30 IST | `release/2026-10-07d` | `d88ee175` | hygiene | sp | NOTED | Policy: local checks only between ships; preview only review-link¦pre-prod. 2026-10-07 also burned many unlogged `vercel deploy` / canceled Git previews (quota >100). |
+| 2026-10-07 17:38 IST | `release/2026-10-07d` | `5078d31a` | production | sp | REFUSED | gate failed |
