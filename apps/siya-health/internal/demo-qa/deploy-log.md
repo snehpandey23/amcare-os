@@ -15,6 +15,7 @@ Log `STARTED` ≈ CLI attempts from this script (Git/Vercel auto-builds also bur
 
 | Day (IST) | Prod STARTED | Prod OK | Preview STARTED | Preview OK | Quota REFUSED |
 |---|---:|---:|---:|---:|---:|
+| 2026-10-08 | 1 | 1 | 0 | 0 | 0 |
 | 2026-10-07 | 3 | 3 | 0 | 0 | 2 |
 | 2026-10-06 | 1 | 1 | 0 | 0 | 0 |
 
@@ -38,3 +39,5 @@ Log `STARTED` ≈ CLI attempts from this script (Git/Vercel auto-builds also bur
 | 2026-10-07 10:24 IST | `release/2026-10-07d` | `fdb7a64a` | production | sp | REFUSED | Vercel api-deployments-free-per-day (>100); playback round gates green on tip |
 | 2026-10-07 17:30 IST | `release/2026-10-07d` | `d88ee175` | hygiene | sp | NOTED | Policy: local checks only between ships; preview only review-link¦pre-prod. 2026-10-07 also burned many unlogged `vercel deploy` / canceled Git previews (quota >100). |
 | 2026-10-07 17:38 IST | `release/2026-10-07d` | `5078d31a` | production | sp | REFUSED | gate failed |
+| 2026-10-08 05:46 IST | `release/2026-10-07d` | `7939876f` | production | sp | STARTED | Pause gate screenshot flake fix; log refused prod (gate timeout). |
+| 2026-10-08 05:46 IST | `release/2026-10-07d` | `7939876f` | production | sp | OK | playback pause/speed/pacing · dpl_92UZzgZAY2JXd7Mk2rUgmm29CYAE |
