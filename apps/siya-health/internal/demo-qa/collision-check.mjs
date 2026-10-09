@@ -294,15 +294,15 @@ async function check(page, slideId, viewport) {
   }, { TEXT_SELECTOR, STRUCT_SKIP: [...STRUCT_SKIP], slideId, viewport });
 }
 
+const FAST = process.env.SIYA_GATE_FAST === '1';
 for (const [w, h] of VIEWS) {
-  for (const id of CHECK_SLIDES) {
-    if (!slideIds.includes(id)) continue;
-    const ctx = await browser.newContext({
-      viewport: { width: w, height: h },
-      isMobile: w < 500,
-      hasTouch: w < 500,
-    });
-    const page = await ctx.newPage();
+  const ctx = await browser.newContext({
+    viewport: { width: w, height: h },
+    isMobile: w < 500,
+    hasTouch: w < 500,
+  });
+  const page = FAST ? await ctx.newPage() : null;
+  if (FAST) {
     await page.goto(`http://127.0.0.1:${port}/employers/demo.html?review=1`, { waitUntil: 'domcontentloaded' });
     await page.waitForFunction(() => document.documentElement.dataset.siyaReady === '1');
     await page.evaluate(() => {
@@ -311,8 +311,29 @@ for (const [w, h] of VIEWS) {
       document.getElementById('welcome').classList.remove('on');
       document.getElementById('tour').hidden = false;
       document.getElementById('tour').classList.add('on');
+      if (window.__employerDemo.setCaptions) window.__employerDemo.setCaptions(true);
     });
-    const surfaceOk = await page.evaluate((id) => {
+  }
+  for (const id of CHECK_SLIDES) {
+    if (!slideIds.includes(id)) continue;
+    const slideCtx = FAST ? null : await browser.newContext({
+      viewport: { width: w, height: h },
+      isMobile: w < 500,
+      hasTouch: w < 500,
+    });
+    const slidePage = FAST ? page : await slideCtx.newPage();
+    if (!FAST) {
+      await slidePage.goto(`http://127.0.0.1:${port}/employers/demo.html?review=1`, { waitUntil: 'domcontentloaded' });
+      await slidePage.waitForFunction(() => document.documentElement.dataset.siyaReady === '1');
+      await slidePage.evaluate(() => {
+        document.getElementById('begin').hidden = true;
+        document.documentElement.classList.add('welcome-live');
+        document.getElementById('welcome').classList.remove('on');
+        document.getElementById('tour').hidden = false;
+        document.getElementById('tour').classList.add('on');
+      });
+    }
+    const surfaceOk = await slidePage.evaluate((id) => {
       const el = document.getElementById(id);
       if (!el || el.classList.contains('parked')) return false;
       const phone = window.matchMedia('(max-width:640px)').matches;
@@ -322,25 +343,28 @@ for (const [w, h] of VIEWS) {
       return true;
     }, id);
     if (!surfaceOk) {
-      await ctx.close();
+      if (!FAST) await slideCtx.close();
       continue;
     }
-    await page.evaluate(() => {
-      if (window.__employerDemo.setCaptions) window.__employerDemo.setCaptions(true);
-    });
+    if (!FAST) {
+      await slidePage.evaluate(() => {
+        if (window.__employerDemo.setCaptions) window.__employerDemo.setCaptions(true);
+      });
+    }
     try {
-      await page.evaluate((id) => window.__employerDemo.showSlide(id), id);
+      await slidePage.evaluate((id) => window.__employerDemo.showSlide(id), id);
     } catch (e) {
       failures.push({ slideId: id, viewport: `${w}x${h}`, type: 'missing-slide', err: String(e.message || e) });
-      await ctx.close();
+      if (!FAST) await slideCtx.close();
       continue;
     }
-    const wait = (id === 'p-away' || id === 'p-coord' || id === 'f-time') ? 6500 : 4000;
-    await page.waitForTimeout(wait);
-    const f = await check(page, id, `${w}x${h}`);
+    const wait = FAST ? 350 : ((id === 'p-away' || id === 'p-coord' || id === 'f-time') ? 6500 : 4000);
+    await slidePage.waitForTimeout(wait);
+    const f = await check(slidePage, id, `${w}x${h}`);
     failures.push(...f);
-    await ctx.close();
+    if (!FAST) await slideCtx.close();
   }
+  await ctx.close();
 }
 
 const report = {

@@ -1,5 +1,5 @@
 {
-  "commit": "dc0455fa",
+  "commit": "f3837b86",
   "checked": [
     "statement",
     "p-familiar",
@@ -32,6 +32,7 @@
   "views": [
     "1440x900",
     "1366x768",
+    "1280x720",
     "390x844",
     "360x800",
     "390x664",

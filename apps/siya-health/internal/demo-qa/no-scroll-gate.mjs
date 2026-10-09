@@ -121,8 +121,9 @@ async function runEngine(engine, label, views = VIEWS) {
     );
     for (const id of ids) {
       await page.evaluate((id) => window.__employerDemo.playSlideDeepLink(id, { playBuild: true }), id);
-      for (const wait of [300, 1200, 2400]) {
-        await page.waitForTimeout(wait === 300 ? 300 : 900);
+      const phases = process.env.SIYA_GATE_FAST === '1' ? [400] : [300, 1200, 2400];
+      for (const wait of phases) {
+        await page.waitForTimeout(process.env.SIYA_GATE_FAST === '1' ? 400 : (wait === 300 ? 300 : 900));
         checkMeas(await measure(page), { engine: label, view: `${w}x${h}`, phase: `build-${wait}`, id });
       }
       await page.evaluate((id) => window.__employerDemo.showSlide(id), id);

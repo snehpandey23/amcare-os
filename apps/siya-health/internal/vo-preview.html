@@ -23,14 +23,17 @@
   .OK-with-caption-change { background: #fff4d6; color: #7a5600; }
   .RE-RECORD { background: #fde8e6; color: #9b1c1c; }
   p { margin: 0; }
-  .meta { margin-top: 8px; color: #5c6778; font: 13px/1.4 system-ui, sans-serif; }
+  .ab { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 10px; }
+  .ab label { display: block; font: 12px/1.2 system-ui, sans-serif; letter-spacing: .04em; text-transform: uppercase; color: #5c6778; margin-bottom: 4px; }
+  .tail { margin: 8px 0 0; font-weight: 600; }
+  audio { width: 100%; height: 36px; }
   .warn { background: #fde8e6; border-radius: 12px; padding: 12px 14px; margin: 0 0 16px; }
 </style>
 </head>
 <body>
 <main>
   <h1>Employer demo voiceover</h1>
-  <p class="note">Preview only. Nothing here is wired into the demo. Narrator: Dr. Sneh Pandey. Play all runs the clips in order, with the tour bed ducked to about 35% under the voice. A single clip plays dry.</p>
+  <p class="note">Local listening page only. Not part of the demo and not deployed. Each line plays the previous cut and the new cut. The bold line is the last two words, which is where the old clips were clipping.</p>
   <div class="warn">Line 11 and line 19 are the Oct 9 re-record. Captions stay the script. Line 05 in this same file clearly says “days.” The opening line in the file was not swapped in.</div>
   <div class="bar">
     <button id="all" type="button">Play all in order</button>
@@ -459,16 +462,22 @@ let token = 0;
 let bed = null;
 
 rows.forEach((row) => {
+  const words = row.caption.trim().split(/\s+/);
+  const tail = words.slice(-2).join(" ");
   const el = document.createElement("article");
   el.id = "line-" + row.n;
   el.innerHTML =
     '<header><span class="num">' + String(row.n).padStart(2, "0") + " " + row.id + "</span>" +
-    '<button type="button" data-n="' + row.n + '">Play</button>' +
+    '<button type="button" data-n="' + row.n + '">Play new</button>' +
     '<span class="badge ' + row.verdict + '">' + row.verdict + "</span></header>" +
     "<p>" + row.caption + "</p>" +
-    '<div class="meta">' + row.duration.toFixed(1) + "s" +
-    (row.diff ? " · " + row.diff : "") +
-    (row.issues ? " · " + row.issues : "") + "</div>";
+    '<p class="tail">' + tail + "</p>" +
+    '<div class="ab">' +
+      '<div><label>Old</label><audio controls preload="none" src="vo-raw/work/old/' + row.file + '"></audio></div>' +
+      '<div><label>New</label><audio controls preload="none" src="../employers/demo/media/vo/' + row.file + '"></audio></div>' +
+    "</div>" +
+    '<div class="meta">' + row.duration.toFixed(1) + "s previous cut" +
+    (row.diff ? " · " + row.diff : "") + "</div>";
   list.appendChild(el);
 });
 

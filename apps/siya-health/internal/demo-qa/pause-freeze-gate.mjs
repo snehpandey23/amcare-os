@@ -127,7 +127,7 @@ for (const { w, h, mobile } of VIEWS) {
       const shot1 = await page.screenshot({ type: 'png', animations: 'disabled', timeout: 15000 });
       const h1 = snapHash(shot1);
       const elapsed1 = await page.evaluate(() => window.__employerDemo.getElapsed());
-      await page.waitForTimeout(5000);
+      await page.waitForTimeout(process.env.SIYA_GATE_FAST === '1' ? 1200 : 5000);
       const sig2 = await domSig(page);
       const shot2 = await page.screenshot({ type: 'png', animations: 'disabled', timeout: 15000 });
       const h2 = snapHash(shot2);
