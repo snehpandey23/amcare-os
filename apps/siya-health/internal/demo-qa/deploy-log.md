@@ -15,7 +15,7 @@ Log `STARTED` ≈ CLI attempts from this script (Git/Vercel auto-builds also bur
 
 | Day (IST) | Prod STARTED | Prod OK | Preview STARTED | Preview OK | Quota REFUSED |
 |---|---:|---:|---:|---:|---:|
-| 2026-10-09 | 0 | 0 | 1 | 1 | 0 |
+| 2026-10-09 | 0 | 0 | 2 | 2 | 0 |
 | 2026-10-07 | 3 | 3 | 0 | 0 | 2 |
 | 2026-10-06 | 1 | 1 | 0 | 0 | 0 |
 
@@ -39,4 +39,6 @@ Log `STARTED` ≈ CLI attempts from this script (Git/Vercel auto-builds also bur
 | 2026-10-07 10:24 IST | `release/2026-10-07d` | `fdb7a64a` | production | sp | REFUSED | Vercel api-deployments-free-per-day (>100); playback round gates green on tip |
 | 2026-10-07 17:30 IST | `release/2026-10-07d` | `d88ee175` | hygiene | sp | NOTED | Policy: local checks only between ships; preview only review-link¦pre-prod. 2026-10-07 also burned many unlogged `vercel deploy` / canceled Git previews (quota >100). |
 | 2026-10-09 12:55 IST | `employer-demo-journey-prod` | `cc3ba1ed` | preview | sp | STARTED | reason=review-link · Re-cut the employer-demo voiceover so word endings keep their room tone. |
-| 2026-10-09 12:55 IST | `employer-demo-journey-prod` | `cc3ba1ed` | preview | sp | OK | reason=review-link · day=2026-10-09 |
+| 2026-10-09 12:55 IST | `employer-demo-journey-prod` | `cc3ba1ed` | preview | sp | OK | reason=review-link · day=2026-10-09 · deployment removed; raw master was in that upload |
+| 2026-10-09 13:08 IST | `employer-demo-journey-prod` | `cb0c649b` | preview | sp | STARTED | reason=review-link · Keep raw voice takes and the local listening page out of the preview upload. |
+| 2026-10-09 13:08 IST | `employer-demo-journey-prod` | `cb0c649b` | preview | sp | OK | reason=review-link · day=2026-10-09 |
