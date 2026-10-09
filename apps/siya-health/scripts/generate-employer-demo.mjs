@@ -51,6 +51,10 @@ const SLIDE_IDS = [
   'proof',
   'proof-nums',
   'founder',
+  'e1-time',
+  'e2-focus',
+  'e3-outcomes',
+  'e4-simple',
   'close',
 ];
 

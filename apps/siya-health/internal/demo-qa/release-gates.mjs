@@ -2,7 +2,9 @@
  * Release gates for employer demo. Exit 1 on any failure.
  * node internal/demo-qa/release-gates.mjs
  */
-import { chromium } from 'playwright';
+import { chromium as playwrightChromium } from 'playwright';
+import { withSilence } from './silence-audio.mjs';
+const chromium = withSilence(playwrightChromium);
 import http from 'node:http';
 import fs from 'node:fs';
 import path from 'node:path';
@@ -162,7 +164,7 @@ const browser = await chromium.launch();
 {
   try {
     const out = execSync(
-      'node internal/demo-qa/collision-check.mjs journey f-time-a f-time-b f-response f-urgent f-time p-response cost privacy p-familiar f-ways outcomes',
+      'node internal/demo-qa/collision-check.mjs journey f-time-a f-time-b f-response f-urgent f-time p-response cost privacy p-familiar f-ways outcomes e1-time e2-focus e3-outcomes e4-simple',
       { cwd: ROOT, encoding: 'utf8', timeout: 600000 },
     );
     const n = Number((out.match(/FAILURES\s+(\d+)/) || [])[1] || 0);
@@ -345,8 +347,8 @@ const browser = await chromium.launch();
     return r.build > BAR * 3;
   });
   if (buildBad.length) fail('pacing', `build over cap on ${buildBad.map((r) => `${r.id}:${r.build}`).join(',')}`);
-  /* Target ≈3:30 at 1×; allow 3:10–3:55 */
-  if (pacing.totalMs > 235000) fail('pacing', `total runtime ${pacing.totalMs}ms > 3:55`);
+  /* Pre-chapter tour was 3:10–3:55. For you adds four slides; ceiling is 4:50. */
+  if (pacing.totalMs > 290000) fail('pacing', `total runtime ${pacing.totalMs}ms > 4:50`);
   else if (pacing.totalMs < 190000) fail('pacing', `total runtime ${pacing.totalMs}ms < 3:10 (too short)`);
   else pass('pacing', `total ${pacing.totalMin} min (${pacing.totalMs}ms), label="${pacing.label || ''}"`);
   fs.writeFileSync(path.join(OUT, 'pacing-table.json'), JSON.stringify(pacing, null, 2));

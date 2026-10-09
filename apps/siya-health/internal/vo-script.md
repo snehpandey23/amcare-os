@@ -22,7 +22,7 @@ Claim-critical: Medical Director, nine to five, two hours, twenty minutes, fifte
 16 employer: Getting started is simple. A short call, a package tailored to your team, and a private link your employees can join, voluntarily.
 17 journey: From that link, they reach us through our secure app or our website. Same team, same care.
 18 outcomes: Your team member feels the progress. You see aggregate trends only, never anyone's personal details.
-19 clinicians: Our clinicians have practiced in academic hospitals, community care, inpatient medicine, and concierge practice. They know what to manage, and when to refer.
+19 clinicians: Our clinicians have practiced in academic hospitals, community centers, inpatient medicine, and concierge practice. They know what to manage, and when to refer.
 20 cost: No months-long waitlists. No network maze. One concierge team for refills, specialists, labs, and forms.
 21 privacy: Their health stays theirs. You see participation and aggregate trends, in groups of ten or more. Never names, diagnoses, or messages.
 22 proof: More than twenty-seven hundred patients, most of them busy professionals, with a four point nine rating on Google.

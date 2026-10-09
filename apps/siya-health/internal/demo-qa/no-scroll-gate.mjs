@@ -6,7 +6,10 @@
  * Usage: node internal/demo-qa/no-scroll-gate.mjs
  * Exit 1 on any failure.
  */
-import { chromium, webkit } from 'playwright';
+import { chromium as playwrightChromium, webkit as playwrightWebkit } from 'playwright';
+import { withSilence } from './silence-audio.mjs';
+const chromium = withSilence(playwrightChromium);
+const webkit = withSilence(playwrightWebkit);
 import http from 'node:http';
 import fs from 'node:fs';
 import path from 'node:path';

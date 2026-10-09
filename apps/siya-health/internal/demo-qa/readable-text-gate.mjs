@@ -3,7 +3,9 @@
  * Viewports include toolbar heights (375×553 etc.).
  * Usage: node internal/demo-qa/readable-text-gate.mjs
  */
-import { chromium } from 'playwright';
+import { chromium as playwrightChromium } from 'playwright';
+import { withSilence } from './silence-audio.mjs';
+const chromium = withSilence(playwrightChromium);
 import http from 'node:http';
 import fs from 'node:fs';
 import path from 'node:path';

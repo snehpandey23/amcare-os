@@ -192,6 +192,11 @@ run_prod_gates() {
     echo "REFUSING: pause-freeze gate failed." >&2
     return 1
   fi
+  echo "==> collision gate"
+  if ! (cd "$ROOT/apps/siya-health" && node internal/demo-qa/collision-check.mjs journey f-time-a f-time-b f-response f-urgent f-time p-response cost privacy p-familiar f-ways outcomes e1-time e2-focus e3-outcomes e4-simple); then
+    echo "REFUSING: collision gate failed." >&2
+    return 1
+  fi
   return 0
 }
 

@@ -4,7 +4,9 @@
  * after 5s paused: DOM + screenshot unchanged; slide did not advance.
  * Usage: node internal/demo-qa/pause-freeze-gate.mjs
  */
-import { chromium } from 'playwright';
+import { chromium as playwrightChromium } from 'playwright';
+import { withSilence } from './silence-audio.mjs';
+const chromium = withSilence(playwrightChromium);
 import http from 'node:http';
 import fs from 'node:fs';
 import path from 'node:path';
