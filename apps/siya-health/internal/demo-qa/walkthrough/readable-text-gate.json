@@ -1,5 +1,5 @@
 {
-  "commit": "7939876f",
+  "commit": "dc0455fa",
   "failures": 0,
   "sample": [],
   "trimmedSlides": [
@@ -12,6 +12,7 @@
     "p-coord",
     "question",
     "turn",
+    "care-checklist",
     "f-time",
     "f-ways",
     "f-response",
@@ -24,7 +25,10 @@
     "cost",
     "privacy",
     "proof-nums",
-    "close",
-    "care-checklist"
+    "e1-time",
+    "e2-focus",
+    "e3-outcomes",
+    "e4-simple",
+    "close"
   ]
 }

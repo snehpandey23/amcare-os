@@ -6,7 +6,9 @@
  * Usage: node internal/demo-qa/collision-check.mjs [slideId ...]
  * Exit 1 if any failure.
  */
-import { chromium } from 'playwright';
+import { chromium as playwrightChromium } from 'playwright';
+import { withSilence } from './silence-audio.mjs';
+const chromium = withSilence(playwrightChromium);
 import http from 'node:http';
 import fs from 'node:fs';
 import path from 'node:path';
@@ -48,7 +50,9 @@ const DEFAULT_SLIDES = [
   'question', 'care-checklist', 'turn',
   'f-time', 'f-time-a', 'f-time-b', 'f-ways', 'f-response', 'f-urgent', 'f-whole',
   'employer', 'journey', 'outcomes', 'clinicians',
-  'cost', 'privacy', 'proof', 'close',
+  'cost', 'privacy', 'proof',
+  'e1-time', 'e2-focus', 'e3-outcomes', 'e4-simple',
+  'close',
 ];
 
 const argSlides = process.argv.slice(2).filter((a) => !a.startsWith('-'));

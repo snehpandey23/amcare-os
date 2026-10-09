@@ -432,11 +432,31 @@ html.desk-stage #tour article[data-walk] .doors{max-height:100%;overflow:auto}
   .bar #pause{grid-area:pause}
   .bar #muteTour{grid-area:mute}
   .bar #speedBtn{grid-area:speed}
+  .bar #ccBtn{grid-area:speed}
   .bar #next{grid-area:next}
   .bar-actions{display:contents}
-  .bar #prev,.bar #pause,.bar #muteTour,.bar #speedBtn,.bar #next{width:100%}
+  .bar #prev,.bar #pause,.bar #muteTour,.bar #speedBtn,.bar #ccBtn,.bar #next{width:100%}
+  .bar #ccBtn .cc-pill{position:static;width:auto;height:auto;margin:0;padding:0;overflow:visible;clip:auto;border:0;font-size:11px}
+}
+html.sound-off .bar{
+  /* Sound off shows speed and captions together. Still one icon row, so the bar does not grow taller. */
+}
+@media (max-width:480px){
+  html.sound-off .bar{
+    grid-template-columns:repeat(6,minmax(0,1fr));
+    grid-template-areas:"ch ch ch ch ch ch" "prev pause mute cc speed next";
+  }
+  html.sound-off .bar #ccBtn{grid-area:cc}
+  html.sound-off .bar #speedBtn{grid-area:speed}
 }
 .bar #speedBtn .speed-pill{font:700 12px/1 var(--font-display);letter-spacing:.02em;min-width:2.2em}
+.bar #ccBtn .cc-pill{font:700 12px/1 var(--font-display);letter-spacing:.04em;min-width:2.2em}
+.bar #speedBtn[hidden],.bar #ccBtn[hidden]{display:none!important}
+.vo-cap{display:none;margin:0;width:100%;box-sizing:border-box;text-align:center;font:500 13px/1.35 var(--font-body);color:var(--ink);padding:2px 12px 4px}
+.vo-cap.on{display:block}
+@media (max-width:480px){
+  .vo-cap.on{grid-column:1 / -1;font-size:12px;padding:0 8px 4px}
+}
 .bar .bar-ico[data-ico="gauge"]{stroke:currentColor;fill:none}
 .speed-sheet{
   position:fixed;z-index:60;left:50%;bottom:calc(88px + env(safe-area-inset-bottom,0px));
@@ -818,10 +838,25 @@ html.desk-stage #tour #p-familiar .desk-hero{align-content:center}
   border:1px solid rgba(10,36,107,.08);font:500 12px/1.35 var(--font-body);color:var(--ink)}
 .away-rx::before{content:"";flex:none;width:8px;height:8px;margin-top:5px;border-radius:50%;background:var(--grad-btn)}
 .away-src{margin:0;font:500 11px/1.35 var(--font-body);color:var(--ink-soft)}
+.away-mult{margin:0;font:700 22px/1.2 var(--font-display);color:var(--ink)}
+.fy-chart{width:min(520px,100%);max-width:100%;box-sizing:border-box;background:#fff;border-radius:18px;padding:16px 18px 14px;box-shadow:0 14px 32px rgba(10,36,107,.12);display:grid;gap:8px;text-align:left}
+.fy-chart h3{margin:0;font:700 15px/1.2 var(--font-display);color:var(--ink)}
+.fy-chart .spark svg{height:150px}
+.fy-tiles{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;width:min(640px,100%);max-width:100%;box-sizing:border-box}
+.fy-tile{background:#fff;border-radius:16px;padding:14px;box-shadow:0 8px 20px rgba(10,36,107,.10);display:grid;gap:6px;align-content:start;text-align:left;min-width:0;box-sizing:border-box}
+.fy-tile h3{margin:0;font:700 16px/1.25 var(--font-display);color:var(--ink)}
+.fy-tile p{margin:0;font:500 14px/1.35 var(--font-body);color:var(--ink-soft)}
+.fy-list{list-style:none;margin:0;padding:0;display:grid;gap:8px;width:min(460px,100%);max-width:100%;box-sizing:border-box}
+.fy-list li{background:#fff;border-radius:12px;padding:10px 12px;font:600 15px/1.3 var(--font-display);color:var(--ink);box-shadow:0 8px 18px rgba(10,36,107,.08);text-align:left}
+[data-illustrative][hidden],[data-real-slot][hidden]{display:none!important}
 .away-legend{display:none;flex-wrap:wrap;gap:6px 10px;font:600 11px/1.2 var(--font-body);color:var(--ink-soft)}
 .away-legend i{font-style:normal;color:var(--ink)}
-html.desk-stage #tour #p-away .desk-hero{align-content:center;width:100%}
-html.desk-stage #tour #p-away .away-stack{max-width:none;width:100%}
+html.desk-stage #tour #p-away .desk-hero,
+html.desk-stage #tour #e1-time .desk-hero{align-content:center;width:100%}
+html.desk-stage #tour #p-away .away-stack,
+html.desk-stage #tour #e1-time .away-stack{max-width:none;width:100%}
+html.desk-stage #tour #e2-focus .fy-chart{width:100%;max-width:none}
+html.desk-stage #tour #e3-outcomes .fy-tiles{width:100%}
 .clin-stack{width:min(520px,100%);display:grid;gap:12px;align-content:center}
 .panel-card{background:#fff;border-radius:16px;padding:12px 14px;box-shadow:0 8px 20px rgba(10,36,107,.10);display:grid;gap:8px;text-align:left}
 .panel-card h3{margin:0;font:700 13px/1.2 var(--font-display);color:var(--ink);letter-spacing:.02em}
@@ -888,18 +923,56 @@ html.desk-stage #tour #care-checklist .chart-card{width:min(380px,100%)}
   #f-time .week{--wh:7px;padding:8px}
   #f-time .legend{font-size:10px;gap:4px 8px;margin-top:4px;flex-wrap:wrap}
   #f-time .ev,#f-time .gap span{font-size:10px}
-  #p-away .away-total{font-size:16px}
-  #p-away .desk-copy .cap{font-size:clamp(22px,6.2vw,28px)}
-  #p-away .desk-copy .sub{font-size:13px}
-  #turn.slide{padding:12px 14px 100px;align-content:stretch;align-items:stretch}
-  #turn .frame{height:100%;grid-template-rows:auto minmax(0,1fr);gap:8px;align-content:stretch}
+  #p-away .away-total,#e1-time .away-total{font-size:16px}
+  #p-away .desk-copy .cap,#e1-time .desk-copy .cap{font-size:clamp(22px,6.2vw,28px)}
+  #p-away .desk-copy .sub,#e1-time .desk-copy .sub{font-size:13px}
+  #e1-time.slide{padding-bottom:108px}
+  #e1-time .frame.desk-split,#e2-focus .frame.desk-split,#e3-outcomes .frame.desk-split,#e4-simple .frame.desk-split{display:grid;grid-template-rows:auto auto;gap:10px;align-content:start}
+  #e1-time .desk-copy,#e2-focus .desk-copy,#e3-outcomes .desk-copy,#e4-simple .desk-copy{display:grid;gap:6px;justify-items:center}
+  #e1-time .desk-hero,#e2-focus .desk-hero,#e3-outcomes .desk-hero,#e4-simple .desk-hero{width:100%;min-width:0}
+  #e1-time .away-mult{font-size:16px}
+  .fy-tiles{grid-template-columns:1fr;gap:8px}
+  .fy-tile{padding:10px 12px}
+  .fy-tile h3{font-size:15px}
+  .fy-tile p{font-size:13px}
+  .fy-list{width:100%}
+  .fy-list li{font-size:14px;padding:8px 10px}
+  #e2-focus .fy-chart .spark svg{height:92px}
+  #e2-focus .cap,#e3-outcomes .cap,#e4-simple .cap{font-size:clamp(22px,6.2vw,28px)}
+  #turn.slide{padding:12px 14px calc(118px + env(safe-area-inset-bottom,0px));align-content:start;align-items:center;box-sizing:border-box}
+  #turn .frame{height:auto;max-height:100%;min-height:0;grid-template-rows:auto auto;gap:8px;align-content:start;overflow:hidden}
   #turn .desk-copy{display:grid;gap:6px;justify-items:center}
   #turn .desk-copy .cap{font-size:clamp(22px,6.2vw,28px)}
   #turn .desk-copy .sub{font-size:14px}
-  #turn .desk-hero{min-height:0;height:100%;display:grid;place-items:center;align-content:center;padding-bottom:8px}
-  #turn .meet-phone{height:100%;max-height:none;align-content:center}
-  #turn .meet-stage{width:100%;max-height:min(100%,520px);height:min(100vw - 32px, min(100%,520px));aspect-ratio:1}
-  #turn .web.tall,#turn #webT.meet-web,#turn #webT.tall{width:100%;height:100%;max-height:none;aspect-ratio:auto}
+  #turn .desk-hero{min-height:0;height:auto;max-height:100%;display:grid;place-items:center;align-content:center;padding-bottom:0;overflow:hidden}
+  #turn .meet-phone{height:auto;max-height:100%;min-height:0;align-content:center}
+  /* Hub in its own center cell so the four cards cannot cover the circle.
+     Stage sized to the space above the bar, not to the full viewport width. */
+  #turn .meet-stage{
+    width:min(100%, calc(100dvh - 230px));max-width:100%;height:auto;max-height:100%;aspect-ratio:1;
+    grid-template-columns:minmax(0,1fr) 74px minmax(0,1fr);
+    grid-template-rows:minmax(0,1fr) 74px minmax(0,1fr);
+    gap:8px;padding:2px;
+  }
+  #turn .meet-stage > .siya-core{
+    position:relative;left:auto;top:auto;transform:none;
+    grid-column:2;grid-row:2;width:68px;height:68px;aspect-ratio:1;
+    justify-self:center;align-self:center;font-size:11px;z-index:2;
+  }
+  #turn .meet-stage > .card-lite:nth-child(3){grid-column:1;grid-row:1}
+  #turn .meet-stage > .card-lite:nth-child(4){grid-column:3;grid-row:1}
+  #turn .meet-stage > .card-lite:nth-child(5){grid-column:1;grid-row:3}
+  #turn .meet-stage > .card-lite:nth-child(6){grid-column:3;grid-row:3}
+  #turn .meet-stage > .card-lite{
+    width:100%;max-width:100%;min-width:0;min-height:0;height:auto;max-height:100%;
+    align-self:stretch;justify-self:stretch;padding:6px 5px;gap:2px;overflow:hidden;
+  }
+  #turn .meet-stage .card-lite b{font-size:11px!important;line-height:1.15}
+  #turn .meet-stage .card-lite small{
+    font-size:11px!important;line-height:1.15;
+    display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;
+  }
+  #turn .web.tall,#turn #webT.meet-web,#turn #webT.tall{width:100%;height:auto;max-height:100%;aspect-ratio:auto}
   #care-checklist.slide{padding:14px 16px 108px;align-content:start}
   #care-checklist .frame{gap:10px}
   #care-checklist .chart-card{padding:12px 12px 10px}
@@ -1342,6 +1415,7 @@ article.slide[data-close="1"] .close-foot{
   #cost .why-row .wx,#cost .why-row .ok{font-size:14px!important}
   #outcomes .spark-top b,#outcomes .spark-top span,#outcomes .panel h3 small{font-size:12px!important}
   #f-ways .avatar{font-size:12px!important;width:22px;height:22px;line-height:22px}
+  #f-ways a{font-size:13px!important}
   #close .next-steps-rail li{font-size:12px!important}
   /* When the frame is scaled, bump type (ID-level specificity) so rendered ≥11px. */
   #tour article.slide.phone-lg-type .sub,
@@ -1405,6 +1479,9 @@ article.slide[data-close="1"] .close-foot{
   #f-ways .sub{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
   #f-ways .ways-card .mini-phone{min-height:0;max-height:min(28vh,220px)}
   #f-ways .ways-card .mini-phone .screen{min-height:0;max-height:100%}
+  #f-ways.phone-trim-tight .ways{gap:8px}
+  #f-ways.phone-trim-tight .ways-card{padding:8px 10px;gap:6px}
+  #f-ways.phone-trim-tight .ways-card .mini-phone{max-height:min(18vh,120px)}
   #f-ways.phone-trim-tight .ways-card:last-child .meta,
   #f-ways.phone-trim-tight .ways-card .chat-thread .msg-line:nth-child(n+3){display:none!important}
   #care-checklist .sub{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
@@ -1581,7 +1658,12 @@ html.desk-stage #tour #f-urgent .desk-hero{place-items:center;align-content:cent
 html:not(.desk-stage) #p-time .desk-callout{display:none!important}
 html:not(.desk-stage) #p-time .phone-callout{display:grid}
 html.desk-stage #tour article[data-close="1"] .frame{
-  width:100%;max-width:none;height:100%;display:grid;
+  /* Stretch to the slide's content box (inside the bar padding). height:100%
+     uses the border box and crosses the bar; height:auto follows the copy
+     and overflows the same way when the copy is taller than the stage. */
+  width:100%;max-width:none;height:auto;min-height:0;align-self:stretch;justify-self:stretch;
+  overflow:hidden;box-sizing:border-box;
+  display:grid;
   grid-template-columns:minmax(0,4fr) minmax(0,6fr);gap:32px 40px;align-items:center;
 }
 html.desk-stage #tour article[data-close="1"] .close-stack{
@@ -2393,13 +2475,115 @@ a.start,a.ghost,a.talk{text-decoration:none;display:inline-flex;align-items:cent
     </div>
   </article>
 
+  <!-- For you: after Proof, before Close -->
+  <article class="slide" id="e1-time" data-slide-id="e1-time" data-chapter="6" data-foryou="1">
+    <div class="frame desk-split">
+      <div class="desk-copy">
+        <div class="eyebrow b" data-at="0">For you</div>
+        <h2 class="cap b" data-at="536">Give your team their <em>time back.</em></h2>
+        <p class="sub b" data-at="1072">On average, a doctor's visit takes about two hours, for about twenty minutes with the doctor.</p>
+      </div>
+      <div class="desk-hero">
+        <div class="away-stack">
+          <div class="away-row away-usual">
+            <div class="away-row-lab b" data-at="1340">The usual way</div>
+            <div class="away-track">
+              <div class="away-seg t-travel grow" data-at="1608">Travel there 20m</div>
+              <div class="away-seg t-wait grow" data-at="1876">Check-in &amp; waiting 60m</div>
+              <div class="away-seg t-visit grow" data-at="2144">Visit 20m</div>
+              <div class="away-seg t-back grow" data-at="2412">Travel back 20m</div>
+            </div>
+            <div class="away-legend b" data-at="2680"><i>Travel 20m</i><i>Waiting 60m</i><i>Visit 20m</i><i>Travel 20m</i></div>
+            <div class="away-total b" data-at="2948">≈ 2 hours away from work</div>
+          </div>
+          <div class="away-phase b" data-at="3216" aria-hidden="true">siya</div>
+          <div class="away-row away-siya">
+            <div class="away-row-lab b" data-at="3484">With Siya</div>
+            <div class="away-track away-siya-track" aria-hidden="true">
+              <div class="away-not-needed b" data-at="3752"><span>Travel and waiting: not needed</span></div>
+              <div class="away-siya-visit b" data-at="4020"><span>Video visit, from their desk</span></div>
+            </div>
+            <div class="away-total b" data-at="4288">≈ 20 minutes</div>
+          </div>
+          <p class="away-mult b" data-at="4556">× every visit, every employee</p>
+          <p class="away-src b" data-at="4824">Source: Ray et al., American Journal of Managed Care, 2015.</p>
+        </div>
+      </div>
+    </div>
+  </article>
+
+  <article class="slide" id="e2-focus" data-slide-id="e2-focus" data-chapter="6" data-foryou="1">
+    <div class="frame desk-split">
+      <div class="desk-copy">
+        <div class="eyebrow b" data-at="0">For you</div>
+        <h2 class="cap b" data-at="536">Sharper <em>focus.</em> Fewer bad weeks.</h2>
+        <p class="sub b" data-at="1072">Stress, sleep, focus and ADHD addressed early. Cognitive testing tracked over time.</p>
+      </div>
+      <div class="desk-hero">
+        <div class="fy-chart b" data-at="1340">
+          <h3>What we measure</h3>
+          <div class="spark">
+            <div class="spark-top"><b>Focus</b><span>Tracked over time</span></div>
+            <svg viewBox="0 0 110 62" aria-hidden="true">
+              <text transform="rotate(-90 10 28)" x="10" y="28" fill="#0A246B" font-size="8" font-weight="700" text-anchor="middle">Focus</text>
+              <line x1="22" y1="8" x2="22" y2="44" stroke="rgba(10,36,107,.25)" stroke-width="1"/>
+              <line x1="22" y1="44" x2="102" y2="44" stroke="rgba(10,36,107,.25)" stroke-width="1"/>
+              <text x="102" y="58" fill="#0A246B" font-size="8" font-weight="700" text-anchor="end">Time</text>
+              <circle class="base-mark pop" data-at="1608" cx="28" cy="38" r="2.2" fill="#0A6B3A"/>
+              <path class="draw" data-at="1876" pathLength="1" d="M28 38 C 50 32, 72 18, 98 12" fill="none" stroke="#0A6B3A" stroke-width="2.5" stroke-linecap="round"/>
+            </svg>
+          </div>
+        </div>
+        <p class="pack-note b" data-at="2144">Illustrative: aggregate results shared with employers once available.</p>
+      </div>
+    </div>
+  </article>
+
+  <article class="slide" id="e3-outcomes" data-slide-id="e3-outcomes" data-chapter="6" data-foryou="1">
+    <div class="frame desk-split">
+      <div class="desk-copy">
+        <div class="eyebrow b" data-at="0">For you</div>
+        <h2 class="cap b" data-at="536">Measured health, not just <em>app ratings.</em></h2>
+      </div>
+      <div class="desk-hero">
+        <div data-illustrative>
+          <div class="fy-tiles">
+            <div class="fy-tile pop" data-at="1340"><h3>Validated questionnaires</h3></div>
+            <div class="fy-tile pop" data-at="1608"><h3>Cognitive assessments</h3></div>
+            <div class="fy-tile pop" data-at="1876"><h3>Clinical markers</h3><p>BP, weight, labs</p></div>
+          </div>
+        </div>
+        <div data-real-slot hidden></div>
+        <p class="pack-note b" data-at="2144">Aggregate, de-identified, groups of 10+.</p>
+      </div>
+    </div>
+  </article>
+
+  <article class="slide" id="e4-simple" data-slide-id="e4-simple" data-chapter="6" data-foryou="1">
+    <div class="frame desk-split">
+      <div class="desk-copy">
+        <div class="eyebrow b" data-at="0">For you</div>
+        <h2 class="cap b" data-at="536">One partner. One <em>predictable fee.</em></h2>
+      </div>
+      <div class="desk-hero">
+        <ul class="fy-list pack-note">
+          <li class="b" data-at="1340">Per enrolled employee</li>
+          <li class="b" data-at="1608">Tailored package</li>
+          <li class="b" data-at="1876">HSA-compatible</li>
+          <li class="b" data-at="2144">No network maze</li>
+          <li class="b" data-at="2412">No new admin for HR — private link, voluntary</li>
+        </ul>
+      </div>
+    </div>
+  </article>
+
   <!-- close -->
-  <article class="slide" id="close" data-slide-id="close" data-chapter="5" data-dur="0" data-vcenter="1" data-close="1">
+  <article class="slide" id="close" data-slide-id="close" data-chapter="6" data-dur="0" data-vcenter="1" data-close="1">
     <div class="frame">
       <div class="close-stack">
         <div class="close-above">
           <div class="eyebrow b" data-at="0">Siya Health</div>
-          <h2 class="q2 b" data-at="536">See it <em>live</em>.</h2>
+          <h2 class="q2 b" data-at="536">See how it would work for <em>your team.</em></h2>
           <p class="sub b" data-at="1072">A short call, and we'll walk you through the real experience.</p>
         </div>
         <div class="row-btns b" data-at="1340">
@@ -2427,12 +2611,14 @@ a.start,a.ghost,a.talk{text-decoration:none;display:inline-flex;align-items:cent
   <div class="hint2" id="hint2">Click anywhere to continue</div>
   <a class="talk talk-float" id="talkToUsFloat" href="/employers#inquiry-heading">Talk to us</a>
   <nav class="bar" aria-label="Tour controls">
+    <p id="voCap" class="vo-cap" hidden></p>
     <button id="prev" type="button" aria-label="Back"><svg class="bar-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="m15 18-6-6 6-6"/></svg><span class="bar-txt">Back</span></button>
     <div class="segs" id="segs"></div>
     <div class="bar-actions">
       <button id="pause" type="button" aria-label="Pause" aria-pressed="false"><svg class="bar-ico" data-ico="pause" viewBox="0 0 24 24" aria-hidden="true"><rect x="6" y="4" width="4" height="16" rx="1"/><rect x="14" y="4" width="4" height="16" rx="1"/></svg><svg class="bar-ico" data-ico="play" viewBox="0 0 24 24" aria-hidden="true" hidden><polygon points="6 3 20 12 6 21 6 3"/></svg><span class="bar-txt">Pause</span></button>
       <button id="muteTour" type="button" aria-label="Sound on" aria-pressed="false"><svg class="bar-ico" data-ico="vol" viewBox="0 0 24 24" aria-hidden="true"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/></svg><svg class="bar-ico" data-ico="mute" viewBox="0 0 24 24" aria-hidden="true" hidden><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><line x1="22" y1="9" x2="16" y2="15"/><line x1="16" y1="9" x2="22" y2="15"/></svg><span class="bar-txt">Sound on</span></button>
-      <button id="speedBtn" type="button" aria-label="Playback speed 1×" aria-haspopup="listbox" aria-expanded="false"><svg class="bar-ico" data-ico="gauge" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 14V8"/><path d="M12 14l4-2"/><path d="M5 19a9 9 0 1 1 14 0"/><circle cx="12" cy="14" r="1.2" fill="currentColor" stroke="none"/></svg><span class="bar-txt speed-pill">1×</span></button>
+      <button id="ccBtn" type="button" aria-pressed="false" aria-label="Show captions"><span class="bar-txt cc-pill">CC</span></button>
+      <button id="speedBtn" type="button" hidden aria-label="Playback speed 1×" aria-haspopup="listbox" aria-expanded="false"><svg class="bar-ico" data-ico="gauge" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 14V8"/><path d="M12 14l4-2"/><path d="M5 19a9 9 0 1 1 14 0"/><circle cx="12" cy="14" r="1.2" fill="currentColor" stroke="none"/></svg><span class="bar-txt speed-pill">1×</span></button>
       <button id="next" type="button" aria-label="Next"><svg class="bar-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg><span class="bar-txt">Next</span></button>
       <a class="talk talk-inbar" id="talkToUs" href="/employers#inquiry-heading">Talk to us</a>
     </div>
@@ -2802,7 +2988,7 @@ function setMusicAudible(on){
   if(!audio||!audio.music)return;
   if(paused&&on){setPauseMusic(true);return;}
   const g=audio.music.musicGain.gain,t=audio.ac.currentTime;
-  g.cancelScheduledValues(t); g.setTargetAtTime(on&&!muted?MUSIC_LEVEL:.0001,t,.12);
+  g.cancelScheduledValues(t); g.setTargetAtTime(on&&!muted?musicLevelNow():.0001,t,.12);
 }
 function fadeMusicOut(sec=3){
   if(!audio||!audio.music)return;
@@ -2990,12 +3176,15 @@ addEventListener('keydown',e=>{
 $('skip').addEventListener('click',e=>{e.stopPropagation();unlockAudio();track('employer_demo_intro_skip');if(phase==='idle')phase='play';finishIntro();});
 function applyMute(next,fromPeer){
   muted=!!next;
+  ccOn=!!muted;
   try{syncBarIcons();}catch(e){}
   const labels=muted?'Sound off':'Sound on';
   [$('mute'),$('muteTour')].forEach(btn=>{
     if(!btn)return; btn.textContent=labels; btn.setAttribute('aria-pressed',String(muted));
   });
   try{if(audio){audio.master.gain.setTargetAtTime(muted?0:.9,audio.ac.currentTime,.05);setMusicAudible(!muted);}}catch(e){}
+  try{if(muted)stopVoice(false);else if(tourOn&&!paused&&slides[cur])startVoice(slides[cur].id,0);}catch(e){}
+  try{scheduleFit();}catch(e){}
   if(fromPeer)return;
   if(demoEmbed)postToHost('mute',{muted});
 }
@@ -3189,8 +3378,17 @@ const cy0=phone?340:262;
 const push=[55,40];
 (()=>{
   if(!elP3) return;
-  {
-    elP3.className=phone?'web tall stress-hub':'web stress-hub';
+  if(phone){
+    /* Radial labels overlap on a phone (spec of one node lands on the next).
+       Pairs under the Stress chip stay in their own cells. */
+    elP3.className='cont-phone';
+    elP3.innerHTML=`<div class="stress pop" data-at="${BAR_MS}">Stress</div><div class="cont-grid">`+
+      conds.map((c,i)=>`<div class="cont-pair">
+        <div class="cond pop" data-at="${HALF_BEAT_MS+i*HALF_BEAT_MS}">${c[0]}</div>
+        <div class="spec pop" data-at="${BAR_MS+i*HALF_BEAT_MS}">${c[1]}</div>
+      </div>`).join('')+`</div>`;
+  }else{
+    elP3.className='web stress-hub';
     const pBOX=phone?720:BOX;
     const pTop=y=>y/pBOX*100;
     let s=`<svg viewBox="0 0 1000 ${pBOX}" aria-hidden="true"><g class="grp">`;
@@ -3230,7 +3428,7 @@ const push=[55,40];
 let slides=[];
 const segs=$('segs');
 /* Short bar labels — must read fully at 360px with no ellipsis */
-const CHAPTERS=['Problem','Meet Siya','How it works','Care','Why Siya','Proof'];
+const CHAPTERS=['Problem','Meet Siya','How it works','Care','Why Siya','Proof','For you'];
 const CHAPTER_SHORT=CHAPTERS;
 /* v1 flags — keep founder + real outcomes in the file; ship with both off */
 const showFounder=false;
@@ -3241,6 +3439,8 @@ function applyDemoFlags(){
   document.querySelectorAll('article.slide[data-founder]').forEach(el=>el.classList.toggle('parked',!showFounder));
   const soon=$('outcomesSoon'); if(soon) soon.hidden=true;
   const real=$('realOutcomes'); if(real) real.hidden=!realOutcomes;
+  document.querySelectorAll('[data-illustrative]').forEach(el=>{el.hidden=!!realOutcomes;});
+  document.querySelectorAll('[data-real-slot]').forEach(el=>{el.hidden=!realOutcomes;});
   if(!showFounder){
     const vid=$('founderVid');
     if(vid){vid.removeAttribute('poster');vid.querySelectorAll('source,track').forEach(n=>n.remove());vid.hidden=true;}
@@ -3249,7 +3449,8 @@ function applyDemoFlags(){
 const SLIDE_ALIASES={
   'meet-siya':'turn','turn':'turn',
   'checklist':'care-checklist','care-checklist':'care-checklist','clinicians':'clinicians',
-  'sound-familiar':'p-familiar','p-familiar':'p-familiar','time-away':'p-away','p-away':'p-away'
+  'sound-familiar':'p-familiar','p-familiar':'p-familiar','time-away':'p-away','p-away':'p-away',
+  'e1-time':'e1-time','e2-focus':'e2-focus','e3-outcomes':'e3-outcomes','e4-simple':'e4-simple'
 };
 function playSlideDeepLink(raw,{playBuild=true}={}){
   const id=SLIDE_ALIASES[String(raw||'').toLowerCase()]||String(raw||'');
@@ -3309,7 +3510,11 @@ window.__employerDemo={
     if(scrib && s.id==='p-coord') scrib.classList.add('on');
     s.style.filter='none';
     pinChatThread(s,true);
-    fitFor=-1; scheduleFit();
+    fitFor=-1;
+    /* Fit even while paused. showSlide pauses before the queued fit used to run,
+       so the frame stayed at full height and sat under the phone bar. */
+    fitFrame();
+    scheduleFit();
   },
   lastBuildMs(){
     const s=slides[cur]; if(!s)return 0;
@@ -3504,14 +3709,15 @@ function paintChapters(forceMenu){
 function syncWalk(){
   const s=slides[cur];
   if(!s||!s.hasAttribute('data-walk'))return;
-  const step=Math.min(WALK_LAST,Math.floor(elapsed/WALK_MS));
+  const voUnit=(!muted&&voMeta(s.id))?Math.max(480,voMeta(s.id).ms/(WALK_LAST+1)):WALK_MS;
+  const step=Math.min(WALK_LAST,Math.floor(elapsed/voUnit));
   if(step!==walkStep){
     renderWalk(step,{instant:step===WALK_LAST && paused});
     return;
   }
   /* Rotate concierge intents while Path A is on the message frame. */
   if(step===2){
-    const sub=Math.floor((elapsed%WALK_MS)/900)%WALK_INTENTS.length;
+    const sub=Math.floor((elapsed%voUnit)/900)%WALK_INTENTS.length;
     if(sub!==walkIntentSub){
       walkIntentSub=sub;
       const phone=$('walkPhone');
@@ -3600,7 +3806,7 @@ function freezeVisualPlayback(on){
 function setPauseMusic(isPaused){
   if(!audio||!audio.music)return;
   const g=audio.music.musicGain.gain,t=audio.ac.currentTime;
-  const target=muted?0.0001:(isPaused?MUSIC_LEVEL*0.3:MUSIC_LEVEL);
+  const target=musicLevelNow();
   g.cancelScheduledValues(t); g.setTargetAtTime(target,t,.12);
 }
 function animMsFor(el){
@@ -3709,9 +3915,10 @@ function fitFrame(){
     frame.style.transformOrigin='top center';
     frame.style.transform=scale<0.999?('scale('+scale+')'):'';
   }else{
-    /* Fits: vertical-center in the visible band above the bar */
-    s.style.alignContent='center';
-    s.style.justifyContent='center';
+    /* Fits above the bar. Stay top-aligned. Centering in the full slide
+       pushes the frame down into the phone bar. */
+    s.style.alignContent='start';
+    s.style.justifyContent='flex-start';
     frame.style.transform='';
   }
   const fr2=frame.getBoundingClientRect();
@@ -3723,12 +3930,104 @@ function fitFrame(){
   }
 }
 function scheduleFit(force){
-  /* Re-fit on every build reveal — content grows after first paint */
+  /* Layout, not a build cue: must run while paused. A paused showSlide
+     used to drop this timeout, leaving the frame under the phone bar. */
   fitFor=cur;
-  fitTimer=slideTimeout(fitFrame,80);
+  clearTimeout(fitTimer);
+  fitTimer=setTimeout(()=>{fitTimer=0;fitFrame();},80);
+}
+let ccOn=false, voiceUnder=false;
+const VO_BY_ID={"statement": {"file": "demo/media/vo/01-statement.mp3", "ms": 11760, "cap": "I'm Dr. Sneh Pandey, physician and Medical Director at Siya Health. Here's something every HR leader knows that healthcare still runs on a schedule your people can't keep."}, "p-time": {"file": "demo/media/vo/02-p-time.mp3", "ms": 8040, "cap": "Clinics open nine to five. Your team works nine to five. So the doctor's appointment either doesn't happen, or it takes the afternoon."}, "p-away": {"file": "demo/media/vo/03-p-away.mp3", "ms": 7730, "cap": "On average, a doctor's visit costs a patient about two hours, for roughly twenty minutes with the doctor."}, "p-familiar": {"file": "demo/media/vo/04-p-familiar.mp3", "ms": 15070, "cap": "And you hear the result every week: out for an appointment, can't focus, not sleeping, still waiting for a psychiatrist. Common, often preventable, and costing your team time and focus."}, "p-response": {"file": "demo/media/vo/05-p-response.mp3", "ms": 4270, "cap": "Even reaching the clinic can take days of voicemails and missed callbacks."}, "p-whole": {"file": "demo/media/vo/06-p-whole.mp3", "ms": 10910, "cap": "Stress, sleep, focus, weight, blood pressure: they are all connected. But the care gets split across specialists who never compare notes."}, "p-coord": {"file": "demo/media/vo/07-p-coord.mp3", "ms": 6250, "cap": "And your employee is left juggling the apps, the logins, and the follow-ups."}, "question": {"file": "demo/media/vo/08-question.mp3", "ms": 4780, "cap": "You have invested in good coverage. But is care there when they actually need it?"}, "turn": {"file": "demo/media/vo/09-turn.mp3", "ms": 9510, "cap": "That's why we built Siya Health: one care team for the whole person. Physical health, mental health, and focus, connected."}, "care-checklist": {"file": "demo/media/vo/10-care-checklist.mp3", "ms": 12640, "cap": "It starts with a full picture: history, screenings, vitals, labs, and cognitive testing, so we track focus and stress over time instead of just guessing. Then, a personalized plan."}, "f-time": {"file": "demo/media/vo/11-f-time.mp3", "ms": 10440, "cap": "Care fits their schedule: a fifteen-minute check-in between meetings, or a longer visit in the evening or on a weekend. Bookable twenty-four seven."}, "f-ways": {"file": "demo/media/vo/12-f-ways.mp3", "ms": 4290, "cap": "They can message the care team anytime, or book a visit with real clinicians."}, "f-response": {"file": "demo/media/vo/13-f-response.mp3", "ms": 8310, "cap": "Real people, not AI chat. Our care team replies within thirty minutes, and a doctor can join within two hours, any time."}, "f-urgent": {"file": "demo/media/vo/14-f-urgent.mp3", "ms": 7010, "cap": "Something urgent, like pink eye at night? Often a photo and a few questions are enough, handled right in the chat."}, "f-whole": {"file": "demo/media/vo/15-f-whole.mp3", "ms": 8140, "cap": "And we stay with them: regular check-ins, preventive care, and ongoing cognitive monitoring. A relationship, not a one-off visit."}, "employer": {"file": "demo/media/vo/16-employer.mp3", "ms": 7110, "cap": "Getting started is simple. A short call, a package tailored to your team, and a private link your employees can join, voluntarily."}, "journey": {"file": "demo/media/vo/17-journey.mp3", "ms": 7080, "cap": "From that link, they reach us through our secure app or our website. Same team, same care."}, "outcomes": {"file": "demo/media/vo/18-outcomes.mp3", "ms": 6740, "cap": "Your team member feels the progress. And you see aggregate trends only, never anybody's personal details."}, "clinicians": {"file": "demo/media/vo/19-clinicians.mp3", "ms": 11290, "cap": "Our clinicians have practiced in academic hospitals, community centers, inpatient medicine, and concierge practice. They know what to manage, and when to refer."}, "cost": {"file": "demo/media/vo/20-cost.mp3", "ms": 8620, "cap": "No months-long waitlists. No network maze. One concierge team for refills, specialists, labs, and forms."}, "privacy": {"file": "demo/media/vo/21-privacy.mp3", "ms": 10880, "cap": "Their health stays theirs. You see participation and aggregate trends, in groups of ten or more. Never names, diagnoses, or messages."}, "proof": {"file": "demo/media/vo/22-proof.mp3", "ms": 7070, "cap": "More than twenty-seven hundred patients, most of them busy professionals, with a four point nine rating on Google."}, "e1-time": {"file": "demo/media/vo/23-e1-time.mp3", "ms": 5730, "cap": "For you, that means time back: visits that take twenty minutes, not two hours."}, "e2-focus": {"file": "demo/media/vo/24-e2-focus.mp3", "ms": 6600, "cap": "Sharper focus and fewer bad weeks, because stress, sleep, and attention get addressed early."}, "e3-outcomes": {"file": "demo/media/vo/25-e3-outcomes.mp3", "ms": 7140, "cap": "Measured health, not just app ratings: validated questionnaires, cognitive assessments, and clinical markers."}, "e4-simple": {"file": "demo/media/vo/26-e4-simple.mp3", "ms": 5660, "cap": "And one partner, one predictable fee, with no extra admin for HR."}, "close": {"file": "demo/media/vo/27-close.mp3", "ms": 6600, "cap": "Let's see how this would work for your team. Request a short call. I would love to walk you through it."}};
+
+if(VO_BY_ID.proof)VO_BY_ID['proof-nums']=VO_BY_ID.proof;
+let voPlay={src:null,offset:0,t0:0,on:false,id:''};
+const voCache=new Map();
+function musicLevelNow(){
+  if(muted)return 0.0001;
+  if(pausedTourMusic)return MUSIC_LEVEL*0.3;
+  if(voiceUnder)return MUSIC_LEVEL*0.35;
+  return MUSIC_LEVEL;
+}
+function voMeta(id){return (id&&VO_BY_ID[id])||null;}
+function setVoiceUnder(on){
+  voiceUnder=!!on&&!muted;
+  try{if(audio&&audio.music)setMusicAudible(!muted);}catch(e){}
+}
+function voiceNow(){
+  if(!voPlay.on||!audio||!audio.ac)return voPlay.offset||0;
+  return (voPlay.offset||0)+(audio.ac.currentTime-voPlay.t0);
+}
+function stopVoice(keep){
+  const pos=voiceNow();
+  try{if(voPlay.src){voPlay.src.onended=null;voPlay.src.stop();}}catch(e){}
+  voPlay.src=null;voPlay.on=false;
+  voPlay.offset=keep?pos:0;
+  setVoiceUnder(false);
+}
+function ensureVo(id){
+  if(!id||!voMeta(id)||!audio||!audio.ac||typeof audio.ac.decodeAudioData!=='function')return Promise.resolve(null);
+  if(voCache.has(id))return voCache.get(id);
+  const p=fetch(voMeta(id).file).then(r=>{if(!r.ok)throw new Error('vo');return r.arrayBuffer();}).then(b=>audio.ac.decodeAudioData(b)).catch(()=>null);
+  voCache.set(id,p);
+  return p;
+}
+function startVoice(id,offset){
+  if(muted||paused||!id||!voMeta(id)||!audio)return;
+  const off=Math.max(0,offset||0);
+  stopVoice(false);
+  voPlay.id=id;voPlay.offset=off;
+  ensureVo(id).then(buf=>{
+    if(!buf||!buf.duration||muted||paused||voPlay.id!==id)return;
+    if(!slides[cur]||slides[cur].id!==id)return;
+    try{
+      const src=audio.ac.createBufferSource();
+      src.buffer=buf;src.connect(audio.master);
+      const t=audio.ac.currentTime;
+      const startAt=Math.min(off,Math.max(0,buf.duration-0.05));
+      src.start(t,startAt);
+      voPlay.src=src;voPlay.t0=t;voPlay.offset=startAt;voPlay.on=true;
+      setVoiceUnder(true);
+      src.onended=()=>{
+        if(voPlay.src!==src)return;
+        voPlay.on=false;voPlay.src=null;
+        if(cur===slides.length-1){voiceUnder=false;try{fadeMusicOut(2);}catch(e){}}
+        else setVoiceUnder(false);
+      };
+    }catch(e){}
+  });
+  const nxt=slides[cur+1];
+  if(nxt)ensureVo(nxt.id);
+}
+function buildScale(s){
+  const meta=voMeta(s&&s.id);
+  if(!meta)return 1;
+  let maxT=0;
+  s.querySelectorAll('[data-at]').forEach(el=>{maxT=Math.max(maxT,+el.dataset.at||0);});
+  if(maxT<400)return 1;
+  return Math.max(0.35,(meta.ms*0.9)/maxT);
+}
+function syncSoundChrome(){
+  const speed=$('speedBtn'),cc=$('ccBtn'),cap=$('voCap');
+  const soundOn=!muted;
+  if(speed)speed.hidden=soundOn;
+  document.documentElement.classList.toggle('sound-off',!soundOn);
+  const meta=slides[cur]?voMeta(slides[cur].id):null;
+  if(cap){
+    cap.textContent=meta?meta.cap:'';
+    const show=!!(ccOn&&meta);
+    cap.hidden=!show;
+    cap.classList.toggle('on',show);
+  }
+  if(cc){
+    cc.hidden=false;
+    cc.setAttribute('aria-pressed',String(!!ccOn));
+    cc.setAttribute('aria-label',ccOn?'Hide captions':'Show captions');
+  }
+  if(soundOn){const sheet=$('speedSheet');if(sheet)sheet.hidden=true;}
 }
 function enterSlide(i,opts){
   opts=opts||{};
+  try{stopVoice(false);}catch(e){}
   tx='entering';
   cur=i;walkStep=-1;founderHold=false;
   try{updatePortraitBackdrop();}catch(e){}
@@ -3756,12 +4055,14 @@ function enterSlide(i,opts){
     scheduleFit(true);
     syncSlideMotionRate(el);
   };
-  s.querySelectorAll('[data-at]').forEach(el=>{events.push({t:+el.dataset.at,fn:()=>revealChat(el)});
-    if(el.dataset.count)events.push({t:+el.dataset.at,fn:()=>countUp(el)});});
-  s.querySelectorAll('[data-out]').forEach(el=>events.push({t:+el.dataset.out,fn:()=>{el.classList.add('out');syncSlideMotionRate(el);}}));
+  const scale=(!opts.final&&!muted&&voMeta(s.id))?buildScale(s):1;
+  s.querySelectorAll('[data-at]').forEach(el=>{events.push({t:+el.dataset.at*scale,fn:()=>revealChat(el)});
+    if(el.dataset.count)events.push({t:+el.dataset.at*scale,fn:()=>countUp(el)});});
+  s.querySelectorAll('[data-out]').forEach(el=>events.push({t:+el.dataset.out*scale,fn:()=>{el.classList.add('out');syncSlideMotionRate(el);}}));
   events.sort((a,b)=>a.t-b.t);fired=0;elapsed=0;
   if(chatThread)chatThread.scrollTop=0;
-  dur=computeAdvanceMs(s);
+  if(!opts.final&&!muted&&voMeta(s.id)&&+s.dataset.dur!==0)dur=voMeta(s.id).ms+800;
+  else dur=computeAdvanceMs(s);
   try{
     const ch=+(s.dataset.chapter||0);
     if(!opts.final) chapterLift(ch);
@@ -3770,6 +4071,8 @@ function enterSlide(i,opts){
   if(i===slides.length-1){try{fadeMusicOut(3);}catch(e){}}
   s.classList.add('active','entering');
   s.style.opacity='';s.style.visibility='';
+  try{syncSoundChrome();}catch(e){}
+  if(!opts.final&&!paused&&!muted)startVoice(s.id,0);
   if(reduce||opts.final)fireAll();
   if(chatThread)pinChatThread(s,!!opts.final);
   if(s.hasAttribute('data-walk')){
@@ -3865,6 +4168,7 @@ function syncBarIcons(){
     const txt=muteBtn.querySelector('.bar-txt');
     if(txt)txt.textContent=muted?'Sound off':'Sound on';
   }
+  try{syncSoundChrome();}catch(e){}
 }
 function setPlaySpeed(v){
   const n=+v;
@@ -3910,11 +4214,13 @@ function togglePause(){
     freezeVisualPlayback(true);
     pausedTourMusic=true;
     setPauseMusic(true);
+    try{stopVoice(true);}catch(e){}
   }else{
     resumeSlideTimeouts();
     freezeVisualPlayback(false);
     pausedTourMusic=false;
     setPauseMusic(false);
+    try{if(!muted&&slides[cur])startVoice(slides[cur].id,voPlay.offset||0);}catch(e){}
   }
 }
 function tick(now){
@@ -3929,7 +4235,8 @@ function tick(now){
         else{window.dataLayer=window.dataLayer||[];window.dataLayer.push(payload);}
       }catch(e){}
     }
-    if(!paused){elapsed+=dt*playSpeed;while(fired<events.length&&events[fired].t<=elapsed){events[fired++].fn();scheduleFit(true);}
+    const clock=(!muted&&slides[cur]&&voMeta(slides[cur].id))?1:playSpeed;
+    if(!paused){elapsed+=dt*clock;while(fired<events.length&&events[fired].t<=elapsed){events[fired++].fn();scheduleFit(true);}
       if(playSpeed!==1)syncSlideMotionRate();
       if(!founderHold&&tx==='idle'&&dur>0&&elapsed>=dur)goTo(cur+1,{});}
     syncWalk();
@@ -4030,6 +4337,8 @@ $('next').addEventListener('click',()=>{advance();showBar();});
 $('pause').addEventListener('click',()=>{togglePause();showBar();});
 const muteTourBtn=$('muteTour');
 if(muteTourBtn)muteTourBtn.addEventListener('click',e=>{e.stopPropagation();applyMute(!muted);});
+const ccBtn=$('ccBtn');
+if(ccBtn)ccBtn.addEventListener('click',e=>{e.stopPropagation();ccOn=!ccOn;try{syncSoundChrome();scheduleFit();}catch(err){}showBar();});
 function bindTalkLink(el){
   if(!el||el.dataset.boundTalk)return;
   el.dataset.boundTalk='1';

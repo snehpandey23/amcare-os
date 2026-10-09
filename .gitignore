@@ -41,6 +41,9 @@ apps/siya-health/brand/04-Content-Tracker/fuse-logs/
 
 # Local homepage previews — excluded from the patient-site deploy
 apps/siya-health/previews/
+
+# Founder voiceover masters — never deploy. Processed clips live in employers/demo/media/vo/
+apps/siya-health/internal/vo-raw/
 tmp/
 
 # OET LMS local LLM/env pulls — never commit

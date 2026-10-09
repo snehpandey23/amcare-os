@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Siya voiceover preview — not wired</title>
+<style>
+  :root { color-scheme: light; }
+  body { margin: 0; font: 16px/1.45 "Iowan Old Style", Palatino, Georgia, serif; color: #142033; background: #f6f3ee; }
+  main { max-width: 820px; margin: 0 auto; padding: 28px 20px 80px; }
+  h1 { font-size: 1.45rem; font-weight: 600; margin: 0 0 6px; }
+  .note { color: #4a5568; margin: 0 0 18px; }
+  .bar { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; margin: 0 0 22px; }
+  button { font: 15px/1 system-ui, sans-serif; border: 0; border-radius: 999px; padding: 10px 16px; cursor: pointer; background: #142033; color: #fff; }
+  button.ghost { background: transparent; color: #142033; border: 1px solid #142033; }
+  button:disabled { opacity: .45; cursor: default; }
+  article { background: #fff; border-radius: 14px; padding: 14px 16px 16px; margin: 0 0 12px; box-shadow: 0 1px 0 rgba(20,32,51,.06); }
+  article.playing { outline: 2px solid #142033; }
+  header { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; margin-bottom: 8px; }
+  .num { font: 13px/1 ui-monospace, monospace; color: #5c6778; min-width: 4.5rem; }
+  .badge { font: 12px/1 system-ui, sans-serif; letter-spacing: .02em; border-radius: 999px; padding: 5px 8px; }
+  .OK { background: #e5f4ea; color: #146132; }
+  .OK-with-caption-change { background: #fff4d6; color: #7a5600; }
+  .RE-RECORD { background: #fde8e6; color: #9b1c1c; }
+  p { margin: 0; }
+  .meta { margin-top: 8px; color: #5c6778; font: 13px/1.4 system-ui, sans-serif; }
+  .warn { background: #fde8e6; border-radius: 12px; padding: 12px 14px; margin: 0 0 16px; }
+</style>
+</head>
+<body>
+<main>
+  <h1>Employer demo voiceover</h1>
+  <p class="note">Preview only. Nothing here is wired into the demo. Narrator: Dr. Sneh Pandey. Play all runs the clips in order, with the tour bed ducked to about 35% under the voice. A single clip plays dry.</p>
+  <div class="warn">Line 11 and line 19 are the Oct 9 re-record. Captions stay the script. Line 05 in this same file clearly says “days.” The opening line in the file was not swapped in.</div>
+  <div class="bar">
+    <button id="all" type="button">Play all in order</button>
+    <button id="stop" class="ghost" type="button">Stop</button>
+  </div>
+  <div id="list"></div>
+</main>
+<script type="application/json" id="rows">
+[
+  {
+    "n": 1,
+    "id": "statement",
+    "file": "01-statement.mp3",
+    "m4a": "01-statement.m4a",
+    "duration": 11.76,
+    "takes": "1",
+    "diff": "Added 'that' after 'knows'. Name kept as Sneh (ASR was unstable).",
+    "issues": "ASR spelled the name Sneha/Sudeik; caption keeps Sneh. Extra 'that' after 'knows'.",
+    "verdict": "OK-with-caption-change",
+    "caption": "I'm Dr. Sneh Pandey, physician and Medical Director at Siya Health. Here's something every HR leader knows that healthcare still runs on a schedule your people can't keep.",
+    "lufs": -16.6,
+    "tp": -1.9,
+    "pings_silenced": 0
+  },
+  {
+    "n": 2,
+    "id": "p-time",
+    "file": "02-p-time.mp3",
+    "m4a": "02-p-time.m4a",
+    "duration": 8.04,
+    "takes": "1",
+    "diff": "",
+    "issues": "",
+    "verdict": "OK",
+    "caption": "Clinics open nine to five. Your team works nine to five. So the doctor's appointment either doesn't happen, or it takes the afternoon.",
+    "lufs": -16.8,
+    "tp": -1.9,
+    "pings_silenced": 0
+  },
+  {
+    "n": 3,
+    "id": "p-away",
+    "file": "03-p-away.mp3",
+    "m4a": "03-p-away.m4a",
+    "duration": 7.73,
+    "takes": "1",
+    "diff": "",
+    "issues": "",
+    "verdict": "OK",
+    "caption": "On average, a doctor's visit costs a patient about two hours, for roughly twenty minutes with the doctor.",
+    "lufs": -16.8,
+    "tp": -1.9,
+    "pings_silenced": 0
+  },
+  {
+    "n": 4,
+    "id": "p-familiar",
+    "file": "04-p-familiar.mp3",
+    "m4a": "04-p-familiar.m4a",
+    "duration": 15.07,
+    "takes": "1",
+    "diff": "",
+    "issues": "",
+    "verdict": "OK",
+    "caption": "And you hear the result every week: out for an appointment, can't focus, not sleeping, still waiting for a psychiatrist. Common, often preventable, and costing your team time and focus.",
+    "lufs": -16.7,
+    "tp": -1.9,
+    "pings_silenced": 0
+  },
+  {
+    "n": 5,
+    "id": "p-response",
+    "file": "05-p-response.mp3",
+    "m4a": "05-p-response.m4a",
+    "duration": 4.27,
+    "takes": "1",
+    "diff": "Caption kept as 'days' (not changed to the uncertain ASR word 'ways').",
+    "issues": "ASR heard 'ways' (0.63\u20130.92), which is likely 'days'. Caption stays 'days'. Confirm on the preview.",
+    "verdict": "OK",
+    "caption": "Even reaching the clinic can take days of voicemails and missed callbacks.",
+    "lufs": -16.4,
+    "tp": -2.9,
+    "pings_silenced": 0
+  },
+  {
+    "n": 6,
+    "id": "p-whole",
+    "file": "06-p-whole.mp3",
+    "m4a": "06-p-whole.m4a",
+    "duration": 10.91,
+    "takes": "1",
+    "diff": "'they're' said as 'they are'.",
+    "issues": "",
+    "verdict": "OK-with-caption-change",
+    "caption": "Stress, sleep, focus, weight, blood pressure: they are all connected. But the care gets split across specialists who never compare notes.",
+    "lufs": -16.5,
+    "tp": -1.9,
+    "pings_silenced": 0
+  },
+  {
+    "n": 7,
+    "id": "p-coord",
+    "file": "07-p-coord.mp3",
+    "m4a": "07-p-coord.m4a",
+    "duration": 6.25,
+    "takes": "1",
+    "diff": "",
+    "issues": "",
+    "verdict": "OK",
+    "caption": "And your employee is left juggling the apps, the logins, and the follow-ups.",
+    "lufs": -16.7,
+    "tp": -1.9,
+    "pings_silenced": 0
+  },
+  {
+    "n": 8,
+    "id": "question",
+    "file": "08-question.mp3",
+    "m4a": "08-question.m4a",
+    "duration": 4.78,
+    "takes": "1",
+    "diff": "'You've' said as 'You have'.",
+    "issues": "",
+    "verdict": "OK-with-caption-change",
+    "caption": "You have invested in good coverage. But is care there when they actually need it?",
+    "lufs": -16.4,
+    "tp": -1.9,
+    "pings_silenced": 0
+  },
+  {
+    "n": 9,
+    "id": "turn",
+    "file": "09-turn.mp3",
+    "m4a": "09-turn.m4a",
+    "duration": 9.51,
+    "takes": "1",
+    "diff": "",
+    "issues": "",
+    "verdict": "OK",
+    "caption": "That's why we built Siya Health: one care team for the whole person. Physical health, mental health, and focus, connected.",
+    "lufs": -16.9,
+    "tp": -1.9,
+    "pings_silenced": 0
+  },
+  {
+    "n": 10,
+    "id": "care-checklist",
+    "file": "10-care-checklist.mp3",
+    "m4a": "10-care-checklist.m4a",
+    "duration": 12.64,
+    "takes": "1",
+    "diff": "'the full picture' said as 'a full picture'. Added 'just' before 'guessing'.",
+    "issues": "",
+    "verdict": "OK-with-caption-change",
+    "caption": "It starts with a full picture: history, screenings, vitals, labs, and cognitive testing, so we track focus and stress over time instead of just guessing. Then, a personalized plan.",
+    "lufs": -16.6,
+    "tp": -1.9,
+    "pings_silenced": 0
+  },
+  {
+    "n": 11,
+    "id": "f-time",
+    "file": "11-f-time.mp3",
+    "m4a": "11-f-time.m4a",
+    "duration": 10.44,
+    "takes": "re-record Audio_10_09_2026_06_06_43",
+    "diff": "Re-record replaces the fifty-minute take. Caption stays the script.",
+    "issues": "ASR hears '15' (0.96) and '24x7' (0.73), i.e. fifteen-minute and twenty-four seven. Caption stays the script.",
+    "verdict": "OK",
+    "caption": "Care fits their schedule: a fifteen-minute check-in between meetings, or a longer visit in the evening or on a weekend. Bookable twenty-four seven.",
+    "lufs": -16.6,
+    "tp": -1.9,
+    "pings_silenced": 0
+  },
+  {
+    "n": 12,
+    "id": "f-ways",
+    "file": "12-f-ways.mp3",
+    "m4a": "12-f-ways.m4a",
+    "duration": 4.29,
+    "takes": "1",
+    "diff": "'a real clinician' said as 'real clinicians'.",
+    "issues": "",
+    "verdict": "OK-with-caption-change",
+    "caption": "They can message the care team anytime, or book a visit with real clinicians.",
+    "lufs": -16.4,
+    "tp": -2.0,
+    "pings_silenced": 0
+  },
+  {
+    "n": 13,
+    "id": "f-response",
+    "file": "13-f-response.mp3",
+    "m4a": "13-f-response.m4a",
+    "duration": 8.31,
+    "takes": "1",
+    "diff": "",
+    "issues": "",
+    "verdict": "OK",
+    "caption": "Real people, not AI chat. Our care team replies within thirty minutes, and a doctor can join within two hours, any time.",
+    "lufs": -16.5,
+    "tp": -2.0,
+    "pings_silenced": 0
+  },
+  {
+    "n": 14,
+    "id": "f-urgent",
+    "file": "14-f-urgent.mp3",
+    "m4a": "14-f-urgent.m4a",
+    "duration": 7.01,
+    "takes": "1",
+    "diff": "Spoken drop of 'a' before 'few questions' is ungrammatical. Caption keeps the script.",
+    "issues": "",
+    "verdict": "OK",
+    "caption": "Something urgent, like pink eye at night? Often a photo and a few questions are enough, handled right in the chat.",
+    "lufs": -16.9,
+    "tp": -1.9,
+    "pings_silenced": 0
+  },
+  {
+    "n": 15,
+    "id": "f-whole",
+    "file": "15-f-whole.mp3",
+    "m4a": "15-f-whole.m4a",
+    "duration": 8.14,
+    "takes": "1",
+    "diff": "",
+    "issues": "",
+    "verdict": "OK",
+    "caption": "And we stay with them: regular check-ins, preventive care, and ongoing cognitive monitoring. A relationship, not a one-off visit.",
+    "lufs": -16.8,
+    "tp": -1.9,
+    "pings_silenced": 0
+  },
+  {
+    "n": 16,
+    "id": "employer",
+    "file": "16-employer.mp3",
+    "m4a": "16-employer.m4a",
+    "duration": 7.11,
+    "takes": "1",
+    "diff": "",
+    "issues": "",
+    "verdict": "OK",
+    "caption": "Getting started is simple. A short call, a package tailored to your team, and a private link your employees can join, voluntarily.",
+    "lufs": -16.4,
+    "tp": -2.1,
+    "pings_silenced": 0
+  },
+  {
+    "n": 17,
+    "id": "journey",
+    "file": "17-journey.mp3",
+    "m4a": "17-journey.m4a",
+    "duration": 7.08,
+    "takes": "1",
+    "diff": "",
+    "issues": "",
+    "verdict": "OK",
+    "caption": "From that link, they reach us through our secure app or our website. Same team, same care.",
+    "lufs": -16.7,
+    "tp": -1.9,
+    "pings_silenced": 0
+  },
+  {
+    "n": 18,
+    "id": "outcomes",
+    "file": "18-outcomes.mp3",
+    "m4a": "18-outcomes.m4a",
+    "duration": 6.74,
+    "takes": "1",
+    "diff": "Added 'And'. 'anyone's' said as 'anybody's'.",
+    "issues": "",
+    "verdict": "OK-with-caption-change",
+    "caption": "Your team member feels the progress. And you see aggregate trends only, never anybody's personal details.",
+    "lufs": -16.4,
+    "tp": -2.2,
+    "pings_silenced": 0
+  },
+  {
+    "n": 19,
+    "id": "clinicians",
+    "file": "19-clinicians.mp3",
+    "m4a": "19-clinicians.m4a",
+    "duration": 11.29,
+    "takes": "re-record Audio_10_09_2026_06_06_43",
+    "diff": "Founder approved the caption 'community centers' for the re-record.",
+    "issues": "Caption set to spoken 'community centers' for ship.",
+    "verdict": "OK",
+    "caption": "Our clinicians have practiced in academic hospitals, community centers, inpatient medicine, and concierge practice. They know what to manage, and when to refer.",
+    "lufs": -16.5,
+    "tp": -1.9,
+    "pings_silenced": 0
+  },
+  {
+    "n": 20,
+    "id": "cost",
+    "file": "20-cost.mp3",
+    "m4a": "20-cost.m4a",
+    "duration": 8.62,
+    "takes": "1",
+    "diff": "Spoken 'waitlist' is a slip. Caption keeps the script 'waitlists'.",
+    "issues": "",
+    "verdict": "OK",
+    "caption": "No months-long waitlists. No network maze. One concierge team for refills, specialists, labs, and forms.",
+    "lufs": -16.6,
+    "tp": -1.9,
+    "pings_silenced": 0
+  },
+  {
+    "n": 21,
+    "id": "privacy",
+    "file": "21-privacy.mp3",
+    "m4a": "21-privacy.m4a",
+    "duration": 10.88,
+    "takes": "1",
+    "diff": "Spoken 'diagnosis' is a slip. Caption keeps the script 'diagnoses'.",
+    "issues": "",
+    "verdict": "OK",
+    "caption": "Their health stays theirs. You see participation and aggregate trends, in groups of ten or more. Never names, diagnoses, or messages.",
+    "lufs": -16.4,
+    "tp": -2.0,
+    "pings_silenced": 0
+  },
+  {
+    "n": 22,
+    "id": "proof",
+    "file": "22-proof.mp3",
+    "m4a": "22-proof.m4a",
+    "duration": 7.07,
+    "takes": "1",
+    "diff": "",
+    "issues": "",
+    "verdict": "OK",
+    "caption": "More than twenty-seven hundred patients, most of them busy professionals, with a four point nine rating on Google.",
+    "lufs": -16.6,
+    "tp": -1.9,
+    "pings_silenced": 0
+  },
+  {
+    "n": 23,
+    "id": "e1-time",
+    "file": "23-e1-time.mp3",
+    "m4a": "23-e1-time.m4a",
+    "duration": 5.73,
+    "takes": "1 (a 'that's the best' insert was not in the audio on a second pass)",
+    "diff": "",
+    "issues": "",
+    "verdict": "OK",
+    "caption": "For you, that means time back: visits that take twenty minutes, not two hours.",
+    "lufs": -16.4,
+    "tp": -2.1,
+    "pings_silenced": 0
+  },
+  {
+    "n": 24,
+    "id": "e2-focus",
+    "file": "24-e2-focus.mp3",
+    "m4a": "24-e2-focus.m4a",
+    "duration": 6.6,
+    "takes": "1",
+    "diff": "Spoken 'gets addressed' is a slip. Caption keeps the script 'get addressed'.",
+    "issues": "",
+    "verdict": "OK",
+    "caption": "Sharper focus and fewer bad weeks, because stress, sleep, and attention get addressed early.",
+    "lufs": -16.5,
+    "tp": -2.0,
+    "pings_silenced": 0
+  },
+  {
+    "n": 25,
+    "id": "e3-outcomes",
+    "file": "25-e3-outcomes.mp3",
+    "m4a": "25-e3-outcomes.m4a",
+    "duration": 7.14,
+    "takes": "1",
+    "diff": "",
+    "issues": "",
+    "verdict": "OK",
+    "caption": "Measured health, not just app ratings: validated questionnaires, cognitive assessments, and clinical markers.",
+    "lufs": -16.8,
+    "tp": -1.9,
+    "pings_silenced": 0
+  },
+  {
+    "n": 26,
+    "id": "e4-simple",
+    "file": "26-e4-simple.mp3",
+    "m4a": "26-e4-simple.m4a",
+    "duration": 5.66,
+    "takes": "1",
+    "diff": "",
+    "issues": "",
+    "verdict": "OK",
+    "caption": "And one partner, one predictable fee, with no extra admin for HR.",
+    "lufs": -16.4,
+    "tp": -1.9,
+    "pings_silenced": 0
+  },
+  {
+    "n": 27,
+    "id": "close",
+    "file": "27-close.mp3",
+    "m4a": "27-close.m4a",
+    "duration": 6.6,
+    "takes": "1 (real ending is 'walk you through it'; a zero-duration 'hear from you' was not a second take)",
+    "diff": "'I'd love' said as 'I would love'.",
+    "issues": "",
+    "verdict": "OK-with-caption-change",
+    "caption": "Let's see how this would work for your team. Request a short call. I would love to walk you through it.",
+    "lufs": -16.7,
+    "tp": -1.9,
+    "pings_silenced": 0
+  }
+]
+</script>
+<script>
+const rows = JSON.parse(document.getElementById("rows").textContent);
+const list = document.getElementById("list");
+const allBtn = document.getElementById("all");
+const stopBtn = document.getElementById("stop");
+let voice = new Audio();
+voice.preload = "auto";
+let playingAll = false;
+let token = 0;
+let bed = null;
+
+rows.forEach((row) => {
+  const el = document.createElement("article");
+  el.id = "line-" + row.n;
+  el.innerHTML =
+    '<header><span class="num">' + String(row.n).padStart(2, "0") + " " + row.id + "</span>" +
+    '<button type="button" data-n="' + row.n + '">Play</button>' +
+    '<span class="badge ' + row.verdict + '">' + row.verdict + "</span></header>" +
+    "<p>" + row.caption + "</p>" +
+    '<div class="meta">' + row.duration.toFixed(1) + "s" +
+    (row.diff ? " · " + row.diff : "") +
+    (row.issues ? " · " + row.issues : "") + "</div>";
+  list.appendChild(el);
+});
+
+function src(row) { return "../employers/demo/media/vo/" + row.file; }
+
+function mark(n) {
+  document.querySelectorAll("article").forEach((el) => el.classList.remove("playing"));
+  const el = document.getElementById("line-" + n);
+  if (el) el.scrollIntoView({ block: "nearest", behavior: "smooth" });
+  if (el) el.classList.add("playing");
+}
+
+function stopBed() {
+  if (!bed) return;
+  clearInterval(bed.timer);
+  const t = bed.ac.currentTime;
+  bed.music.gain.cancelScheduledValues(t);
+  bed.music.gain.setTargetAtTime(0.0001, t, 0.08);
+  try { bed.ac.close(); } catch (e) {}
+  bed = null;
+}
+
+function startBed() {
+  stopBed();
+  const ac = new AudioContext();
+  const master = ac.createGain();
+  master.gain.value = 0.0001;
+  master.connect(ac.destination);
+  const verb = ac.createDelay(0.4);
+  verb.delayTime.value = 0.18;
+  const verbGain = ac.createGain();
+  verbGain.gain.value = 0.25;
+  verb.connect(verbGain);
+  verbGain.connect(master);
+  const music = ac.createGain();
+  music.gain.value = 0.0001;
+  const filter = ac.createBiquadFilter();
+  filter.type = "lowpass";
+  filter.frequency.value = 2200;
+  music.connect(filter);
+  filter.connect(master);
+  const wet = ac.createGain();
+  wet.gain.value = 0.32;
+  filter.connect(wet);
+  wet.connect(verb);
+  const MUSIC_LEVEL = 1.3 * 0.35;
+  const PAD = 0.068, ARP = 0.058, PULSE = 0.048, BRIGHT = 1.15;
+  const BPM = 112, beat = 60 / BPM, step = beat / 2, chordLen = beat * 8;
+  const progression = [[130.81, 196, 261.63, 329.63], [98, 146.83, 196, 246.94], [110, 164.81, 220, 261.63], [87.31, 130.81, 174.61, 220]];
+  const arp = [0, 2, 1, 3, 2, 0, 1, 2];
+  let nextT = ac.currentTime + 0.05, chordIdx = 0, eighth = 0;
+  const voiceOsc = (t, freq, type, peak, attack, release) => {
+    const o = ac.createOscillator(), g = ac.createGain();
+    o.type = type; o.frequency.value = freq;
+    g.gain.setValueAtTime(0.0001, t);
+    g.gain.exponentialRampToValueAtTime(Math.max(peak, 0.0002), t + attack);
+    g.gain.exponentialRampToValueAtTime(0.0001, t + release);
+    o.connect(g); g.connect(music); o.start(t); o.stop(t + release + 0.02);
+  };
+  const schedule = () => {
+    if (!bed || ac.state !== "running") return;
+    const now = ac.currentTime;
+    while (nextT < now + 0.9) {
+      const ch = progression[chordIdx], t = nextT, pos = eighth % 64, lifting = pos >= 48;
+      const amt = lifting ? (pos - 48 + 1) / 16 : 0;
+      const dyn = lifting ? 1 + 0.45 * amt : 1;
+      if (eighth % 16 === 0) ch.forEach((hz, i) => voiceOsc(t, hz, i % 2 ? "square" : "sawtooth", (i === 0 ? PAD : PAD * 0.6) * dyn, 0.32, chordLen * 0.98));
+      voiceOsc(t, ch[arp[eighth % 8]] * 2.02, "sawtooth", ARP * (lifting ? 1 + 0.4 * amt : 1) * BRIGHT, 0.012, step * 0.7);
+      if (eighth % 8 === 0 || eighth % 8 === 4) voiceOsc(t, 55, "sine", PULSE * (lifting ? 1 + 0.25 * amt : 1), 0.02, beat * 0.65);
+      eighth++;
+      if (eighth % 16 === 0) chordIdx = (chordIdx + 1) % 4;
+      nextT += step;
+    }
+  };
+  music.gain.linearRampToValueAtTime(MUSIC_LEVEL, ac.currentTime + 0.4);
+  const timer = setInterval(schedule, 180);
+  bed = { ac, music, timer };
+  schedule();
+}
+
+function stopAll() {
+  token++;
+  playingAll = false;
+  voice.pause();
+  voice.removeAttribute("src");
+  voice.load();
+  stopBed();
+  document.querySelectorAll("article").forEach((el) => el.classList.remove("playing"));
+  allBtn.disabled = false;
+}
+
+function playOne(row, myToken) {
+  return new Promise((resolve) => {
+    if (myToken !== token) { resolve(); return; }
+    mark(row.n);
+    voice.src = src(row);
+    const done = () => { voice.removeEventListener("ended", done); voice.removeEventListener("error", done); resolve(); };
+    voice.addEventListener("ended", done);
+    voice.addEventListener("error", done);
+    voice.play().catch(done);
+  });
+}
+
+async function playAll() {
+  stopAll();
+  const my = token;
+  playingAll = true;
+  allBtn.disabled = true;
+  startBed();
+  for (const row of rows) {
+    if (my !== token) return;
+    await playOne(row, my);
+    if (my !== token) return;
+    await new Promise((r) => setTimeout(r, 800));
+  }
+  if (my === token) stopAll();
+}
+
+list.addEventListener("click", (ev) => {
+  const btn = ev.target.closest("button[data-n]");
+  if (!btn) return;
+  const row = rows.find((r) => r.n === Number(btn.dataset.n));
+  stopAll();
+  const my = token;
+  playOne(row, my).then(() => { if (my === token) stopAll(); });
+});
+allBtn.addEventListener("click", playAll);
+stopBtn.addEventListener("click", stopAll);
+</script>
+</body>
+</html>
