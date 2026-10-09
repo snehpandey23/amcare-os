@@ -1571,11 +1571,11 @@ export function injectGtmAndTracking(html, relPath = '') {
   html = stripExistingGtag(html);
   html = stripExistingMetaPixel(html);
 
-  // EXCEPTION — /employers/demo.html only. Do not copy this branch to other pages.
-  // Do not inject GTM or siya-tracking.js here. The demo page inserts those scripts
-  // only when the hostname is siya.health, so preview deploys never load them.
+  // EXCEPTION — /employers/demo.html and /employers/pilot-deck/ only.
+  // Do not inject GTM or siya-tracking.js here. Those pages insert GTM themselves
+  // only when the hostname is siya.health, so preview deploys never load it.
   // No Meta pixel.
-  if (/^employers\/demo\.html$/i.test(relPath)) {
+  if (/^employers\/demo\.html$/i.test(relPath) || /^employers\/pilot-deck\//i.test(relPath)) {
     html = html.replace(/<script src="\/scripts\/siya-tracking\.js"(?:\s+defer)?><\/script>\s*/gi, '');
     return html;
   }

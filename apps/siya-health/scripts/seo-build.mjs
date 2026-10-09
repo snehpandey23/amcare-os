@@ -60,6 +60,7 @@ const SITEMAP_EXCLUDE = new Set([
   'adhd-care2.html',
   'employers2.html',
   'employers/demo.html', // invitation preview — noindex, not in sitemap
+  'employers/pilot-deck/index.html', // unlisted employer pilot deck — noindex, not in sitemap
   'video-cards.html', // local export surface; public URL redirects home
   'homepage2-audit.html',
   'homepage2-care-preview.html',
@@ -574,6 +575,11 @@ const H2_LIVE_PAGES = new Set([
 ]);
 
 function processHtml(relPath) {
+  // Unlisted pilot deck owns its chrome, robots tag, and GTM bootstrap.
+  // Do not inject site nav, Meta pixel, or sitemap copy.
+  if (relPath === 'employers/pilot-deck/index.html' || relPath.startsWith('employers/pilot-deck/')) {
+    return;
+  }
   const fullPath = path.join(SITE_ROOT, relPath);
   let html = ensureProviderKlarityReviews(
     ensureHomepageGoogleReviews(fs.readFileSync(fullPath, 'utf8')),
