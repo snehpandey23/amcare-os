@@ -375,50 +375,87 @@ html.desk-stage #tour article[data-walk] .doors{max-height:100%;overflow:auto}
 @media (max-width:480px){
   .bar{
     display:grid!important;
-    grid-template-columns:repeat(5,minmax(0,1fr));
-    grid-template-areas:"ch ch ch ch ch" "prev pause mute speed next";
+    grid-template-columns:repeat(6,minmax(0,1fr));
+    grid-template-areas:"ch ch ch ch ch ch" "prev pause mute cc speed next";
     align-items:center;
   }
   .bar .segs{grid-area:ch;width:100%}
   .bar #prev{grid-area:prev}
   .bar #pause{grid-area:pause}
   .bar #muteTour{grid-area:mute}
+  .bar #ccBtn{grid-area:cc}
   .bar #speedBtn{grid-area:speed}
-  .bar #ccBtn{grid-area:speed}
   .bar #next{grid-area:next}
   .bar-actions{display:contents}
-  .bar #prev,.bar #pause,.bar #muteTour,.bar #speedBtn,.bar #ccBtn,.bar #next{width:100%}
+  .bar #prev,.bar #pause,.bar #muteTour,.bar #speedBtn,.bar #ccBtn,.bar #next{width:100%;min-width:44px;min-height:44px}
   .bar #ccBtn .cc-pill{position:static;width:auto;height:auto;margin:0;padding:0;overflow:visible;clip:auto;border:0;font-size:11px}
-}
-html.sound-off .bar{
-  /* Sound off shows speed and captions together. Still one icon row, so the bar does not grow taller. */
-}
-@media (max-width:480px){
-  html.sound-off .bar{
-    grid-template-columns:repeat(6,minmax(0,1fr));
-    grid-template-areas:"ch ch ch ch ch ch" "prev pause mute cc speed next";
-  }
-  html.sound-off .bar #ccBtn{grid-area:cc}
-  html.sound-off .bar #speedBtn{grid-area:speed}
+  .bar #speedBtn .bar-ico{display:none}
 }
 .bar #speedBtn .speed-pill{font:700 12px/1 var(--font-display);letter-spacing:.02em;min-width:2.2em}
 .bar #ccBtn .cc-pill{font:700 12px/1 var(--font-display);letter-spacing:.04em;min-width:2.2em}
 .bar #speedBtn[hidden],.bar #ccBtn[hidden]{display:none!important}
-.vo-cap{display:none;margin:0;width:100%;box-sizing:border-box;text-align:center;font:500 13px/1.35 var(--font-body);color:var(--ink);padding:2px 12px 4px}
-.vo-cap.on{display:block}
-@media (max-width:480px){
-  .vo-cap.on{grid-column:1 / -1;font-size:12px;padding:0 8px 4px}
+/* Subtitle sits above the control bar and stays when the bar hides. */
+.vo-cap{
+  position:absolute;z-index:4;left:50%;bottom:calc(118px + env(safe-area-inset-bottom,0px));
+  transform:translateX(-50%);display:none;box-sizing:border-box;pointer-events:none;
+  width:max-content;max-width:min(640px,calc(100% - 28px));
+  margin:0;padding:8px 14px;border-radius:8px;
+  background:rgba(0,0,0,.72);color:#fff;text-align:center;
+  font:500 16px/1.25 var(--font-body);
+  overflow:hidden;-webkit-line-clamp:2;-webkit-box-orient:vertical;
+}
+.vo-cap.on{display:-webkit-box}
+html.desk-stage #tour .vo-cap{bottom:92px;max-width:min(860px,calc(100% - 96px));font-size:20px;line-height:1.25}
+html.cc-on.desk-stage #tour .slide,
+html.cc-on.desk-stage #tour article.slide[data-vcenter="1"]{padding-bottom:168px}
+html.cc-on.desk-stage #tour article[data-close="1"]{
+  padding-bottom:150px;align-items:start;align-content:start;
+}
+html.cc-on.desk-stage #tour article[data-close="1"] .frame{
+  height:auto;max-height:100%;min-height:0;align-self:start;overflow:hidden;
+}
+html.cc-on.desk-stage #tour article[data-close="1"] .q2{font-size:40px;line-height:1.08}
+html.cc-on.desk-stage #tour article[data-close="1"] .next-steps-rail li{min-height:72px;padding:10px 8px}
+html.cc-on.desk-stage #tour #p-response .desk-hero{align-content:start;place-items:start center}
+html.cc-on.desk-stage #tour #p-response .phone{align-self:start;height:auto;max-height:100%}
+html.cc-on.desk-stage #tour #p-response .vm{gap:4px;padding:8px 8px 6px}
+html.cc-on.desk-stage #tour #p-response .vm-row{padding:6px 8px}
+html.cc-on.desk-stage #tour #p-response .vm-call{padding:8px;font-size:13px}
+html.cc-on.desk-stage #tour #p-response .vm-script{
+  display:-webkit-box;-webkit-line-clamp:1;-webkit-box-orient:vertical;overflow:hidden;
+}
+html.cc-on.desk-stage #tour #p-coord .app{padding:8px 8px;width:100px}
+html.cc-on.desk-stage #tour #p-coord .me-node{width:80px}
+@media (max-width:640px){
+  html.cc-on #p-response .phone{height:auto;max-height:calc(100dvh - 310px)}
+  html.cc-on #p-response .vm{gap:2px;padding:4px}
+  html.cc-on #p-response .vm-row{padding:3px 6px}
+  html.cc-on #p-response .vm-script{display:none}
+  html.cc-on #p-response .vm-call{padding:6px;font-size:12px}
+  html.cc-on #p-away .away-track,html.cc-on #e1-time .away-track{height:36px}
+}
+@media (max-width:640px) and (max-height:700px){
+  html.cc-on #p-response .vm-row:nth-child(-n+2){display:none}
+}
+@media (max-width:640px) and (max-height:580px){
+  html.cc-on #p-response .vm-row:nth-child(-n+3){display:none}
+}
+@media (max-width:640px){
+  html.cc-on #tour .slide,
+  html.cc-on #turn.slide{padding-bottom:calc(176px + env(safe-area-inset-bottom,0px))}
+  html.cc-on #turn .meet-stage{width:min(100%, calc(100dvh - 320px))}
 }
 .bar .bar-ico[data-ico="gauge"]{stroke:currentColor;fill:none}
 .speed-sheet{
-  position:fixed;z-index:60;left:50%;bottom:calc(88px + env(safe-area-inset-bottom,0px));
+  position:absolute;z-index:8;left:50%;bottom:calc(176px + env(safe-area-inset-bottom,0px));
   transform:translateX(-50%);display:flex;gap:6px;padding:8px;border-radius:16px;
   background:rgba(255,255,255,.96);box-shadow:0 12px 32px rgba(10,36,107,.18),inset 0 0 0 1px var(--line);
 }
+html.desk-stage #tour .speed-sheet{bottom:168px}
 .speed-sheet[hidden]{display:none!important}
 .speed-sheet button{
-  min-width:52px;min-height:40px;border:0;border-radius:12px;cursor:pointer;
-  font:700 13px/1 var(--font-display);color:var(--ink);background:rgba(10,36,107,.06);
+  min-width:44px;min-height:44px;padding:0 12px;border:0;border-radius:12px;cursor:pointer;
+  font:700 14px/1 var(--font-display);color:var(--ink);background:rgba(10,36,107,.06);
 }
 .speed-sheet button[aria-selected="true"]{background:var(--grad-btn);color:#fff}
 #tour.is-paused,#tour.is-paused *{animation-play-state:paused!important}
@@ -2562,18 +2599,18 @@ html.demo-embed #tour .hint2{display:none}
   <div class="hint2" id="hint2">Click anywhere to continue</div>
   <a class="talk talk-float" id="talkToUsFloat" href="__INQUIRY_HREF__">Talk to us</a>
   <nav class="bar" aria-label="Tour controls">
-    <p id="voCap" class="vo-cap" hidden></p>
     <button id="prev" type="button" aria-label="Back"><svg class="bar-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="m15 18-6-6 6-6"/></svg><span class="bar-txt">Back</span></button>
     <div class="segs" id="segs"></div>
     <div class="bar-actions">
       <button id="pause" type="button" aria-label="Pause" aria-pressed="false"><svg class="bar-ico" data-ico="pause" viewBox="0 0 24 24" aria-hidden="true"><rect x="6" y="4" width="4" height="16" rx="1"/><rect x="14" y="4" width="4" height="16" rx="1"/></svg><svg class="bar-ico" data-ico="play" viewBox="0 0 24 24" aria-hidden="true" hidden><polygon points="6 3 20 12 6 21 6 3"/></svg><span class="bar-txt">Pause</span></button>
       <button id="muteTour" type="button" aria-label="Sound on" aria-pressed="false"><svg class="bar-ico" data-ico="vol" viewBox="0 0 24 24" aria-hidden="true"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/></svg><svg class="bar-ico" data-ico="mute" viewBox="0 0 24 24" aria-hidden="true" hidden><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><line x1="22" y1="9" x2="16" y2="15"/><line x1="16" y1="9" x2="22" y2="15"/></svg><span class="bar-txt">Sound on</span></button>
       <button id="ccBtn" type="button" aria-pressed="false" aria-label="Show captions"><span class="bar-txt cc-pill">CC</span></button>
-      <button id="speedBtn" type="button" hidden aria-label="Playback speed 1×" aria-haspopup="listbox" aria-expanded="false"><svg class="bar-ico" data-ico="gauge" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 14V8"/><path d="M12 14l4-2"/><path d="M5 19a9 9 0 1 1 14 0"/><circle cx="12" cy="14" r="1.2" fill="currentColor" stroke="none"/></svg><span class="bar-txt speed-pill">1×</span></button>
+      <button id="speedBtn" type="button" aria-label="Playback speed 1×" aria-haspopup="listbox" aria-expanded="false"><svg class="bar-ico" data-ico="gauge" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 14V8"/><path d="M12 14l4-2"/><path d="M5 19a9 9 0 1 1 14 0"/><circle cx="12" cy="14" r="1.2" fill="currentColor" stroke="none"/></svg><span class="bar-txt speed-pill">1×</span></button>
       <button id="next" type="button" aria-label="Next"><svg class="bar-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg><span class="bar-txt">Next</span></button>
       <a class="talk talk-inbar" id="talkToUs" href="__INQUIRY_HREF__">Talk to us</a>
     </div>
   </nav>
+  <p id="voCap" class="vo-cap" hidden></p>
   <div id="speedSheet" class="speed-sheet" hidden role="listbox" aria-label="Playback speed">
     <button type="button" role="option" data-speed="0.5">0.5×</button>
     <button type="button" role="option" data-speed="0.75">0.75×</button>
@@ -2867,7 +2904,8 @@ function startMusic(A,opts){
   const cycleEighths=cycleBars*barEighths,liftStart=(cycleBars-liftBars)*barEighths;
   const progression=[[130.81,196.00,261.63,329.63],[98.00,146.83,196.00,246.94],[110.00,164.81,220.00,261.63],[87.31,130.81,174.61,220.00]];
   const arp=[0,2,1,3,2,0,1,2];
-  let nextT=ac.currentTime+.05,chordIdx=0,eighth=0;
+  let nextT=ac.currentTime+.05,chordIdx=0,eighth=0,pausedAt=0;
+  const cursor={get nextT(){return nextT;},set nextT(v){nextT=v;},get pausedAt(){return pausedAt;},set pausedAt(v){pausedAt=v;}};
   const voice=(t,freq,type,peak,attack,release)=>{
     const o=ac.createOscillator(),g=ac.createGain();o.type=type;o.frequency.value=freq;
     g.gain.setValueAtTime(.0001,t);g.gain.exponentialRampToValueAtTime(Math.max(peak,.0002),t+attack);
@@ -2884,7 +2922,7 @@ function startMusic(A,opts){
     });
   };
   const schedule=()=>{
-    if(!A.music||A.ac.state!=='running')return;
+    if(!A.music||A.ac.state!=='running'||pausedTourMusic)return;
     const now=ac.currentTime;
     /* Phone/Safari throttles setInterval — jump the cursor instead of flooding oscillators. */
     if(nextT<now-.25){
@@ -2924,7 +2962,7 @@ function startMusic(A,opts){
     musicGain.gain.linearRampToValueAtTime(target,t0+2);
   }
   const timer=setInterval(schedule,180); schedule();
-  A.music={musicGain,filter,timer,kick:schedule};
+  A.music={musicGain,filter,timer,kick:schedule,cursor};
 }
 function setMusicAudible(on){
   if(!audio||!audio.music)return;
@@ -2956,7 +2994,7 @@ function ensureMusic(opts){
   }catch(e){}
 }
 document.addEventListener('visibilitychange',()=>{
-  if(document.visibilityState!=='visible'||!audio)return;
+  if(document.visibilityState!=='visible'||!audio||paused)return;
   try{
     const p=audio.ac.resume();
     const kick=()=>{if(audio.music&&audio.music.kick)audio.music.kick();};
@@ -3118,7 +3156,11 @@ addEventListener('keydown',e=>{
 $('skip').addEventListener('click',e=>{e.stopPropagation();unlockAudio();if(phase==='idle')phase='play';finishIntro();});
 function applyMute(next,fromPeer){
   muted=!!next;
-  ccOn=!!muted;
+  if(!ccChosen)ccOn=!!muted;
+  if(!activeSpeeds().includes(playSpeed)){
+    playSpeed=nearestSpeed(playSpeed);
+    try{sessionStorage.setItem('demo_play_speed',String(playSpeed));}catch(e){}
+  }
   try{syncBarIcons();}catch(e){}
   const labels=muted?'Sound off':'Sound on';
   [$('mute'),$('muteTour')].forEach(btn=>{
@@ -3152,11 +3194,22 @@ if(demoEmbed){
 }
 
 /* =============== TOUR =============== */
-/* Music B: 112 BPM → beat/bar grid for builds + dwell snap */
+/* Music stays at 112 BPM. Speed scales the narration and the slide clock, not the bed. */
 const BEAT_MS=536, HALF_BEAT_MS=268, BAR_MS=2144;
-const SPEED_OPTS=[0.5,0.75,1,1.5];
+const SPEED_ON=[0.75,1,1.25,1.5];
+const SPEED_OFF=[0.5,0.75,1,1.5];
+function activeSpeeds(){return muted?SPEED_OFF:SPEED_ON;}
+function nearestSpeed(n,opts){
+  opts=opts||activeSpeeds();
+  let best=opts[0];
+  for(const x of opts){if(Math.abs(x-n)<Math.abs(best-n)-1e-9)best=x;}
+  return best;
+}
 let playSpeed=1;
-try{const _sp=+sessionStorage.getItem('demo_play_speed'); if(SPEED_OPTS.includes(_sp)) playSpeed=_sp;}catch(e){}
+try{
+  const _sp=+sessionStorage.getItem('demo_play_speed');
+  if(Number.isFinite(_sp)&&_sp>0) playSpeed=nearestSpeed(_sp,SPEED_ON);
+}catch(e){}
 const line='Healthcare still runs on a schedule your people can’t keep.';
 $('bigline').innerHTML=line.split(' ').map((w,i)=>{const hot=/can’t|keep\./.test(w);
   /* Statement build ≤1.6s: word lands by ~1.0s, anim 536ms → lastEnd ≤1536 */
@@ -3419,7 +3472,9 @@ window.__employerDemo={
   MUSIC_LEVEL,MUSIC_PAD_PEAK,MUSIC_ARP_PEAK,MUSIC_PULSE_PEAK,
   ensureMusic,playSlideDeepLink,SLIDE_ALIASES,
   computeAdvanceMs,getTx:()=>tx,getCur:()=>cur,
-  getPaused:()=>paused,togglePause,getPlaySpeed:()=>playSpeed,setPlaySpeed,SPEED_OPTS,
+  getPaused:()=>paused,togglePause,getPlaySpeed:()=>playSpeed,setPlaySpeed,getSpeeds:()=>activeSpeeds().slice(),
+  SPEED_OPTS:SPEED_OFF,SPEED_ON,SPEED_OFF,
+  setCaptions,getCaptions:()=>ccOn,
   getElapsed:()=>elapsed,getDur:()=>dur,
   /* review/QA helper — finishes builds on the target slide */
   showSlide(id){
@@ -3747,9 +3802,35 @@ function freezeVisualPlayback(on){
 }
 function setPauseMusic(isPaused){
   if(!audio||!audio.music)return;
-  const g=audio.music.musicGain.gain,t=audio.ac.currentTime;
-  const target=musicLevelNow();
-  g.cancelScheduledValues(t); g.setTargetAtTime(target,t,.12);
+  const m=audio.music;
+  const g=m.musicGain.gain;
+  if(isPaused){
+    if(m.timer){clearInterval(m.timer);m.timer=0;}
+    if(m.cursor)m.cursor.pausedAt=audio.ac.currentTime;
+    const t=audio.ac.currentTime;
+    g.cancelScheduledValues(t);
+    g.setValueAtTime(.0001,t);
+    try{audio.ac.suspend();}catch(e){}
+    return;
+  }
+  const go=()=>{
+    if(m.cursor&&m.cursor.pausedAt){
+      const drift=audio.ac.currentTime-m.cursor.pausedAt;
+      if(drift>0.05)m.cursor.nextT+=drift;
+      m.cursor.pausedAt=0;
+    }
+    if(!m.timer&&m.kick)m.timer=setInterval(m.kick,180);
+    if(!muted){
+      const t=audio.ac.currentTime;
+      g.cancelScheduledValues(t);
+      g.setTargetAtTime(musicLevelNow(),t,.12);
+    }
+    try{if(m.kick)m.kick();}catch(e){}
+  };
+  let p=null;
+  try{p=audio.ac.resume();}catch(e){}
+  if(p&&typeof p.then==='function')p.then(go).catch(go);
+  else go();
 }
 function animMsFor(el){
   if(el.classList.contains('draw')||el.classList.contains('grow'))return Math.round(BEAT_MS*2);
@@ -3830,7 +3911,10 @@ function fitFrame(){
   const bar=document.querySelector('.bar');
   const barHidden=bar&&bar.classList.contains('bar-hidden');
   const barTop=(bar&&!barHidden)?bar.getBoundingClientRect().top:visBottom;
-  const availBottom=Math.min(visBottom,barTop)-8;
+  const capEl=document.getElementById('voCap');
+  const capOn=!!(capEl&&capEl.classList.contains('on')&&!capEl.hidden);
+  const capTop=capOn?capEl.getBoundingClientRect().top:visBottom;
+  const availBottom=Math.min(visBottom,barTop,capTop)-8;
   /* Probe natural height with top-align */
   s.style.alignContent='start';
   s.style.justifyContent='flex-start';
@@ -3878,15 +3962,18 @@ function scheduleFit(force){
   clearTimeout(fitTimer);
   fitTimer=setTimeout(()=>{fitTimer=0;fitFrame();},80);
 }
-let ccOn=false, voiceUnder=false;
+let ccOn=false, ccChosen=false, voiceUnder=false;
+try{
+  const _cc=sessionStorage.getItem('demo_cc');
+  if(_cc==='0'||_cc==='1'){ccOn=_cc==='1';ccChosen=true;}
+}catch(e){}
 const VO_BY_ID={"statement": {"file": "demo/media/vo/01-statement.mp3", "ms": 11760, "cap": "I'm Dr. Sneh Pandey, physician and Medical Director at Siya Health. Here's something every HR leader knows that healthcare still runs on a schedule your people can't keep."}, "p-time": {"file": "demo/media/vo/02-p-time.mp3", "ms": 8040, "cap": "Clinics open nine to five. Your team works nine to five. So the doctor's appointment either doesn't happen, or it takes the afternoon."}, "p-away": {"file": "demo/media/vo/03-p-away.mp3", "ms": 7730, "cap": "On average, a doctor's visit costs a patient about two hours, for roughly twenty minutes with the doctor."}, "p-familiar": {"file": "demo/media/vo/04-p-familiar.mp3", "ms": 15070, "cap": "And you hear the result every week: out for an appointment, can't focus, not sleeping, still waiting for a psychiatrist. Common, often preventable, and costing your team time and focus."}, "p-response": {"file": "demo/media/vo/05-p-response.mp3", "ms": 4270, "cap": "Even reaching the clinic can take days of voicemails and missed callbacks."}, "p-whole": {"file": "demo/media/vo/06-p-whole.mp3", "ms": 10910, "cap": "Stress, sleep, focus, weight, blood pressure: they are all connected. But the care gets split across specialists who never compare notes."}, "p-coord": {"file": "demo/media/vo/07-p-coord.mp3", "ms": 6250, "cap": "And your employee is left juggling the apps, the logins, and the follow-ups."}, "question": {"file": "demo/media/vo/08-question.mp3", "ms": 4780, "cap": "You have invested in good coverage. But is care there when they actually need it?"}, "turn": {"file": "demo/media/vo/09-turn.mp3", "ms": 9510, "cap": "That's why we built Siya Health: one care team for the whole person. Physical health, mental health, and focus, connected."}, "care-checklist": {"file": "demo/media/vo/10-care-checklist.mp3", "ms": 12640, "cap": "It starts with a full picture: history, screenings, vitals, labs, and cognitive testing, so we track focus and stress over time instead of just guessing. Then, a personalized plan."}, "f-time": {"file": "demo/media/vo/11-f-time.mp3", "ms": 10440, "cap": "Care fits their schedule: a fifteen-minute check-in between meetings, or a longer visit in the evening or on a weekend. Bookable twenty-four seven."}, "f-ways": {"file": "demo/media/vo/12-f-ways.mp3", "ms": 4290, "cap": "They can message the care team anytime, or book a visit with real clinicians."}, "f-response": {"file": "demo/media/vo/13-f-response.mp3", "ms": 8310, "cap": "Real people, not AI chat. Our care team replies within thirty minutes, and a doctor can join within two hours, any time."}, "f-urgent": {"file": "demo/media/vo/14-f-urgent.mp3", "ms": 7010, "cap": "Something urgent, like pink eye at night? Often a photo and a few questions are enough, handled right in the chat."}, "f-whole": {"file": "demo/media/vo/15-f-whole.mp3", "ms": 8140, "cap": "And we stay with them: regular check-ins, preventive care, and ongoing cognitive monitoring. A relationship, not a one-off visit."}, "employer": {"file": "demo/media/vo/16-employer.mp3", "ms": 7110, "cap": "Getting started is simple. A short call, a package tailored to your team, and a private link your employees can join, voluntarily."}, "journey": {"file": "demo/media/vo/17-journey.mp3", "ms": 7080, "cap": "From that link, they reach us through our secure app or our website. Same team, same care."}, "outcomes": {"file": "demo/media/vo/18-outcomes.mp3", "ms": 6740, "cap": "Your team member feels the progress. And you see aggregate trends only, never anybody's personal details."}, "clinicians": {"file": "demo/media/vo/19-clinicians.mp3", "ms": 11290, "cap": "Our clinicians have practiced in academic hospitals, community centers, inpatient medicine, and concierge practice. They know what to manage, and when to refer."}, "cost": {"file": "demo/media/vo/20-cost.mp3", "ms": 8620, "cap": "No months-long waitlists. No network maze. One concierge team for refills, specialists, labs, and forms."}, "privacy": {"file": "demo/media/vo/21-privacy.mp3", "ms": 10880, "cap": "Their health stays theirs. You see participation and aggregate trends, in groups of ten or more. Never names, diagnoses, or messages."}, "proof": {"file": "demo/media/vo/22-proof.mp3", "ms": 7070, "cap": "More than twenty-seven hundred patients, most of them busy professionals, with a four point nine rating on Google."}, "e1-time": {"file": "demo/media/vo/23-e1-time.mp3", "ms": 5730, "cap": "For you, that means time back: visits that take twenty minutes, not two hours."}, "e2-focus": {"file": "demo/media/vo/24-e2-focus.mp3", "ms": 6600, "cap": "Sharper focus and fewer bad weeks, because stress, sleep, and attention get addressed early."}, "e3-outcomes": {"file": "demo/media/vo/25-e3-outcomes.mp3", "ms": 7140, "cap": "Measured health, not just app ratings: validated questionnaires, cognitive assessments, and clinical markers."}, "e4-simple": {"file": "demo/media/vo/26-e4-simple.mp3", "ms": 5660, "cap": "And one partner, one predictable fee, with no extra admin for HR."}, "close": {"file": "demo/media/vo/27-close.mp3", "ms": 6600, "cap": "Let's see how this would work for your team. Request a short call. I would love to walk you through it."}};
 
 if(VO_BY_ID.proof)VO_BY_ID['proof-nums']=VO_BY_ID.proof;
-let voPlay={src:null,offset:0,t0:0,on:false,id:''};
+let voPlay={src:null,offset:0,t0:0,on:false,id:'',rate:1};
 const voCache=new Map();
 function musicLevelNow(){
-  if(muted)return 0.0001;
-  if(pausedTourMusic)return MUSIC_LEVEL*0.3;
+  if(muted||pausedTourMusic)return 0.0001;
   if(voiceUnder)return MUSIC_LEVEL*0.35;
   return MUSIC_LEVEL;
 }
@@ -3897,7 +3984,20 @@ function setVoiceUnder(on){
 }
 function voiceNow(){
   if(!voPlay.on||!audio||!audio.ac)return voPlay.offset||0;
-  return (voPlay.offset||0)+(audio.ac.currentTime-voPlay.t0);
+  return (voPlay.offset||0)+(audio.ac.currentTime-voPlay.t0)*(voPlay.rate||1);
+}
+function retargetVoiceRate(){
+  if(!voPlay.on||!voPlay.src||!audio||!audio.ac)return;
+  const pos=voiceNow();
+  voPlay.offset=pos;
+  voPlay.t0=audio.ac.currentTime;
+  voPlay.rate=playSpeed;
+  try{
+    const p=voPlay.src.playbackRate;
+    p.cancelScheduledValues(audio.ac.currentTime);
+    p.setValueAtTime(playSpeed,audio.ac.currentTime);
+    voPlay.src.preservesPitch=true;
+  }catch(e){}
 }
 function stopVoice(keep){
   const pos=voiceNow();
@@ -3924,10 +4024,11 @@ function startVoice(id,offset){
     try{
       const src=audio.ac.createBufferSource();
       src.buffer=buf;src.connect(audio.master);
+      try{src.playbackRate.value=playSpeed;src.preservesPitch=true;}catch(e){}
       const t=audio.ac.currentTime;
       const startAt=Math.min(off,Math.max(0,buf.duration-0.05));
       src.start(t,startAt);
-      voPlay.src=src;voPlay.t0=t;voPlay.offset=startAt;voPlay.on=true;
+      voPlay.src=src;voPlay.t0=t;voPlay.offset=startAt;voPlay.on=true;voPlay.rate=playSpeed;
       setVoiceUnder(true);
       src.onended=()=>{
         if(voPlay.src!==src)return;
@@ -3948,15 +4049,29 @@ function buildScale(s){
   if(maxT<400)return 1;
   return Math.max(0.35,(meta.ms*0.9)/maxT);
 }
+function paintSpeedSheet(){
+  const sheet=$('speedSheet'); if(!sheet)return;
+  const opts=activeSpeeds();
+  const cur=nearestSpeed(playSpeed,opts);
+  if(cur!==playSpeed)playSpeed=cur;
+  sheet.innerHTML=opts.map(n=>`<button type="button" role="option" data-speed="${n}" aria-selected="${n===playSpeed}" style="min-width:44px;min-height:44px">${n%1?n+'×':n+'×'}</button>`).join('');
+  const pill=document.querySelector('#speedBtn .speed-pill');
+  if(pill)pill.textContent=(playSpeed%1?playSpeed:playSpeed)+'×';
+  const btn=$('speedBtn');
+  if(btn){
+    btn.hidden=false;
+    btn.setAttribute('aria-label','Playback speed '+playSpeed+'×');
+  }
+}
 function syncSoundChrome(){
-  const speed=$('speedBtn'),cc=$('ccBtn'),cap=$('voCap');
-  const soundOn=!muted;
-  if(speed)speed.hidden=soundOn;
-  document.documentElement.classList.toggle('sound-off',!soundOn);
+  const cc=$('ccBtn'),cap=$('voCap');
+  document.documentElement.classList.toggle('sound-off',!!muted);
+  document.documentElement.classList.toggle('cc-on',!!ccOn);
+  try{paintSpeedSheet();}catch(e){}
   const meta=slides[cur]?voMeta(slides[cur].id):null;
   if(cap){
     cap.textContent=meta?meta.cap:'';
-    const show=!!(ccOn&&meta);
+    const show=!!(ccOn&&meta&&meta.cap);
     cap.hidden=!show;
     cap.classList.toggle('on',show);
   }
@@ -3965,7 +4080,12 @@ function syncSoundChrome(){
     cc.setAttribute('aria-pressed',String(!!ccOn));
     cc.setAttribute('aria-label',ccOn?'Hide captions':'Show captions');
   }
-  if(soundOn){const sheet=$('speedSheet');if(sheet)sheet.hidden=true;}
+}
+function setCaptions(on){
+  ccOn=!!on;
+  ccChosen=true;
+  try{sessionStorage.setItem('demo_cc',ccOn?'1':'0');}catch(e){}
+  try{syncSoundChrome();scheduleFit();}catch(e){}
 }
 function enterSlide(i,opts){
   opts=opts||{};
@@ -4113,23 +4233,15 @@ function syncBarIcons(){
   try{syncSoundChrome();}catch(e){}
 }
 function setPlaySpeed(v){
-  const n=+v;
-  if(!SPEED_OPTS.includes(n))return playSpeed;
+  const n=nearestSpeed(+v);
   const prev=playSpeed;
   playSpeed=n;
   try{sessionStorage.setItem('demo_play_speed',String(n));}catch(e){}
-  try{
-    const pill=document.querySelector('#speedBtn .speed-pill');
-    if(pill)pill.textContent=n%1?n+'×':(n+'×');
-    const btn=$('speedBtn');
-    if(btn)btn.setAttribute('aria-label','Playback speed '+n+'×');
-    document.querySelectorAll('#speedSheet [data-speed]').forEach(b=>{
-      b.setAttribute('aria-selected',String(+b.dataset.speed===n));
-    });
-  }catch(e){}
+  try{paintSpeedSheet();}catch(e){}
   try{paintTourLengthLabel();}catch(e){}
   if(prev!==n){
     try{retargetSlideTimeouts(prev);syncSlideMotionRate();}catch(e){}
+    try{retargetVoiceRate();}catch(e){}
     try{
       if(typeof track==='function')track('demo_speed_change',{value:n});
       else{
@@ -4155,8 +4267,8 @@ function togglePause(){
     pauseSlideTimeouts();
     freezeVisualPlayback(true);
     pausedTourMusic=true;
-    setPauseMusic(true);
     try{stopVoice(true);}catch(e){}
+    setPauseMusic(true);
   }else{
     resumeSlideTimeouts();
     freezeVisualPlayback(false);
@@ -4177,7 +4289,7 @@ function tick(now){
         else{window.dataLayer=window.dataLayer||[];window.dataLayer.push(payload);}
       }catch(e){}
     }
-    const clock=(!muted&&slides[cur]&&voMeta(slides[cur].id))?1:playSpeed;
+    const clock=playSpeed;
     if(!paused){elapsed+=dt*clock;while(fired<events.length&&events[fired].t<=elapsed){events[fired++].fn();scheduleFit(true);}
       if(playSpeed!==1)syncSlideMotionRate();
       if(!founderHold&&tx==='idle'&&dur>0&&elapsed>=dur)goTo(cur+1,{});}
@@ -4232,6 +4344,8 @@ function showBar(force){
   bar.classList.remove('bar-hidden');
   clearTimeout(barHideTimer);
   if(phoneChrome()&&tourOn&&!paused){
+    const sheet=$('speedSheet');
+    if(sheet&&!sheet.hidden)return;
     barHideTimer=setTimeout(()=>{if(tourOn&&!paused)bar.classList.add('bar-hidden');},3000);
   }
 }
@@ -4279,7 +4393,7 @@ $('pause').addEventListener('click',()=>{togglePause();showBar();});
 const muteTourBtn=$('muteTour');
 if(muteTourBtn)muteTourBtn.addEventListener('click',e=>{e.stopPropagation();applyMute(!muted);});
 const ccBtn=$('ccBtn');
-if(ccBtn)ccBtn.addEventListener('click',e=>{e.stopPropagation();ccOn=!ccOn;try{syncSoundChrome();scheduleFit();}catch(err){}showBar();});
+if(ccBtn)ccBtn.addEventListener('click',e=>{e.stopPropagation();setCaptions(!ccOn);showBar();});
 function bindTalkLink(el){
   if(!el||el.dataset.boundTalk)return;
   el.dataset.boundTalk='1';
@@ -4313,20 +4427,31 @@ function paintTourLengthLabel(){
 }
 
 $('replayTour').addEventListener('click',()=>{paused=false;try{freezeVisualPlayback(false);resumeSlideTimeouts();setPauseMusic(false);syncBarIcons();}catch(e){}$('pause')&&($('pause').querySelector('.bar-txt')?0:($('pause').textContent='Pause'));goTo(0,{force:true});});
+let speedGuard=0;
 try{
   setPlaySpeed(playSpeed);
   const speedBtn=$('speedBtn');
-  if(speedBtn)speedBtn.addEventListener('click',e=>{e.stopPropagation();toggleSpeedSheet();});
+  if(speedBtn)speedBtn.addEventListener('click',e=>{
+    e.preventDefault();
+    e.stopPropagation();
+    speedGuard=performance.now();
+    toggleSpeedSheet();
+    showBar();
+  });
   const speedSheet=$('speedSheet');
   if(speedSheet){
     speedSheet.addEventListener('click',e=>{
+      e.preventDefault();
       e.stopPropagation();
+      speedGuard=performance.now();
       const b=e.target.closest('[data-speed]'); if(!b)return;
       setPlaySpeed(+b.dataset.speed);
       toggleSpeedSheet(false);
+      showBar();
     });
   }
   document.addEventListener('click',e=>{
+    if(performance.now()-speedGuard<500)return;
     if(e.target.closest('#speedBtn,#speedSheet'))return;
     toggleSpeedSheet(false);
   });
