@@ -15,6 +15,7 @@ Log `STARTED` ≈ CLI attempts from this script (Git/Vercel auto-builds also bur
 
 | Day (IST) | Prod STARTED | Prod OK | Preview STARTED | Preview OK | Quota REFUSED |
 |---|---:|---:|---:|---:|---:|
+| 2026-10-09 | 1 | 1 | 0 | 0 | 0 |
 | 2026-10-08 | 1 | 1 | 0 | 0 | 0 |
 | 2026-10-07 | 3 | 3 | 0 | 0 | 2 |
 | 2026-10-06 | 1 | 1 | 0 | 0 | 0 |
@@ -41,3 +42,5 @@ Log `STARTED` ≈ CLI attempts from this script (Git/Vercel auto-builds also bur
 | 2026-10-07 17:38 IST | `release/2026-10-07d` | `5078d31a` | production | sp | REFUSED | gate failed |
 | 2026-10-08 05:46 IST | `release/2026-10-07d` | `7939876f` | production | sp | STARTED | Pause gate screenshot flake fix; log refused prod (gate timeout). |
 | 2026-10-08 05:46 IST | `release/2026-10-07d` | `7939876f` | production | sp | OK | playback pause/speed/pacing · dpl_92UZzgZAY2JXd7Mk2rUgmm29CYAE |
+| 2026-10-09 07:05 IST | `release/2026-10-09` | `23fe16bb` | production | sp | STARTED | Merge employer-demo-journey-prod into release/2026-10-09. |
+| 2026-10-09 07:05 IST | `release/2026-10-09` | `23fe16bb` | production | sp | OK | For you chapter + founder voiceover · dpl_ByYtasrQvcNSaA9yi4in9b4xBeLD |
