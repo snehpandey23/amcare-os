@@ -318,7 +318,7 @@ export const ANCHOR_LABELS = {
   '/adhd-care': 'ADHD evaluation and ongoing care',
   '/weight-loss-metabolic-health': 'Medical weight loss program',
   '/adult-adhd-diagnosis': 'Book an adult ADHD evaluation',
-  '/adhd-screening': 'Free 2-minute ADHD screening',
+  '/adhd-screening': 'Take our free 2-minute ADHD screening',
   '/answers': 'Browse all health guides',
   '/primary-urgent-care': 'Primary and urgent telehealth care',
   '/labs': 'Labs & blood tests',
