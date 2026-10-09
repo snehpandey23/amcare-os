@@ -10,5 +10,6 @@ brand/
 # Local voiceover listening page and raw takes. Never deploy.
 internal/vo-preview.html
 internal/vo-raw
+internal/vo-raw/**
 internal/vo-tail-check.json
 internal/vo-report.json

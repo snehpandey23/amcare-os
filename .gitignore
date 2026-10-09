@@ -49,3 +49,4 @@ tmp/
 # OET LMS local LLM/env pulls — never commit
 integrations/oet-lms-chat/.env.staff-llm
 **/.env.staff-llm
+.vercel

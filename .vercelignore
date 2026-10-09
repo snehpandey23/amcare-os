@@ -1,0 +1,9 @@
+# CLI deploys from the repo root. Ignore rules are read here, not from apps/siya-health/.vercelignore.
+# Raw voice takes, the local A/B page, and the clip report must never upload.
+apps/siya-health/internal/vo-raw
+apps/siya-health/internal/vo-raw/**
+apps/siya-health/internal/vo-preview.html
+apps/siya-health/internal/vo-tail-check.json
+apps/siya-health/internal/vo-report.json
+apps/siya-health/node_modules
+apps/siya-health/node_modules/**
