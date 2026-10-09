@@ -483,10 +483,10 @@ html.cc-on.desk-stage #tour #p-coord .me-node{width:80px}
   html.cc-on #p-away .away-track,html.cc-on #e1-time .away-track{height:36px}
 }
 @media (max-width:640px) and (max-height:700px){
-  html.cc-on #p-response .vm-row:nth-child(-n+2){display:none}
-}
-@media (max-width:640px) and (max-height:580px){
   html.cc-on #p-response .vm-row:nth-child(-n+3){display:none}
+}
+@media (max-width:640px) and (max-height:670px){
+  html.cc-on #p-response .vm-row:nth-child(-n+4){display:none}
 }
 @media (max-width:640px){
   html.cc-on #tour .slide,
@@ -958,8 +958,8 @@ html.desk-stage #tour #care-checklist .chart-card{width:min(380px,100%)}
   #f-time .panel-label{font-size:11px;margin:0 0 4px}
   #f-time .gcal{--hr:22px}
   #f-time .week{--wh:7px;padding:8px}
-  #f-time .legend{font-size:10px;gap:4px 8px;margin-top:4px;flex-wrap:wrap}
-  #f-time .ev,#f-time .gap span{font-size:10px}
+  #f-time .legend{font-size:11px;gap:4px 8px;margin-top:4px;flex-wrap:wrap}
+  #f-time .ev,#f-time .gap span{font-size:11px}
   #p-away .away-total,#e1-time .away-total{font-size:16px}
   #p-away .desk-copy .cap,#e1-time .desk-copy .cap{font-size:clamp(22px,6.2vw,28px)}
   #p-away .desk-copy .sub,#e1-time .desk-copy .sub{font-size:13px}
@@ -1344,11 +1344,15 @@ html.desk-stage #tour #cost .cost-cell{font-size:13px;padding:11px 12px}
 .out-dual{width:100%;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:24px;align-items:stretch}
 .out-dual .panel{min-height:0;min-width:45%;overflow:hidden;gap:12px;flex:1 1 45%}
 .out-dual .panel h3{flex-wrap:wrap}
-.out-dual .panel h3 small{display:inline;margin-left:6px;font:600 10px/1 var(--font-body);letter-spacing:.06em;text-transform:uppercase;color:var(--ink-soft)}
+.out-dual .panel h3 small{display:inline;margin-left:6px;font:600 12px/1 var(--font-body);letter-spacing:.06em;text-transform:uppercase;color:var(--ink-soft)}
 html.desk-stage #tour #outcomes .out-dual{gap:24px;width:100%}
 html.desk-stage #tour #outcomes .out-dual .panel{padding:16px;min-width:0}
 html.desk-stage #tour #outcomes .spark svg{height:150px;min-height:140px}
 html.desk-stage #tour #outcomes .spark-top b{font-size:14px}
+html.desk-stage #tour .spark-top span,
+html.desk-stage #tour #outcomes small,
+html.desk-stage #tour .cost-foot,
+html.desk-stage #tour .avatar{font-size:12px}
 #outcomes .spark svg{height:140px;min-height:140px}
 @media (max-width:640px){
   #outcomes .spark svg{height:120px;min-height:120px}
@@ -1500,6 +1504,28 @@ article.slide[data-close="1"] .close-foot{
   #tour article.slide.phone-lg-type .why-siya span,
   #tour article.slide.phone-lg-type .cost-foot,
   #tour article.slide.phone-lg-type .wm-dates span,
+  #tour article.slide.phone-lg-type h3,
+  #tour article.slide.phone-lg-type b,
+  #tour article.slide.phone-lg-type .vm-time,
+  #tour article.slide.phone-lg-type .vm-row small,
+  #tour article.slide.phone-lg-type .pill,
+  #tour article.slide.phone-lg-type .gcal span,
+  #tour article.slide.phone-lg-type .legend,
+  #tour article.slide.phone-lg-type .legend span,
+  #tour article.slide.phone-lg-type .hr-av,
+  #tour article.slide.phone-lg-type .cond,
+  #tour article.slide.phone-lg-type .spec,
+  #tour article.slide.phone-lg-type .badge,
+  #tour article.slide.phone-lg-type .app-row b,
+  #tour article.slide.phone-lg-type .hol,
+  #tour article.slide.phone-lg-type .wk-hours span,
+  #tour article.slide.phone-lg-type .wk-head div,
+  #tour article.slide.phone-lg-type .chk-row,
+  #tour article.slide.phone-lg-type .chk-final,
+  #tour article.slide.phone-lg-type .chk-final span,
+  #tour article.slide.phone-lg-type .chart-head span,
+  #tour article.slide.phone-lg-type .yt-item span,
+  #tour article.slide.phone-lg-type .priv-col li,
   #tour article.slide.phone-lg-type button,
   #tour article.slide.phone-lg-type a{
     font-size:16px!important;
@@ -1749,7 +1775,7 @@ html.demo-embed #tour .hint2{display:none}
   #outcomes .panel{padding:6px;gap:3px;min-width:0}
   #outcomes .spark-cap{display:none}
   #outcomes .spark{gap:1px}
-  #outcomes .spark-top b,#outcomes .spark-top span{font-size:10px}
+  #outcomes .spark-top b,#outcomes .spark-top span{font-size:11px}
   #outcomes .spark svg{height:110px;min-height:110px;max-height:110px}
   #outcomes .panel h3{font-size:11px;line-height:1.2}
   #outcomes .panel h3 small{font-size:9px}
