@@ -102,9 +102,11 @@
       detailEl.innerHTML = ASRS_DETAIL_HTML;
     }
   } else {
-    titleEl.textContent = 'Your ADHD screening is complete';
-    leadEl.textContent =
-      'This screening is not a diagnosis. Learn what an ADHD evaluation involves, or book a free Meet & Greet if you want to talk through next steps.';
+    /* No score in the URL — do not claim the questionnaire was finished. */
+    titleEl.textContent = 'Finish your ADHD screening';
+    leadEl.innerHTML =
+      'We don\'t have a screening score for this visit yet. <a href="/adhd-screening?adhd=1">Take the free 2-minute questionnaire</a> to see your result and next-step options. This screening is not a diagnosis.';
+    if (badgeEl) badgeEl.hidden = true;
   }
 
   if (scoreEl && hasScore) {
