@@ -22,6 +22,7 @@ const HASH = execSync('git rev-parse --short HEAD', { cwd: ROOT }).toString().tr
 const VIEWS = [
   [1440, 900],
   [1366, 768],
+  [1280, 720],
   [390, 844],
   [360, 800],
   [390, 664],
@@ -272,6 +273,23 @@ async function check(page, slideId, viewport) {
       }
     }
 
+    /* Captions on: key text must stay above the subtitle band. */
+    const cap = document.querySelector('#voCap.on');
+    if (cap) {
+      const cr = cap.getBoundingClientRect();
+      for (const b of boxes) {
+        const ox = Math.min(b.r.right, cr.right) - Math.max(b.r.left, cr.left);
+        const oy = Math.min(b.r.bottom, cr.bottom) - Math.max(b.r.top, cr.top);
+        if (ox > 4 && oy > 4) {
+          fails.push({
+            slideId, viewport, type: 'caption-overlap',
+            a: `${b.label}:${b.text}`,
+            b: 'voCap',
+          });
+        }
+      }
+    }
+
     return fails;
   }, { TEXT_SELECTOR, STRUCT_SKIP: [...STRUCT_SKIP], slideId, viewport });
 }
@@ -307,6 +325,9 @@ for (const [w, h] of VIEWS) {
       await ctx.close();
       continue;
     }
+    await page.evaluate(() => {
+      if (window.__employerDemo.setCaptions) window.__employerDemo.setCaptions(true);
+    });
     try {
       await page.evaluate((id) => window.__employerDemo.showSlide(id), id);
     } catch (e) {

@@ -15,7 +15,16 @@ const ROOT = process.cwd();
 const OUT = path.join(ROOT, 'internal/demo-qa/walkthrough');
 fs.mkdirSync(OUT, { recursive: true });
 const HASH = execSync('git rev-parse --short HEAD', { cwd: ROOT }).toString().trim();
-const VIEWS = [[390, 664], [393, 659], [375, 553], [390, 844], [360, 800]];
+const VIEWS = [
+  { w: 390, h: 664, mobile: true },
+  { w: 393, h: 659, mobile: true },
+  { w: 375, h: 553, mobile: true },
+  { w: 390, h: 844, mobile: true },
+  { w: 360, h: 800, mobile: true },
+  { w: 1440, h: 900, mobile: false },
+  { w: 1366, h: 768, mobile: false },
+  { w: 1280, h: 720, mobile: false },
+];
 const MIN_SCALE = 0.7;
 const MIN_PX = 11;
 
@@ -39,8 +48,8 @@ const failures = [];
 const trimmed = new Set();
 
 const browser = await chromium.launch();
-for (const [w, h] of VIEWS) {
-  const ctx = await browser.newContext({ viewport: { width: w, height: h }, isMobile: true, hasTouch: true });
+for (const { w, h, mobile } of VIEWS) {
+  const ctx = await browser.newContext({ viewport: { width: w, height: h }, isMobile: mobile, hasTouch: mobile });
   const page = await ctx.newPage();
   await page.goto(`http://127.0.0.1:${port}/employers/demo.html?review=1`, { waitUntil: 'domcontentloaded' });
   await page.waitForFunction(() => document.documentElement.dataset.siyaReady === '1');
@@ -50,13 +59,18 @@ for (const [w, h] of VIEWS) {
     document.getElementById('welcome').classList.remove('on');
     document.getElementById('tour').hidden = false;
     document.getElementById('tour').classList.add('on');
+    if (window.__employerDemo.setCaptions) window.__employerDemo.setCaptions(true);
   });
-  const ids = await page.evaluate(() =>
+  const ids = await page.evaluate((mobile) =>
     [...document.querySelectorAll('#tour article.slide:not(.parked)')]
-      .filter((s) => (s.dataset.surface || 'both') !== 'desk')
+      .filter((s) => {
+        const surf = s.dataset.surface || 'both';
+        if (mobile) return surf !== 'desk';
+        return surf !== 'phone';
+      })
       .map((s) => s.id)
       .filter(Boolean),
-  );
+  mobile);
   for (const id of ids) {
     await page.evaluate((id) => window.__employerDemo.showSlide(id), id);
     await page.waitForTimeout(280);

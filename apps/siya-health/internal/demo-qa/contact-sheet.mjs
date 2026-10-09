@@ -66,6 +66,9 @@ async function shoot(w, h, label) {
       document.getElementById('tour').hidden = false;
       document.getElementById('tour').classList.add('on');
     });
+    await page.evaluate(() => {
+      if (window.__employerDemo.setCaptions) window.__employerDemo.setCaptions(true);
+    });
     await page.evaluate((id) => window.__employerDemo.showSlide(id), id);
     await page.waitForTimeout(id.includes('away') || id === 'f-ways' || id === 'p-coord' ? 5000 : 2200);
     await page.evaluate(({ HASH, TS }) => {

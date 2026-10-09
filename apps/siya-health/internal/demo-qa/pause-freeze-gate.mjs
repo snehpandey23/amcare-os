@@ -20,6 +20,8 @@ const HASH = execSync('git rev-parse --short HEAD', { cwd: ROOT }).toString().tr
 const VIEWS = [
   { w: 390, h: 664, mobile: true },
   { w: 1440, h: 900, mobile: false },
+  { w: 1366, h: 768, mobile: false },
+  { w: 1280, h: 720, mobile: false },
 ];
 
 const server = await new Promise((r) => {
