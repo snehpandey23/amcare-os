@@ -11,7 +11,8 @@
 #     Do NOT burn Vercel preview deploys for every polish iteration.
 #   - Preview (`--preview`) only when the founder asks for a review link,
 #     or immediately before a prod promote (PREVIEW_REASON=review-link|pre-prod).
-#   - Production requires `--prod` + SIYA_HEALTH_RELEASE_BRANCH + PROMOTE_APPROVED.
+#   - Production (`--prod`) uploads with `--skip-domain`. It does not assign
+#     www.siya.health. Allowed branches: main, integration/*.
 # Every attempt appends to apps/siya-health/internal/demo-qa/deploy-log.md
 # and refreshes the "Deploy count by day" section.
 
@@ -45,9 +46,10 @@ Usage: bash scripts/deploy-siya-health.sh [--check-only] [--prod] [--preview]
   HYGIENE: use local builds + contact sheets for intermediate checks.
   Preview deploys only when asked for a review link, or right before prod.
 
-  --prod requires:
-    - current branch == SIYA_HEALTH_RELEASE_BRANCH (default: main)
-    - PROMOTE_APPROVED=<commit hash> matching HEAD
+  --prod stages a production deployment with --skip-domain.
+  It does not assign www.siya.health.
+  Branch must be main or integration/*.
+  Demo and video agents must not run a bare `vercel deploy --prod`.
 
   --preview requires:
     - PREVIEW_REASON=review-link   (founder asked for a review URL)
@@ -69,7 +71,6 @@ done
 export VERCEL_ORG_ID="${VERCEL_ORG_ID:-team_7dvS6pa19W0oVxblge8o52QL}"
 export VERCEL_PROJECT_ID="${VERCEL_PROJECT_ID:-prj_d44fdj7C0X9ivPrLVqIHOiNvJ8Qd}"
 
-RELEASE_BRANCH="${SIYA_HEALTH_RELEASE_BRANCH:-main}"
 BRANCH="$(git rev-parse --abbrev-ref HEAD)"
 SHA="$(git rev-parse HEAD)"
 SHORT="$(git rev-parse --short HEAD)"
@@ -96,20 +97,20 @@ log_attempt() {
 }
 
 echo "==> Patient site deploy"
-echo "    branch: $BRANCH (release branch: $RELEASE_BRANCH)"
+echo "    branch: $BRANCH (allowed for --prod: main, integration/*)"
 echo "    commit: $SHA"
 echo "    $SUBJECT"
 echo "    hygiene: local checks preferred; preview only review-link|pre-prod"
 echo ""
 
-DIRTY="$(git status --porcelain -- apps/siya-health)"
+DIRTY="$(git status --porcelain)"
 if [[ -n "$DIRTY" ]]; then
-  echo "==> apps/siya-health is not committed:" >&2
+  echo "==> Working tree is not clean (uncommitted or untracked files):" >&2
   echo "$DIRTY" >&2
   echo "" >&2
-  echo "REFUSING deploy. Disk and git disagree for the patient site." >&2
-  echo "Commit apps/siya-health and push before deploying." >&2
-  log_attempt "blocked" "REFUSED" "dirty apps/siya-health"
+  echo "REFUSING deploy. CLI uploads the working tree, not git HEAD." >&2
+  echo "Commit or remove those files before deploying." >&2
+  log_attempt "blocked" "REFUSED" "dirty tree"
   exit 1
 fi
 
@@ -120,27 +121,15 @@ if [[ "$WANT_PROD" -eq 1 && "$WANT_PREVIEW" -eq 1 ]]; then
 fi
 
 if [[ "$WANT_PROD" -eq 1 ]]; then
-  if [[ "$BRANCH" != "$RELEASE_BRANCH" ]]; then
-    echo "REFUSING --prod: branch '$BRANCH' is not the release branch '$RELEASE_BRANCH'." >&2
-    log_attempt "production" "REFUSED" "branch!=$RELEASE_BRANCH"
-    exit 1
-  fi
-  if [[ -z "${PROMOTE_APPROVED:-}" ]]; then
-    echo "REFUSING --prod: set PROMOTE_APPROVED=<commit hash> to match HEAD ($SHORT)." >&2
-    log_attempt "production" "REFUSED" "missing PROMOTE_APPROVED"
-    exit 1
-  fi
-  APPROVED_FULL="$(git rev-parse --verify "${PROMOTE_APPROVED}^{commit}" 2>/dev/null || true)"
-  if [[ -z "$APPROVED_FULL" ]]; then
-    echo "REFUSING --prod: PROMOTE_APPROVED='$PROMOTE_APPROVED' is not a known commit." >&2
-    log_attempt "production" "REFUSED" "bad PROMOTE_APPROVED"
-    exit 1
-  fi
-  if [[ "$APPROVED_FULL" != "$SHA" ]]; then
-    echo "REFUSING --prod: PROMOTE_APPROVED ($APPROVED_FULL) != HEAD ($SHA)." >&2
-    log_attempt "production" "REFUSED" "PROMOTE_APPROVED mismatch"
-    exit 1
-  fi
+  case "$BRANCH" in
+    main|integration/*) ;;
+    *)
+      echo "REFUSING --prod: branch '$BRANCH' is not main or integration/*." >&2
+      echo "Demo and video agents must not run vercel deploy --prod." >&2
+      log_attempt "production" "REFUSED" "branch not main or integration/*"
+      exit 1
+      ;;
+  esac
 fi
 
 if [[ "$WANT_PREVIEW" -eq 1 ]]; then
@@ -206,12 +195,18 @@ if [[ "$WANT_PROD" -eq 1 ]]; then
     exit 1
   fi
   log_attempt "production" "STARTED" "$SUBJECT"
-  if ! npx vercel deploy --prod --yes; then
+  DEPLOY_OUT="$(npx vercel deploy --prod --skip-domain --yes 2>&1)" || {
+    printf '%s\n' "$DEPLOY_OUT" >&2
     log_attempt "production" "REFUSED" "vercel deploy failed (check quota)"
     exit 1
+  }
+  printf '%s\n' "$DEPLOY_OUT"
+  DEPLOY_URL="$(printf '%s\n' "$DEPLOY_OUT" | awk '/^https:\/\/[^ ]+$/ {u=$0} END {print u}')"
+  DEPLOY_ID=""
+  if [[ -n "$DEPLOY_URL" ]]; then
+    DEPLOY_ID="$(npx vercel inspect "$DEPLOY_URL" 2>/dev/null | awk '/^[[:space:]]*id[[:space:]]/ {print $2; exit}')"
   fi
-  npx vercel cache purge --type cdn --yes || true
-  log_attempt "production" "OK" "$SUBJECT · day=$DAY_IST"
+  log_attempt "production" "OK" "staged --skip-domain sha=$SHA branch=$BRANCH operator=$WHO id=${DEPLOY_ID:-unknown} url=${DEPLOY_URL:-unknown}"
   exit 0
 fi
 

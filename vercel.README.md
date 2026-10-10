@@ -6,7 +6,7 @@ This monorepo hosts **multiple Vercel projects**. A bare `vercel deploy --prod` 
 |---------|-------------|
 | **Staff portal** (auth API + staff app) | `bash scripts/deploy-staff-portal.sh` — refuses dirty working tree unless `--allow-dirty` |
 | **Auth API alone** | Prefer the script above (same gate). Avoid bare `vercel deploy` — skips dirty check. |
-| **Patient site** | `bash scripts/deploy-siya-health.sh --prod` (promote) or `--preview` with `PREVIEW_REASON=review-link\|pre-prod`. Intermediate checks: **local** generate + contact sheets — do **not** burn previews every polish pass. Dirty tree refused; no `--allow-dirty`. Do not `cd apps/siya-health && vercel deploy`. Counts: `apps/siya-health/internal/demo-qa/deploy-log.md`. |
+| **Patient site** | `bash scripts/deploy-siya-health.sh --prod` stages with `--skip-domain` and does **not** assign www.siya.health. Branch must be `main` or `integration/*`. Dirty or untracked files are refused. Demo and video agents must not run `vercel deploy --prod`. `--preview` needs `PREVIEW_REASON=review-link\|pre-prod`. |
 | **Patient Guide bot** | `cd apps/siya-assistant && npx vercel deploy --prod --yes` |
 
 See `.cursor/rules/staff-portal-vercel-deploy.mdc`, `.cursor/rules/siya-health-commit-before-deploy.mdc`, and `apps/hipaa-training/docs/DEPLOYMENT-GATE.md`.
