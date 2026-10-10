@@ -187,13 +187,34 @@
   /** Fire completion events, show brief handoff UI, then redirect to dedicated results page. */
   function completeScreeningAndRedirect() {
     var score = calculateScore();
+    var resultsRoot = document.getElementById('asrs-results');
+    var headingEl = document.getElementById('asrs-results-heading');
+    var completeEl = document.getElementById('asrs-results-complete');
     var scoreEl = document.getElementById('asrs-score-para');
     var messageEl = document.getElementById('asrs-results-message');
     var ctaBlock = container.querySelector('.asrs-cta-completion');
+    var microEl = container.querySelector('.asrs-results-microcopy');
+    var step7 = container.querySelector('.asrs-step[data-step="7"]');
     var destination = resultsPageUrl(score);
 
     var isPositive = score >= POSITIVE_THRESHOLD;
+
+    /* Reveal handoff copy only after all six answers exist — never in initial HTML. */
+    if (step7) {
+      step7.removeAttribute('inert');
+      step7.setAttribute('aria-label', 'Screening complete');
+    }
+    if (resultsRoot) resultsRoot.hidden = false;
+    if (headingEl) {
+      headingEl.hidden = false;
+      headingEl.textContent = 'Screening complete';
+    }
+    if (completeEl) {
+      completeEl.hidden = false;
+      completeEl.textContent = 'You’ve completed your free ADHD screening.';
+    }
     if (scoreEl) {
+      scoreEl.hidden = false;
       scoreEl.textContent =
         'Result: ' +
         (isPositive ? 'positive' : 'negative') +
@@ -203,6 +224,7 @@
     }
 
     if (messageEl) {
+      messageEl.hidden = false;
       messageEl.innerHTML =
         '<p><strong>Your screening result is ' +
         (isPositive ? 'positive' : 'negative') +
@@ -213,11 +235,13 @@
     }
 
     if (ctaBlock) {
+      ctaBlock.hidden = false;
       ctaBlock.innerHTML =
         '<a class="button ds-button ds-button--primary" href="' +
         destination +
         '" data-siya-track="screening-results-continue" data-siya-location="screening-results-handoff">Continue to next steps</a>';
     }
+    if (microEl) microEl.hidden = false;
 
     var detail = {
       funnel: 'adhd_california',
