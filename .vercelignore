@@ -1,0 +1,5 @@
+# Applied when `vercel deploy` runs from the monorepo root.
+# Project Root Directory is apps/siya-health; a nested .vercelignore is not
+# applied to a root upload, which is how /internal/ and /brand/ reached production.
+# Shipped pages do not load /internal/. Voiceover mp3s live under employers/demo/media.
+apps/siya-health/internal

@@ -1,3 +1,7 @@
+# No shipped page loads /internal/. CLI uploads from apps/siya-health honor this file.
+# A root upload uses the repo-root .vercelignore instead (see that file).
+internal
+
 # Stale HTML mirrors — not part of production surface
 public/
 
