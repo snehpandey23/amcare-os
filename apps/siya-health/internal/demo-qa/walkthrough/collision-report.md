@@ -1,8 +1,0 @@
-# Collision report `dc0455fa`
-
-Checked: statement, p-familiar, p-time, p-away, p-response, p-whole, p-coord, question, care-checklist, turn, f-time, f-ways, f-response, f-urgent, f-whole, employer, journey, outcomes, clinicians, cost, privacy, proof, e1-time, e2-focus, e3-outcomes, e4-simple, close
-Views: 1440x900, 1366x768, 390x844, 360x800, 390x664, 393x659, 375x553
-
-**Failures: 0**
-
-_Zero failures._

@@ -10,14 +10,11 @@ data/ads-landing-smoke-latest.json
 # Phase 0 live HTML + git archive backups (local only; do not commit)
 .site-snapshots/
 
-# Local Design QA screenshots / clips (not deployed).
-# Keep scripts + markdown reports tracked; ignore generated media.
+# Demo QA outputs stay local. Gate scripts (*.mjs) and the deploy log stay tracked.
 internal/demo-qa/**
 !internal/demo-qa/**/
 !internal/demo-qa/**/*.mjs
-!internal/demo-qa/**/*.md
-!internal/demo-qa/**/*.json
-!internal/demo-qa/**/*.html
+!internal/demo-qa/deploy-log.md
 internal/demo-qa/**/_cs_*/
 internal/demo-qa/**/*.png
 internal/demo-qa/**/*.jpg
