@@ -15,6 +15,7 @@ Log `STARTED` ≈ CLI attempts from this script (Git/Vercel auto-builds also bur
 
 | Day (IST) | Prod STARTED | Prod OK | Preview STARTED | Preview OK | Quota REFUSED |
 |---|---:|---:|---:|---:|---:|
+| 2026-10-10 | 1 | 1 | 0 | 0 | 0 |
 | 2026-10-09 | 2 | 2 | 0 | 0 | 0 |
 | 2026-10-08 | 1 | 1 | 0 | 0 | 0 |
 | 2026-10-07 | 3 | 3 | 0 | 0 | 2 |
@@ -46,3 +47,5 @@ Log `STARTED` ≈ CLI attempts from this script (Git/Vercel auto-builds also bur
 | 2026-10-09 07:05 IST | `release/2026-10-09` | `23fe16bb` | production | sp | OK | For you chapter + founder voiceover · dpl_ByYtasrQvcNSaA9yi4in9b4xBeLD |
 | 2026-10-09 09:55 IST | `release/2026-10-09` | `63a04478` | production | sp | STARTED | Merge branch 'employer-demo-journey-prod' into release/2026-10-09 |
 | 2026-10-09 09:55 IST | `release/2026-10-09` | `63a04478` | production | sp | OK | Pause, pinned subtitles, speed with voice · dpl_EyxpkRRoy62f5AsbWaeXf511gerG |
+| 2026-10-10 06:23 IST | `release/2026-10-09` | `a565a34d` | production | sp | STARTED | Trim the employer demo voiceover and settle each slide after it finishes moving. |
+| 2026-10-10 06:23 IST | `release/2026-10-09` | `a565a34d` | production | sp | OK | Trim the employer demo voiceover and settle each slide after it finishes moving. · day=2026-10-10 |
