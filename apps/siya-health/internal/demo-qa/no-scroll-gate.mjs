@@ -120,21 +120,30 @@ async function runEngine(engine, label, views = VIEWS) {
         .filter(Boolean),
     );
     for (const id of ids) {
+      const beforePlay = await page.evaluate(() => window.__slideSettled?.gen || 0);
       await page.evaluate((id) => window.__employerDemo.playSlideDeepLink(id, { playBuild: true }), id);
-      for (const wait of [300, 1200, 2400]) {
-        await page.waitForTimeout(wait === 300 ? 300 : 900);
-        checkMeas(await measure(page), { engine: label, view: `${w}x${h}`, phase: `build-${wait}`, id });
+      if (process.env.SIYA_GATE_FAST === '1') {
+        await page.waitForFunction((n) => (window.__slideSettled?.gen || 0) > n, beforePlay, { timeout: 2000 });
+        checkMeas(await measure(page), { engine: label, view: `${w}x${h}`, phase: 'settled', id });
+      } else {
+        for (const wait of [300, 1200, 2400]) {
+          await page.waitForTimeout(wait === 300 ? 300 : 900);
+          checkMeas(await measure(page), { engine: label, view: `${w}x${h}`, phase: `build-${wait}`, id });
+        }
       }
+      const beforeFinal = await page.evaluate(() => window.__slideSettled?.gen || 0);
       await page.evaluate((id) => window.__employerDemo.showSlide(id), id);
-      await page.waitForTimeout(220);
+      await page.waitForFunction((n) => (window.__slideSettled?.gen || 0) > n, beforeFinal, { timeout: 2000 });
       checkMeas(await measure(page), { engine: label, view: `${w}x${h}`, phase: 'final', id });
+      const beforeResize = await page.evaluate(() => window.__slideSettled?.gen || 0);
       await page.setViewportSize({ width: w, height: Math.max(480, h - 72) });
       await page.evaluate(() => window.dispatchEvent(new Event('resize')));
-      await page.waitForTimeout(220);
+      await page.waitForFunction((n) => (window.__slideSettled?.gen || 0) > n, beforeResize, { timeout: 2000 });
       checkMeas(await measure(page), { engine: label, view: `${w}x${h}`, phase: 'resize', id });
+      const beforeResizeBack = await page.evaluate(() => window.__slideSettled?.gen || 0);
       await page.setViewportSize({ width: w, height: h });
       await page.evaluate(() => window.dispatchEvent(new Event('resize')));
-      await page.waitForTimeout(120);
+      await page.waitForFunction((n) => (window.__slideSettled?.gen || 0) > n, beforeResizeBack, { timeout: 2000 });
       await page.evaluate(() => document.getElementById('pause')?.click());
       await page.waitForTimeout(100);
       checkMeas(await measure(page), { engine: label, view: `${w}x${h}`, phase: 'paused', id });
@@ -155,11 +164,13 @@ async function runEngine(engine, label, views = VIEWS) {
       await page.evaluate(() => document.querySelector('.bar')?.classList.remove('bar-hidden'));
       // next/back once per viewport on a heavy slide only
       if (id === 'f-ways' || id === 'outcomes') {
+        const beforeNext = await page.evaluate(() => window.__slideSettled?.gen || 0);
         await page.evaluate(() => document.getElementById('next')?.click());
-        await page.waitForTimeout(200);
+        await page.waitForFunction((n) => (window.__slideSettled?.gen || 0) > n, beforeNext, { timeout: 2000 });
         checkMeas(await measure(page), { engine: label, view: `${w}x${h}`, phase: 'after-next', id: 'nav' });
+        const beforePrev = await page.evaluate(() => window.__slideSettled?.gen || 0);
         await page.evaluate(() => document.getElementById('prev')?.click());
-        await page.waitForTimeout(200);
+        await page.waitForFunction((n) => (window.__slideSettled?.gen || 0) > n, beforePrev, { timeout: 2000 });
         checkMeas(await measure(page), { engine: label, view: `${w}x${h}`, phase: 'after-back', id: 'nav' });
       }
     }

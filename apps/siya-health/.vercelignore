@@ -7,6 +7,12 @@ brand/
 # Local Phase 0 backups (never deploy)
 .site-snapshots/
 
-# Local homepage color previews (never production)
-previews/
-preview-home-*.html
+# Local QA, voiceover notes, and raw takes. Never deploy.
+internal/
+internal/vo-preview.html
+internal/vo-marker.html
+internal/vo-endpoints.json
+internal/vo-raw
+internal/vo-raw/**
+internal/vo-tail-check.json
+internal/vo-report.json
