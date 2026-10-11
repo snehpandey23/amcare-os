@@ -49,3 +49,4 @@ Log `STARTED` ≈ CLI attempts from this script (Git/Vercel auto-builds also bur
 | 2026-10-09 09:55 IST | `release/2026-10-09` | `63a04478` | production | sp | OK | Pause, pinned subtitles, speed with voice · dpl_EyxpkRRoy62f5AsbWaeXf511gerG |
 | 2026-10-10 06:23 IST | `release/2026-10-09` | `a565a34d` | production | sp | STARTED | Trim the employer demo voiceover and settle each slide after it finishes moving. |
 | 2026-10-10 06:23 IST | `release/2026-10-09` | `a565a34d` | production | sp | OK | Trim the employer demo voiceover and settle each slide after it finishes moving. · day=2026-10-10 |
+| 2026-10-10 18:22 IST | `release/2026-10-09` | `f98dbd32` | production | sp | REFUSED | gate failed |

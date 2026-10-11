@@ -1,4 +1,4 @@
-# readable-text gate `6533ddb6`
+# readable-text gate `f98dbd32`
 
 **Failures: 0**
 

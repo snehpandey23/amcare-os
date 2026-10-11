@@ -1,4 +1,4 @@
-# speed-sync gate `6533ddb6`
+# speed-sync gate `f98dbd32`
 
 **Failures: 0**
 

@@ -1,0 +1,31 @@
+{
+  "target": 239220,
+  "maxWall": 244004.4,
+  "minWall": 234435.6,
+  "maxGap": 700,
+  "rows": [
+    {
+      "label": "desk",
+      "started": true,
+      "arrived": true,
+      "wall": 239079.89999997616,
+      "maxGap": 517.5,
+      "pair": "e4-simple→close",
+      "starts": 27,
+      "ends": 26,
+      "last": "close"
+    },
+    {
+      "label": "pixel7",
+      "started": true,
+      "arrived": true,
+      "wall": 239118,
+      "maxGap": 516.8000000715256,
+      "pair": "p-response→p-whole",
+      "starts": 27,
+      "ends": 26,
+      "last": "close"
+    }
+  ],
+  "failures": []
+}

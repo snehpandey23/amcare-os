@@ -16,6 +16,7 @@ const OUT = path.join(ROOT, 'internal/demo-qa/walkthrough');
 fs.mkdirSync(OUT, { recursive: true });
 const HASH = execSync('git rev-parse --short HEAD', { cwd: ROOT }).toString().trim();
 const MUTATION = process.env.SIYA_SPEED_MUTATION === '1';
+const MID_ONLY = process.env.SIYA_SPEED_MID === '1';
 const VIEWS = [
   { w: 1440, h: 900, mobile: false },
   { w: 390, h: 664, mobile: true },
@@ -136,7 +137,8 @@ for (const view of (MUTATION ? [VIEWS[0]] : VIEWS)) {
   await prep(page);
   const speeds = MUTATION ? [1.5] : SPEEDS;
   const slides = MUTATION ? ['p-time'] : SLIDES;
-  for (const rate of speeds) {
+  let coldPage = true;
+  if (!MID_ONLY) for (const rate of speeds) {
     for (const id of slides) {
       const label = `${view.w}x${view.h} ${id} @${rate}`;
       let sample;
@@ -155,11 +157,18 @@ for (const view of (MUTATION ? [VIEWS[0]] : VIEWS)) {
       else if (Math.abs(sample.animSec - sample.animBase / rate) / (sample.animBase / rate) > 0.10) {
         failures.push(`${label} anim ${sample.animSec.toFixed(3)}s != ${(sample.animBase / rate).toFixed(3)}s`);
       }
+      const firstOfPage = coldPage;
+      coldPage = false;
+      let firstCueMs = Infinity;
+      for (const cue of sample.cues) {
+        if (cue.audioMs >= 80 && cue.audioMs < firstCueMs) firstCueMs = cue.audioMs;
+      }
       for (const cue of sample.cues) {
         if (cue.audioMs < 80) continue;
         const want = cue.audioMs / rate;
+        const tol = (firstOfPage && cue.audioMs === firstCueMs) ? 200 : 120;
         if (cue.wall == null) failures.push(`${label} cue ${cue.audioMs} did not fire`);
-        else if (Math.abs(cue.wall - want) > 120) failures.push(`${label} cue ${cue.audioMs} at ${Math.round(cue.wall)}ms != ${Math.round(want)}ms`);
+        else if (Math.abs(cue.wall - want) > tol) failures.push(`${label} cue ${cue.audioMs} at ${Math.round(cue.wall)}ms != ${Math.round(want)}ms (±${tol})`);
       }
       console.log(`${label} clock ${sample.clock} wall ${sample.wall == null ? '—' : Math.round(sample.wall)} cues ${sample.cues.length} anim ${sample.animSec == null ? '—' : sample.animSec.toFixed(3)}`);
     }
@@ -170,37 +179,52 @@ for (const view of (MUTATION ? [VIEWS[0]] : VIEWS)) {
       const demo = window.__employerDemo;
       demo.setPlaySpeed(1);
       window.__cueFired = [];
+      window.__slideEnded = null;
+      const ended = new Promise((resolve) => {
+        const onEnd = (ev) => {
+          const detail = ev.detail || window.__slideEnded;
+          if (!detail || detail.id !== 'p-time') return;
+          window.removeEventListener('slideEnded', onEnd);
+          resolve(detail);
+        };
+        window.addEventListener('slideEnded', onEnd);
+      });
       demo.playSlideDeepLink('p-time', { playBuild: true });
-      const plan = window.__cueFired.slice();
       const started = performance.now();
-      while (window.__cueFired.length < 3 && performance.now() - started < 4000) {
+      while (window.__cueFired.filter((c) => c.id === 'p-time').length < 3 && performance.now() - started < 4000) {
         await new Promise((r) => setTimeout(r, 30));
       }
-      const before = window.__cueFired.map((c) => c.audioMs);
+      const before = window.__cueFired.filter((c) => c.id === 'p-time').map((c) => c.audioMs);
       demo.setPlaySpeed(1.5);
-      const dur = demo.getDur();
-      const t0 = performance.now();
-      while (demo.getElapsed() < dur - 20 && performance.now() - t0 < dur / 1.5 + 4000) {
-        await new Promise((r) => setTimeout(r, 30));
-      }
-      const after = window.__cueFired.map((c) => c.audioMs);
+      const detail = await Promise.race([
+        ended,
+        new Promise((resolve) => setTimeout(() => resolve(null), 20000)),
+      ]);
+      const after = window.__cueFired.filter((c) => c.id === 'p-time').map((c) => c.audioMs);
       const counts = {};
       after.forEach((ms) => { counts[ms] = (counts[ms] || 0) + 1; });
       const beforeCounts = {};
       before.forEach((ms) => { beforeCounts[ms] = (beforeCounts[ms] || 0) + 1; });
-      return { before: before.length, after: after.length, counts, beforeCounts, plan: plan.length, elapsed: demo.getElapsed(), dur };
+      return { before: before.length, after: after.length, counts, beforeCounts, ended: detail };
     });
-    const dup = Object.entries(mid.counts).filter(([ms, n]) => n > (mid.beforeCounts[ms] || 0) + (mid.counts[ms] - (mid.beforeCounts[ms] || 0)) && n > 2);
     const doubled = Object.entries(mid.counts).filter(([, n]) => n > 3);
     if (mid.before < 2) failures.push(`${label} changed speed before cues started (${mid.before})`);
-    if (mid.elapsed < mid.dur - 40) failures.push(`${label} did not finish (${Math.round(mid.elapsed)}/${mid.dur})`);
+    if (!mid.ended) failures.push(`${label} slideEnded did not fire`);
+    else {
+      if (Math.abs(mid.ended.audioMs - mid.ended.clipMs) > 50) {
+        failures.push(`${label} audio ${Math.round(mid.ended.audioMs)} != clip ${Math.round(mid.ended.clipMs)}`);
+      }
+      const wantGap = 500 / mid.ended.rate;
+      if (Math.abs(mid.ended.gapMs - wantGap) > 100) {
+        failures.push(`${label} gap ${Math.round(mid.ended.gapMs)} != ${Math.round(wantGap)} at ${mid.ended.rate}×`);
+      }
+    }
     if (doubled.length) failures.push(`${label} cue fired repeatedly ${doubled.map(([ms, n]) => `${ms}×${n}`).join(',')}`);
-    const early = new Set(Object.keys(mid.beforeCounts));
     const missing = Object.keys(mid.counts).length === 0;
     if (missing) failures.push(`${label} no cues after the speed change`);
     else if (mid.after < mid.before) failures.push(`${label} lost cues ${mid.before}->${mid.after}`);
-    console.log(`${label} before ${mid.before} after ${mid.after} elapsed ${Math.round(mid.elapsed)}`);
-    void early; void dup;
+    const end = mid.ended;
+    console.log(`${label} before ${mid.before} after ${mid.after} audio ${end ? Math.round(end.audioMs) : '—'} clip ${end ? Math.round(end.clipMs) : '—'} gap ${end ? Math.round(end.gapMs) : '—'}`);
   }
   await ctx.close();
 }

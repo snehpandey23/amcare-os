@@ -74,7 +74,13 @@ async function check(browserType, contextOptions, label) {
       const demo = window.__employerDemo;
       demo.setPlaySpeed(speed);
       demo.setCaptions(true);
+      const gen0 = window.__slideStarted ? window.__slideStarted.gen : 0;
       demo.playSlideDeepLink('p-time');
+      const deadline = performance.now() + 5000;
+      while ((window.__slideStarted ? window.__slideStarted.gen : 0) === gen0 && performance.now() < deadline) {
+        await new Promise((r) => setTimeout(r, 16));
+      }
+      const started = window.__slideStarted && window.__slideStarted.gen !== gen0 && window.__slideStarted.id === 'p-time';
       const t0 = performance.now();
       const e0 = demo.getElapsed();
       await new Promise((r) => setTimeout(r, 450));
@@ -91,6 +97,7 @@ async function check(browserType, contextOptions, label) {
         cap: (cap.textContent || '').slice(0, 48),
         capOn: cap.classList.contains('on'),
         fs: getComputedStyle(cap).fontSize,
+        started,
       };
     }, speed);
     const expectDur = (() => {
@@ -103,6 +110,7 @@ async function check(browserType, contextOptions, label) {
     if (![0.75, 1, 1.25, 1.5].every((n, i) => sample.speeds[i] === n)) failures.push(`${label} speed list ${sample.speeds}`);
     if (sample.dur !== expectDur) failures.push(`${label} @${speed} dur ${sample.dur} != ${expectDur}`);
     if (!sample.capOn || !sample.cap.startsWith('Clinics open nine to five')) failures.push(`${label} @${speed} caption ${sample.cap}`);
+    if (!sample.started) failures.push(`${label} @${speed} slide did not start before the sample`);
     if (Math.abs(ratio - speed) > 0.35) failures.push(`${label} @${speed} clock ratio ${ratio.toFixed(2)} wall ${sample.wall.toFixed(0)}`);
     const wantFs = label === 'desk' ? '20px' : '16px';
     if (sample.fs !== wantFs) failures.push(`${label} caption ${sample.fs} != ${wantFs}`);

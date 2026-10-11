@@ -3182,6 +3182,7 @@ addEventListener('keydown',e=>{
 });
 $('skip').addEventListener('click',e=>{e.stopPropagation();unlockAudio();if(phase==='idle')phase='play';finishIntro();});
 function applyMute(next,fromPeer){
+  const prevCss=motionCssRate();
   muted=!!next;
   if(!ccChosen)ccOn=!!muted;
   if(!activeSpeeds().includes(playSpeed)){
@@ -3195,7 +3196,7 @@ function applyMute(next,fromPeer){
   });
   try{if(audio){audio.master.gain.setTargetAtTime(muted?0:.9,audio.ac.currentTime,.05);setMusicAudible(!muted);}}catch(e){}
   try{if(muted){stopVoice(false);clockMode='wall';}else if(tourOn&&!paused&&slides[cur]){voiceLatch=false;voiceEnded=false;audioWatch=null;gapAudio=0;if(voMeta(slides[cur].id)&&+slides[cur].dataset.dur!==0)clockMode='audio';startVoice(slides[cur].id,0);}}catch(e){}
-  try{syncSlideMotionRate();scheduleFit();}catch(e){}
+  try{syncSlideMotionRate(null,prevCss);scheduleFit();}catch(e){}
   if(fromPeer)return;
   if(demoEmbed)postToHost('mute',{muted});
 }
@@ -3210,6 +3211,7 @@ let rt;addEventListener('resize',()=>{clearTimeout(rt);rt=setTimeout(()=>{
     const idx=Math.max(0,slides.findIndex(s=>s.id===prevId));
     show(idx>=0?idx:Math.min(cur,slides.length-1));
   }else{paintChapters();fitWalk();fitFrame();}
+  try{scheduleSettle();}catch(e){}
 },200);});
 syncDeskStage();
 if(demoEmbed){
@@ -3484,13 +3486,22 @@ function playSlideDeepLink(raw,{playBuild=true}={}){
   welcome.classList.remove('on');
   tour.hidden=false; tour.classList.add('on');
   tourOn=true;
-  if(playBuild){
-    paused=false; pausedTourMusic=false; $('pause').textContent='Pause';
-    try{ensureMusic();}catch(e){}
-    goTo(i,{force:true});
-  }else{
-    window.__employerDemo.showSlide(id);
-  }
+  const run=()=>{
+    if(playBuild){
+      paused=false; pausedTourMusic=false; $('pause').textContent='Pause';
+      try{ensureMusic();}catch(e){}
+      goTo(i,{force:true});
+    }else{
+      window.__employerDemo.showSlide(id);
+    }
+    scheduleSettle();
+  };
+  /* Cold deep link or jump: decode before the slide goes active.
+     A clip already decoded (the next slide, prefetched during playback) starts immediately. */
+  if(playBuild&&!muted&&voMeta(id)&&!voDecoded(id)){
+    try{unlockAudio();}catch(e){}
+    ensureVo(id).then(run);
+  }else run();
   return true;
 }
 window.__employerDemo={
@@ -3505,6 +3516,7 @@ window.__employerDemo={
   getElapsed:()=>elapsed,getDur:()=>dur,
   getVoiceMs:()=>{try{return voiceNow()*1000;}catch(e){return 0;}},
   getClockMode:()=>clockMode,
+  scheduleSettle:()=>{try{scheduleSettle();}catch(e){}},
   /* review/QA helper — finishes builds on the target slide */
   showSlide(id){
     collectSlides();
@@ -3540,7 +3552,7 @@ window.__employerDemo={
     /* Fit even while paused. showSlide pauses before the queued fit used to run,
        so the frame stayed at full height and sat under the phone bar. */
     fitFrame();
-    scheduleFit();
+    scheduleSettle();
   },
   lastBuildMs(){
     const s=slides[cur]; if(!s)return 0;
@@ -3754,6 +3766,9 @@ function syncWalk(){
 /* Must initialize before collectSlides→paintChapters (phone narrow path reads cur). */
 let cur=-1,elapsed=0,last=performance.now(),paused=false,events=[],fired=0,dur=0,tourOn=false;
 let voiceLatch=false,voiceEnded=false,gapAudio=0,clockMode='wall',audioWatch=null,stageTimers=[];
+let slideStartMarked=false,gapArmed=false;
+window.__slideStarted={gen:0,id:'',t:0};
+window.__voEdges=[];
 let animBirth=new WeakMap();
 window.__cueFired=[];
 /* Transition state machine: idle → leaving → entering → idle. Never two slides building. */
@@ -3821,15 +3836,16 @@ function applyMotionRate(){
     });
   }catch(e){}
 }
-function syncSlideMotionRate(root){
+function syncSlideMotionRate(root,bornIfNew){
   applyMotionRate();
   const scope=root&&root.getAnimations?root:tour;
   if(!scope||!scope.getAnimations)return;
   const cssR=motionCssRate();
+  const stamp=(typeof bornIfNew==='number'&&bornIfNew>0)?bornIfNew:cssR;
   try{
     scope.getAnimations({subtree:true}).forEach(a=>{
       try{
-        if(!animBirth.has(a))animBirth.set(a,cssR);
+        if(!animBirth.has(a))animBirth.set(a,stamp);
         const born=animBirth.get(a)||1;
         const target=muted?playSpeed:(playSpeed/born);
         if(a.playbackRate!==target)a.playbackRate=target;
@@ -4058,35 +4074,15 @@ function finiteRunningAnims(root){
 }
 function waitSlideMotion(root){
   /* Running CSS transitions/animations only. Paused playback is not waited
-     out, and a looping shimmer must not hold the settle signal. */
-  const anims=finiteRunningAnims(root);
-  const pending=anims.length?anims:[];
-  if(!pending.length){
-    const mid=root?[...root.querySelectorAll('.in')].filter(el=>{
-      const op=parseFloat(getComputedStyle(el).opacity);
-      return op>0.01&&op<0.99;
-    }):[];
-    if(!mid.length)return Promise.resolve();
-    return new Promise(resolve=>{
-      let open=true;
-      const done=()=>{if(!open)return;open=false;resolve();};
-      const cap=setTimeout(done,1100);
-      let left=mid.length;
-      mid.forEach(el=>{
-        const fin=()=>{
-          el.removeEventListener('transitionend',fin);
-          el.removeEventListener('animationend',fin);
-          if(--left<=0){clearTimeout(cap);done();}
-        };
-        el.addEventListener('transitionend',fin);
-        el.addEventListener('animationend',fin);
-      });
-    });
-  }
-  return Promise.race([
-    Promise.all(pending.map(a=>a.finished.catch(()=>{}))),
-    new Promise(r=>setTimeout(r,1100))
-  ]);
+     out, and a looping shimmer must not hold the settle signal.
+     Zero running animations: Promise.all([]) resolves immediately. Do not
+     listen for transitionend — nothing is going to fire it. */
+  const pending=finiteRunningAnims(root);
+  const done=Promise.all(pending.map(a=>a.finished.catch(()=>{})));
+  if(!pending.length)return done;
+  /* A repeated decorative animation (the calendar ring runs three times)
+     must not hold the layout signal past this beat. */
+  return Promise.race([done, new Promise(r=>setTimeout(r,1200))]);
 }
 function withCap(p, ms){
   return Promise.race([Promise.resolve(p).catch(()=>{}), new Promise(r=>setTimeout(r,ms))]);
@@ -4095,33 +4091,40 @@ async function finishSettle(epoch, slide){
   if(epoch!==settleEpoch)return;
   await new Promise(r=>requestAnimationFrame(()=>r()));
   if(epoch!==settleEpoch||(slide&&slides[cur]!==slide))return;
-  await withCap(document.fonts&&document.fonts.ready, 400);
-  if(epoch!==settleEpoch||(slide&&slides[cur]!==slide))return;
+  const root=slide||(slides[cur]||document.getElementById('tour'));
   const imgs=slide?[...slide.querySelectorAll('img')]:[];
-  await withCap(Promise.all(imgs.map(img=>{
-    if(typeof img.decode==='function')return img.decode().catch(()=>{});
-    if(img.complete)return Promise.resolve();
-    return new Promise(res=>{
-      img.addEventListener('load',res,{once:true});
-      img.addEventListener('error',res,{once:true});
-    });
-  })), 400);
-  if(epoch!==settleEpoch||(slide&&slides[cur]!==slide))return;
-  await waitSlideMotion(slide||(slides[cur]||document.getElementById('tour')));
-  if(epoch!==settleEpoch||(slide&&slides[cur]!==slide))return;
+  await Promise.all([
+    withCap(document.fonts&&document.fonts.ready, 400),
+    withCap(Promise.all(imgs.map(img=>{
+      if(typeof img.decode==='function')return img.decode().catch(()=>{});
+      if(img.complete)return Promise.resolve();
+      return new Promise(res=>{
+        img.addEventListener('load',res,{once:true});
+        img.addEventListener('error',res,{once:true});
+      });
+    })), 400),
+    waitSlideMotion(root)
+  ]);
+  if(epoch!==settleEpoch)return;
+  /* The slide may already have moved on. Still emit, or a leave/enter drops the signal. */
+  if(slide&&slides[cur]!==slide){
+    const s=slides[cur];
+    window.__slideSettled={gen:(window.__slideSettled?.gen||0)+1,id:s&&s.id,t:performance.now()};
+    return;
+  }
   fitFrame();
   await new Promise(r=>setTimeout(r,80));
   if(epoch!==settleEpoch||(slide&&slides[cur]!==slide))return;
   const s=slides[cur];
   window.__slideSettled={gen:(window.__slideSettled?.gen||0)+1,id:s&&s.id,t:performance.now()};
 }
-function scheduleFit(force){
-  /* Layout, not a build cue: must run while paused. A paused showSlide
-     used to drop this timeout, leaving the frame under the phone bar.
-     __slideSettled waits until this beat's animations, fonts, and images
-     are done, then fitFrame + 80ms. A later beat settles again. Cancelling
-     the debounce does not drop a settle that has already started, so a
-     deep link still emits while the build continues. */
+function scheduleSettle(force){
+  /* One layout signal for every slide change. Must run while paused.
+     A paused showSlide used to drop this timeout, leaving the frame under
+     the phone bar. __slideSettled waits until this beat's animations,
+     fonts, and images are done, then fitFrame + 80ms. A later beat settles
+     again. Cancelling the debounce does not drop a settle that has already
+     started, so a deep link still emits while the build continues. */
   fitFor=cur;
   /* Keep the queued settle. Clearing it on every beat or resize meant the
      80ms timer never fired while the build was still moving. */
@@ -4135,6 +4138,7 @@ function scheduleFit(force){
     finishSettle(epoch,slide);
   },80);
 }
+function scheduleFit(force){scheduleSettle(force);}
 let ccOn=false, ccChosen=false, voiceUnder=false;
 try{
   const _cc=sessionStorage.getItem('demo_cc');
@@ -4144,7 +4148,11 @@ const VO_BY_ID={"statement": {"file": "demo/media/vo/01-statement.mp3", "ms": 11
 
 if(VO_BY_ID.proof)VO_BY_ID['proof-nums']=VO_BY_ID.proof;
 let voPlay={src:null,offset:0,t0:0,on:false,id:'',rate:1};
+let clipEnd=null;
+window.__slideEnded=null;
 const voCache=new Map();
+const voBuf=new Map();
+function voDecoded(id){return !!(id&&voBuf.has(id));}
 function musicLevelNow(){
   if(muted||pausedTourMusic)return 0.0001;
   if(voiceUnder)return MUSIC_LEVEL*0.35;
@@ -4182,13 +4190,36 @@ function stopVoice(keep){
 function ensureVo(id){
   if(!id||!voMeta(id)||!audio||!audio.ac||typeof audio.ac.decodeAudioData!=='function')return Promise.resolve(null);
   if(voCache.has(id))return voCache.get(id);
-  const p=fetch(voMeta(id).file).then(r=>{if(!r.ok)throw new Error('vo');return r.arrayBuffer();}).then(b=>audio.ac.decodeAudioData(b)).catch(()=>null);
+  const p=fetch(voMeta(id).file).then(r=>{if(!r.ok)throw new Error('vo');return r.arrayBuffer();}).then(b=>audio.ac.decodeAudioData(b)).then(buf=>{if(buf)voBuf.set(id,buf);return buf||null;}).catch(()=>null);
   voCache.set(id,p);
   return p;
+}
+function prefetchNeighbors(){
+  try{
+    const n=slides[cur+1], p=slides[cur-1];
+    if(n)ensureVo(n.id);
+    if(p)ensureVo(p.id);
+  }catch(e){}
+}
+function emitSlideEnded(fromIdx){
+  const s=slides[fromIdx];
+  if(!s)return;
+  const meta=voMeta(s.id);
+  const end=clipEnd&&clipEnd.id===s.id?clipEnd:null;
+  const rec={
+    id:s.id,
+    clipMs:meta?meta.ms:0,
+    audioMs:end?end.audioMs:(voPlay.id===s.id?voiceNow()*1000:0),
+    rate:playSpeed,
+    gapMs:end?Math.max(0,performance.now()-end.wall):0
+  };
+  window.__slideEnded=rec;
+  try{window.dispatchEvent(new CustomEvent('slideEnded',{detail:rec}));}catch(e){}
 }
 function startVoice(id,offset){
   if(muted||paused||!id||!voMeta(id)||!audio)return;
   const off=Math.max(0,offset||0);
+  clipEnd=null;
   stopVoice(false);
   voPlay.id=id;voPlay.offset=off;
   ensureVo(id).then(buf=>{
@@ -4203,16 +4234,20 @@ function startVoice(id,offset){
       src.start(t,startAt);
       voPlay.src=src;voPlay.t0=t;voPlay.offset=startAt;voPlay.on=true;voPlay.rate=playSpeed;
       setVoiceUnder(true);
+      try{window.__voEdges.push({kind:'start',id:id,t:performance.now()});}catch(e){}
       src.onended=()=>{
         if(voPlay.src!==src)return;
+        const played=src.buffer&&src.buffer.duration?src.buffer.duration*1000:voiceNow()*1000;
+        if(!clipEnd||clipEnd.id!==id)clipEnd={id:id,audioMs:played,wall:performance.now()};
+        else clipEnd.audioMs=played;
         voPlay.on=false;voPlay.src=null;voiceEnded=true;
+        try{window.__voEdges.push({kind:'end',id:id,t:performance.now()});}catch(e){}
         if(cur===slides.length-1){voiceUnder=false;try{fadeMusicOut(2);}catch(e){}}
         else setVoiceUnder(false);
       };
     }catch(e){}
   });
-  const nxt=slides[cur+1];
-  if(nxt)ensureVo(nxt.id);
+  prefetchNeighbors();
 }
 function buildScale(s){
   const meta=voMeta(s&&s.id);
@@ -4264,7 +4299,7 @@ function enterSlide(i,opts){
   opts=opts||{};
   try{stopVoice(false);}catch(e){}
   tx='entering';
-  cur=i;walkStep=-1;founderHold=false;
+  cur=i;walkStep=-1;founderHold=false;slideStartMarked=false;gapArmed=false;
   try{updatePortraitBackdrop();}catch(e){}
   slides.forEach((s,k)=>{
     if(k!==i){s.classList.remove('active','entering','leaving');}
@@ -4279,15 +4314,16 @@ function enterSlide(i,opts){
     applyMotionRate();
     el.classList.add('in');
     try{playRevealCue(el);}catch(e){}
-    if(!chatThread||!chatThread.contains(el))return;
-    const now=elapsed;
-    const wait=Math.max(0,BEAT_MS-(now-lastChatReveal));
-    lastChatReveal=now+wait;
-    const doScroll=()=>{
-      if(!chatThread||slides[cur]!==s)return;
-      pinChatThread(s,false);
-    };
-    if(wait>0)slideTimeout(doScroll,wait); else doScroll();
+    if(chatThread&&chatThread.contains(el)){
+      const now=elapsed;
+      const wait=Math.max(0,BEAT_MS-(now-lastChatReveal));
+      lastChatReveal=now+wait;
+      const doScroll=()=>{
+        if(!chatThread||slides[cur]!==s)return;
+        pinChatThread(s,false);
+      };
+      if(wait>0)slideTimeout(doScroll,wait); else doScroll();
+    }
     scheduleFit(true);
     syncSlideMotionRate(el);
     requestAnimationFrame(()=>{if(slides[cur]===s)syncSlideMotionRate(el);});
@@ -4320,6 +4356,7 @@ function enterSlide(i,opts){
   s.classList.add('active','entering');
   s.style.opacity='';s.style.visibility='';
   try{syncSoundChrome();}catch(e){}
+  prefetchNeighbors();
   if(!opts.final&&!paused&&!muted)startVoice(s.id,0);
   if(reduce||opts.final)fireAll();
   if(chatThread)pinChatThread(s,!!opts.final);
@@ -4358,13 +4395,25 @@ function enterSlide(i,opts){
 function goTo(i,opts){
   opts=opts||{};
   if(i<0||i>=slides.length)return;
-  if(tx!=='idle'&&!opts.force){pendingNav={i,opts};return;}
+  if(tx!=='idle'&&!opts.force){pendingNav={i,opts};scheduleSettle();return;}
   if(i===cur&&!opts.force){
     if(opts.final&&fired<events.length)fireAll();
+    scheduleSettle();
     return;
   }
   const from=cur;
   cancelSlideTimers();
+  scheduleSettle();
+  /* Gap handoff: the leave fade already ran during the post-clip 500ms, so the next voice starts now. */
+  if(opts.gap&&from>=0&&from!==i&&slides[from]){
+    const out=slides[from];
+    out.classList.remove('active','entering');
+    out.classList.add('leaving');
+    out.querySelectorAll('[data-at],[data-out]').forEach(el=>{el.style.transition='none';});
+    emitSlideEnded(from);
+    enterSlide(i,opts);
+    return;
+  }
   if(from>=0&&from!==i&&slides[from]){
     tx='leaving';
     const out=slides[from];
@@ -4377,6 +4426,7 @@ function goTo(i,opts){
       out.style.opacity='';
       out.style.visibility='';
       resetSlideBuilds(out);
+      emitSlideEnded(from);
       enterSlide(i,opts);
     },TX_MS);
   }else{
@@ -4425,12 +4475,13 @@ function syncBarIcons(){
 function setPlaySpeed(v){
   const n=nearestSpeed(+v);
   const prev=playSpeed;
+  const prevCss=motionCssRate();
   playSpeed=n;
   try{sessionStorage.setItem('demo_play_speed',String(n));}catch(e){}
   try{paintSpeedSheet();}catch(e){}
   try{paintTourLengthLabel();}catch(e){}
   if(prev!==n){
-    try{retargetSlideTimeouts(prev);retargetStage(prev);syncSlideMotionRate();}catch(e){}
+    try{retargetSlideTimeouts(prev);retargetStage(prev);syncSlideMotionRate(null,prevCss);}catch(e){}
     try{retargetVoiceRate();}catch(e){}
     try{
       if(typeof track==='function')track('demo_speed_change',{value:n});
@@ -4441,6 +4492,7 @@ function setPlaySpeed(v){
       }
     }catch(e){}
   }
+  scheduleSettle();
   return playSpeed;
 }
 function toggleSpeedSheet(force){
@@ -4466,6 +4518,7 @@ function togglePause(){
     setPauseMusic(false);
     try{if(!muted&&slides[cur])startVoice(slides[cur].id,voPlay.offset||0);}catch(e){}
   }
+  scheduleSettle();
 }
 function tick(now){
   const dt=Math.min(100,now-last);last=now;
@@ -4484,11 +4537,21 @@ function tick(now){
       const meta=sNow&&voMeta(sNow.id);
       if(clockMode==='audio'&&meta){
         const ac=audio&&audio.ac?audio.ac.currentTime:0;
-        if(!audioWatch)audioWatch={t:now,ac};
-        const voiceLive=!!(voPlay.on&&voPlay.id===sNow.id&&ac>audioWatch.ac+0.01);
+        if(!audioWatch)audioWatch={t:now,ac,lastAc:ac,lastMove:0};
+        const moving=ac>(audioWatch.lastAc||0)+0.005;
+        if(moving){audioWatch.lastAc=ac;audioWatch.lastMove=now;}
+        const voiceLive=!!(voPlay.on&&voPlay.id===sNow.id&&moving);
+        const voiceStalled=!!(voiceLatch&&voPlay.on&&audioWatch.lastMove&&!moving&&now-audioWatch.lastMove>500);
         if(voiceLive){
           voiceLatch=true; voiceEnded=false; gapAudio=0;
           elapsed=Math.max(elapsed, voiceNow()*1000);
+        }else if(voiceStalled||(audio&&audio.ac&&audio.ac.state==='suspended'&&voiceLatch)){
+          clockMode='wall';
+          elapsed+=dt*playSpeed;
+        }else if(voiceLatch&&!voPlay.on){
+          voiceEnded=true;
+          gapAudio+=dt*playSpeed;
+          elapsed=Math.max(elapsed, meta.ms+gapAudio);
         }else if(voiceLatch&&voiceEnded){
           gapAudio+=dt*playSpeed;
           elapsed=Math.max(elapsed, meta.ms+gapAudio);
@@ -4503,8 +4566,25 @@ function tick(now){
         try{window.__cueFired.push({id:sNow&&sNow.id,audioMs:ev.t,wall:performance.now(),rate:playSpeed});}catch(e){}
         scheduleFit(true);
       }
-      if(!muted||playSpeed!==1)syncSlideMotionRate();
-      if(!founderHold&&tx==='idle'&&dur>0&&elapsed>=dur)goTo(cur+1,{});
+      if(meta&&sNow&&voPlay.on&&voPlay.id===sNow.id&&voiceNow()*1000>=meta.ms&&(!clipEnd||clipEnd.id!==sNow.id)){
+        const pos=voiceNow()*1000;
+        clipEnd={id:sNow.id,audioMs:Math.min(pos,meta.ms+45),wall:performance.now()};
+      }
+      if(!founderHold&&tx==='idle'&&dur>0&&cur<slides.length-1){
+        const voiced=!muted&&clockMode==='audio'&&(voiceLatch||voiceEnded);
+        if(voiced&&elapsed>=dur-TX_MS&&elapsed<dur){
+          if(!gapArmed){
+            gapArmed=true;
+            try{slides[cur].classList.add('leaving');}catch(e){}
+          }
+        }
+        if(elapsed>=dur)goTo(cur+1,voiced?{gap:true}:{});
+      }
+      if(!slideStartMarked&&sNow&&voPlay.on&&voPlay.id===sNow.id&&fired>0){
+        slideStartMarked=true;
+        const prev=window.__slideStarted||{gen:0};
+        window.__slideStarted={gen:(prev.gen||0)+1,id:sNow.id,t:performance.now()};
+      }
     }
     syncWalk();
     const ch=slides[cur]?+(slides[cur].dataset.chapter||0):0;
