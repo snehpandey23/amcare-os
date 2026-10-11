@@ -44,3 +44,4 @@ Log `STARTED` ≈ CLI attempts from this script (Git/Vercel auto-builds also bur
 | 2026-10-08 05:46 IST | `release/2026-10-07d` | `7939876f` | production | sp | OK | playback pause/speed/pacing · dpl_92UZzgZAY2JXd7Mk2rUgmm29CYAE |
 | 2026-10-09 07:05 IST | `release/2026-10-09` | `23fe16bb` | production | sp | STARTED | Merge employer-demo-journey-prod into release/2026-10-09. |
 | 2026-10-09 07:05 IST | `release/2026-10-09` | `23fe16bb` | production | sp | OK | For you chapter + founder voiceover · dpl_ByYtasrQvcNSaA9yi4in9b4xBeLD |
+| 2026-10-10 06:12 IST | `integration/2026-10-10` | `1f585052` | production | snehpandey23 | OK | staged --skip-domain sha=1f5850525a49492b1ae59f6985437e482cc8d40c branch=integration/2026-10-10 operator=snehpandey23 id=dpl_BLCWiKfqisFTbedeiomdU3E2TUQx url=https://siya-health-frjy4lmjn-snehpandey23s-projects.vercel.app · not promoted · www remains dpl_EyxpkRRoy62f5AsbWaeXf511gerG |
