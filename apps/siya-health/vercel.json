@@ -405,6 +405,31 @@
       "permanent": true
     },
     {
+      "source": "/(.*).md",
+      "destination": "/",
+      "permanent": false
+    },
+    {
+      "source": "/vercel.json",
+      "destination": "/",
+      "permanent": false
+    },
+    {
+      "source": "/package.json",
+      "destination": "/",
+      "permanent": false
+    },
+    {
+      "source": "/legal-document-versions",
+      "destination": "/",
+      "permanent": false
+    },
+    {
+      "source": "/legal-document-versions/:path*",
+      "destination": "/",
+      "permanent": false
+    },
+    {
       "source": "/blog/adhd-treatment-los-angeles-ca",
       "destination": "/adult-adhd-california",
       "permanent": true

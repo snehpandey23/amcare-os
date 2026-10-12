@@ -12,3 +12,20 @@ apps/siya-health/node_modules
 apps/siya-health/node_modules/**
 # Investor decks are tracked in git and are not read by the site build or any page.
 apps/siya-health/brand/investor
+# The rest of brand/ is the same: pages do not reference it, and npm run build still passes with it removed.
+apps/siya-health/brand
+# Internal notes and generators. Removed in a temp tree; the build's HTML set did not change.
+apps/siya-health/audit
+apps/siya-health/content
+apps/siya-health/exports
+apps/siya-health/.cursor
+apps/siya-health/previews/serve-homepage-previews.py
+apps/siya-health/assets/images/README.md
+apps/siya-health/*.md
+apps/siya-health/.gitignore
+apps/siya-health/.vercelignore
+apps/siya-health/netlify.toml
+apps/siya-health/seo-generated-urls.txt
+apps/siya-health/serve_local.py
+apps/siya-health/scripts/*.py
+apps/siya-health/scripts/*.sh

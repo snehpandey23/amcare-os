@@ -1,3 +1,6 @@
+# CLI uploads from the monorepo root read /.vercelignore, not this file.
+# This file applies only when the Vercel root directory is apps/siya-health.
+# Patterns below are unchanged.
 # Stale HTML mirrors — not part of production surface
 public/
 
