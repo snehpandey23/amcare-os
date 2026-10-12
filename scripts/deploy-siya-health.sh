@@ -68,8 +68,16 @@ EOF
   esac
 done
 
-export VERCEL_ORG_ID="${VERCEL_ORG_ID:-team_7dvS6pa19W0oVxblge8o52QL}"
-export VERCEL_PROJECT_ID="${VERCEL_PROJECT_ID:-prj_d44fdj7C0X9ivPrLVqIHOiNvJ8Qd}"
+# Repo-root .vercel/project.json points at siya-staff-assist. Always target siya-health.
+export VERCEL_ORG_ID=team_7dvS6pa19W0oVxblge8o52QL
+export VERCEL_PROJECT_ID=prj_d44fdj7C0X9ivPrLVqIHOiNvJ8Qd
+
+PROJ_NAME="$(npx vercel api "/v9/projects/${VERCEL_PROJECT_ID}?teamId=${VERCEL_ORG_ID}" | python3 -c 'import json,sys; print(json.load(sys.stdin).get("name",""))')"
+if [[ "$PROJ_NAME" != "siya-health" ]]; then
+  echo "REFUSING: resolved Vercel project is '${PROJ_NAME:-unknown}', not siya-health." >&2
+  echo "    org=$VERCEL_ORG_ID project=$VERCEL_PROJECT_ID" >&2
+  exit 1
+fi
 
 BRANCH="$(git rev-parse --abbrev-ref HEAD)"
 SHA="$(git rev-parse HEAD)"
@@ -159,7 +167,7 @@ if [[ "$CHECK_ONLY" -eq 1 ]]; then
 fi
 
 if [[ "$WANT_PROD" -ne 1 && "$WANT_PREVIEW" -ne 1 ]]; then
-  echo "REFUSING: pass --prod (promote) or --preview (review-link|pre-prod only)." >&2
+  echo "REFUSING: pass --prod (stage with --skip-domain; does not assign www) or --preview." >&2
   echo "For intermediate checks: local generate + contact-sheet — not Vercel." >&2
   log_attempt "unspecified" "REFUSED" "missing --prod/--preview"
   exit 1
@@ -194,19 +202,52 @@ if [[ "$WANT_PROD" -eq 1 ]]; then
     log_attempt "production" "REFUSED" "gate failed"
     exit 1
   fi
+  # --skip-domain is required. This script must not assign www.siya.health.
+  PROD_CMD=(npx vercel deploy --prod --skip-domain --yes)
+  case " ${PROD_CMD[*]} " in
+    *" --skip-domain "*) ;;
+    *)
+      echo "REFUSING: production upload is missing --skip-domain." >&2
+      log_attempt "production" "REFUSED" "missing --skip-domain"
+      exit 1
+      ;;
+  esac
   log_attempt "production" "STARTED" "$SUBJECT"
-  DEPLOY_OUT="$(npx vercel deploy --prod --skip-domain --yes 2>&1)" || {
+  DEPLOY_OUT="$("${PROD_CMD[@]}" 2>&1)" || {
     printf '%s\n' "$DEPLOY_OUT" >&2
     log_attempt "production" "REFUSED" "vercel deploy failed (check quota)"
     exit 1
   }
   printf '%s\n' "$DEPLOY_OUT"
-  DEPLOY_URL="$(printf '%s\n' "$DEPLOY_OUT" | awk '/^https:\/\/[^ ]+$/ {u=$0} END {print u}')"
-  DEPLOY_ID=""
-  if [[ -n "$DEPLOY_URL" ]]; then
-    DEPLOY_ID="$(npx vercel inspect "$DEPLOY_URL" 2>/dev/null | awk '/^[[:space:]]*id[[:space:]]/ {print $2; exit}')"
+  PARSED="$(printf '%s\n' "$DEPLOY_OUT" | python3 -c '
+import json, sys
+text = sys.stdin.read()
+dec = json.JSONDecoder()
+deploy_id = ""
+deploy_url = ""
+for i, ch in enumerate(text):
+    if ch != "{":
+        continue
+    try:
+        obj, _ = dec.raw_decode(text[i:])
+    except json.JSONDecodeError:
+        continue
+    dep = obj.get("deployment") if isinstance(obj, dict) else None
+    if isinstance(dep, dict) and str(dep.get("id", "")).startswith("dpl_"):
+        deploy_id = dep.get("id") or ""
+        deploy_url = dep.get("url") or ""
+print(deploy_id)
+print(deploy_url)
+')"
+  DEPLOY_ID="$(printf '%s\n' "$PARSED" | sed -n '1p')"
+  DEPLOY_URL="$(printf '%s\n' "$PARSED" | sed -n '2p')"
+  if [[ -z "$DEPLOY_ID" || -z "$DEPLOY_URL" ]]; then
+    log_attempt "production" "REFUSED" "staged upload output had no deployment id sha=$SHA branch=$BRANCH operator=$WHO"
+    echo "REFUSING to log success: deployment id or url was not in the CLI JSON." >&2
+    exit 1
   fi
-  log_attempt "production" "OK" "staged --skip-domain sha=$SHA branch=$BRANCH operator=$WHO id=${DEPLOY_ID:-unknown} url=${DEPLOY_URL:-unknown}"
+  # Do not record a www deployment id. This upload does not assign www.siya.health.
+  log_attempt "production" "OK" "staged --skip-domain not-promoted www-unchanged sha=$SHA branch=$BRANCH operator=$WHO id=$DEPLOY_ID url=$DEPLOY_URL"
   exit 0
 fi
 
