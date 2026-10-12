@@ -4,25 +4,25 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="robots" content="noindex, nofollow, noarchive" />
-    <title>For Employers · California pilot | Siya Health</title>
+    <title>For Employers | Siya Health</title>
     <meta
       name="description"
-      content="California employer pilot leave-behind. Preview only — not for search indexing."
+      content="Siya Health for employers leave-behind. Preview only — not for search indexing."
     />
     <link rel="canonical" href="https://siya.health/employers/one-pager" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700&family=Inter:wght@400;500;600;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap"
       rel="stylesheet"
     />
     <style>
       /*
-        Static print leave-behind. Background is a frozen homepage2 snapshot
-        (/print/onepager-bg.png) as a real <img> so PDF export never depends on
-        browser “Background graphics”. No CSS/JS animation on this route.
-
-        Care-flow steps from index.html #how-it-works (see HTML comments).
+        Static Letter leave-behind. Background: /print/onepager-bg.svg as <img>.
+        Care model (3 steps condensed from homepage 6 — index.html #how-it-works):
+          1 “We listen to everything” ← Tell us EVERYTHING
+          2 “A complete evaluation” ← Comprehensive clinical evaluation + Diagnostics + Personalized plan
+          3 “We follow through” ← Continuous care + Tracked & escalated
       */
       :root {
         --cream: #f4efe7;
@@ -35,28 +35,7 @@
         --font-display: "Poppins", ui-sans-serif, system-ui, sans-serif;
         --font-body: "Inter", ui-sans-serif, system-ui, sans-serif;
         --grad-btn: linear-gradient(135deg, #d81088 0%, #7b2d8e 48%, #001878 100%);
-        --grad-em: linear-gradient(
-          90deg,
-          #d81088 0%,
-          #d81088 28%,
-          #a81490 48%,
-          #0a246b 68%,
-          #001878 100%
-        );
         --card: rgba(255, 255, 255, 0.94);
-      }
-
-      /* Review / export: hide chrome when ?review=1 */
-      body.review-shot .screen-bar {
-        display: none !important;
-      }
-      body.review-shot .page-wrap {
-        padding: 0 !important;
-      }
-      body.review-shot .sheet {
-        border: none !important;
-        border-radius: 0 !important;
-        box-shadow: none !important;
       }
 
       html,
@@ -77,6 +56,18 @@
         color: var(--ink);
         font-family: var(--font-body);
         -webkit-font-smoothing: antialiased;
+      }
+
+      body.review-shot .screen-bar {
+        display: none !important;
+      }
+      body.review-shot .page-wrap {
+        padding: 0 !important;
+      }
+      body.review-shot .sheet {
+        border: none !important;
+        border-radius: 0 !important;
+        box-shadow: none !important;
       }
 
       .screen-bar {
@@ -101,7 +92,6 @@
         display: inline-flex;
         align-items: center;
         border: none;
-        cursor: pointer;
         font-family: var(--font-display);
         font-weight: 600;
         font-size: 14px;
@@ -140,7 +130,6 @@
         background: var(--cream);
       }
 
-      /* Portrait SVG fills Letter edge-to-edge (no landscape letterboxing) */
       .sheet-bg-img {
         position: absolute;
         inset: 0;
@@ -160,57 +149,43 @@
         justify-content: space-between;
         height: 100%;
         min-height: 0;
-        gap: 0;
-      }
-
-      /* Solid magenta on cream — no background-clip boxes in capture/PDF */
-      .siya-em {
-        font-style: normal !important;
-        font-weight: 700 !important;
-        display: inline !important;
-        color: var(--magenta) !important;
-        -webkit-text-fill-color: var(--magenta) !important;
-        background: none !important;
-        -webkit-background-clip: border-box !important;
-        background-clip: border-box !important;
-        text-decoration: none !important;
-        border: 0 !important;
-        outline: none !important;
-        box-shadow: none !important;
-        filter: none !important;
-        padding: 0 !important;
-        margin: 0 !important;
-        animation: none !important;
-        box-decoration-break: unset !important;
-        -webkit-box-decoration-break: slice !important;
       }
 
       .hero {
         flex: 0 0 auto;
-        padding: 18px 26px 0;
+        padding: 16px 26px 0;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
       }
       .hero-top {
         display: flex;
-        align-items: center;
+        align-items: flex-start;
         justify-content: space-between;
         gap: 12px;
-        margin-bottom: 14px;
+        margin-bottom: 8px;
       }
-      .brand {
+      .brand-lockup {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 4px;
+        text-decoration: none;
+        color: var(--ink);
+        max-width: 22rem;
+      }
+      .brand-row {
         display: inline-flex;
         align-items: center;
         gap: 10px;
-        text-decoration: none;
-        color: var(--ink);
       }
-      .brand img {
+      .brand-row img {
         width: 40px;
         height: 40px;
         border-radius: 9px;
         object-fit: contain;
         background: #fff;
       }
-      .brand .wordmark {
+      .brand-row .wordmark {
         font-family: var(--font-display);
         font-weight: 600;
         font-size: 20px;
@@ -218,21 +193,34 @@
         line-height: 1.1;
         color: var(--ink);
       }
-      .brand .reg {
+      .brand-row .reg {
         font-size: 0.55em;
         font-weight: 600;
         vertical-align: super;
         margin-left: 0.06em;
         line-height: 0;
       }
+      .brand-tagline {
+        margin: 0;
+        margin-left: 50px;
+        font-family: var(--font-body);
+        font-size: 15px;
+        font-weight: 500;
+        line-height: 1.3;
+        color: rgba(10, 36, 107, 0.8);
+        max-width: 28ch;
+      }
       .pilot-tag {
         margin: 0;
+        padding-top: 6px;
         font-size: 11px;
         font-weight: 600;
-        letter-spacing: 0.12em;
+        letter-spacing: 0.14em;
         text-transform: uppercase;
         color: var(--magenta);
+        white-space: nowrap;
       }
+
       .hero-grid {
         display: grid;
         grid-template-columns: 52% 48%;
@@ -241,57 +229,46 @@
       }
       .hero-copy {
         min-width: 0;
-        width: 100%;
-        max-width: 100%;
         overflow: hidden;
         display: flex;
         flex-direction: column;
         justify-content: center;
-        padding-right: 4px;
-      }
-      .eyebrow {
-        margin: 0 0 8px;
-        font-size: 13px;
-        font-weight: 600;
-        color: var(--ink-soft);
-        line-height: 1.35;
       }
       .hero h1 {
         margin: 0 0 10px;
         font-family: var(--font-display);
         font-weight: 700;
         font-size: 34px;
-        line-height: 1.15;
+        line-height: 1.16;
         letter-spacing: -0.025em;
         color: var(--ink);
-        max-width: 11.5ch;
-        width: 100%;
-        text-wrap: pretty;
-        border: 0 !important;
-        outline: 0 !important;
-        box-shadow: none !important;
-        background: transparent !important;
-        text-decoration: none !important;
-        -webkit-text-stroke: 0 !important;
+        max-width: 14ch;
+        text-wrap: balance;
+        border: 0;
+        outline: 0;
+        box-shadow: none;
+        background: transparent;
       }
-      .hero h1 .h1-line {
+      .hero h1 .brain-svg {
         display: block;
-        border: 0 !important;
-        outline: 0 !important;
-        box-shadow: none !important;
-        background: transparent !important;
-        text-decoration: none !important;
-        padding: 0 !important;
-        margin: 0 !important;
-        -webkit-text-fill-color: inherit;
-        -webkit-text-stroke: 0 !important;
+        margin: 0.06em 0 0;
+        overflow: visible;
+        max-width: 100%;
+        height: auto;
       }
-      .hero h1 .h1-line.siya-em {
-        color: var(--magenta) !important;
-        -webkit-text-fill-color: var(--magenta) !important;
+      .sr-only {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        padding: 0;
+        margin: -1px;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        white-space: nowrap;
+        border: 0;
       }
       .hero-lead {
-        margin: 0 0 14px;
+        margin: 0 0 12px;
         font-size: 15px;
         line-height: 1.4;
         color: var(--ink-soft);
@@ -305,7 +282,6 @@
         border-radius: 999px;
         background: var(--card);
         border: 1px solid var(--line);
-        box-shadow: 0 6px 18px rgba(0, 24, 120, 0.06);
       }
       .zero-badge .amt {
         font-family: var(--font-display);
@@ -319,11 +295,12 @@
         font-weight: 600;
         color: var(--ink);
       }
-      .zero-badge .dagger {
-        font-size: 0.85em;
+      .fn {
+        font-size: 0.7em;
         font-weight: 700;
+        vertical-align: super;
+        line-height: 0;
         color: var(--magenta);
-        margin-left: 1px;
       }
       .hero-photo {
         margin: 0;
@@ -332,11 +309,10 @@
         border: 1px solid var(--line);
         background: #fff;
         box-shadow: 0 12px 28px rgba(0, 24, 120, 0.1);
-        height: 268px;
-        align-self: center;
+        height: 248px;
         width: 100%;
-        z-index: 2;
         position: relative;
+        z-index: 2;
       }
       .hero-photo img {
         display: block;
@@ -348,7 +324,7 @@
 
       .care-flow {
         flex: 0 0 auto;
-        padding: 14px 26px 0;
+        padding: 4px 26px 0;
         display: flex;
         flex-direction: column;
         gap: 8px;
@@ -366,12 +342,15 @@
         display: grid;
         grid-template-columns: repeat(3, 1fr);
         gap: 10px;
+        align-items: stretch;
       }
       .step {
         background: var(--card);
         border: 1px solid var(--line);
         border-radius: var(--radius);
-        padding: 12px;
+        padding: 8px 12px;
+        display: flex;
+        flex-direction: column;
       }
       .step-num {
         display: inline-grid;
@@ -386,38 +365,26 @@
         margin-bottom: 6px;
       }
       .step h3 {
-        margin: 0 0 5px;
+        margin: 0 0 6px;
         font-family: var(--font-display);
-        font-size: 16px;
+        font-size: 15px;
         font-weight: 700;
         color: var(--ink);
-        line-height: 1.2;
-        letter-spacing: -0.02em;
-      }
-      .step h3 .all {
-        color: var(--magenta) !important;
-        -webkit-text-fill-color: var(--magenta) !important;
-        background: none !important;
-        text-decoration: underline !important;
-        text-decoration-color: var(--magenta) !important;
-        text-underline-offset: 0.14em;
-        text-decoration-thickness: 2px;
-        border: 0 !important;
-        outline: none !important;
-        box-shadow: none !important;
-        padding: 0 !important;
+        line-height: 1.25;
+        letter-spacing: -0.01em;
+        min-height: 2.5em;
       }
       .step p {
         margin: 0;
-        font-size: 16px;
+        font-size: 14px;
         line-height: 1.35;
         color: var(--ink-soft);
       }
 
       .privacy {
         flex: 0 0 auto;
-        margin: 12px 26px 0;
-        padding: 10px 12px;
+        margin: 4px 26px 0;
+        padding: 8px 12px;
         display: flex;
         gap: 10px;
         align-items: flex-start;
@@ -427,14 +394,14 @@
       }
       .privacy svg {
         flex-shrink: 0;
-        width: 22px;
-        height: 22px;
+        width: 20px;
+        height: 20px;
         margin-top: 2px;
         color: var(--magenta);
       }
       .privacy p {
         margin: 0;
-        font-size: 15px;
+        font-size: 14px;
         line-height: 1.35;
         color: var(--ink-soft);
       }
@@ -445,8 +412,8 @@
 
       .facts {
         flex: 0 0 auto;
-        margin: 12px 26px 0;
-        padding: 10px 0;
+        margin: 4px 26px 0;
+        padding: 6px 0;
         display: grid;
         grid-template-columns: repeat(4, 1fr);
         background: var(--card);
@@ -463,10 +430,10 @@
       .fact strong {
         display: block;
         font-family: var(--font-display);
-        font-size: 18px;
+        font-size: 15px;
         font-weight: 700;
         color: var(--ink);
-        line-height: 1.15;
+        line-height: 1.2;
       }
       .fact span {
         display: block;
@@ -478,7 +445,7 @@
 
       .proof {
         flex: 0 0 auto;
-        margin: 12px 26px 0;
+        margin: 4px 26px 0;
         display: grid;
         grid-template-columns: 1fr 1fr;
         gap: 10px;
@@ -508,8 +475,8 @@
 
       .cta {
         flex: 0 0 auto;
-        margin: 12px 26px 0;
-        padding: 12px 14px;
+        margin: 4px 26px 0;
+        padding: 10px 14px;
         border-radius: var(--radius);
         background: var(--card);
         border: 1px solid var(--line);
@@ -531,7 +498,7 @@
       }
       .cta .meta {
         margin: 0;
-        font-size: 14px;
+        font-size: 13px;
         line-height: 1.4;
         color: var(--ink-soft);
       }
@@ -541,8 +508,38 @@
       .cta .meta .nb {
         white-space: nowrap;
       }
-      .cta-btn {
+      .cta-actions {
+        display: flex;
+        align-items: center;
+        gap: 12px;
         flex-shrink: 0;
+      }
+      .cta-qr {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 3px;
+        text-decoration: none;
+        color: var(--ink-mute);
+      }
+      .cta-qr img {
+        width: 72px;
+        height: 72px;
+        display: block;
+        background: #fff;
+        border-radius: 8px;
+        border: 1px solid var(--line);
+        padding: 4px;
+      }
+      .cta-qr span {
+        font-size: 9px;
+        font-weight: 600;
+        letter-spacing: 0.02em;
+        text-align: center;
+        max-width: 76px;
+        line-height: 1.2;
+      }
+      .cta-btn {
         display: inline-flex;
         align-items: center;
         justify-content: center;
@@ -560,10 +557,29 @@
 
       .legal {
         flex: 0 0 auto;
-        padding: 8px 26px 40px;
         margin-top: 0;
+        padding: 6px 26px 28px;
+        position: relative;
+      }
+      .legal::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: -8px;
+        bottom: 0;
+        background: linear-gradient(
+          180deg,
+          rgba(255, 255, 255, 0) 0%,
+          rgba(255, 255, 255, 0.88) 28%,
+          rgba(255, 255, 255, 0.96) 100%
+        );
+        z-index: 0;
+        pointer-events: none;
       }
       .legal p {
+        position: relative;
+        z-index: 1;
         margin: 0 0 2px;
         font-size: 12px;
         line-height: 1.35;
@@ -583,10 +599,11 @@
           min-height: 11in;
         }
         .hero h1 {
-          font-size: 32px;
+          font-size: 28px;
+          max-width: none;
         }
-        .hero h1 .h1-line {
-          white-space: normal;
+        .brand-tagline {
+          margin-left: 0;
         }
         .hero-grid,
         .steps,
@@ -604,8 +621,8 @@
           flex-direction: column;
           align-items: stretch;
         }
-        .cta-btn {
-          width: 100%;
+        .cta-actions {
+          justify-content: space-between;
         }
       }
 
@@ -616,10 +633,6 @@
       @media print {
         .screen-bar {
           display: none !important;
-        }
-        html,
-        body {
-          background: #fff;
         }
         .page-wrap {
           padding: 0;
@@ -640,18 +653,18 @@
   </head>
   <body>
     <div class="screen-bar" role="region" aria-label="Preview controls">
-      <p>California employer pilot · leave-behind · Download pre-built PDF</p>
+      <p>For employers leave-behind · Download pre-built PDF</p>
       <a
         class="btn-print"
         id="download-pdf"
-        href="/downloads/siya-health-employers-california-pilot.pdf"
-        download="siya-health-employers-california-pilot.pdf"
+        href="/downloads/siya-health-for-employers.pdf"
+        download="siya-health-for-employers.pdf"
         >Download PDF</a
       >
     </div>
 
     <div class="page-wrap">
-      <article class="sheet" aria-label="For Employers California pilot one-pager">
+      <article class="sheet" aria-label="For Employers one-pager">
         <img
           class="sheet-bg-img"
           src="/print/onepager-bg.svg"
@@ -664,33 +677,70 @@
         <div class="sheet-inner">
           <header class="hero">
             <div class="hero-top">
-              <a class="brand" href="https://siya.health/" aria-label="Siya Health home">
-                <img
-                  src="/assets/images/siya-health-mark.png"
-                  alt=""
-                  width="40"
-                  height="40"
-                  decoding="async"
-                />
-                <span class="wordmark">Siya Health<sup class="reg" aria-hidden="true">®</sup></span>
+              <a class="brand-lockup" href="https://siya.health/" aria-label="Siya Health home">
+                <span class="brand-row">
+                  <img
+                    src="/assets/images/siya-health-mark.png"
+                    alt=""
+                    width="40"
+                    height="40"
+                    decoding="async"
+                  />
+                  <span class="wordmark"
+                    >Siya Health<sup class="reg" aria-hidden="true">®</sup></span
+                  >
+                </span>
+                <span class="brand-tagline"
+                  >An integrated care experience for busy professionals</span
+                >
               </a>
-              <p class="pilot-tag">For employers · California pilot</p>
+              <p class="pilot-tag">For employers</p>
             </div>
             <div class="hero-grid">
               <div class="hero-copy">
-                <p class="eyebrow">An integrated care experience for busy professionals</p>
                 <h1>
-                  Your business runs<br />
-                  on brain power.<br />
-                  <span class="siya-em">Who’s looking<br />after it?</span>
+                  Annual physicals check the Body.
+                  <span class="sr-only">Who's checking the Brain?</span>
+                  <svg
+                    class="brain-svg"
+                    role="img"
+                    aria-label="Who's checking the Brain?"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <defs>
+                      <linearGradient
+                        id="whoBrainGrad"
+                        x1="0%"
+                        y1="0%"
+                        x2="100%"
+                        y2="0%"
+                        gradientUnits="objectBoundingBox"
+                      >
+                        <stop offset="0%" stop-color="#D81088" />
+                        <stop offset="28%" stop-color="#D81088" />
+                        <stop offset="48%" stop-color="#A81490" />
+                        <stop offset="68%" stop-color="#0A246B" />
+                        <stop offset="100%" stop-color="#001878" />
+                      </linearGradient>
+                    </defs>
+                    <text
+                      fill="url(#whoBrainGrad)"
+                      font-family="Poppins, sans-serif"
+                      font-weight="700"
+                      letter-spacing="-0.025em"
+                    >
+                      <tspan font-size="34" x="0" y="34">Who's checking</tspan>
+                      <tspan font-size="37.4" font-weight="700" x="0" y="72">the Brain?</tspan>
+                    </text>
+                  </svg>
                 </h1>
                 <p class="hero-lead">
-                  One physician-led team for stress, focus, memory and sleep — alongside everyday
-                  primary care.
+                  One physician-led team for focus, stress, memory and sleep, plus your team’s
+                  everyday primary care.
                 </p>
                 <div class="zero-badge" aria-label="Zero cost to employees">
                   <span class="amt">$0</span>
-                  <span class="lbl">to your employees<span class="dagger">†</span></span>
+                  <span class="lbl">to your employees<sup class="fn">¹</sup></span>
                 </div>
               </div>
               <figure class="hero-photo">
@@ -709,28 +759,34 @@
             <h2 id="care-flow-heading">Our care model</h2>
             <div class="steps">
               <!--
-                Steps from index.html #how-it-works .siya-h2-care-flow:
-                1 data-step="1" Tell us EVERYTHING
-                2 data-step="2" Comprehensive clinical evaluation (+ creyos-adhd-testing.html)
-                3 data-step="6" Tracked & escalated
+                Condensed from index.html #how-it-works .siya-h2-care-flow (6 → 3):
+                1 We listen to everything ← step 1 Tell us EVERYTHING
+                2 A complete evaluation ← steps 2–4 Comprehensive clinical evaluation,
+                  Diagnostics, Personalized plan
+                3 We follow through ← steps 5–6 Continuous care, Tracked & escalated
               -->
               <div class="step">
                 <span class="step-num" aria-hidden="true">1</span>
-                <h3>Tell us <span class="all">EVERYTHING</span></h3>
-                <p>Share every concern — physical and mental — without filtering to one issue.</p>
+                <h3>We listen to everything</h3>
+                <p>
+                  Real people who hear every concern, physical and mental, without rushing you to
+                  one issue.
+                </p>
               </div>
               <div class="step">
                 <span class="step-num" aria-hidden="true">2</span>
-                <h3>Comprehensive clinical evaluation</h3>
+                <h3>A complete evaluation</h3>
                 <p>
-                  Unhurried evaluation; cognitive tasks that measure attention, as needed.
+                  Unhurried clinical evaluation, cognitive assessments, and lab or diagnostic tests
+                  when needed, leading to an evidence-based plan.
                 </p>
               </div>
               <div class="step">
                 <span class="step-num" aria-hidden="true">3</span>
-                <h3>Tracked &amp; escalated</h3>
+                <h3>We follow through</h3>
                 <p>
-                  Subjective + objective tracking over time; a second look when something shifts.
+                  A care team that coordinates your care, keeps you on track, and flags and
+                  escalates anything that changes.
                 </p>
               </div>
             </div>
@@ -748,27 +804,27 @@
               <path d="M8 11V8a4 4 0 0 1 8 0v3" />
             </svg>
             <p>
-              <strong>Private by design.</strong> Results stay between each employee and their
-              clinician. You see de-identified group trends only (groups of 10+).
+              <strong>Private by design.</strong> Every employee’s health records stay between them
+              and their care team. Employers see only anonymised, group-level reports.
             </p>
           </div>
 
           <div class="facts" aria-label="Access standards">
             <div class="fact">
-              <strong>Same clinician</strong>
-              <span>every visit</span>
+              <strong>Your own clinician</strong>
+              <span>for everyday care</span>
             </div>
             <div class="fact">
-              <strong>24/7*</strong>
-              <span>care team, incl. weekends</span>
+              <strong>On-call clinicians</strong>
+              <span>nights, weekends, holidays<sup class="fn">²</sup></span>
             </div>
             <div class="fact">
               <strong>30 min</strong>
               <span>message replies</span>
             </div>
             <div class="fact">
-              <strong>2 hours*</strong>
-              <span>urgent needs seen by a licensed clinician</span>
+              <strong>2 hours</strong>
+              <span>urgent needs seen by a licensed clinician<sup class="fn">²</sup></span>
             </div>
           </div>
 
@@ -787,32 +843,47 @@
             <div class="cta-copy">
               <h2>Start a pilot conversation</h2>
               <p class="meta">
-                <span class="meta-line"
-                  >$100 per enrolled employee per month · minimum 250</span
-                >
+                <span class="meta-line">$100 per enrolled employee per month</span>
                 <span class="meta-line"
                   >6-month pilot · <span class="nb">HSA&#8209;compatible</span></span
                 >
               </p>
             </div>
-            <a
-              class="cta-btn"
-              href="https://siya.health/employers#employer-inquiry-form"
-              data-siya-track="employer_one_pager_cta"
-              data-intent="employer"
-              >siya.health/employers</a
-            >
+            <div class="cta-actions">
+              <a
+                class="cta-qr"
+                href="https://siya.health/employers#employer-inquiry"
+                aria-label="Scan to request information"
+              >
+                <img
+                  src="/print/employers-inquiry-qr.svg"
+                  alt=""
+                  width="72"
+                  height="72"
+                  decoding="async"
+                />
+                <span>Scan to request information</span>
+              </a>
+              <a
+                class="cta-btn"
+                href="https://siya.health/employers#employer-inquiry"
+                data-siya-track="employer_one_pager_cta"
+                data-intent="employer"
+                >siya.health/employers</a
+              >
+            </div>
           </div>
 
           <footer class="legal">
-            <p>*24/7 availability and 2-hour urgent response apply to the California pilot.</p>
             <p>
-              †Covers visits, check-ins and care coordination. Medications, labs and specialist
+              ¹ Covers visits, assessments and care coordination. Medications, labs and specialist
               visits are billed separately.
             </p>
             <p>
-              <span class="em-911">For medical emergencies, call 911.</span> Siya Health, Inc. ·
-              Clinical services by Siya Healthcare PC.
+              ² 24/7 on-call coverage and 2-hour urgent response apply in California and Florida.
+            </p>
+            <p>
+              <span class="em-911">For medical emergencies, call 911.</span> Siya Health, Inc. · Clinical services by Siya Healthcare PC.
             </p>
           </footer>
         </div>
@@ -822,6 +893,29 @@
       if (new URLSearchParams(location.search).get("review") === "1") {
         document.body.classList.add("review-shot");
       }
+      function fitBrainSvg() {
+        var svg = document.querySelector(".brain-svg");
+        var text = svg && svg.querySelector("text");
+        if (!svg || !text || !text.getBBox) return;
+        var b = text.getBBox();
+        var padX = 1;
+        var padY = 2;
+        svg.setAttribute(
+          "viewBox",
+          b.x -
+            padX +
+            " " +
+            (b.y - padY) +
+            " " +
+            (b.width + padX * 2) +
+            " " +
+            (b.height + padY * 2),
+        );
+        svg.setAttribute("width", String(Math.ceil(b.width + padX * 2)));
+        svg.setAttribute("height", String(Math.ceil(b.height + padY * 2)));
+        svg.dataset.ready = "1";
+      }
+      document.fonts.ready.then(fitBrainSvg);
     </script>
   </body>
 </html>

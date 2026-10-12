@@ -15,7 +15,7 @@ export function employerInquiryButtonHtml({
 } = {}) {
   const btnClass =
     variant === 'primary' ? 'ds-button--primary' : 'ds-button--secondary secondary';
-  return `<a class="button ds-button ${btnClass}" href="#employer-inquiry-form" data-siya-track="${EMPLOYER_INQUIRY_TRACK}" data-siya-location="${location}" data-page-type="employer" data-intent="employer" data-conversion-goal="bookDemo" data-cta-slot="bookDemo" data-component="button">${label}</a>`;
+  return `<a class="button ds-button ${btnClass}" href="#employer-inquiry" data-siya-track="${EMPLOYER_INQUIRY_TRACK}" data-siya-location="${location}" data-page-type="employer" data-intent="employer" data-conversion-goal="bookDemo" data-cta-slot="bookDemo" data-component="button">${label}</a>`;
 }
 
 export function employerInquiryFormHtml() {

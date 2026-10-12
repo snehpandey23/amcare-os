@@ -61,6 +61,9 @@ const SITEMAP_EXCLUDE = new Set([
   'employers2.html',
   'employers/demo.html', // invitation preview — noindex, not in sitemap
   'employers/one-pager.html', // CA pilot leave-behind — noindex, not in nav/sitemap
+  'employees/one-pager.html', // employee leave-behind — noindex, unlinked
+  'join/sample-co.html', // employer join landing — noindex, unlinked
+  'start/index.html', // Meet & Greet hop — noindex, same destination as /redirect/meet-greet
   'video-cards.html', // local export surface; public URL redirects home
   'homepage2-audit.html',
   'homepage2-care-preview.html',

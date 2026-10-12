@@ -1,10 +1,34 @@
 /**
  * Employer inquiry form — POST to same-origin /api/employer-inquiry (proxied to auth API).
+ * Also lands #employer-inquiry (and legacy #employer-inquiry-form) on the section heading.
  */
 (function () {
   'use strict';
 
   var form = document.getElementById('employer-inquiry-form');
+  var section = document.getElementById('employer-inquiry');
+
+  function scrollToInquiry() {
+    var hash = String(location.hash || '');
+    if (hash !== '#employer-inquiry' && hash !== '#employer-inquiry-form') return;
+    var target = section || form;
+    if (!target || !target.scrollIntoView) return;
+    // After sticky header / late layout: scroll to section, not the first input.
+    window.requestAnimationFrame(function () {
+      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  }
+
+  if (section || form) {
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', scrollToInquiry);
+    } else {
+      scrollToInquiry();
+    }
+    window.addEventListener('hashchange', scrollToInquiry);
+    window.addEventListener('load', scrollToInquiry);
+  }
+
   if (!form) return;
 
   var errEl = document.getElementById('employer-inquiry-error');

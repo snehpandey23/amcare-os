@@ -1,0 +1,12 @@
+{
+  "todo": "Each real employer needs its own Spruce join link in spruceJoinUrl before any flyer is distributed. sample-co uses the practice-wide Spruce invite only so the preview button has a real destination. includes24x7 defaults to false: set true only when that employer's package includes on-call and 2-hour urgent response.",
+  "flyers": [
+    {
+      "slug": "sample-co",
+      "employerName": "Sample Co",
+      "joinUrl": "https://siya.health/join/sample-co",
+      "spruceJoinUrl": "https://app.sprucehealth.com/?invite=siyahealth",
+      "includes24x7": true
+    }
+  ]
+}

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex, nofollow, noarchive" />
+    <title>Welcome | Siya Health</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+    <style>
+      :root { --cream: #f4efe7; --ink: #0a246b; --magenta: #d81088; }
+      * { box-sizing: border-box; }
+      body {
+        margin: 0;
+        min-height: 100vh;
+        background: var(--cream);
+        color: var(--ink);
+        font-family: Inter, ui-sans-serif, system-ui, sans-serif;
+      }
+      main { max-width: 32rem; margin: 0 auto; padding: 48px 20px 64px; }
+      .logo { display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--ink); font-family: Poppins, sans-serif; font-weight: 600; font-size: 20px; }
+      .logo img { width: 40px; height: 40px; border-radius: 9px; }
+      h1 { font-family: Poppins, sans-serif; font-size: 32px; line-height: 1.15; letter-spacing: -0.03em; margin: 28px 0 12px; }
+      ol { margin: 0 0 28px; padding-left: 1.2rem; font-size: 17px; line-height: 1.45; }
+      li { margin: 0 0 8px; }
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 14px 22px;
+        border-radius: 999px;
+        background: linear-gradient(135deg, #d81088 0%, #7b2d8e 48%, #001878 100%);
+        color: #fff;
+        font-family: Poppins, sans-serif;
+        font-weight: 700;
+        text-decoration: none;
+      }
+      .todo { margin-top: 28px; padding: 12px 14px; background: #fff4d6; border-radius: 12px; font-size: 14px; font-weight: 600; }
+    </style>
+  </head>
+  <body>
+    <main>
+      <a class="logo" href="https://siya.health/">
+        <img src="/assets/images/siya-health-mark.png" alt="" width="40" height="40" />
+        Siya Health
+      </a>
+      <h1 id="welcome">Welcome, team</h1>
+      <ol>
+        <li>Create your profile in the Spruce app.</li>
+        <li>Book a free Meet &amp; Greet with your clinician.</li>
+        <li>Message your care team when you need them.</li>
+      </ol>
+      <a class="btn" id="spruce-btn" href="https://app.sprucehealth.com/?invite=siyahealth">Continue in Spruce</a>
+      <p class="todo" id="todo" hidden>
+        TODO: add this employer's Spruce join link in data/employer-flyers.json before the flyer is distributed.
+      </p>
+    </main>
+    <script>
+      (function () {
+        var slug = (location.pathname.split("/").pop() || "").replace(/\.html$/, "");
+        fetch("/data/employer-flyers.json")
+          .then(function (res) { return res.json(); })
+          .then(function (data) {
+            var flyer = ((data && data.flyers) || []).filter(function (item) { return item.slug === slug; })[0];
+            if (!flyer) return;
+            document.getElementById("welcome").textContent = "Welcome, " + flyer.employerName + " team";
+            document.title = "Welcome, " + flyer.employerName + " team | Siya Health";
+            if (flyer.spruceJoinUrl) document.getElementById("spruce-btn").href = flyer.spruceJoinUrl;
+            var placeholder = flyer.spruceJoinUrl === "https://app.sprucehealth.com/?invite=siyahealth";
+            document.getElementById("todo").hidden = !placeholder;
+          });
+      })();
+    </script>
+  </body>
+</html>

@@ -45,7 +45,7 @@ export const USER_INTENT_RULES = {
 CTA_SLOTS.bookDemo = {
   id: 'bookDemo',
   label: 'Request employer information',
-  url: '#employer-inquiry-form',
+  url: '#employer-inquiry',
   external: false,
   track: EMPLOYER_INQUIRY_TRACK,
 };
