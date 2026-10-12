@@ -1,4 +1,4 @@
-# no-scroll + visible-top gate `f98dbd32`
+# no-scroll + visible-top gate `974a2686`
 
 **Failures: 0**
 

@@ -1,4 +1,4 @@
-# pause-freeze gate `f98dbd32`
+# pause-freeze gate `974a2686`
 
 **Failures: 0**
 
