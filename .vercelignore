@@ -10,3 +10,5 @@ apps/siya-health/internal/vo-tail-check.json
 apps/siya-health/internal/vo-report.json
 apps/siya-health/node_modules
 apps/siya-health/node_modules/**
+# Investor decks are tracked in git and are not read by the site build or any page.
+apps/siya-health/brand/investor
