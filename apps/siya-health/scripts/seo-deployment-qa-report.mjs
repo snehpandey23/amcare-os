@@ -167,7 +167,12 @@ const deployAnswerStatus = DEPLOY_ANSWERS.map((slug) => {
 });
 
 const crossLinkResults = CROSS_LINKS.map(([from, toSlug]) => {
-  const html = fs.readFileSync(path.join(SITE_ROOT, 'blog', from), 'utf8');
+  const fp = path.join(SITE_ROOT, 'blog', from);
+  if (!fs.existsSync(fp)) {
+    console.warn(`[seo-deployment-qa] skip missing cross-link source: blog/${from}`);
+    return { from, toSlug, ok: false, skippedMissing: true };
+  }
+  const html = fs.readFileSync(fp, 'utf8');
   return { from, toSlug, ok: html.includes(toSlug) };
 });
 

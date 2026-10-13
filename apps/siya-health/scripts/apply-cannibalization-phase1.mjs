@@ -22,6 +22,15 @@ const DOCS = path.join(SITE_ROOT, 'docs');
 
 const BLOG_HUBS = new Set(['index.html', 'all.html', 'adhd.html', 'weight-loss.html', 'telehealth.html']);
 
+/** Read UTF-8 if present; skip + log when the triage deleted the target. */
+function readTextIfExists(filePath, label = filePath) {
+  if (!fs.existsSync(filePath)) {
+    console.warn(`[cannibalization] skip missing file: ${label}`);
+    return null;
+  }
+  return fs.readFileSync(filePath, 'utf8');
+}
+
 function applyGuideOverrides(slug) {
   const base = ANSWER_SEEDS.find((s) => s.slug === slug);
   const patch = GUIDE_CANNIBALIZATION_OVERRIDES[slug];
@@ -255,23 +264,28 @@ function linkEquityReport() {
     const slug = blogPath.replace('/blog/', '');
     const guideLink = Object.entries(BLOG_RECIPROCAL_GUIDE_LINKS).find(([, v]) => v.guide)?.[1];
     const reciprocal = BLOG_RECIPROCAL_GUIDE_LINKS[slug];
-    const html = fs.existsSync(path.join(BLOG_DIR, `${slug}.html`))
-      ? fs.readFileSync(path.join(BLOG_DIR, `${slug}.html`), 'utf8')
-      : '';
+    const html = readTextIfExists(path.join(BLOG_DIR, `${slug}.html`), `blog/${slug}.html`) || '';
+    const guideHtml = reciprocal
+      ? readTextIfExists(
+          path.join(ANSWERS_DIR, `${reciprocal.guide.replace('/answers/', '')}.html`),
+          reciprocal.guide,
+        )
+      : null;
 
     return {
       blog: blogPath,
       inbound: inbound[blogPath] || 0,
-      fromGuide: reciprocal ? fs.readFileSync(path.join(ANSWERS_DIR, `${reciprocal.guide.replace('/answers/', '')}.html`), 'utf8').includes(blogPath) : false,
+      fromGuide: guideHtml ? guideHtml.includes(blogPath) : false,
       guideReciprocal: reciprocal ? html.includes(reciprocal.guide) : false,
       categoryHub: ['weight-loss.html', 'adhd.html', 'telehealth.html'].some((h) => {
-        const hub = fs.readFileSync(path.join(BLOG_DIR, h), 'utf8');
-        return hub.includes(blogPath);
+        const hub = readTextIfExists(path.join(BLOG_DIR, h), `blog/${h}`);
+        return hub ? hub.includes(blogPath) : false;
       }),
       relatedBlock: html.includes('continue-reading') || html.includes('related-health-guides'),
       servicePage: ['/weight-loss-metabolic-health.html', '/mens-health-longevity.html', '/adhd-care.html', '/telehealth.html'].some((p) => {
-        const fp = path.join(SITE_ROOT, p);
-        return fs.existsSync(fp) && fs.readFileSync(fp, 'utf8').includes(blogPath);
+        const fp = path.join(SITE_ROOT, p.replace(/^\//, ''));
+        const body = readTextIfExists(fp, p);
+        return body ? body.includes(blogPath) : false;
       }),
     };
   });
@@ -289,7 +303,16 @@ function linkEquityReport() {
 function cornerstoneReport() {
   const lines = [];
   for (const sys of CORNERSTONE_SYSTEMS) {
-    const blogHtml = fs.readFileSync(path.join(SITE_ROOT, sys.blog.replace(/^\//, '') + '.html'), 'utf8');
+    const blogHtml = readTextIfExists(
+      path.join(SITE_ROOT, sys.blog.replace(/^\//, '') + '.html'),
+      sys.blog,
+    );
+    if (!blogHtml) {
+      lines.push(`### ${sys.name}`);
+      lines.push(`- **Cornerstone blog:** ${sys.blog} _(missing — skipped)_`);
+      lines.push('');
+      continue;
+    }
     const blogTitle = extractTitle(blogHtml);
     const blogH1 = extractH1(blogHtml);
     const blogMeta = extractMeta(blogHtml, 'description');
@@ -303,7 +326,12 @@ function cornerstoneReport() {
     for (const guidePath of sys.guides) {
       const slug = guidePath.replace('/answers/', '');
       const merged = applyGuideOverrides(slug);
-      const gHtml = fs.readFileSync(path.join(ANSWERS_DIR, `${slug}.html`), 'utf8');
+      const gHtml = readTextIfExists(path.join(ANSWERS_DIR, `${slug}.html`), guidePath);
+      if (!gHtml) {
+        lines.push(`| Guide | ${guidePath} | _(missing — skipped)_ |`);
+        lines.push('');
+        continue;
+      }
       const gTitle = extractTitle(gHtml);
       const gH1 = extractH1(gHtml);
       const gMeta = extractMeta(gHtml, 'description');

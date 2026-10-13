@@ -76,12 +76,16 @@ function loadRedirectTargets() {
   try {
     const cfg = JSON.parse(fs.readFileSync(vercelPath, 'utf8'));
     for (const r of cfg.redirects || []) {
-      const source = '/' + String(r.source || '').replace(/^\//, '').split('?')[0];
-      const dest = String(r.destination || '').split('?')[0];
+      const source = '/' + String(r.source || '').replace(/^\//, '').split('?')[0].split('#')[0];
+      // Strip query/hash so /guides/foo#section resolves to guides/foo.html
+      const dest = String(r.destination || '').split('?')[0].split('#')[0];
       if (!dest.startsWith('/')) continue;
       const destVariants = [dest, dest.replace(/\/$/, ''), dest + '.html', dest + '/index.html'];
       if (destVariants.some((d) => allPaths.has(d) || fs.existsSync(path.join(SITE_ROOT, d.replace(/^\//, ''))))) {
         ok.add(source);
+        ok.add(source.replace(/\/$/, ''));
+      } else {
+        console.warn(`[validate-cta-links] redirect source kept invalid (dest missing): ${source} -> ${r.destination}`);
       }
     }
   } catch {
