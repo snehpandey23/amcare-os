@@ -3,11 +3,13 @@
 **Status:** Review only — no deletes/merges/redirects executed for the 120-page cleanup. Pillar split drafts exist locally; not deployed.
 
 **Pillar split (2026-10-04):**
+
+**Update:** `#te-sex` (ED/sildenafil) removed from `/guides/testosterone`. `/blog/sildenafil-for-erectile-dysfunction-what-to-expect` is KEEP standalone until sexual health has its own home.
 - Landing: `/guides/hormonal-health` (short self-route page)
 - `/guides/testosterone` — former `#ho-t` + `#ho-sex`
 - `/guides/perimenopause` — former `#ho-women`
 
-**Counts:** 120 · MERGE 68 · RETIRE 23 · KEEP 29
+**Counts:** 120 · MERGE 68 · RETIRE 22 · KEEP 30
 
 ## Re-pointed hormonal merge/retire targets
 
@@ -27,13 +29,14 @@
 | `/blog/minoxidil-for-hair-loss-does-it-work` | RETIRE | `/guides/testosterone#te-opener` |
 | `/blog/oral-vs-topical-minoxidil-which-is-right` | RETIRE | `/guides/testosterone#te-opener` |
 | `/blog/perimenopause-brain-fog` | MERGE | `/guides/perimenopause#pe-mood` |
-| `/blog/sildenafil-for-erectile-dysfunction-what-to-expect` | RETIRE | `/guides/testosterone#te-sex` |
+| `/blog/sildenafil-for-erectile-dysfunction-what-to-expect` | KEEP | — (standalone until sexual-health taxonomy home) |
 | `/blog/when-is-testosterone-therapy-appropriate` | MERGE | `/guides/testosterone#te-therapy` |
 
 ## KEEP pages — review assignment tags
 
 | Page URL | Review tag |
 |---|---|
+| `/blog/sildenafil-for-erectile-dysfunction-what-to-expect` | clinical claim — needs physician review |
 | `/blog/adhd-accommodations-hr-primer` | ops/pricing/trust — no clinical review needed |
 | `/blog/adhd-evaluation-california-online-vs-in-person` | ops/pricing/trust — no clinical review needed |
 | `/blog/adhd-evaluation-cost-texas` | ops/pricing/trust — no clinical review needed |
@@ -119,7 +122,7 @@
 | `/blog/phentermine-for-weight-loss-safety-and-effectiveness` | RETIRE | /guides/weight#wt-opener | Mid-career · wellness checks — Single-drug safety blog; high maintenance, low persona value vs pillar. |
 | `/blog/pots-and-adhd` | RETIRE | /guides/mental-health-and-adhd#mh-diff | Early-career · mental health — Niche comorbidity; too specialized for pillars and thin for standalone review priority. |
 | `/blog/semaglutide-for-weight-loss-how-it-works` | RETIRE | /guides/weight#wt-glp1 | Mid-career · wellness checks — Molecule explainer without durable citation ownership; pillar covers GLP-1 conversation. |
-| `/blog/sildenafil-for-erectile-dysfunction-what-to-expect` | RETIRE | /guides/testosterone#te-sex | Mid-career man · sexual health — PDE5 drug explainer; sexual-health pillar can link to care, not host a med monograph. |
+| `/blog/sildenafil-for-erectile-dysfunction-what-to-expect` | KEEP | — | Mid-career man · sexual health — Keep standalone until sexual health has its own taxonomy home; do not fold into testosterone. |
 | `/blog/sleep-and-focus-at-work` | MERGE | /guides/sleep#sl-focus | Early-career · focus/cognitive — Workplace sleep/focus is sleep pillar’s ADHD-lookalike section. |
 | `/blog/sleep-apnea-fatigue-metabolic-risk-when-snoring-is-not-benign` | MERGE | /guides/sleep#sl-apnea | Mid-career · wellness checks — Apnea + metabolic risk belongs in #sl-apnea. |
 | `/blog/telehealth-prescriptions-how-online-treatment-works` | KEEP | — | Early-career · wellness checks — How telehealth prescribing works (ops/trust); keep for conversion. |
