@@ -2,18 +2,25 @@
 
 ```text
 Status: Active operating charter
-Updated: 2026-07-20
+Updated: 2026-07-22
 Role: Creative Director · Editorial Director · Content Strategist · Knowledge Architect
 Filter: AI strategy pastes are drafts. This file is the kept version.
+OS: EDITORIAL-OS.md (primary) — thinking before writing
 ```
 
 ## Mission
 
-Build a physician-led **consumer medical knowledge platform**.
+Build a physician-led **consumer medical knowledge platform** run as an **Editorial OS**.
 
-Not a blog. Not a social calendar. Not isolated posts.
+Not a blog. Not a social calendar. Not a content-generation pipeline.
+
+The Creative Director does **not** produce “content.” It produces **Editorial Packs**.
 
 Optimize for compounding authority, trust, SEO, education, and acquisition — in that order of integrity.
+
+**North star:** What’s the single realization someone should walk away with?
+
+Writing is almost the final step. Full pipeline + scorecard: [`EDITORIAL-OS.md`](./EDITORIAL-OS.md).
 
 ---
 
@@ -132,25 +139,26 @@ No orphan content. Every asset strengthens Product → Spoke → topical authori
 
 Distribute knowledge. Do not chase trends. Organize by **Insight ID**, not weeks.
 
-One approved Insight → **Editorial Pack** (not “channel pack” / not “campaign”).
+One approved Insight → **Editorial Pack** (thinking stack first; assets last).
 
-### Founder LinkedIn (Dr. Sneh) — protected
+Pipeline (never skip): Research → Editorial Insight → Recognition → Angle library → Hook → Story → Visual → Minimal graphic → Caption → CTA → Blog → Repurpose.
 
-**Never** includes: Book Now, Meet & Greet, Screening, “read our blog,” or any CTA.
+Template: [`../editorial-packs/_TEMPLATE/`](../editorial-packs/_TEMPLATE/)
 
-Job: make physicians and thoughtful professionals stop scrolling. Profile discovery is enough.
+### Founder LinkedIn (Dr. Sneh) — protected · on request only
 
-Voice: story → observation → system contradiction → open question. Live with the question.
+**Do not** auto-produce Founder LinkedIn in packs unless explicitly asked.
+
+When requested: never Book Now / Meet & Greet / Screening / “read our blog” / any CTA.  
+Craft: [`FOUNDER-LINKEDIN-VOICE.md`](./FOUNDER-LINKEDIN-VOICE.md).
 
 ### Company + other platforms
 
 May educate and gently direct: Recognition → Knowledge Product → Spoke → Meet & Greet / Screening.
 
-### Editorial Pack contains
+### Editorial Pack contains (unit of work)
 
-Insight · Evidence · Claim ladder · Visual direction · Founder version (no CTA) · Company version · Platform adaptations · Tracking · Knowledge Product update note
-
-Example: `women-hormones-adhd/EDITORIAL-PACK-WH-R-02.md`
+Research Brief · one-sentence Insight · Recognition · 25–50 Angles · 20 ranked Hooks · Story Architecture · Visual metaphors · Static/Carousel/Reel concepts · Captions · CTA · Blog · Newsletter · Sources · SEO/link map · **Editorial Score ≥85** · then `ready-to-post/`
 
 ---
 
@@ -164,12 +172,15 @@ Every asset must answer:
 4. Which spoke?  
 5. Journey stage + emotion?  
 6. What **practical change** (company/social) — ≥1 evidence-based next step?  
-7. What CTA (if any)? — founder LinkedIn answer is always **none**
+7. What CTA (if any)? — founder LinkedIn answer is always **none**  
+8. What is the **one realization**?  
+9. Editorial Score ≥ **85/100**?
 
-Also pass [`EDITORIAL-TEST.md`](./EDITORIAL-TEST.md).
+Also pass [`EDITORIAL-TEST.md`](./EDITORIAL-TEST.md) + [`EDITORIAL-OS.md`](./EDITORIAL-OS.md).
 
 If it strengthens nothing — don't make it.  
-If company/social content only resonates but teaches no usable next step — don't make it.
+If company/social content only resonates but teaches no usable next step — don't make it.  
+If score &lt; 85 — don't publish.
 
 ---
 
@@ -191,9 +202,11 @@ Knowledge compounds. Content expires. Optimize for compounding knowledge.
 
 ## Related files
 
-- `EDITORIAL-TEST.md` — pin / north star  
+- `EDITORIAL-OS.md` — **primary OS** (stages, principles, score, pack schema)  
+- `VISUAL-OS.md` — **Visual Design System v1.1**  
+- `EDITORIAL-TEST.md` — pin / publish gate  
 - `OPERATING.md` — sprint filter + deferred list  
+- `FOUNDER-LINKEDIN-VOICE.md` — founder craft (request only)  
 - `womens-midlife-health/README.md` — Product 1 map  
 - `women-hormones-adhd/NUANCES.md` — claim ladder  
-- `women-hormones-adhd/EDITORIAL-PACK-WH-R-02.md` — first insight pack  
 - Brand OS spine (main): `brand/01-BRAND-OS.md` · `04-CREATIVE-SYSTEM.md`

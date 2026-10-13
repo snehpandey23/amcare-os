@@ -1,8 +1,9 @@
 # Siya Knowledge Platform — what we actually do now
 
 ```text
-Locked: 2026-07-20
+Locked: 2026-07-22
 Filter rule: AI strategy pastes are drafts. We keep leverage; we defer theater.
+OS: EDITORIAL-OS.md — Editorial Packs, not content generation
 ```
 
 ## Hierarchy (real)
@@ -11,12 +12,13 @@ Filter rule: AI strategy pastes are drafts. We keep leverage; we defer theater.
 Knowledge Product   →  /womens-midlife-health
 Knowledge Articles  →  /blog/* spokes (rename URLs later, not now)
 Creative Registry   →  Insight IDs (WH-R-02, …)
-Editorial Packs     →  distribute insight (not “weeks”)
+Editorial Packs     →  unit of work (thinking → assets → score ≥85)
 ```
 
 Moat: **systems medicine explained simply.**
 
-**Editorial desk, not campaign calendar.** Insights resurface; weeks don’t.
+**Editorial OS, not campaign calendar.** Insights resurface; weeks don’t.  
+Ask: *single realization?* — not *how do we post this research?*
 
 ## Tier-1 products (cap at six)
 
@@ -43,23 +45,27 @@ Moat: **systems medicine explained simply.**
 
 ## Pin
 
+- `EDITORIAL-OS.md` — primary OS  
+- `VISUAL-OS.md` — Visual Design System v1.1  
 - `EDITORIAL-TEST.md`  
 - `CREATIVE-DIRECTOR.md`  
 - `INSTAGRAM-STATIC.md`  
 - `TEAM-WORKDRIVE.md`
-- `FOUNDER-LINKEDIN-VOICE.md` — founder LI craft (memory > thesis; end on realization) — **sync all team deliverables to Zoho Common Folder → Siya Knowledge Editorial**  
-- Founder LinkedIn: never sells  
-- Company/social: useful + ≥1 evidence-based practical change  
+- `FOUNDER-LINKEDIN-VOICE.md` — founder LI on request only — **sync team deliverables to Zoho Common Folder → Siya Knowledge Editorial**  
+- Founder LinkedIn: never sells; do not auto-produce  
+- Company/social: useful + ≥1 evidence-based practical change + score ≥85  
+- Visuals: Visual OS v1.1 — 4:5 · one job · Rule of Three · Blur Test · never-ship gallery  
 
 ## Slim prompt (post-deploy)
 
 ```text
-Publishing Insight from Women's Midlife Health.
-Use Editorial Pack format (Insight ID, not Week).
-Founder LinkedIn: Draft A voice, zero CTA.
-Company/social: Recognition → useful explanation → ≥1 practical change
-(evidence-based / guideline-aligned; no DIY dosing / HRT-as-ADHD / overclaim).
-Link Product → Spoke → Meet & Greet. Pass Editorial Test.
+Run Editorial OS + Visual OS v1.1 for Insight ID from Women's Midlife Health.
+Stages before copy: Insight → Recognition → Angles · Hooks · Story · Visual.
+Company voice only unless Founder LI explicitly requested.
+Score ≥85 + Visual ≥40. One realization. Curiosity on image; teach in caption.
+Format 4:5. Blur Test. Siya® top-left once. Bottom-center URL.
+No stacked CTA slabs, 3×3 symptom grids, head-in-hands clichés, or free discovery call.
+Soft path: Talk to a Clinician. Pass Editorial Test + Editorial OS + Visual OS.
 ```
 
 ## Content production pause (2026-07-21)

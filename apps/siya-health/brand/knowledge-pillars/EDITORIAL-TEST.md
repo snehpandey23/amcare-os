@@ -2,6 +2,7 @@
 
 ```text
 Pin this. Apply before anything ships.
+OS: EDITORIAL-OS.md — thinking before writing; score ≥85
 ```
 
 Before publishing anything, ask:
@@ -13,6 +14,9 @@ Before publishing anything, ask:
 5. **Would we still be proud of this in three years?**
 6. **Does this teach something competitors don't?**
 7. **Does this build trust instead of attention?**
+8. **Is there exactly one realization** (not ten facts)?
+9. **Did thinking happen before writing?** (insight → recognition → angle → hook → story → visual → copy)
+10. **Editorial Score ≥ 85/100?** (see `EDITORIAL-OS.md`)
 
 If any answer is no — don't publish.
 
@@ -23,14 +27,16 @@ Safe practical patterns:
 - Track X for N days, then bring it to a clinician  
 - Ask for evaluation of Y (labs/screens named carefully)  
 - Stop doing Z when A is happening; do W instead  
-- Read spoke → book Meet & Greet (company channels only)
+- Read spoke → Talk to a Clinician / CarePatron (company channels only)
 
-Never: DIY stimulant/HRT protocols, “hormones cause ADHD,” guaranteed diagnosis language.
+Never: DIY stimulant/HRT protocols, “hormones cause ADHD,” guaranteed diagnosis language, “free discovery call,” Meet & Greet as booking CTAs.
 
 ---
 
 **Editorial slogan:** Recognition > Expertise  
-**Company/social addendum:** Recognition without a useful next step is incomplete.
+**Company/social addendum:** Recognition without a useful next step is incomplete.  
+**OS addendum:** One realization per piece. Graphic = curiosity. Caption = understanding. Never waste Slide 1 or the last slide.  
+**Visual addendum:** Pass `VISUAL-OS.md` v1.1 (one job · Rule of Three · 4:5 · Blur Test · never-ship gallery) before image approval. No symptom encyclopedias or stacked discovery-call ads.
 
 **Emotional arc (default):**
 
