@@ -239,7 +239,7 @@ export const ADDITIONAL_PROVIDERS = [
     ],
     testimonials: [],
     relatedLinksHtml:
-      'Explore: <a href="/answers/what-is-food-noise">what is food noise</a>, <a href="/guides/weight#wt-glp1">GLP-1 side effects</a>.',
+      'Explore: <a href="/guides/weight#wt-food-noise">what is food noise</a>, <a href="/guides/weight#wt-glp1">GLP-1 side effects</a>.',
     inlineCtas: [
       { label: 'Medical weight loss', path: '/weight-loss-metabolic-health', primary: true },
       { label: 'Browse weight guides', path: '/answers', primary: false },

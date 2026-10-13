@@ -1,15 +1,15 @@
-# Persona triage plan (plan only)
+# Persona triage plan
 
-**Status:** Review only — no deletes/merges/redirects executed for the 120-page cleanup. Pillar split drafts exist locally; not deployed.
+**Status:** MERGE/RETIRE executed on `wip/hormonal-health-patch` (2026-10-04) for exhausted · weight · sleep · mental-health-and-adhd · testosterone · perimenopause targets. Pages deleted, permanent redirects in `vercel.json` + `data/retired-content.mjs` + `data/redirect-map.mjs`, inbound links remapped, sitemap refreshed. **Not deployed yet.** KEEP pages left live (including sildenafil blog).
 
 **Pillar split (2026-10-04):**
 
 **Update:** `#te-sex` (ED/sildenafil) removed from `/guides/testosterone`. `/blog/sildenafil-for-erectile-dysfunction-what-to-expect` is KEEP standalone until sexual health has its own home.
 - Landing: `/guides/hormonal-health` (short self-route page)
-- `/guides/testosterone` — former `#ho-t` + `#ho-sex`
+- `/guides/testosterone` — testosterone only (ED section removed)
 - `/guides/perimenopause` — former `#ho-women`
 
-**Counts:** 120 · MERGE 68 · RETIRE 22 · KEEP 30
+**Counts:** 120 · MERGE 68 · RETIRE 22 · KEEP 30 · **executed MERGE+RETIRE → pillars: 90**
 
 ## Re-pointed hormonal merge/retire targets
 
