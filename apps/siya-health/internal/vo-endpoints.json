@@ -1,0 +1,111 @@
+{
+  "_note": "defaults accepted by founder 2026-10-09",
+  "01-statement": {
+    "startMs": 0,
+    "cutMs": 11950
+  },
+  "02-p-time": {
+    "startMs": 0,
+    "cutMs": 8250
+  },
+  "03-p-away": {
+    "startMs": 0,
+    "cutMs": 8410
+  },
+  "04-p-familiar": {
+    "startMs": 0,
+    "cutMs": 15350
+  },
+  "05-p-response": {
+    "startMs": 0,
+    "cutMs": 4530
+  },
+  "06-p-whole": {
+    "startMs": 0,
+    "cutMs": 11350
+  },
+  "07-p-coord": {
+    "startMs": 0,
+    "cutMs": 6610
+  },
+  "08-question": {
+    "startMs": 360,
+    "cutMs": 5950
+  },
+  "09-turn": {
+    "startMs": 0,
+    "cutMs": 10290
+  },
+  "10-care-checklist": {
+    "startMs": 0,
+    "cutMs": 12810
+  },
+  "11-f-time": {
+    "startMs": 0,
+    "cutMs": 10570
+  },
+  "12-f-ways": {
+    "startMs": 0,
+    "cutMs": 5410
+  },
+  "13-f-response": {
+    "startMs": 0,
+    "cutMs": 8510
+  },
+  "14-f-urgent": {
+    "startMs": 0,
+    "cutMs": 8030
+  },
+  "15-f-whole": {
+    "startMs": 0,
+    "cutMs": 9270
+  },
+  "16-employer": {
+    "startMs": 0,
+    "cutMs": 7350
+  },
+  "17-journey": {
+    "startMs": 0,
+    "cutMs": 7610
+  },
+  "18-outcomes": {
+    "startMs": 0,
+    "cutMs": 7910
+  },
+  "19-clinicians": {
+    "startMs": 0,
+    "cutMs": 11390
+  },
+  "20-cost": {
+    "startMs": 0,
+    "cutMs": 9150
+  },
+  "21-privacy": {
+    "startMs": 0,
+    "cutMs": 11410
+  },
+  "22-proof": {
+    "startMs": 0,
+    "cutMs": 8330
+  },
+  "23-e1-time": {
+    "startMs": 0,
+    "cutMs": 6230
+  },
+  "24-e2-focus": {
+    "startMs": 0,
+    "cutMs": 7530
+  },
+  "25-e3-outcomes": {
+    "startMs": 0,
+    "cutMs": 8050
+  },
+  "26-e4-simple": {
+    "startMs": 0,
+    "cutMs": 6130
+  },
+  "27-close": {
+    "startMs": 580,
+    "cutMs": 7070
+  }
+}

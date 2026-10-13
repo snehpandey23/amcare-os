@@ -72,7 +72,26 @@ async function domSig(page) {
   });
 }
 
+const STEP_MS = 180000;
+let currentStep = 'launch';
+async function within(step, fn) {
+  currentStep = step;
+  console.log('STEP', step);
+  let timer;
+  try {
+    return await Promise.race([
+      Promise.resolve().then(fn),
+      new Promise((_, reject) => {
+        timer = setTimeout(() => reject(new Error('TIMEOUT ' + step)), STEP_MS);
+      }),
+    ]);
+  } finally {
+    clearTimeout(timer);
+  }
+}
+
 const browser = await chromium.launch();
+let timedOut = null;
 for (const { w, h, mobile } of VIEWS) {
   const ctx = await browser.newContext({
     viewport: { width: w, height: h },
@@ -113,39 +132,53 @@ for (const { w, h, mobile } of VIEWS) {
     const dur = await page.evaluate(() => window.__employerDemo.getDur?.() || 4000);
     const points = [0.15, 0.45, 0.75].map((f) => Math.max(200, Math.floor(dur * f)));
     for (const wait of points) {
-      await page.evaluate((id) => {
-        window.__employerDemo.playSlideDeepLink(id, { playBuild: true });
-        if (window.__employerDemo.getPaused()) window.__employerDemo.togglePause();
-      }, id);
-      await page.waitForTimeout(Math.min(wait, 2800));
-      const beforeCur = await page.evaluate(() => window.__employerDemo.getCur());
-      if (!(await page.evaluate(() => window.__employerDemo.getPaused()))) {
-        await page.evaluate(() => window.__employerDemo.togglePause());
-      }
-      await page.waitForTimeout(80);
-      const sig1 = await domSig(page);
-      const shot1 = await page.screenshot({ type: 'png', animations: 'disabled', timeout: 15000 });
-      const h1 = snapHash(shot1);
-      const elapsed1 = await page.evaluate(() => window.__employerDemo.getElapsed());
-      await page.waitForTimeout(process.env.SIYA_GATE_FAST === '1' ? 1200 : 5000);
-      const sig2 = await domSig(page);
-      const shot2 = await page.screenshot({ type: 'png', animations: 'disabled', timeout: 15000 });
-      const h2 = snapHash(shot2);
-      const elapsed2 = await page.evaluate(() => window.__employerDemo.getElapsed());
-      const afterCur = await page.evaluate(() => window.__employerDemo.getCur());
-      const stillPaused = await page.evaluate(() => window.__employerDemo.getPaused());
-      if (!stillPaused) failures.push({ view: `${w}x${h}`, id, wait, why: 'unpaused' });
-      if (afterCur !== beforeCur) failures.push({ view: `${w}x${h}`, id, wait, why: `advanced ${beforeCur}->${afterCur}` });
-      if (elapsed1 !== elapsed2) failures.push({ view: `${w}x${h}`, id, wait, why: `elapsed ${elapsed1}->${elapsed2}` });
-      if (sig1 !== sig2) failures.push({ view: `${w}x${h}`, id, wait, why: 'dom-changed', a: sig1.slice(0, 160), b: sig2.slice(0, 160) });
-      if (!almostSamePng(shot1, shot2)) failures.push({ view: `${w}x${h}`, id, wait, why: `screenshot-diff ${h1}!=${h2}` });
-      /* resume for next */
-      if (await page.evaluate(() => window.__employerDemo.getPaused())) {
-        await page.evaluate(() => window.__employerDemo.togglePause());
+      const step = `${w}x${h} ${id} t=${wait}`;
+      try {
+        await within(step, async () => {
+          await page.evaluate((id) => {
+            window.__employerDemo.playSlideDeepLink(id, { playBuild: true });
+            if (window.__employerDemo.getPaused()) window.__employerDemo.togglePause();
+          }, id);
+          await page.waitForTimeout(Math.min(wait, 2800));
+          const beforeCur = await page.evaluate(() => window.__employerDemo.getCur());
+          if (!(await page.evaluate(() => window.__employerDemo.getPaused()))) {
+            await page.evaluate(() => window.__employerDemo.togglePause());
+          }
+          await page.waitForTimeout(80);
+          const sig1 = await domSig(page);
+          const shot1 = await page.screenshot({ type: 'png', animations: 'disabled', timeout: 15000 });
+          const h1 = snapHash(shot1);
+          const elapsed1 = await page.evaluate(() => window.__employerDemo.getElapsed());
+          await page.waitForTimeout(process.env.SIYA_GATE_FAST === '1' ? 1200 : 5000);
+          const sig2 = await domSig(page);
+          const shot2 = await page.screenshot({ type: 'png', animations: 'disabled', timeout: 15000 });
+          const h2 = snapHash(shot2);
+          const elapsed2 = await page.evaluate(() => window.__employerDemo.getElapsed());
+          const afterCur = await page.evaluate(() => window.__employerDemo.getCur());
+          const stillPaused = await page.evaluate(() => window.__employerDemo.getPaused());
+          if (!stillPaused) failures.push({ view: `${w}x${h}`, id, wait, why: 'unpaused' });
+          if (afterCur !== beforeCur) failures.push({ view: `${w}x${h}`, id, wait, why: `advanced ${beforeCur}->${afterCur}` });
+          if (elapsed1 !== elapsed2) failures.push({ view: `${w}x${h}`, id, wait, why: `elapsed ${elapsed1}->${elapsed2}` });
+          if (sig1 !== sig2) failures.push({ view: `${w}x${h}`, id, wait, why: 'dom-changed', a: sig1.slice(0, 160), b: sig2.slice(0, 160) });
+          if (!almostSamePng(shot1, shot2)) failures.push({ view: `${w}x${h}`, id, wait, why: `screenshot-diff ${h1}!=${h2}` });
+          if (await page.evaluate(() => window.__employerDemo.getPaused())) {
+            await page.evaluate(() => window.__employerDemo.togglePause());
+          }
+        });
+      } catch (e) {
+        const msg = String((e && e.message) || e);
+        if (msg.startsWith('TIMEOUT')) {
+          timedOut = step;
+          failures.push({ view: `${w}x${h}`, id, wait, why: 'timeout', step });
+          break;
+        }
+        throw e;
       }
     }
+    if (timedOut) break;
   }
   await ctx.close();
+  if (timedOut) break;
 }
 await browser.close();
 
@@ -155,7 +188,7 @@ const md = `# pause-freeze gate \`${HASH}\`
 
 **Failures: ${failures.length}**
 
-${failures.length ? failures.slice(0, 40).map((f) => `- **${f.id}** @ ${f.view} t≈${f.wait}: ${f.why}`).join('\n') : '_Zero failures._'}
+${failures.length ? failures.slice(0, 40).map((f) => `- **${f.id || 'gate'}** @ ${f.view || ''} t≈${f.wait ?? ''}: ${f.why}${f.step ? ` (${f.step})` : ''}`).join('\n') : '_Zero failures._'}
 `;
 fs.writeFileSync(path.join(OUT, 'pause-freeze-gate.md'), md);
 console.log(md);

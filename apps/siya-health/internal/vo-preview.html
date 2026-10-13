@@ -23,7 +23,7 @@
   .OK-with-caption-change { background: #fff4d6; color: #7a5600; }
   .RE-RECORD { background: #fde8e6; color: #9b1c1c; }
   p { margin: 0; }
-  .ab { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 10px; }
+  .ab { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; margin-top: 10px; }
   .ab label { display: block; font: 12px/1.2 system-ui, sans-serif; letter-spacing: .04em; text-transform: uppercase; color: #5c6778; margin-bottom: 4px; }
   .tail { margin: 8px 0 0; font-weight: 600; }
   audio { width: 100%; height: 36px; }
@@ -474,7 +474,8 @@ rows.forEach((row) => {
     '<p class="tail">' + tail + "</p>" +
     '<div class="ab">' +
       '<div><label>Old</label><audio controls preload="none" src="vo-raw/work/old/' + row.file + '"></audio></div>' +
-      '<div><label>New</label><audio controls preload="none" src="../employers/demo/media/vo/' + row.file + '"></audio></div>' +
+      '<div><label>New v1</label><audio controls preload="none" src="vo-raw/work/v1/' + row.file + '"></audio></div>' +
+      '<div><label>New v2</label><audio controls preload="none" src="../employers/demo/media/vo/' + row.file + '"></audio></div>' +
     "</div>" +
     '<div class="meta">' + row.duration.toFixed(1) + "s previous cut" +
     (row.diff ? " · " + row.diff : "") + "</div>";

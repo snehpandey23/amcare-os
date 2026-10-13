@@ -93,7 +93,11 @@ async function check(browserType, contextOptions, label) {
         fs: getComputedStyle(cap).fontSize,
       };
     }, speed);
-    const expectDur = 9080 + 800;
+    const expectDur = (() => {
+      const html = fs.readFileSync(path.join(ROOT, 'employers/demo.html'), 'utf8');
+      const m = html.match(/"p-time": \{"file": "demo\/media\/vo\/02-p-time\.mp3", "ms": (\d+)/);
+      return m ? +m[1] + 500 : 0;
+    })();
     const ratio = sample.elapsed / sample.wall;
     if (Math.abs(sample.speed - speed) > 0.001) failures.push(`${label} speed ${speed} got ${sample.speed}`);
     if (![0.75, 1, 1.25, 1.5].every((n, i) => sample.speeds[i] === n)) failures.push(`${label} speed list ${sample.speeds}`);
@@ -148,7 +152,7 @@ const runtime = await (async () => {
   let on = 0;
   for (const s of totals.voiced) {
     if (s.dur === 0) continue;
-    on += msById[s.id] ? msById[s.id] + 800 : s.adv;
+      on += msById[s.id] ? msById[s.id] + 500 : s.adv;
   }
   return { off: totals.off, on };
 })();

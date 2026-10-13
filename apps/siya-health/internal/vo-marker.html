@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Voiceover end markers — local only</title>
+<style>
+  :root { color-scheme: light; }
+  body { margin: 0; font: 16px/1.4 "Iowan Old Style", Palatino, Georgia, serif; color: #142033; background: #f6f3ee; }
+  main { max-width: 920px; margin: 0 auto; padding: 24px 16px 80px; }
+  h1 { font-size: 1.4rem; margin: 0 0 6px; }
+  .note, .keys { color: #4a5568; margin: 0 0 12px; }
+  .bar { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; position: sticky; top: 0; background: #f6f3ee; padding: 10px 0; z-index: 2; }
+  button { font: 14px/1 system-ui, sans-serif; border: 0; border-radius: 999px; padding: 8px 12px; cursor: pointer; background: #142033; color: #fff; }
+  button.ghost { background: transparent; color: #142033; border: 1px solid #142033; }
+  button:disabled { opacity: .4; cursor: default; }
+  button.tiny { padding: 6px 8px; font-size: 13px; }
+  .count { font: 15px/1 ui-monospace, monospace; }
+  article { background: #fff; border-radius: 14px; padding: 12px 14px 14px; margin: 0 0 12px; box-shadow: 0 1px 0 rgba(20,32,51,.06); }
+  article.sel { outline: 2px solid #142033; }
+  article.ok { box-shadow: inset 4px 0 0 #146132; }
+  header.row { display: flex; gap: 10px; align-items: baseline; justify-content: space-between; }
+  .num { font: 13px/1 ui-monospace, monospace; color: #5c6778; }
+  .tail { font-weight: 600; margin: 4px 0 8px; }
+  canvas { width: 100%; height: 88px; background: #f3efe8; border-radius: 8px; touch-action: none; cursor: ew-resize; }
+  .marks { display: flex; gap: 16px; flex-wrap: wrap; margin-top: 8px; align-items: center; }
+  .marks label { font: 12px/1.2 system-ui, sans-serif; letter-spacing: .04em; text-transform: uppercase; color: #5c6778; }
+  .ms { font: 14px/1 ui-monospace, monospace; min-width: 7.5rem; display: inline-block; }
+  .play { display: flex; gap: 8px; margin-top: 8px; }
+  .okbtn[aria-pressed="true"] { background: #146132; }
+</style>
+</head>
+<body>
+<main>
+  <h1>Mark the voiceover ends</h1>
+  <p class="note">Local only. Not deployed. Defaults are a starting guess from word timestamps, not a decision. Drag START and CUT until the ending you hear is the one that should ship. Export is enabled only when all 27 are marked OK. Save that file as <code>internal/vo-endpoints.json</code>.</p>
+  <p class="keys">J / K move rows. Space plays the ending. [ and ] move CUT by 50 ms.</p>
+  <div class="bar">
+    <span class="count" id="count">0 / 27 OK</span>
+    <button id="export" type="button" disabled>Export vo-endpoints.json</button>
+  </div>
+  <div id="list"></div>
+</main>
+<script id="clips" type="application/json">[{"n": 1, "id": "statement", "file": "01-statement.mp3", "clipId": "01-statement", "tail": "can't keep", "durMs": 12550, "startMs": 0, "cutMs": 11950, "whisperFirstMs": 0, "whisperLastMs": 11600}, {"n": 2, "id": "p-time", "file": "02-p-time.mp3", "clipId": "02-p-time", "tail": "the afternoon", "durMs": 9080, "startMs": 0, "cutMs": 8250, "whisperFirstMs": 0, "whisperLastMs": 7900}, {"n": 3, "id": "p-away", "file": "03-p-away.mp3", "clipId": "03-p-away", "tail": "the doctor", "durMs": 8940, "startMs": 0, "cutMs": 8410, "whisperFirstMs": 0, "whisperLastMs": 8060}, {"n": 4, "id": "p-familiar", "file": "04-p-familiar.mp3", "clipId": "04-p-familiar", "tail": "and focus", "durMs": 16110, "startMs": 0, "cutMs": 15350, "whisperFirstMs": 0, "whisperLastMs": 15000}, {"n": 5, "id": "p-response", "file": "05-p-response.mp3", "clipId": "05-p-response", "tail": "missed callbacks", "durMs": 5310, "startMs": 0, "cutMs": 4530, "whisperFirstMs": 0, "whisperLastMs": 4180}, {"n": 6, "id": "p-whole", "file": "06-p-whole.mp3", "clipId": "06-p-whole", "tail": "compare notes", "durMs": 12200, "startMs": 0, "cutMs": 11350, "whisperFirstMs": 0, "whisperLastMs": 11000}, {"n": 7, "id": "p-coord", "file": "07-p-coord.mp3", "clipId": "07-p-coord", "tail": "follow ups", "durMs": 7150, "startMs": 0, "cutMs": 6610, "whisperFirstMs": 0, "whisperLastMs": 6260}, {"n": 8, "id": "question", "file": "08-question.mp3", "clipId": "08-question", "tail": "need it", "durMs": 6600, "startMs": 360, "cutMs": 5950, "whisperFirstMs": 560, "whisperLastMs": 5600}, {"n": 9, "id": "turn", "file": "09-turn.mp3", "clipId": "09-turn", "tail": "focus connected", "durMs": 11030, "startMs": 0, "cutMs": 10290, "whisperFirstMs": 0, "whisperLastMs": 9940}, {"n": 10, "id": "care-checklist", "file": "10-care-checklist.mp3", "clipId": "10-care-checklist", "tail": "personalized plan", "durMs": 13530, "startMs": 0, "cutMs": 12810, "whisperFirstMs": 0, "whisperLastMs": 12460}, {"n": 11, "id": "f-time", "file": "11-f-time.mp3", "clipId": "11-f-time", "tail": "four seven", "durMs": 11230, "startMs": 0, "cutMs": 10570, "whisperFirstMs": 0, "whisperLastMs": 10220}, {"n": 12, "id": "f-ways", "file": "12-f-ways.mp3", "clipId": "12-f-ways", "tail": "real clinicians", "durMs": 6290, "startMs": 0, "cutMs": 5410, "whisperFirstMs": 0, "whisperLastMs": 5060}, {"n": 13, "id": "f-response", "file": "13-f-response.mp3", "clipId": "13-f-response", "tail": "any time", "durMs": 9400, "startMs": 0, "cutMs": 8510, "whisperFirstMs": 0, "whisperLastMs": 8160}, {"n": 14, "id": "f-urgent", "file": "14-f-urgent.mp3", "clipId": "14-f-urgent", "tail": "the chat", "durMs": 8690, "startMs": 0, "cutMs": 8030, "whisperFirstMs": 0, "whisperLastMs": 7680}, {"n": 15, "id": "f-whole", "file": "15-f-whole.mp3", "clipId": "15-f-whole", "tail": "off visit", "durMs": 10090, "startMs": 0, "cutMs": 9270, "whisperFirstMs": 0, "whisperLastMs": 8920}, {"n": 16, "id": "employer", "file": "16-employer.mp3", "clipId": "16-employer", "tail": "join voluntarily", "durMs": 8080, "startMs": 0, "cutMs": 7350, "whisperFirstMs": 0, "whisperLastMs": 7000}, {"n": 17, "id": "journey", "file": "17-journey.mp3", "clipId": "17-journey", "tail": "same care", "durMs": 8380, "startMs": 0, "cutMs": 7610, "whisperFirstMs": 0, "whisperLastMs": 7260}, {"n": 18, "id": "outcomes", "file": "18-outcomes.mp3", "clipId": "18-outcomes", "tail": "personal details", "durMs": 8770, "startMs": 0, "cutMs": 7910, "whisperFirstMs": 0, "whisperLastMs": 7560}, {"n": 19, "id": "clinicians", "file": "19-clinicians.mp3", "clipId": "19-clinicians", "tail": "to refer", "durMs": 12110, "startMs": 0, "cutMs": 11390, "whisperFirstMs": 0, "whisperLastMs": 11040}, {"n": 20, "id": "cost", "file": "20-cost.mp3", "clipId": "20-cost", "tail": "and forms", "durMs": 9840, "startMs": 0, "cutMs": 9150, "whisperFirstMs": 0, "whisperLastMs": 8800}, {"n": 21, "id": "privacy", "file": "21-privacy.mp3", "clipId": "21-privacy", "tail": "or messages", "durMs": 12070, "startMs": 0, "cutMs": 11410, "whisperFirstMs": 0, "whisperLastMs": 11060}, {"n": 22, "id": "proof", "file": "22-proof.mp3", "clipId": "22-proof", "tail": "on Google", "durMs": 9000, "startMs": 0, "cutMs": 8330, "whisperFirstMs": 0, "whisperLastMs": 7980}, {"n": 23, "id": "e1-time", "file": "23-e1-time.mp3", "clipId": "23-e1-time", "tail": "two hours", "durMs": 6700, "startMs": 0, "cutMs": 6230, "whisperFirstMs": 0, "whisperLastMs": 5880}, {"n": 24, "id": "e2-focus", "file": "24-e2-focus.mp3", "clipId": "24-e2-focus", "tail": "addressed early", "durMs": 8140, "startMs": 0, "cutMs": 7530, "whisperFirstMs": 0, "whisperLastMs": 7180}, {"n": 25, "id": "e3-outcomes", "file": "25-e3-outcomes.mp3", "clipId": "25-e3-outcomes", "tail": "clinical markers", "durMs": 8560, "startMs": 0, "cutMs": 8050, "whisperFirstMs": 0, "whisperLastMs": 7700}, {"n": 26, "id": "e4-simple", "file": "26-e4-simple.mp3", "clipId": "26-e4-simple", "tail": "for HR", "durMs": 6760, "startMs": 0, "cutMs": 6130, "whisperFirstMs": 0, "whisperLastMs": 5780}, {"n": 27, "id": "close", "file": "27-close.mp3", "clipId": "27-close", "tail": "through it", "durMs": 7940, "startMs": 580, "cutMs": 7070, "whisperFirstMs": 780, "whisperLastMs": 6720}]</script>
+<script>
+const CLIPS = JSON.parse(document.getElementById('clips').textContent);
+const DRAFT_KEY = 'siya-vo-endpoints-draft';
+const list = document.getElementById('list');
+const countEl = document.getElementById('count');
+const exportBtn = document.getElementById('export');
+let sel = 0;
+let ctx = null;
+const buffers = new Map();
+let playing = null;
+
+function loadDraft() {
+  try {
+    const raw = localStorage.getItem(DRAFT_KEY);
+    if (!raw) return {};
+    return JSON.parse(raw);
+  } catch (e) { return {}; }
+}
+const draft = loadDraft();
+
+function saveDraft() {
+  const out = {};
+  CLIPS.forEach((c) => {
+    out[c.clipId] = { startMs: c.startMs, cutMs: c.cutMs, ok: !!c.ok };
+  });
+  localStorage.setItem(DRAFT_KEY, JSON.stringify(out));
+}
+
+CLIPS.forEach((c) => {
+  const d = draft[c.clipId];
+  if (d && Number.isFinite(d.startMs) && Number.isFinite(d.cutMs)) {
+    c.cutMs = Math.max(100, Math.min(Math.round(d.cutMs), c.durMs));
+    c.startMs = clampStart(Math.round(d.startMs), c.cutMs, c.durMs);
+    c.cutMs = clampCut(c.cutMs, c.startMs, c.durMs);
+    c.ok = !!d.ok;
+  } else {
+    c.ok = false;
+  }
+});
+
+function clampStart(start, cut, dur) {
+  return Math.max(0, Math.min(start, cut - 100, dur - 100));
+}
+function clampCut(cut, start, dur) {
+  return Math.max(start + 100, Math.min(cut, dur));
+}
+function fmt(ms) {
+  return (ms / 1000).toFixed(2) + 's  ' + ms + ' ms';
+}
+
+function draw(c) {
+  const canvas = c.canvas;
+  const dpr = window.devicePixelRatio || 1;
+  const w = canvas.clientWidth;
+  const h = canvas.clientHeight;
+  canvas.width = Math.max(1, Math.floor(w * dpr));
+  canvas.height = Math.max(1, Math.floor(h * dpr));
+  const g = canvas.getContext('2d');
+  g.setTransform(dpr, 0, 0, dpr, 0, 0);
+  g.clearRect(0, 0, w, h);
+  g.fillStyle = '#f3efe8';
+  g.fillRect(0, 0, w, h);
+  const x0 = (c.startMs / c.durMs) * w;
+  const x1 = (c.cutMs / c.durMs) * w;
+  g.fillStyle = '#e7f6ea';
+  g.fillRect(x0, 0, Math.max(0, x1 - x0), h);
+  const peaks = c.peaks;
+  if (peaks) {
+    g.fillStyle = '#142033';
+    const mid = h / 2;
+    for (let i = 0; i < peaks.length; i++) {
+      const x = (i / peaks.length) * w;
+      const bh = Math.max(1, peaks[i] * (h * 0.46));
+      g.fillRect(x, mid - bh, Math.max(1, w / peaks.length), bh * 2);
+    }
+  }
+  function line(ms, color) {
+    const x = (ms / c.durMs) * w;
+    g.strokeStyle = color;
+    g.lineWidth = 2;
+    g.beginPath();
+    g.moveTo(x, 0);
+    g.lineTo(x, h);
+    g.stroke();
+  }
+  line(c.startMs, '#146132');
+  line(c.cutMs, '#9b1c1c');
+}
+
+function msFromX(c, clientX) {
+  const rect = c.canvas.getBoundingClientRect();
+  const t = (clientX - rect.left) / rect.width;
+  return Math.round(Math.max(0, Math.min(1, t)) * c.durMs);
+}
+
+function paintRow(c) {
+  c.startLabel.textContent = fmt(c.startMs);
+  c.cutLabel.textContent = fmt(c.cutMs);
+  c.okBtn.setAttribute('aria-pressed', c.ok ? 'true' : 'false');
+  c.okBtn.textContent = c.ok ? 'OK' : 'Mark OK';
+  c.article.classList.toggle('ok', c.ok);
+  draw(c);
+  updateCount();
+  saveDraft();
+}
+
+function updateCount() {
+  const n = CLIPS.filter((c) => c.ok).length;
+  countEl.textContent = n + ' / 27 OK';
+  exportBtn.disabled = n !== 27;
+}
+
+function select(i) {
+  sel = (i + CLIPS.length) % CLIPS.length;
+  CLIPS.forEach((c, k) => c.article.classList.toggle('sel', k === sel));
+  CLIPS[sel].article.scrollIntoView({ block: 'nearest' });
+}
+
+async function bufferFor(c) {
+  if (buffers.has(c.file)) return buffers.get(c.file);
+  const res = await fetch('/employers/demo/media/vo/' + c.file);
+  const arr = await res.arrayBuffer();
+  if (!ctx) ctx = new AudioContext();
+  const buf = await ctx.decodeAudioData(arr.slice(0));
+  buffers.set(c.file, buf);
+  const data = buf.getChannelData(0);
+  const cols = 480;
+  const peaks = new Array(cols);
+  const step = data.length / cols;
+  for (let i = 0; i < cols; i++) {
+    let m = 0;
+    const a = Math.floor(i * step);
+    const b = Math.min(data.length, Math.floor((i + 1) * step));
+    for (let j = a; j < b; j += 8) {
+      const v = Math.abs(data[j]);
+      if (v > m) m = v;
+    }
+    peaks[i] = m;
+  }
+  c.peaks = peaks;
+  draw(c);
+  return buf;
+}
+
+function stopPlay() {
+  if (!playing) return;
+  try { playing.stop(); } catch (e) {}
+  playing = null;
+}
+
+async function playRange(c, fromMs, toMs, fadeInMs, fadeOutMs) {
+  const buf = await bufferFor(c);
+  if (!ctx) ctx = new AudioContext();
+  if (ctx.state === 'suspended') await ctx.resume();
+  stopPlay();
+  const src = ctx.createBufferSource();
+  src.buffer = buf;
+  const gain = ctx.createGain();
+  src.connect(gain);
+  gain.connect(ctx.destination);
+  const from = Math.max(0, fromMs / 1000);
+  const to = Math.min(buf.duration, toMs / 1000);
+  const dur = Math.max(0.05, to - from);
+  const now = ctx.currentTime;
+  const fadeIn = fadeInMs / 1000;
+  const fadeOut = fadeOutMs / 1000;
+  gain.gain.setValueAtTime(fadeIn ? 0.0001 : 1, now);
+  if (fadeIn) gain.gain.linearRampToValueAtTime(1, now + Math.min(fadeIn, dur));
+  if (fadeOut) {
+    const fadeAt = now + Math.max(0, dur - fadeOut);
+    gain.gain.setValueAtTime(1, fadeAt);
+    gain.gain.linearRampToValueAtTime(0.0001, now + dur);
+  }
+  src.start(now, from, dur);
+  playing = src;
+  src.onended = () => { if (playing === src) playing = null; };
+}
+
+function nudge(c, which, delta) {
+  if (which === 'start') c.startMs = clampStart(c.startMs + delta, c.cutMs, c.durMs);
+  else c.cutMs = clampCut(c.cutMs + delta, c.startMs, c.durMs);
+  c.ok = false;
+  paintRow(c);
+}
+
+CLIPS.forEach((c, i) => {
+  const article = document.createElement('article');
+  article.innerHTML =
+    '<header class="row"><span class="num">' + String(c.n).padStart(2, '0') + ' ' + c.id + '</span>' +
+    '<button type="button" class="okbtn" data-ok="' + i + '">Mark OK</button></header>' +
+    '<p class="tail">' + c.tail + '</p>' +
+    '<canvas></canvas>' +
+    '<div class="marks"></div>' +
+    '<div class="play"></div>';
+  const canvas = article.querySelector('canvas');
+  const marks = article.querySelector('.marks');
+  const play = article.querySelector('.play');
+  c.article = article;
+  c.canvas = canvas;
+  c.okBtn = article.querySelector('[data-ok]');
+  function marker(name, which) {
+    const wrap = document.createElement('div');
+    const lab = document.createElement('div');
+    lab.innerHTML = '<label>' + name + '</label> <span class="ms"></span>';
+    wrap.appendChild(lab);
+    const span = lab.querySelector('.ms');
+    [-100, -50, 50, 100].forEach((d) => {
+      const b = document.createElement('button');
+      b.type = 'button';
+      b.className = 'tiny ghost';
+      b.textContent = (d > 0 ? '+' : '') + d;
+      b.addEventListener('click', () => { select(i); nudge(c, which, d); });
+      wrap.appendChild(b);
+    });
+    marks.appendChild(wrap);
+    return span;
+  }
+  c.startLabel = marker('Start', 'start');
+  c.cutLabel = marker('Cut', 'cut');
+  const hearStart = document.createElement('button');
+  hearStart.type = 'button';
+  hearStart.className = 'ghost';
+  hearStart.textContent = 'Hear start';
+  hearStart.addEventListener('click', () => { select(i); playRange(c, c.startMs, c.startMs + 2000, 30, 0); });
+  const hearEnd = document.createElement('button');
+  hearEnd.type = 'button';
+  hearEnd.className = 'ghost';
+  hearEnd.textContent = 'Hear ending';
+  hearEnd.addEventListener('click', () => { select(i); playRange(c, c.cutMs - 2000, c.cutMs, 0, 60); });
+  play.appendChild(hearStart);
+  play.appendChild(hearEnd);
+  c.okBtn.addEventListener('click', () => { select(i); c.ok = !c.ok; paintRow(c); });
+  article.addEventListener('pointerdown', () => select(i));
+  let drag = null;
+  canvas.addEventListener('pointerdown', (ev) => {
+    select(i);
+    const ms = msFromX(c, ev.clientX);
+    drag = Math.abs(ms - c.startMs) < Math.abs(ms - c.cutMs) ? 'start' : 'cut';
+    canvas.setPointerCapture(ev.pointerId);
+    applyDrag(ev);
+  });
+  function applyDrag(ev) {
+    if (!drag) return;
+    const ms = msFromX(c, ev.clientX);
+    if (drag === 'start') c.startMs = clampStart(ms, c.cutMs, c.durMs);
+    else c.cutMs = clampCut(ms, c.startMs, c.durMs);
+    c.ok = false;
+    paintRow(c);
+  }
+  canvas.addEventListener('pointermove', applyDrag);
+  canvas.addEventListener('pointerup', () => { drag = null; });
+  canvas.addEventListener('pointercancel', () => { drag = null; });
+  list.appendChild(article);
+  paintRow(c);
+  bufferFor(c);
+});
+
+function exportFile() {
+  const out = {};
+  CLIPS.forEach((c) => { out[c.clipId] = { startMs: c.startMs, cutMs: c.cutMs }; });
+  const blob = new Blob([JSON.stringify(out, null, 2) + '\n'], { type: 'application/json' });
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = 'vo-endpoints.json';
+  a.click();
+}
+exportBtn.addEventListener('click', exportFile);
+
+window.addEventListener('keydown', (ev) => {
+  const k = ev.key;
+  if (k === 'j' || k === 'J') { ev.preventDefault(); select(sel + 1); }
+  else if (k === 'k' || k === 'K') { ev.preventDefault(); select(sel - 1); }
+  else if (k === ' ') { ev.preventDefault(); const c = CLIPS[sel]; playRange(c, c.cutMs - 2000, c.cutMs, 0, 60); }
+  else if (k === '[') { ev.preventDefault(); nudge(CLIPS[sel], 'cut', -50); }
+  else if (k === ']') { ev.preventDefault(); nudge(CLIPS[sel], 'cut', 50); }
+});
+window.addEventListener('resize', () => CLIPS.forEach(draw));
+select(0);
+</script>
+</body>
+</html>

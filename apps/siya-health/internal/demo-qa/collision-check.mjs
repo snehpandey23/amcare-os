@@ -351,6 +351,7 @@ for (const [w, h] of VIEWS) {
         if (window.__employerDemo.setCaptions) window.__employerDemo.setCaptions(true);
       });
     }
+    const before = await slidePage.evaluate(() => window.__slideSettled?.gen || 0);
     try {
       await slidePage.evaluate((id) => window.__employerDemo.showSlide(id), id);
     } catch (e) {
@@ -358,8 +359,13 @@ for (const [w, h] of VIEWS) {
       if (!FAST) await slideCtx.close();
       continue;
     }
-    const wait = FAST ? 350 : ((id === 'p-away' || id === 'p-coord' || id === 'f-time') ? 6500 : 4000);
-    await slidePage.waitForTimeout(wait);
+    try {
+      await slidePage.waitForFunction((n) => (window.__slideSettled?.gen || 0) > n, before, { timeout: 2000 });
+    } catch (e) {
+      failures.push({ slideId: id, viewport: `${w}x${h}`, type: 'not-settled', err: String(e.message || e) });
+      if (!FAST) await slideCtx.close();
+      continue;
+    }
     const f = await check(slidePage, id, `${w}x${h}`);
     failures.push(...f);
     if (!FAST) await slideCtx.close();
