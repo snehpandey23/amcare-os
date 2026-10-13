@@ -32,9 +32,31 @@ export function isReviewSignOffComplete(meta) {
   );
 }
 
-/** Wave 1 rolled back until compliance attaches signOffSource + reviewerConsent per URL */
+/**
+ * Explicit allowlist only. Each entry needs reviewerSlug + reviewDate +
+ * signOffSource + reviewerConsent === true or reviewedBy will not emit.
+ */
 export const CLINICAL_REVIEW_APPROVED = {
-  pages: {},
+  pages: {
+    'guides/sleep': {
+      reviewerSlug: 'dr-sneh-pandey',
+      reviewDate: '2026-10-04',
+      signOffSource: 'docs/clinical-signoffs/2026-10-04-pillar-guides-dr-sneh-pandey.md',
+      reviewerConsent: true,
+    },
+    'guides/testosterone': {
+      reviewerSlug: 'dr-sneh-pandey',
+      reviewDate: '2026-10-04',
+      signOffSource: 'docs/clinical-signoffs/2026-10-04-pillar-guides-dr-sneh-pandey.md',
+      reviewerConsent: true,
+    },
+    'guides/perimenopause': {
+      reviewerSlug: 'dr-sneh-pandey',
+      reviewDate: '2026-10-04',
+      signOffSource: 'docs/clinical-signoffs/2026-10-04-pillar-guides-dr-sneh-pandey.md',
+      reviewerConsent: true,
+    },
+  },
   blogs: {},
   answers: {},
 };
