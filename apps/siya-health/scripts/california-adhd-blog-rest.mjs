@@ -105,7 +105,7 @@ export const CALIFORNIA_POSTS_REST = [
             <section class="blog-related" aria-label="Related"><h2>Related articles</h2><ul>
               <li><a href="/blog/online-adhd-diagnosis-california">Online ADHD diagnosis in California</a></li>
               <li><a href="/adhd-care">ADHD telehealth in California</a></li>
-              <li><a href="/answers/starting-adhd-medication-adults">After diagnosis next steps</a></li>
+              <li><a href="/guides/mental-health-and-adhd#mh-work">After diagnosis next steps</a></li>
             </ul></section>
 
             <h2>FAQ</h2>`,
@@ -150,8 +150,8 @@ export const CALIFORNIA_POSTS_REST = [
 
             <section class="blog-related" aria-label="Related"><h2>Related articles</h2><ul>
               <li><a href="/blog/online-adhd-diagnosis-california">Online ADHD diagnosis in California</a></li>
-              <li><a href="/blog/non-stimulant-adhd-medications-explained">Non-stimulant medications explained</a></li>
-              <li><a href="/blog/adhd-medication-daily-or-as-needed-adults">Daily versus as-needed medication patterns</a></li>
+              <li><a href="/guides/mental-health-and-adhd#mh-screen">Non-stimulant medications explained</a></li>
+              <li><a href="/guides/mental-health-and-adhd#mh-work">Daily versus as-needed medication patterns</a></li>
             </ul></section>
 
             <h2>FAQ</h2>`,
@@ -308,7 +308,7 @@ export const CALIFORNIA_POSTS_REST = [
     ],
     bodyHtml: `
             <p class="blog-disclaimer"><strong>Educational only:</strong> This blog is for educational purposes only and does not replace medical advice. A licensed provider can help determine what care is appropriate for you.</p>
-            <div class="blog-internal-links"><p>Read our <a href="/blog/non-stimulant-adhd-medications-explained">non-stimulant ADHD medications explained</a> guide, <a href="/blog/how-adhd-medication-is-prescribed-online">how ADHD medication prescribing works online</a>, and California-specific <a href="/adhd-care">telehealth medication context</a>.</p></div>
+            <div class="blog-internal-links"><p>Read our <a href="/guides/mental-health-and-adhd#mh-screen">non-stimulant ADHD medications explained</a> guide, <a href="/blog/how-adhd-medication-is-prescribed-online">how ADHD medication prescribing works online</a>, and California-specific <a href="/adhd-care">telehealth medication context</a>.</p></div>
 
             <p>When adults search <strong>ADHD medication options California</strong>, the results often swing between euphoria and panic: influencers describing stimulants as life-changing miracles, Reddit threads implying anyone who asks is drug-seeking, and shortage headlines that amplify dread. Responsible education keeps the framing clinical: ADHD medications can meaningfully reduce symptoms for many people once diagnosis is thoughtfully supported—but choice of agent, dosing, monitoring, and continuity belong in a clinician-patient relationship—not a checkout flow.</p>
 
@@ -336,8 +336,8 @@ export const CALIFORNIA_POSTS_REST = [
             <div class="cta-block blog-cta"><a class="button" href="https://book.carepatron.com/Siya-Health?p=X9PN3zKZR22FpD8jVPKsOA&amp;i=ftxOxenx" target="_blank" rel="noopener">Book Your Free 15-Minute ADHD Consultation</a></div>
 
             <section class="blog-related" aria-label="Related"><h2>Related articles</h2><ul>
-              <li><a href="/blog/vyvanse-vs-adderall-differences">Vyvanse vs Adderall (educational)</a></li>
-              <li><a href="/blog/adhd-medication-daily-or-as-needed-adults">Daily versus as-needed strategies</a></li>
+              <li><a href="/guides/mental-health-and-adhd#mh-screen">Vyvanse vs Adderall (educational)</a></li>
+              <li><a href="/guides/mental-health-and-adhd#mh-work">Daily versus as-needed strategies</a></li>
               <li><a href="/blog/how-to-choose-adhd-provider-california">Choosing a California ADHD provider</a></li>
             </ul></section>
 

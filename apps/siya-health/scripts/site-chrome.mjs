@@ -362,7 +362,7 @@ const LEARN_MORE_ADHD = `<!-- SIYA:LEARN-MORE-ADHD -->
               <strong>Late ADHD Diagnosis</strong>
               <span>Why so many adults seek answers later in life.</span>
             </a>
-            <a class="adhd-reading-card" href="/blog/adhd-medication-options-for-adults">
+            <a class="adhd-reading-card" href="/guides/mental-health-and-adhd#mh-screen">
               <figure class="adhd-reading-card-media">
                 <img src="/assets/images/editorial-adhd-consult.jpg" alt="" width="720" height="480" loading="lazy" decoding="async" />
               </figure>
@@ -534,21 +534,21 @@ const LEARN_MORE_WEIGHT = `<!-- SIYA:LEARN-MORE-WEIGHT -->
               <strong>Insulin Resistance</strong>
               <span>Clinician overview of IR and weight physiology.</span>
             </a>
-            <a class="adhd-reading-card" href="/blog/semaglutide-for-weight-loss-how-it-works">
+            <a class="adhd-reading-card" href="/guides/weight#wt-glp1">
               <figure class="adhd-reading-card-media">
                 <img src="/assets/images/editorial-glp1-consult.jpg" alt="" width="720" height="480" loading="lazy" decoding="async" />
               </figure>
               <strong>Semaglutide Overview</strong>
               <span>How it works when clinically appropriate.</span>
             </a>
-            <a class="adhd-reading-card" href="/blog/medical-weight-loss-vs-dieting-what-actually-works">
+            <a class="adhd-reading-card" href="/guides/weight#wt-opener">
               <figure class="adhd-reading-card-media">
                 <img src="/assets/images/editorial-medical-vs-diet.jpg" alt="" width="720" height="480" loading="lazy" decoding="async" />
               </figure>
               <strong>Medical Weight Loss vs Dieting</strong>
               <span>Why regain happens—and what evaluation adds.</span>
             </a>
-            <a class="adhd-reading-card" href="/blog/how-mental-health-affects-weight-loss-outcomes">
+            <a class="adhd-reading-card" href="/guides/weight#wt-opener">
               <figure class="adhd-reading-card-media">
                 <img src="/assets/images/editorial-weight-mood.jpg" alt="" width="720" height="480" loading="lazy" decoding="async" />
               </figure>
@@ -634,12 +634,12 @@ const LEARN_MORE_WOMENS = `<!-- SIYA:LEARN-MORE-WOMENS -->
           <ul class="learn-more-links">
             <li><a href="/guides/hormonal-health#ho-women">ADHD in women: why symptoms are often missed</a></li>
             <li><a href="/guides/weight#wt-insulin">What is insulin resistance?</a></li>
-            <li><a href="/answers/why-am-i-tired-even-after-sleeping">Why am I tired even after sleeping?</a></li>
+            <li><a href="/guides/exhausted#ex-sleep-link">Why am I tired even after sleeping?</a></li>
             <li><a href="/guides/sleep#sl-focus">When poor sleep feels like ADHD</a></li>
             <li><a href="/fatigue">Fatigue: when tired stops being normal</a></li>
             <li><a href="/guides/weight#wt-insulin">Insulin resistance and weight loss</a></li>
             <li><a href="/guides/weight#wt-food-noise">Food noise and GLP-1</a></li>
-            <li><a href="/answers/what-is-food-noise">What is food noise?</a></li>
+            <li><a href="/guides/weight#wt-food-noise">What is food noise?</a></li>
             <li><a href="/adhd-care">ADHD evaluation &amp; care</a></li>
             <li><a href="/weight-loss-metabolic-health">Medical weight loss</a></li>
           </ul>

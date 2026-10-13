@@ -330,7 +330,7 @@ function render() {
             <li><a href="/brain-fog">Brain fog</a></li>
             <li><a href="/labs/cbc">CBC</a></li>
             <li><a href="/answers/which-preventive-blood-tests-adults">Which preventive blood tests adults usually need</a></li>
-            <li><a href="/answers/why-normal-labs-dont-mean-healthy">Why normal labs don&rsquo;t mean healthy</a></li>
+            <li><a href="/guides/exhausted#ex-opener">Why normal labs don&rsquo;t mean healthy</a></li>
           </ul>
         </div>
       </section>

@@ -310,7 +310,7 @@ export const CORNERSTONE_ENGAGEMENT = {
     afterWhatFatigueMeans: symptomFlowchart({
       title: 'Fatigue workup — how clinicians organize causes',
       steps: [
-        { heading: 'Sleep quantity & quality', body: 'Apnea, insomnia, fragmented sleep, circadian delay (<a href="/answers/why-am-i-tired-even-after-sleeping">tired after sleeping</a>).' },
+        { heading: 'Sleep quantity & quality', body: 'Apnea, insomnia, fragmented sleep, circadian delay (<a href="/guides/exhausted#ex-sleep-link">tired after sleeping</a>).' },
         { heading: 'Medical & labs', body: 'Thyroid, iron, B12, glucose/insulin patterns, medications.' },
         { heading: 'Mental health', body: 'Depression, anxiety, PTSD—anergia is common.' },
         { heading: 'Endocrine & hormones', body: 'Low testosterone (men), thyroid; treat sleep apnea before TRT rush.' },
