@@ -695,11 +695,6 @@
       "permanent": true
     },
     {
-      "source": "/blog/adhd-accommodations-hr-primer",
-      "destination": "/guides/mental-health-and-adhd#mh-work",
-      "permanent": true
-    },
-    {
       "source": "/answers/adhd-vs-burnout",
       "destination": "/guides/mental-health-and-adhd#mh-diff",
       "permanent": true
@@ -727,11 +722,6 @@
     {
       "source": "/answers/rejection-sensitivity-adhd",
       "destination": "/guides/mental-health-and-adhd#mh-signs",
-      "permanent": true
-    },
-    {
-      "source": "/blog/adult-adhd-symptoms-california",
-      "destination": "/adult-adhd-california",
       "permanent": true
     },
     {
@@ -802,11 +792,6 @@
     {
       "source": "/answers/adhd-in-women",
       "destination": "/guides/perimenopause#pe-opener",
-      "permanent": true
-    },
-    {
-      "source": "/answers/ed-telehealth-legitimate",
-      "destination": "/guides/hormonal-health#ho-ed-visit",
       "permanent": true
     },
     {
