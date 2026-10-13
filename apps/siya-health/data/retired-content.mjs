@@ -55,7 +55,7 @@ export const RETIRED_CONTENT_REDIRECTS = {
       'Legacy post-diagnosis treatment URL duplicating /adhd-care sections (SITE-PRUNING-AUDIT). Redirect rather than maintain parallel funnel.',
   },
   '/answers/weight-gain-after-stopping-ozempic': {
-    destination: '/blog/food-noise-and-glp-1-what-it-means-and-what-helps',
+    destination: '/guides/weight#wt-food-noise',
     entity: 'food-noise-and-glp-1',
     reason:
       'Ozempic cessation / GLP-1 rebound narrative owned by food-noise cornerstone blog (SITE-PRUNING-AUDIT). Guide retired; blog retains long-form depth.',
