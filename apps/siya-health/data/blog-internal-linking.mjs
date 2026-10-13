@@ -173,9 +173,76 @@ export function scoreBlogRelatedness(src, cand) {
   return score;
 }
 
+/**
+ * After the pillar retirements, scored backfill put unrelated live posts
+ * into these slots. Cards here are the whole related list for that page.
+ * Live posts are referenced by slug; guide cards carry their own title and path.
+ * Guide anchors that would repeat on one page use the next section of that guide.
+ */
+const EXPLICIT_RELATED = {
+  'adhd-accommodations-hr-primer': [
+    { slug: 'cognitive-health-benefits-for-employers' },
+    { slug: 'focus-fatigue-workforce-issue' },
+    { title: 'Chronic Fatigue and Work Performance', path: '/guides/exhausted#ex-opener' },
+  ],
+  'cognitive-health-benefits-for-employers': [
+    { slug: 'adhd-accommodations-hr-primer' },
+    { slug: 'focus-fatigue-workforce-issue' },
+    { title: 'How Mental Health Affects Weight Loss Outcomes (2026)', path: '/guides/weight#wt-opener' },
+  ],
+  'focus-fatigue-workforce-issue': [
+    { slug: 'adhd-accommodations-hr-primer' },
+    { slug: 'cognitive-health-benefits-for-employers' },
+    { title: 'Chronic Fatigue and Work Performance', path: '/guides/exhausted#ex-opener' },
+  ],
+  'how-adhd-medication-is-prescribed-online': [
+    { title: 'ADHD Medication Options for Adults: Where to Start', path: '/guides/mental-health-and-adhd#mh-screen' },
+    { title: 'ADHD Medication Side Effects: What to Expect (2026)', path: '/guides/mental-health-and-adhd#mh-discuss' },
+    { title: 'Do Adults Need ADHD Medication Every Day?', path: '/guides/mental-health-and-adhd#mh-work' },
+  ],
+  'how-to-safely-get-prescriptions-online': [
+    { slug: 'telehealth-prescriptions-how-online-treatment-works' },
+    { title: 'Brain Fog After COVID: What We Know and When to Get Help', path: '/guides/exhausted#ex-opener' },
+    { title: 'Brain Fog and Anxiety: When Worry Crowds Out Clarity', path: '/guides/mental-health-and-adhd#mh-diff' },
+  ],
+  'medical-weight-loss-glp1-semaglutide-texas': [
+    { title: 'Medical Weight Loss vs Dieting: What Actually Works (2026)', path: '/guides/weight#wt-opener' },
+    { title: 'Semaglutide for Weight Loss: How It Works (2026 Clinical Overview)', path: '/guides/weight#wt-glp1' },
+    { title: 'Tirzepatide vs Semaglutide: Which Is Better for Weight Loss? (2026)', path: '/guides/weight#wt-food-noise' },
+  ],
+  'sildenafil-for-erectile-dysfunction-what-to-expect': [
+    { title: 'Free Testosterone vs Total Testosterone: What Patients Should Know', path: '/guides/testosterone#te-free' },
+    { title: 'Minoxidil for Hair Loss: Does It Work? (2026)', path: '/guides/testosterone#te-opener' },
+    { title: 'Oral vs Topical Minoxidil: Which Is Right? (2026)', path: '/guides/testosterone#te-therapy' },
+  ],
+  'telehealth-prescriptions-how-online-treatment-works': [
+    { slug: 'how-to-safely-get-prescriptions-online' },
+    { title: 'Brain Fog After COVID: What We Know and When to Get Help', path: '/guides/exhausted#ex-opener' },
+    { title: 'Brain Fog and Anxiety: When Worry Crowds Out Clarity', path: '/guides/mental-health-and-adhd#mh-diff' },
+  ],
+};
+
+function resolveExplicitRelated(slug, registry) {
+  const spec = EXPLICIT_RELATED[slug];
+  if (!spec) return null;
+  return spec.map((item) => {
+    if (item.slug) {
+      const entry = registry.find((e) => e.slug === item.slug);
+      if (!entry) {
+        throw new Error(`explicit related card missing live post ${item.slug} for ${slug}`);
+      }
+      return entry;
+    }
+    return { slug: item.path, title: item.title, path: item.path, topic: 'guide' };
+  });
+}
+
 export function pickRelatedArticles(slug, registry, min = 3) {
   const src = registry.find((e) => e.slug === slug);
   if (!src) return [];
+
+  const explicit = resolveExplicitRelated(slug, registry);
+  if (explicit) return explicit.slice(0, Math.max(min, 3));
 
   const sameTopic = registry
     .filter((c) => c.slug !== slug && c.topic === src.topic)
