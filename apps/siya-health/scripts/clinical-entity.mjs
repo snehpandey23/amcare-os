@@ -8,6 +8,7 @@ import {
   REVIEW_STATUS,
   getBlogReviewMeta,
   getAnswerReviewMeta,
+  getPageReviewMeta,
 } from '../data/content-review-registry.mjs';
 import { getProviderBySlug as getProviderFromData, toEntityGraphProvider } from '../data/providers.mjs';
 
@@ -70,6 +71,20 @@ export function physicianReviewedBy(reviewer) {
     ...(reviewer.honorificPrefix ? { honorificPrefix: reviewer.honorificPrefix } : {}),
     ...(suffix ? { honorificSuffix: suffix } : {}),
     url: reviewer.url,
+  };
+}
+
+export function resolvePageReviewRecord(slug) {
+  const meta = getPageReviewMeta(slug);
+  if (!meta) {
+    return { status: REVIEW_STATUS.PENDING_REVIEW, slug, reviewer: null, reviewDate: null };
+  }
+  const reviewer = getProviderBySlug(meta.reviewerSlug);
+  return {
+    status: REVIEW_STATUS.CLINICALLY_REVIEWED,
+    slug,
+    reviewer,
+    reviewDate: meta.reviewDate || LAST_REVIEWED,
   };
 }
 
@@ -245,6 +260,37 @@ function syncClinicalReviewAside(html, record) {
   html = html.replace(LEGACY_REVIEW_LINE, '');
   html = stripClinicalReviewAsides(html);
   return insertClinicalReviewAside(html, block);
+}
+
+function ensureMedicalWebPageSchema(html, title, description, canonical, record) {
+  if (/application\/ld\+json[\s\S]*?"@type"\s*:\s*"MedicalWebPage"/i.test(html)) {
+    return patchMedicalWebPageSchema(html, record);
+  }
+  const o = {
+    '@context': 'https://schema.org',
+    '@type': 'MedicalWebPage',
+    name: title,
+    description: description || title,
+    url: canonical,
+    dateModified: record.reviewDate || LAST_REVIEWED,
+  };
+  if (record.status === REVIEW_STATUS.CLINICALLY_REVIEWED && record.reviewer) {
+    o.reviewedBy = physicianReviewedBy(record.reviewer);
+  }
+  const tag = `<script type="application/ld+json">${JSON.stringify(o)}</script>`;
+  return html.replace(/<\/head>/i, `    ${tag}\n</head>`);
+}
+
+/** Apply governance review status to top-level /guides pages */
+export function applyPageReviewStatus(html, slug, { title = '', description = '', canonical = '' } = {}) {
+  const record = resolvePageReviewRecord(slug);
+  html = syncClinicalReviewAside(html, record);
+  if (canonical) {
+    html = ensureMedicalWebPageSchema(html, title || slug, description, canonical, record);
+  } else {
+    html = patchMedicalWebPageSchema(html, record);
+  }
+  return html;
 }
 
 /** Apply governance review status to blog article HTML */

@@ -13,6 +13,7 @@ import { fileURLToPath } from 'url';
 import {
   applyAnswerReviewStatus,
   applyBlogReviewStatus,
+  applyPageReviewStatus,
   getProviderBySlug,
   injectProviderPhysicianSchema,
 } from './clinical-entity.mjs';
@@ -637,6 +638,14 @@ function processHtml(relPath) {
     const slug = relPath.replace(/^answers\//, '').replace(/\.html$/, '');
     html = applyAnswerReviewStatus(html, slug);
     html = ensureAnswerBreadcrumb(html, relPath, title, canonical);
+  } else if (relPath.startsWith('guides/') && relPath.endsWith('.html')) {
+    const slug = relPath.replace(/\.html$/, '');
+    html = applyPageReviewStatus(html, slug, {
+      title,
+      description: description || title,
+      canonical,
+    });
+    html = categoryBreadcrumb(relPath, html);
   } else {
     html = categoryBreadcrumb(relPath, html);
   }
