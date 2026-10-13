@@ -15,10 +15,16 @@ Do not treat a symptom hub as a routing table of “see the X page” links. If 
 
 ## Shared requirements (all guide pages)
 
-1. **Reader-intent opening** — Name the actual reader and the situation that brought them here. Not “general education” as the first sentence.
-2. **Educational disclaimer** — Keep the standard disclaimer; it is not the opener.
-3. **Covers / does not cover** — Explicit bullets early.
-4. **Lists, not comma soup** — Convert cause lists, criteria, and “what to bring” into real `<ul>` / `<ol>` items.
+1. **Scene-first opener (mandatory)** — Every guide opens with a concrete, relatable scene — specific and sensory, something a reader recognizes from their own life — *before* naming who the page is for.
+   - **Do not** lead with a conditional clause (“If you are a busy professional who…” / “If you work nights…”).
+   - **Do not** use decision-tree or clinical jargon in the opener (“branch,” “pattern,” “cohort”).
+   - **Do not** drop a cold bulleted list immediately after the opener as a diagnostic menu.
+   - If possible causes/topics need to appear early, fold them into a flowing sentence (e.g. “tired can mean a lot of things — poor sleep, low iron, thyroid, mood, hormones, focus — sometimes more than one at once”).
+   - Then invite recognition (“if that’s familiar, you’re far from alone”) and say what this page will do.
+   - Reference voice (exhausted, agreed): *You’ve had eight hours in bed, your day wasn’t even that brutal, and you’re still running on fumes by 2pm. If that’s familiar, you’re far from alone — persistent tiredness is one of the most common reasons adults see a doctor. The tricky part is that “tired” can mean a lot of different things — poor sleep, low iron, thyroid, mood, hormones, focus — sometimes more than one at once. This page walks you through how to tell them apart, starting with what the research actually says is most common.*
+2. **Educational disclaimer** — Keep the standard disclaimer; it is not the opener and never comes first.
+3. **Covers / does not cover** — Explicit bullets early (after opener + disclaimer).
+4. **Lists, not comma soup** — Convert cause lists, criteria, and “what to bring” into real `<ul>` / `<ol>` items *below* the opener — not as the first thing after it.
 5. **Citations** — Numbered references; clinical/stat claims must be supportable.
 6. **No dosing / no personal diagnosis** — Evaluation framing, not a prescription promise.
 7. **Stable section IDs** — Keep redirect anchors (`#ex-iron`, `#wt-glp1`, etc.) when rewriting.
@@ -41,9 +47,9 @@ Pattern already approved on sleep:
 
 Applies when the page’s job is recognition/triage across multiple causes.
 
-### 1. Reader-intent opening
+### 1. Scene-first opening
 
-Name the reader (e.g. busy professionals who feel tired, unmotivated, or underperforming despite a full schedule and seemingly adequate rest). “If you notice this, you are not alone” tone — not clinical throat-clearing.
+Same opener standard as Shared requirements §1. Symptom hubs especially must not open as a routing table or persona conditional.
 
 ### 2. No mid-article punt language
 
@@ -63,7 +69,7 @@ Name real instruments used in research/clinical measurement (e.g. Chalder Fatigu
 
 ### 4. Practical self-tracking
 
-Concrete guidance for tracking energy / sleep / activity / mood so the reader can bring a pattern to a visit — not vague “listen to your body.”
+Concrete guidance for tracking energy / sleep / activity / mood so the reader can bring a pattern to a visit — not vague “listen to your body.” Long checklists belong on a **standalone tracking page** (e.g. `/guides/fatigue-tracking`) with a short pointer from the hub — do not keep a full multi-week checklist inside the hub body.
 
 ### 5. Ranked causes grounded in evidence
 
