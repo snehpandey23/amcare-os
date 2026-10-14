@@ -15,7 +15,8 @@ Log `STARTED` ≈ CLI attempts from this script (Git/Vercel auto-builds also bur
 
 | Day (IST) | Prod STARTED | Prod OK | Preview STARTED | Preview OK | Quota REFUSED |
 |---|---:|---:|---:|---:|---:|
-| 2026-10-12 | 1 | 1 | 0 | 0 | 0 |
+| 2026-10-13 | 1 | 1 | 0 | 0 | 0 |
+| 2026-10-12 | 1 | 2 | 0 | 0 | 0 |
 | 2026-10-10 | 1 | 1 | 0 | 0 | 0 |
 | 2026-10-09 | 2 | 2 | 0 | 0 | 0 |
 | 2026-10-08 | 1 | 1 | 0 | 0 | 0 |
@@ -55,3 +56,5 @@ Log `STARTED` ≈ CLI attempts from this script (Git/Vercel auto-builds also bur
 | 2026-10-12 11:48 IST | `integration/2026-10-12` | `2643459e` | production | sp | PROMOTED | www.siya.health bound to dpl_CPgUNR5631wvQkxsGwFXX1KyQURc (was dpl_GCdSTpcD2WGhQSZaG5HVhNfW272g). Same upload; not a new deployment. sha=2643459eeb408309d9c6637fa7f0c11ef07c7ca4 operator=sp |
 | 2026-10-12 16:08 IST | `integration/2026-10-12` | `974a2686` | production | sp | STARTED | Keep internal notes and legal source files off the public site. |
 | 2026-10-12 16:08 IST | `integration/2026-10-12` | `974a2686` | production | sp | OK | staged --skip-domain not-promoted www-unchanged sha=974a2686546d7808c678ccd50da958043af04a70 branch=integration/2026-10-12 operator=sp id=dpl_7311hvGrfC3bcubjAZNy5XN24o7w url=https://siya-health-5gtnkjgcb-snehpandey23s-projects.vercel.app |
+| 2026-10-13 18:12 IST | `integration/2026-10-13-pillars` | `6321b5fd` | production | sp | STARTED | Pin related cards that the retirement backfill filled with the wrong posts. |
+| 2026-10-13 18:12 IST | `integration/2026-10-13-pillars` | `6321b5fd` | production | sp | OK | staged --skip-domain not-promoted www-unchanged sha=6321b5fd7a54376fc49c57f0b189afb7b9d4cec2 branch=integration/2026-10-13-pillars operator=sp id=dpl_SM9vCTAgeM47Y3XWkNUQen147MHz url=https://siya-health-bfl0cd5oq-snehpandey23s-projects.vercel.app |
