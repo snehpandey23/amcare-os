@@ -37,14 +37,7 @@ export function isReviewSignOffComplete(meta) {
  * signOffSource + reviewerConsent === true or reviewedBy will not emit.
  */
 export const CLINICAL_REVIEW_APPROVED = {
-  pages: {
-    'guides/perimenopause': {
-      reviewerSlug: 'dr-sneh-pandey',
-      reviewDate: '2026-10-04',
-      signOffSource: 'docs/clinical-signoffs/2026-10-04-pillar-guides-dr-sneh-pandey.md',
-      reviewerConsent: true,
-    },
-  },
+  pages: {},
   blogs: {},
   answers: {},
 };
