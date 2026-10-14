@@ -15,6 +15,7 @@ Log `STARTED` ≈ CLI attempts from this script (Git/Vercel auto-builds also bur
 
 | Day (IST) | Prod STARTED | Prod OK | Preview STARTED | Preview OK | Quota REFUSED |
 |---|---:|---:|---:|---:|---:|
+| 2026-10-14 | 1 | 1 | 0 | 0 | 0 |
 | 2026-10-13 | 1 | 1 | 0 | 0 | 0 |
 | 2026-10-12 | 1 | 2 | 0 | 0 | 0 |
 | 2026-10-10 | 1 | 1 | 0 | 0 | 0 |
@@ -58,3 +59,5 @@ Log `STARTED` ≈ CLI attempts from this script (Git/Vercel auto-builds also bur
 | 2026-10-12 16:08 IST | `integration/2026-10-12` | `974a2686` | production | sp | OK | staged --skip-domain not-promoted www-unchanged sha=974a2686546d7808c678ccd50da958043af04a70 branch=integration/2026-10-12 operator=sp id=dpl_7311hvGrfC3bcubjAZNy5XN24o7w url=https://siya-health-5gtnkjgcb-snehpandey23s-projects.vercel.app |
 | 2026-10-13 18:12 IST | `integration/2026-10-13-pillars` | `6321b5fd` | production | sp | STARTED | Pin related cards that the retirement backfill filled with the wrong posts. |
 | 2026-10-13 18:12 IST | `integration/2026-10-13-pillars` | `6321b5fd` | production | sp | OK | staged --skip-domain not-promoted www-unchanged sha=6321b5fd7a54376fc49c57f0b189afb7b9d4cec2 branch=integration/2026-10-13-pillars operator=sp id=dpl_SM9vCTAgeM47Y3XWkNUQen147MHz url=https://siya-health-bfl0cd5oq-snehpandey23s-projects.vercel.app |
+| 2026-10-14 19:36 IST | `integration/2026-10-14-phase2` | `c4a75e04` | production | sp | STARTED | content(phase2): record 2026-10-14 physician sign-off for sleep, testosterone, perimenopause |
+| 2026-10-14 19:36 IST | `integration/2026-10-14-phase2` | `c4a75e04` | production | sp | OK | staged --skip-domain not-promoted www-unchanged sha=c4a75e04a24f21129634e2808884f85560307478 branch=integration/2026-10-14-phase2 operator=sp id=dpl_CsdKTpMeJP9o4CubZpJvoifmBNrT url=https://siya-health-9rcs16q1j-snehpandey23s-projects.vercel.app |
