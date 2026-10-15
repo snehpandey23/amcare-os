@@ -53,6 +53,22 @@ const INTENT_PATTERNS: Array<{
     links: ['pricing', 'adhd_evaluation_cost', 'meet_and_greet'],
   },
   {
+    id: 'sleep_guide',
+    re: /\b(insomnia|trouble (?:falling )?asleep|trouble sleeping|can(?:'|’)t sleep|night shifts?|shift work|work nights)\b/i,
+    message:
+      'You can start with the sleep guide on the Siya Health site. This chat only points to that page. It does not give medical advice.',
+    followUp: 'Want the sleep guide, or a free Meet & Greet?',
+    links: ['guides_sleep', 'meet_and_greet'],
+  },
+  {
+    id: 'adhd_eval_duration',
+    re: /\bhow long\b.{0,80}\b(?:adhd |the )?(?:evaluation|assessment)\b/i,
+    message:
+      'The cognitive assessment takes about 60 to 90 minutes, and the clinical visit adds roughly 60 more minutes.',
+    followUp: 'Want the ADHD care page, or a Meet & Greet?',
+    links: ['adhd_care', 'meet_and_greet'],
+  },
+  {
     id: 'adhd_screening',
     re: /\b(adhd screening|adhd screen|asrs|free (?:adhd )?test|free screening|health screening)\b/i,
     message:
