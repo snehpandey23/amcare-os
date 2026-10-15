@@ -213,7 +213,7 @@ const CORE_ANSWER_SEEDS = [
     shortAnswer:
       'Yes—when a licensed clinician in your state conducts a full telehealth evaluation using clinical interview, validated tools, and safety screening. A free online quiz alone is screening, not diagnosis. Legitimate care uses HIPAA-compliant video and documented visits.',
     paragraphs: [
-      'At Siya Health, an adult ADHD evaluation has two parts. The cognitive assessment takes about 60 to 90 minutes, and the clinical visit adds roughly 60 more minutes. It is with licensed, ADHD-CCSP–trained clinicians in eligible states.',
+      'At Siya Health, an adult ADHD evaluation has two parts. The cognitive assessment takes about 60 to 90 minutes, and the clinical visit adds roughly 60 more minutes. The clinical visit is with licensed, ADHD-CCSP–trained clinicians in eligible states.',
       'Instant stimulant promises without evaluation are a red flag in any state.',
     ],
     evidence: ['State telehealth practice rules', 'HIPAA-compliant telehealth standards', 'ASRS + clinical interview best practices'],
@@ -251,7 +251,7 @@ const CORE_ANSWER_SEEDS = [
     slug: 'how-long-adhd-evaluation',
     question: 'How long does an ADHD evaluation take?',
     shortAnswer:
-      'A thorough adult ADHD evaluation has two parts. The cognitive assessment takes about 60 to 90 minutes, and the clinical visit adds roughly 60 more minutes. Intake forms are additional. Quick five-minute surveys are not equivalent to diagnosis.',
+      'A thorough adult ADHD evaluation has two parts. The cognitive assessment takes about 60 to 90 minutes, and the clinical visit adds roughly 60 more minutes. You also complete intake forms. Quick five-minute surveys are not equivalent to diagnosis.',
     paragraphs: [
       'Follow-up visits for medication management are shorter but still structured.',
     ],

@@ -427,7 +427,7 @@ export const PHASE5_ANSWER_SEEDS = [
       {
         question: 'How long does online ADHD diagnosis take?',
         answer:
-          'The cognitive assessment takes about 60 to 90 minutes, and the clinical visit adds roughly 60 more minutes. Intake forms are additional; quick surveys are insufficient.',
+          'The cognitive assessment takes about 60 to 90 minutes, and the clinical visit adds roughly 60 more minutes. You also complete intake forms; quick surveys are insufficient.',
       },
       {
         question: 'Is online ADHD diagnosis legitimate?',
