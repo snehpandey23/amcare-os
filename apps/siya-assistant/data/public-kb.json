@@ -34,7 +34,7 @@
       "title": "Published pricing overview",
       "url": "https://www.siya.health/pricing",
       "path": "/pricing",
-      "summary": "Published telehealth pricing includes a $149 initial evaluation and follow-up plans of $79/month (non-controlled) or $149/month (controlled) when recommended by a clinician. Confirm current details on the pricing page. Medication and treatment are never guaranteed.",
+      "summary": "$149 for the evaluation. Then $149 a month for ongoing care. Confirm current details on the pricing page. Medication and treatment are never guaranteed.",
       "topics": [
         "pricing"
       ],
@@ -44,7 +44,6 @@
         "cost",
         "fee",
         "$149",
-        "$79",
         "membership",
         "evaluation",
         "follow-up",

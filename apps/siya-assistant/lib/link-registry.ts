@@ -53,6 +53,12 @@ export const LINK_REGISTRY: Record<string, LinkRecord> = {
         url: 'https://www.siya.health/guides/mental-health-and-adhd#mh-work',
         kind: 'education'
     },
+    guides_sleep: {
+        id: 'guides_sleep',
+        label: 'Sleep guide',
+        url: 'https://www.siya.health/guides/sleep',
+        kind: 'education'
+    },
     adhd_evaluation_cost: {
         id: 'adhd_evaluation_cost',
         label: 'ADHD Evaluation Cost',
