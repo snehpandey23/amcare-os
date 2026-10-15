@@ -93,7 +93,7 @@ export const PROVIDERS = [
     whatToExpect: [
       { title: 'Free ADHD screening', text: 'a short, honest check-in to see if evaluation is a sensible next step.' },
       { title: 'First telehealth visit', text: 'ask questions, learn how telehealth visits work, and see if Siya feels like a fit—no pressure.' },
-      { title: 'Full evaluation', text: 'typically 60–90 minutes with a licensed, ADHD-CCSP–trained clinician; history, standardized tools, and discussion of diagnosis and options.' },
+      { title: 'Full evaluation', text: 'The cognitive assessment takes about 60 to 90 minutes, and the clinical visit adds roughly 60 more minutes, with a licensed, ADHD-CCSP–trained clinician; history, standardized tools, and discussion of diagnosis and options.' },
       { title: 'Ongoing care', text: 'follow-up tuned to medication monitoring, dose adjustments, or coaching referrals as your plan evolves.' },
     ],
     trustCards: [
