@@ -126,7 +126,7 @@
         {
           "id": "guide_tired_after_sleeping",
           "label": "Why am I tired even after sleeping?",
-          "url": "/answers/why-am-i-tired-even-after-sleeping"
+          "url": "/guides/exhausted#ex-sleep-link"
         },
         {
           "id": "guide_brain_fog",
@@ -136,7 +136,7 @@
         {
           "id": "guide_sleep_apnea",
           "label": "Signs of sleep apnea in adults",
-          "url": "/answers/signs-of-sleep-apnea-in-adults"
+          "url": "/guides/sleep#sl-apnea"
         },
         {
           "id": "labs_iron",
@@ -182,7 +182,7 @@
     "executive_dysfunction": {
       "entity": "executive_dysfunction",
       "name": "Executive Dysfunction in ADHD",
-      "canonical_page": "/blog/executive-dysfunction-adhd",
+      "canonical_page": "/guides/mental-health-and-adhd#mh-work",
       "intent": "condition",
       "care_pathway": "adhd_care",
       "safety_class": "general_information",
@@ -209,7 +209,7 @@
         {
           "id": "executive_dysfunction",
           "label": "Executive dysfunction guide",
-          "url": "/blog/executive-dysfunction-adhd"
+          "url": "/guides/mental-health-and-adhd#mh-work"
         }
       ],
       "related_entities": [
@@ -230,7 +230,7 @@
     "women_and_adhd": {
       "entity": "women_and_adhd",
       "name": "ADHD in Women",
-      "canonical_page": "/blog/adhd-in-women",
+      "canonical_page": "/guides/perimenopause#pe-opener",
       "intent": "condition",
       "care_pathway": "adhd_care",
       "safety_class": "general_information",
@@ -539,7 +539,7 @@
         {
           "id": "guide_normal_labs",
           "label": "Why normal labs don't mean healthy",
-          "url": "/answers/why-normal-labs-dont-mean-healthy"
+          "url": "/guides/exhausted#ex-opener"
         },
         {
           "id": "labs_preventive",
@@ -1280,7 +1280,7 @@
         {
           "id": "guide_brain_fog_eating",
           "label": "Brain fog after eating",
-          "url": "/answers/brain-fog-after-eating"
+          "url": "/guides/weight#wt-insulin"
         },
         {
           "id": "labs_cbc",

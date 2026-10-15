@@ -50,7 +50,7 @@ export const LINK_REGISTRY: Record<string, LinkRecord> = {
     executive_dysfunction: {
         id: 'executive_dysfunction',
         label: 'Executive Dysfunction & ADHD',
-        url: 'https://www.siya.health/blog/executive-dysfunction-adhd',
+        url: 'https://www.siya.health/guides/mental-health-and-adhd#mh-work',
         kind: 'education'
     },
     adhd_evaluation_cost: {
