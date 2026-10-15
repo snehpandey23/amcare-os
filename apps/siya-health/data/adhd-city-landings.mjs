@@ -66,7 +66,7 @@ export const ADHD_CITY_LANDINGS = [
       {
         question: 'How long does the evaluation take, and how soon can I book?',
         answer:
-          'The clinical evaluation is typically a 60–90 minute virtual visit. Same-week appointments are often available after you complete the free screening. Screening itself is not a diagnosis.',
+          'The cognitive assessment takes about 60 to 90 minutes, and the clinical visit adds roughly 60 more minutes. Same-week appointments are often available after you complete the free screening. Screening itself is not a diagnosis.',
       },
       {
         question: 'Does evaluation guarantee ADHD medication?',
@@ -144,7 +144,7 @@ export const ADHD_CITY_LANDINGS = [
       {
         question: 'How fast can Orlando patients get evaluated?',
         answer:
-          'After the free screening, same-week virtual appointments are often available. The evaluation visit itself is typically 60–90 minutes. Screening is not a diagnosis.',
+          'After the free screening, same-week virtual appointments are often available. The cognitive assessment takes about 60 to 90 minutes, and the clinical visit adds roughly 60 more minutes. Screening is not a diagnosis.',
       },
       {
         question: 'Is telehealth ADHD evaluation legitimate in Florida?',
