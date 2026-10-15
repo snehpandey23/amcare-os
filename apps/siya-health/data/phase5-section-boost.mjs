@@ -157,7 +157,7 @@ export const PHASE5_EXTRA_SECTIONS = {
       id: 'search-themes',
       heading: 'Preparing for a telehealth ADHD evaluation',
       paragraphs: [
-        'Gather childhood report cards, old IEP documents, or parent quotes about childhood attention problems. List current medications, substance use, sleep symptoms, and prior psychiatric diagnoses. Stable Wi-Fi and a private space for 60–90 minutes reduce visit disruption.',
+        'Gather childhood report cards, old IEP documents, or parent quotes about childhood attention problems. List current medications, substance use, sleep symptoms, and prior psychiatric diagnoses. Stable Wi-Fi and a private space for the cognitive assessment (about 60 to 90 minutes) and the clinical visit (about 60 more minutes) reduce disruption.',
         'After diagnosis, employers may require accommodation letters—ask whether your clinician provides work or school documentation and what follow-up is needed to maintain prescriptions legally in your state.',
       ],
     },
