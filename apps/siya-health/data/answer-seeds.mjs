@@ -213,7 +213,7 @@ const CORE_ANSWER_SEEDS = [
     shortAnswer:
       'Yes—when a licensed clinician in your state conducts a full telehealth evaluation using clinical interview, validated tools, and safety screening. A free online quiz alone is screening, not diagnosis. Legitimate care uses HIPAA-compliant video and documented visits.',
     paragraphs: [
-      'At Siya Health, adult ADHD evaluation. The cognitive assessment takes about 60 to 90 minutes, and the clinical visit adds roughly 60 more minutes, with licensed, ADHD-CCSP–trained clinicians in eligible states.',
+      'At Siya Health, an adult ADHD evaluation has two parts. The cognitive assessment takes about 60 to 90 minutes, and the clinical visit adds roughly 60 more minutes. It is with licensed, ADHD-CCSP–trained clinicians in eligible states.',
       'Instant stimulant promises without evaluation are a red flag in any state.',
     ],
     evidence: ['State telehealth practice rules', 'HIPAA-compliant telehealth standards', 'ASRS + clinical interview best practices'],
@@ -238,7 +238,7 @@ const CORE_ANSWER_SEEDS = [
     slug: 'how-much-does-adhd-testing-cost',
     question: 'How much does ADHD testing cost?',
     shortAnswer:
-      'Costs vary widely: some clinics charge $500–$2,000+; Siya Health offers a transparent $149 comprehensive adult ADHD evaluation. The cognitive assessment takes about 60 to 90 minutes, and the clinical visit adds roughly 60 more minutes, including clinical interview and standardized tools when clinically indicated. Always confirm what is included before booking.',
+      'Costs vary widely: some clinics charge $500–$2,000+; Siya Health offers a transparent $149 comprehensive adult ADHD evaluation that has two parts. The cognitive assessment takes about 60 to 90 minutes, and the clinical visit adds roughly 60 more minutes. It includes clinical interview and standardized tools when clinically indicated. Always confirm what is included before booking.',
     paragraphs: [
       'Insurance may cover some in-network evaluations but often involves prior authorization delays. Many patients use FSA/HSA for direct-pay telehealth.',
     ],
@@ -251,7 +251,7 @@ const CORE_ANSWER_SEEDS = [
     slug: 'how-long-adhd-evaluation',
     question: 'How long does an ADHD evaluation take?',
     shortAnswer:
-      'A thorough adult ADHD evaluation. The cognitive assessment takes about 60 to 90 minutes, and the clinical visit adds roughly 60 more minutes, plus intake forms. Quick five-minute surveys are not equivalent to diagnosis.',
+      'A thorough adult ADHD evaluation has two parts. The cognitive assessment takes about 60 to 90 minutes, and the clinical visit adds roughly 60 more minutes. Intake forms are additional. Quick five-minute surveys are not equivalent to diagnosis.',
     paragraphs: [
       'Follow-up visits for medication management are shorter but still structured.',
     ],
@@ -379,7 +379,7 @@ const CORE_ANSWER_SEEDS = [
     slug: 'screening-vs-adhd-evaluation',
     question: 'What is the difference between ADHD screening and a full evaluation?',
     shortAnswer:
-      'Screening (e.g., ASRS, short online quizzes) estimates likelihood and takes minutes. A full evaluation. The cognitive assessment takes about 60 to 90 minutes, and the clinical visit adds roughly 60 more minutes, with history, standardized tools, safety screening, and a written plan—required for formal diagnosis. Prescribing when clinically appropriate is never guaranteed—including stimulants.',
+      'Screening (e.g., ASRS, short online quizzes) estimates likelihood and takes minutes. A full evaluation has two parts. The cognitive assessment takes about 60 to 90 minutes, and the clinical visit adds roughly 60 more minutes. It includes history, standardized tools, safety screening, and a written plan—required for formal diagnosis. Prescribing when clinically appropriate is never guaranteed—including stimulants.',
     paragraphs: [
       'Never treat a screener result as a lifetime label.',
     ],
@@ -1086,7 +1086,7 @@ const CORE_ANSWER_SEEDS = [
     slug: 'what-included-199-adhd-evaluation',
     question: 'What is included in a Siya Health ADHD evaluation?',
     shortAnswer:
-      'Siya Health’s {{pricing.initialEvaluation}} adult ADHD evaluation. The cognitive assessment takes about 60 to 90 minutes, and the clinical visit adds roughly 60 more minutes. It is a telehealth visit with a licensed medical provider—including clinical interview, validated assessment tools as clinically appropriate (such as ASRS, DIVA, Wender Utah, SWAN, or Creyos when indicated), comorbidity screening, and a documented plan. No insurance required. Diagnosis does not guarantee medication.',
+      'Siya Health’s {{pricing.initialEvaluation}} adult ADHD evaluation has two parts. The cognitive assessment takes about 60 to 90 minutes, and the clinical visit adds roughly 60 more minutes. It is a telehealth visit with a licensed medical provider—including clinical interview, validated assessment tools as clinically appropriate (such as ASRS, DIVA, Wender Utah, SWAN, or Creyos when indicated), comorbidity screening, and a documented plan. No insurance required. Diagnosis does not guarantee medication.',
     paragraphs: [
       'Your clinician selects assessment tools based on clinical judgment—not every patient receives every instrument. Ongoing care is {{pricing.monthlyCare}}/month. See /pricing for the current fee schedule.',
     ],

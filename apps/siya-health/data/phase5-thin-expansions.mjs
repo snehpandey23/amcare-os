@@ -386,7 +386,7 @@ export const PHASE5_ANSWER_SEEDS = [
         id: 'legitimate-telehealth',
         heading: 'What legitimate online ADHD diagnosis includes',
         paragraphs: [
-          'The cognitive assessment takes about 60 to 90 minutes, and the clinical visit adds roughly 60 more minutes for a comprehensive adult evaluation, plus intake forms. Tools may include ASRS, structured interview modules, and cognitive testing (e.g., Creyos) when clinically appropriate.',
+          'The cognitive assessment takes about 60 to 90 minutes, and the clinical visit adds roughly 60 more minutes. It covers a comprehensive adult evaluation, plus intake forms. Tools may include ASRS, structured interview modules, and cognitive testing (e.g., Creyos) when clinically appropriate.',
           'Diagnosis requires DSM-5-TR criteria with childhood onset patterns and cross-setting impairment. Clinicians document differential diagnosis for anxiety, sleep disorders, and medical mimics.',
         ],
       },
@@ -427,7 +427,7 @@ export const PHASE5_ANSWER_SEEDS = [
       {
         question: 'How long does online ADHD diagnosis take?',
         answer:
-          'The cognitive assessment takes about 60 to 90 minutes, and the clinical visit adds roughly 60 more minutes, plus forms; quick surveys are insufficient.',
+          'The cognitive assessment takes about 60 to 90 minutes, and the clinical visit adds roughly 60 more minutes. Intake forms are additional; quick surveys are insufficient.',
       },
       {
         question: 'Is online ADHD diagnosis legitimate?',
@@ -538,7 +538,7 @@ export const PHASE5_ANSWER_SEEDS = [
         id: 'green-flags',
         heading: 'Green flags for legitimate online ADHD care',
         paragraphs: [
-          'Named clinicians with state licenses disclosed, evaluation options where the cognitive assessment takes about 60 to 90 minutes, and the clinical visit adds roughly 60 more minutes, HIPAA-compliant video, refusal to guarantee stimulants before assessment, and clear follow-up policies for controlled substances.',
+          'Named clinicians with state licenses disclosed, evaluation options in two parts. The cognitive assessment takes about 60 to 90 minutes, and the clinical visit adds roughly 60 more minutes. Other signs include HIPAA-compliant video, refusal to guarantee stimulants before assessment, and clear follow-up policies for controlled substances.',
           'Integration of ASRS or similar screeners with full interview and safety questions about cardiovascular history, sleep, and substance use.',
         ],
       },
@@ -1437,7 +1437,7 @@ export const PHASE5_ANSWER_SEEDS = [
         heading: 'What typically happens in a first telehealth visit',
         paragraphs: [
           'You meet a team member or clinician to discuss which programs apply (ADHD evaluation, weight management, men’s health), expected timelines, out-of-pocket pricing, and whether your state is in network for licensure.',
-          'You can ask how ADHD evaluations differ from free screeners. The cognitive assessment takes about 60 to 90 minutes, and the clinical visit adds roughly 60 more minutes, and what documents to prepare (ID, medication list, prior records).',
+          'You can ask how ADHD evaluations differ from free screeners. The cognitive assessment takes about 60 to 90 minutes, and the clinical visit adds roughly 60 more minutes. You can also ask what documents to prepare (ID, medication list, prior records).',
         ],
       },
       {
