@@ -46,9 +46,9 @@ const INTENT_PATTERNS: Array<{
   },
   {
     id: 'pricing',
-    re: /\b(pric(?:e|ing)|\$149|\$79|how much (?:does|is|do|are) (?:siya|it|this|a visit|an evaluation|care|the visit)|(?:visit|evaluation|appointment) (?:cost|fee)|(?:cost|fee) of (?:a |an |the |your )?(?:visit|evaluation|appointment|care|siya))\b/i,
+    re: /\b(pric(?:e|ing)|\$149|how much (?:does|is|do|are) (?:siya|it|this|a visit|an evaluation|care|the visit)|(?:visit|evaluation|appointment) (?:cost|fee)|(?:cost|fee) of (?:a |an |the |your )?(?:visit|evaluation|appointment|care|siya))\b/i,
     message:
-      'Happy to help with that. Published pricing includes a $149 initial evaluation, plus follow-up plans of $79/month or $149/month when a clinician recommends one. Details can change, so the pricing page is the best place to confirm.',
+      'Happy to help with that. $149 for the evaluation. Then $149 a month for ongoing care. Details can change, so the pricing page is the best place to confirm.',
     followUp: 'Want the full pricing page, ADHD evaluation cost details, or a free Meet & Greet to talk it through?',
     links: ['pricing', 'adhd_evaluation_cost', 'meet_and_greet'],
   },

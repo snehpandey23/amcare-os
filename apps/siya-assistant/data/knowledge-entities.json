@@ -179,6 +179,35 @@
       "note": "Symptom-first. Never answer fatigue with an ADHD screening CTA.",
       "entity_family": "symptom"
     },
+    "sleep_problems": {
+      "entity": "sleep_problems",
+      "name": "Sleep",
+      "canonical_page": "/guides/sleep",
+      "intent": "symptom",
+      "care_pathway": "primary_care",
+      "aliases": [
+        "sleep",
+        "insomnia",
+        "night shift",
+        "night shifts",
+        "shift work"
+      ],
+      "primary_cta": {
+        "id": "guides_sleep",
+        "label": "Sleep guide",
+        "url": "/guides/sleep"
+      },
+      "secondary_ctas": [
+        {
+          "id": "meet_and_greet",
+          "label": "Book Free Meet & Greet",
+          "url": "/redirect/meet-greet"
+        }
+      ],
+      "related_entities": [
+        "fatigue"
+      ]
+    },
     "executive_dysfunction": {
       "entity": "executive_dysfunction",
       "name": "Executive Dysfunction in ADHD",
@@ -360,7 +389,7 @@
       "approved_answer_blocks": [
         {
           "id": "pricing_overview",
-          "text": "Published pricing includes a $149 initial evaluation, plus follow-up plans of $79/month or $149/month when a clinician recommends one. Details can change, so the pricing page is the source of truth."
+          "text": "$149 for the evaluation. Then $149 a month for ongoing care. Details can change, so the pricing page is the source of truth."
         },
         {
           "id": "pricing_limits",
