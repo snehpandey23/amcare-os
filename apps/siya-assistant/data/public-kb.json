@@ -57,7 +57,7 @@
       "title": "Adult ADHD evaluation",
       "url": "https://www.siya.health/adhd-care",
       "path": "/adhd-care",
-      "summary": "Siya Health offers primary care–led adult ADHD evaluation via telehealth where clinically appropriate, typically 60–90 minutes. Screening tools support evaluation but do not diagnose ADHD alone. Diagnosis and evaluation do not guarantee medication.",
+      "summary": "Siya Health offers primary care–led adult ADHD evaluation via telehealth where clinically appropriate. The cognitive assessment takes about 60 to 90 minutes, and the clinical visit adds roughly 60 more minutes. Screening tools support evaluation but do not diagnose ADHD alone. Diagnosis and evaluation do not guarantee medication.",
       "topics": [
         "adhd"
       ],
@@ -154,7 +154,7 @@
       "title": "Labs and blood tests",
       "url": "https://www.siya.health/labs",
       "path": "/labs",
-      "summary": "Siya Health offers physician-guided laboratory information and a direct-pay labs storefront experience. Lab interpretation for an individual requires clinical evaluation and should not be done in website chat.",
+      "summary": "Siya Health offers clinician-guided laboratory information and a direct-pay labs storefront experience. Lab interpretation for an individual requires clinical evaluation and should not be done in website chat.",
       "topics": [
         "labs"
       ],
@@ -353,7 +353,7 @@
       "title": "About Siya Health | Care for busy professionals",
       "url": "https://www.siya.health/about",
       "path": "/about",
-      "summary": "Siya Health is physician-led virtual care for busy professionals seeking clear answers about focus, energy, weight, mood, metabolism, hormones, and everyday health. California, Texas, Pennsylvania, Fl…",
+      "summary": "Siya Health is physician-led virtual care for busy professionals seeking clear answers about focus, energy, weight, mood, metabolism, hormones, and everyday health. California, Texas, Pennsylvania, Florida.",
       "topics": [],
       "keywords": [
         "about",
@@ -381,7 +381,7 @@
         "california",
         "texas",
         "pennsylvania",
-        "fl"
+        "florida"
       ]
     },
     {
@@ -580,7 +580,7 @@
       "title": "Adult ADHD Care in California — Diagnosis, Treatment & Screening",
       "url": "https://www.siya.health/adult-adhd-california",
       "path": "/adult-adhd-california",
-      "summary": "The complete guide to adult ADHD in California: what it looks like, when evaluation helps, how online diagnosis works, treatment options, women & ADHD, executive dysfunction, pricing, and a free scree…",
+      "summary": "The complete guide to adult ADHD in California: what it looks like, when evaluation helps, how online diagnosis works, treatment options, women & ADHD, executive dysfunction, pricing, and a free screening. Physician-led telehealth for California adults.",
       "topics": [],
       "keywords": [
         "adult",
@@ -613,7 +613,11 @@
         "and",
         "a",
         "free",
-        "scree"
+        "physician",
+        "led",
+        "telehealth",
+        "for",
+        "adults"
       ]
     },
     {
@@ -1836,7 +1840,7 @@
       "title": "Brain Fog — Why Thinking Feels Slower, and When to Get Evaluated",
       "url": "https://www.siya.health/brain-fog",
       "path": "/brain-fog",
-      "summary": "Brain fog is a symptom with many possible contributors — fatigue, sleep, thyroid, B12, iron, mood, ADHD. Learn what people mean by brain fog, when evaluation helps, which labs clinicians may consider,…",
+      "summary": "Brain fog is a symptom with many possible contributors — fatigue, sleep, thyroid, B12, iron, mood, ADHD. Learn what people mean by brain fog, when evaluation helps, which labs clinicians may consider, and how primary care sorts it out.",
       "topics": [],
       "keywords": [
         "brain",
@@ -1875,7 +1879,13 @@
         "labs",
         "clinicians",
         "may",
-        "consider"
+        "consider",
+        "how",
+        "primary",
+        "care",
+        "sorts",
+        "it",
+        "out"
       ]
     },
     {
@@ -1918,7 +1928,7 @@
       "title": "Care for busy professionals",
       "url": "https://www.siya.health/employers",
       "path": "/employers",
-      "summary": "Physician-led care for busy professionals: focus, sleep, stress, weight, hormones, and primary care, with one clinician keeping the whole picture. 2,700+ patients treated. Licensed in California, Texa…",
+      "summary": "Physician-led care for busy professionals: focus, sleep, stress, weight, hormones, and primary care, with one clinician keeping the whole picture. 2,700+ patients treated. Licensed in California, Texas, Pennsylvania, and Florida.",
       "topics": [],
       "keywords": [
         "care",
@@ -1948,7 +1958,9 @@
         "licensed",
         "in",
         "california",
-        "texa"
+        "texas",
+        "pennsylvania",
+        "florida"
       ]
     },
     {
@@ -1956,7 +1968,7 @@
       "title": "Fatigue — Why You Are Always Tired, and When to Get Evaluated",
       "url": "https://www.siya.health/fatigue",
       "path": "/fatigue",
-      "summary": "Persistent fatigue is a symptom with many possible causes — iron, thyroid, B12, sleep apnea, mood, hormones. Learn what fatigue actually means, when medical evaluation helps, which labs clinicians con…",
+      "summary": "Persistent fatigue is a symptom with many possible causes — iron, thyroid, B12, sleep apnea, mood, hormones. Learn what fatigue actually means, when medical evaluation helps, which labs clinicians consider, and how physician-led primary care sorts it out.",
       "topics": [],
       "keywords": [
         "fatigue",
@@ -1995,7 +2007,15 @@
         "which",
         "labs",
         "clinicians",
-        "con"
+        "consider",
+        "how",
+        "physician",
+        "led",
+        "primary",
+        "care",
+        "sorts",
+        "it",
+        "out"
       ]
     },
     {
@@ -2263,7 +2283,7 @@
       "title": "Headaches that get in the way of work",
       "url": "https://www.siya.health/headache",
       "path": "/headache",
-      "summary": "A recurring headache that interrupts work is a reason for a primary care visit. How migraine and tension-type patterns are described, when a headache is an emergency, and how sleep and midlife changes…",
+      "summary": "A recurring headache that interrupts work is a reason for a primary care visit. How migraine and tension-type patterns are described, when a headache is an emergency, and how sleep and midlife changes fit in.",
       "topics": [],
       "keywords": [
         "headaches",
@@ -2297,7 +2317,8 @@
         "emergency",
         "sleep",
         "midlife",
-        "changes"
+        "changes",
+        "fit"
       ]
     },
     {
@@ -2708,7 +2729,7 @@
       "title": "Preventive Care — Stay Healthy Before Something Goes Wrong",
       "url": "https://www.siya.health/preventive-care",
       "path": "/preventive-care",
-      "summary": "Preventive care is how adults stay ahead of problems: annual wellness visits, health screenings, vaccinations, cardiometabolic risk, lifestyle, and labs in context — with a physician-led primary care …",
+      "summary": "Preventive care is how adults stay ahead of problems: annual wellness visits, health screenings, vaccinations, cardiometabolic risk, lifestyle, and labs in context — with a physician-led primary care relationship, not a one-off checklist.",
       "topics": [],
       "keywords": [
         "preventive",
@@ -2742,7 +2763,12 @@
         "a",
         "physician",
         "led",
-        "primary"
+        "primary",
+        "relationship",
+        "not",
+        "one",
+        "off",
+        "checklist"
       ]
     },
     {
@@ -2750,7 +2776,7 @@
       "title": "Pricing",
       "url": "https://www.siya.health/pricing",
       "path": "/pricing",
-      "summary": "Transparent physician-led telehealth pricing: $149 one-time evaluation, then $149/month for ongoing care. ADHD, weight loss, primary care, and telehealth in California, Texas, Pennsylvania, and Florid…",
+      "summary": "Transparent physician-led telehealth pricing: $149 one-time evaluation, then $149/month for ongoing care. ADHD, weight loss, primary care, and telehealth in California, Texas, Pennsylvania, and Florida.",
       "topics": [],
       "keywords": [
         "pricing",
@@ -2776,7 +2802,7 @@
         "california",
         "texas",
         "pennsylvania",
-        "florid"
+        "florida"
       ]
     },
     {
@@ -2784,7 +2810,7 @@
       "title": "Primary Care — Where Ongoing Health Starts",
       "url": "https://www.siya.health/primary-care",
       "path": "/primary-care",
-      "summary": "Primary care is the root of ongoing health at Siya: symptoms, preventive care, labs in context, and specialty lanes under one physician-led telehealth relationship — not a funnel to a single condition…",
+      "summary": "Primary care is the root of ongoing health at Siya: symptoms, preventive care, labs in context, and specialty lanes under one physician-led telehealth relationship — not a funnel to a single condition.",
       "topics": [],
       "keywords": [
         "primary",
@@ -2857,7 +2883,7 @@
       "title": "Our Care Team",
       "url": "https://www.siya.health/providers",
       "path": "/providers",
-      "summary": "Meet Siya Health physicians and advanced practice providers—primary care–led telehealth for working adults across ADHD, metabolic, fatigue, and neurocognitive evaluation in California, Texas, Pennsylv…",
+      "summary": "Meet Siya Health physicians and advanced practice providers—primary care–led telehealth for working adults across ADHD, metabolic, fatigue, and neurocognitive evaluation in California, Texas, Pennsylvania, and Florida.",
       "topics": [],
       "keywords": [
         "our",
@@ -2886,7 +2912,8 @@
         "in",
         "california",
         "texas",
-        "pennsylv"
+        "pennsylvania",
+        "florida"
       ]
     },
     {

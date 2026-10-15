@@ -2,17 +2,19 @@
 
 Generated: 2026-10-15
 Total pages: 93
+
 - Siya Health | Integrated Care for Busy Professionals
   URL: https://siya.health/
   Summary: Physician-led integrated care for busy professionals — primary care, ADHD, weight, and hormonal health in one place. Licensed in CA, TX, PA, and FL.
 
 - About Siya Health | Care for busy professionals
   URL: https://siya.health/about
-  Summary: Siya Health is physician-led virtual care for busy professionals seeking clear answers about focus, energy, weight, mood, metabolism, hormones, and everyday health. California, Texas, Pennsylvania, Fl…
+  Summary: Siya Health is physician-led virtual care for busy professionals seeking clear answers about focus, energy, weight, mood, metabolism, hormones, and everyday health. California, Texas, Pennsylvania, Florida.
 
 - ADHD Care
   URL: https://siya.health/adhd-care
   Summary: ADHD Care
+
 - ADHD Care in Miami, FL — Online Adult Evaluation
   URL: https://siya.health/adhd-care/miami
   Summary: Adult ADHD evaluation for Miami and South Florida via Florida-licensed telehealth. Free screening, structured virtual visits, and transparent cash-pay pricing—no travel to a clinic required.
@@ -35,7 +37,7 @@ Total pages: 93
 
 - Adult ADHD Care in California — Diagnosis, Treatment &amp; Screening
   URL: https://siya.health/adult-adhd-california
-  Summary: The complete guide to adult ADHD in California: what it looks like, when evaluation helps, how online diagnosis works, treatment options, women & ADHD, executive dysfunction, pricing, and a free scree…
+  Summary: The complete guide to adult ADHD in California: what it looks like, when evaluation helps, how online diagnosis works, treatment options, women & ADHD, executive dysfunction, pricing, and a free screening. Physician-led telehealth for California adults.
 
 - Health Guides | Weight, energy, hormones, sleep, and ADHD
   URL: https://siya.health/answers
@@ -183,7 +185,7 @@ Total pages: 93
 
 - Brain Fog — Why Thinking Feels Slower, and When to Get Evaluated
   URL: https://siya.health/brain-fog
-  Summary: Brain fog is a symptom with many possible contributors — fatigue, sleep, thyroid, B12, iron, mood, ADHD. Learn what people mean by brain fog, when evaluation helps, which labs clinicians may consider,…
+  Summary: Brain fog is a symptom with many possible contributors — fatigue, sleep, thyroid, B12, iron, mood, ADHD. Learn what people mean by brain fog, when evaluation helps, which labs clinicians may consider, and how primary care sorts it out.
 
 - Creyos ADHD Testing Online | Part of Your Evaluation
   URL: https://siya.health/creyos-adhd-testing
@@ -191,11 +193,11 @@ Total pages: 93
 
 - Care for busy professionals
   URL: https://siya.health/employers
-  Summary: Physician-led care for busy professionals: focus, sleep, stress, weight, hormones, and primary care, with one clinician keeping the whole picture. 2,700+ patients treated. Licensed in California, Texa…
+  Summary: Physician-led care for busy professionals: focus, sleep, stress, weight, hormones, and primary care, with one clinician keeping the whole picture. 2,700+ patients treated. Licensed in California, Texas, Pennsylvania, and Florida.
 
 - Fatigue — Why You Are Always Tired, and When to Get Evaluated
   URL: https://siya.health/fatigue
-  Summary: Persistent fatigue is a symptom with many possible causes — iron, thyroid, B12, sleep apnea, mood, hormones. Learn what fatigue actually means, when medical evaluation helps, which labs clinicians con…
+  Summary: Persistent fatigue is a symptom with many possible causes — iron, thyroid, B12, sleep apnea, mood, hormones. Learn what fatigue actually means, when medical evaluation helps, which labs clinicians consider, and how physician-led primary care sorts it out.
 
 - Exhausted, with no explanation
   URL: https://siya.health/guides/exhausted
@@ -231,7 +233,7 @@ Total pages: 93
 
 - Headaches that get in the way of work
   URL: https://siya.health/headache
-  Summary: A recurring headache that interrupts work is a reason for a primary care visit. How migraine and tension-type patterns are described, when a headache is an emergency, and how sleep and midlife changes…
+  Summary: A recurring headache that interrupts work is a reason for a primary care visit. How migraine and tension-type patterns are described, when a headache is an emergency, and how sleep and midlife changes fit in.
 
 - Labs &amp; Blood Tests | Transparent Direct-Pay Testing
   URL: https://siya.health/labs
@@ -307,15 +309,15 @@ Total pages: 93
 
 - Preventive Care — Stay Healthy Before Something Goes Wrong
   URL: https://siya.health/preventive-care
-  Summary: Preventive care is how adults stay ahead of problems: annual wellness visits, health screenings, vaccinations, cardiometabolic risk, lifestyle, and labs in context — with a physician-led primary care …
+  Summary: Preventive care is how adults stay ahead of problems: annual wellness visits, health screenings, vaccinations, cardiometabolic risk, lifestyle, and labs in context — with a physician-led primary care relationship, not a one-off checklist.
 
 - Pricing
   URL: https://siya.health/pricing
-  Summary: Transparent physician-led telehealth pricing: $149 one-time evaluation, then $149/month for ongoing care. ADHD, weight loss, primary care, and telehealth in California, Texas, Pennsylvania, and Florid…
+  Summary: Transparent physician-led telehealth pricing: $149 one-time evaluation, then $149/month for ongoing care. ADHD, weight loss, primary care, and telehealth in California, Texas, Pennsylvania, and Florida.
 
 - Primary Care — Where Ongoing Health Starts
   URL: https://siya.health/primary-care
-  Summary: Primary care is the root of ongoing health at Siya: symptoms, preventive care, labs in context, and specialty lanes under one physician-led telehealth relationship — not a funnel to a single condition…
+  Summary: Primary care is the root of ongoing health at Siya: symptoms, preventive care, labs in context, and specialty lanes under one physician-led telehealth relationship — not a funnel to a single condition.
 
 - Primary &amp; Urgent Care Telehealth
   URL: https://siya.health/primary-urgent-care
@@ -323,7 +325,7 @@ Total pages: 93
 
 - Our Care Team
   URL: https://siya.health/providers
-  Summary: Meet Siya Health physicians and advanced practice providers—primary care–led telehealth for working adults across ADHD, metabolic, fatigue, and neurocognitive evaluation in California, Texas, Pennsylv…
+  Summary: Meet Siya Health physicians and advanced practice providers—primary care–led telehealth for working adults across ADHD, metabolic, fatigue, and neurocognitive evaluation in California, Texas, Pennsylvania, and Florida.
 
 - Dr. Natasha Desai, MD | Adult ADHD &amp; Family Medicine
   URL: https://siya.health/providers/dr-natasha-desai
@@ -360,6 +362,7 @@ Total pages: 93
 - Telehealth
   URL: https://siya.health/telehealth
   Summary: Telehealth
+
 - Provider-Guided Medical Weight Loss
   URL: https://siya.health/weight-loss-metabolic-health
   Summary: Board-certified obesity medicine. GLP-1, phentermine, semaglutide, tirzepatide when appropriate. Provider-guided programs across CA, TX, PA, FL.
