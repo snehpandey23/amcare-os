@@ -15,7 +15,7 @@ Log `STARTED` ≈ CLI attempts from this script (Git/Vercel auto-builds also bur
 
 | Day (IST) | Prod STARTED | Prod OK | Preview STARTED | Preview OK | Quota REFUSED |
 |---|---:|---:|---:|---:|---:|
-| 2026-10-15 | 1 | 1 | 0 | 0 | 0 |
+| 2026-10-15 | 2 | 2 | 0 | 0 | 0 |
 | 2026-10-14 | 1 | 1 | 0 | 0 | 0 |
 | 2026-10-13 | 1 | 1 | 0 | 0 | 0 |
 | 2026-10-12 | 1 | 2 | 0 | 0 | 0 |
@@ -64,3 +64,5 @@ Log `STARTED` ≈ CLI attempts from this script (Git/Vercel auto-builds also bur
 | 2026-10-14 19:36 IST | `integration/2026-10-14-phase2` | `c4a75e04` | production | sp | OK | staged --skip-domain not-promoted www-unchanged sha=c4a75e04a24f21129634e2808884f85560307478 branch=integration/2026-10-14-phase2 operator=sp id=dpl_CsdKTpMeJP9o4CubZpJvoifmBNrT url=https://siya-health-9rcs16q1j-snehpandey23s-projects.vercel.app |
 | 2026-10-15 11:37 IST | `integration/2026-10-15-guide-kb` | `2ef0580e` | production | sp | STARTED | content(adhd): split the leftover visit-length lines |
 | 2026-10-15 11:37 IST | `integration/2026-10-15-guide-kb` | `2ef0580e` | production | sp | OK | staged --skip-domain not-promoted www-unchanged sha=2ef0580e6525dd66e57ec57c67b3878c97268ec1 branch=integration/2026-10-15-guide-kb operator=sp id=dpl_3D7znPoUscbj1BP9imDkwKgLvNHn url=https://siya-health-akth630po-snehpandey23s-projects.vercel.app |
+| 2026-10-15 12:50 IST | `integration/2026-10-15-guide-kb` | `0afa7377` | production | sp | STARTED | content(answers): update guide search duration snippets |
+| 2026-10-15 12:50 IST | `integration/2026-10-15-guide-kb` | `0afa7377` | production | sp | OK | staged --skip-domain not-promoted www-unchanged sha=0afa73779cbf98f94d181aed7291d25ca85ed7d8 branch=integration/2026-10-15-guide-kb operator=sp id=dpl_3Gk6qi1m69aSXgDcM6D1Tz2HCumK url=https://siya-health-6d5aypcgg-snehpandey23s-projects.vercel.app |
