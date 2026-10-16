@@ -29,6 +29,12 @@ const PRICING_MESSAGE =
 const PRICING_ALT_SENTENCE =
   "That's the pricing published on our site; I don't have any other pricing to share."
 
+const INSURANCE_RE =
+  /\b(insurance|insured|covered by insurance|accept insurance|take insurance|in-network|out-of-network|copays?|deductibles?|blue\s*cross|aetna|cigna|united\s*healthcare|medicare|medicaid)\b/i
+
+const INSURANCE_MESSAGE =
+  "Siya Health doesn't currently accept insurance. Our published pricing is $149 for the evaluation. Then $149 a month for ongoing care."
+
 const INTENT_PATTERNS: Array<{
   id: string
   re: RegExp
@@ -57,6 +63,13 @@ const INTENT_PATTERNS: Array<{
     event: 'booking_handoff',
   },
   {
+    id: 'insurance',
+    re: INSURANCE_RE,
+    message: INSURANCE_MESSAGE,
+    followUp: 'Want the pricing page, or a free Meet & Greet?',
+    links: ['pricing', 'meet_and_greet'],
+  },
+  {
     id: 'pricing',
     re: PRICING_TRIGGER_RE,
     message: PRICING_MESSAGE,
@@ -65,7 +78,7 @@ const INTENT_PATTERNS: Array<{
   },
   {
     id: 'sleep_guide',
-    re: /\b(insomnia|trouble (?:falling )?asleep|trouble sleeping|can(?:'|’)t sleep|night shifts?|shift work|work nights)\b/i,
+    re: /\b(insomnia|trouble (?:falling )?asleep|trouble sleeping|can(?:'|’)t sleep|cannot sleep|can not sleep|unable to sleep|not sleeping|night shifts?|shift work|work nights)\b/i,
     message:
       'You can start with the sleep guide on the Siya Health site. This chat only points to that page. It does not give medical advice.',
     followUp: 'Want the sleep guide, or a free Meet & Greet?',
@@ -280,7 +293,7 @@ function isOrgPriceContext(text: string): boolean {
 }
 
 function isInsuranceQuestion(text: string): boolean {
-  return /\binsurance\b/i.test(text)
+  return INSURANCE_RE.test(text)
 }
 
 function isClinicianJoinContext(text: string): boolean {
@@ -355,7 +368,9 @@ export function matchDeterministicIntent(text: string): IntentMatch | null {
 
   if (
     isOrgPriceContext(q) &&
-    (EMPLOYER_GAP_RE.test(q) || /\b(pric(?:e|ing)|cost|fee|package|how much|membership|subscription|\$\d+)\b/i.test(q))
+    (isInsuranceQuestion(q) ||
+      EMPLOYER_GAP_RE.test(q) ||
+      /\b(pric(?:e|ing)|cost|fee|package|how much|membership|subscription|\$\d+)\b/i.test(q))
   ) {
     return intentReply(
       'employer_unpublished',

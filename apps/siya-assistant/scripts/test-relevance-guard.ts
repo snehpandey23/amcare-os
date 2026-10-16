@@ -139,7 +139,7 @@ async function main() {
     {
       q: 'What is the cost of a visit?',
       state: 'verified',
-      must: /\$149 initial evaluation/i,
+      must: /\$149 for the evaluation\. Then \$149 a month for ongoing care\./i,
     },
   ]
 
