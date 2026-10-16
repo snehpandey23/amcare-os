@@ -17,6 +17,18 @@ export function isHumanHandoffRequest(text: string): boolean {
   return HUMAN_HANDOFF_RE.test(text.trim())
 }
 
+/** Patient pricing. Insurance questions are skipped later so they never get this reply. */
+const PRICING_TRIGGER_RE =
+  /\b(pric(?:e|ing)|how much|cheaper|cheapest|discount|memberships?|subscriptions?|plans?|per month|monthly|ongoing care|follow-?up(?: visit)? (?:cost|fee|price)|(?:visit|evaluation|appointment) (?:cost|fee)|(?:cost|fee) of (?:a |an |the |your )?(?:visit|evaluation|appointment|care|siya))\b|\$149|\$79/i
+
+const PRICING_ALT_RE = /\b(discount|cheaper|cheapest)\b|\$79/i
+
+const PRICING_MESSAGE =
+  'Happy to help with that. $149 for the evaluation. Then $149 a month for ongoing care. Details can change, so the pricing page is the best place to confirm.'
+
+const PRICING_ALT_SENTENCE =
+  "That's the pricing published on our site; I don't have any other pricing to share."
+
 const INTENT_PATTERNS: Array<{
   id: string
   re: RegExp
@@ -46,9 +58,8 @@ const INTENT_PATTERNS: Array<{
   },
   {
     id: 'pricing',
-    re: /\b(pric(?:e|ing)|\$149|how much (?:does|is|do|are) (?:siya|it|this|a visit|an evaluation|care|the visit)|(?:visit|evaluation|appointment) (?:cost|fee)|(?:cost|fee) of (?:a |an |the |your )?(?:visit|evaluation|appointment|care|siya))\b/i,
-    message:
-      'Happy to help with that. $149 for the evaluation. Then $149 a month for ongoing care. Details can change, so the pricing page is the best place to confirm.',
+    re: PRICING_TRIGGER_RE,
+    message: PRICING_MESSAGE,
     followUp: 'Want the full pricing page, ADHD evaluation cost details, or a free Meet & Greet to talk it through?',
     links: ['pricing', 'adhd_evaluation_cost', 'meet_and_greet'],
   },
@@ -259,6 +270,19 @@ function isEmployerContext(text: string): boolean {
   return EMPLOYER_RE.test(text) || /\b(employer|partnership|partner with|b2b)\b/i.test(text)
 }
 
+/** Company, team, or employee price questions use the employer reply, not patient pricing. */
+function isOrgPriceContext(text: string): boolean {
+  return (
+    isEmployerContext(text) ||
+    /\b(company|companies|employees|workplace)\b/i.test(text) ||
+    /\b(?:my|our|a|the) team\b/i.test(text)
+  )
+}
+
+function isInsuranceQuestion(text: string): boolean {
+  return /\binsurance\b/i.test(text)
+}
+
 function isClinicianJoinContext(text: string): boolean {
   return (
     CLINICIAN_JOIN_RE.test(text) ||
@@ -329,7 +353,10 @@ export function matchDeterministicIntent(text: string): IntentMatch | null {
     )
   }
 
-  if (isEmployerContext(q) && (EMPLOYER_GAP_RE.test(q) || /\b(pric(?:e|ing)|cost|fee|package)\b/i.test(q))) {
+  if (
+    isOrgPriceContext(q) &&
+    (EMPLOYER_GAP_RE.test(q) || /\b(pric(?:e|ing)|cost|fee|package|how much|membership|subscription|\$\d+)\b/i.test(q))
+  ) {
     return intentReply(
       'employer_unpublished',
       'Partnership pricing, package names, who pays, and response timelines are not published. The next step is Request employer information at siya.health/employers. Inquiry, then a Discovery call to align on scope, then pilot design — that Discovery call is not a patient Meet & Greet.',
@@ -364,6 +391,7 @@ export function matchDeterministicIntent(text: string): IntentMatch | null {
         ? intent.re.test(text) || isBareStateQuestion(text)
         : intent.re.test(text)
     if (matched) {
+      if (intent.id === 'pricing' && isInsuranceQuestion(text)) continue
       if (intent.id === 'human_handoff') {
         return { id: intent.id, confidence: 0.95, response: humanHandoffResponse() }
       }
@@ -386,12 +414,16 @@ export function matchDeterministicIntent(text: string): IntentMatch | null {
       }
       const isPrivate = intent.id === 'private_discussion'
       const limit = intent.linkLimit || 3
+      const message =
+        intent.id === 'pricing' && PRICING_ALT_RE.test(text)
+          ? `${intent.message} ${PRICING_ALT_SENTENCE}`
+          : intent.message
       return {
         id: intent.id,
         confidence: 0.9,
         response: {
           state: isPrivate ? 'restricted' : 'verified',
-          message: intent.message,
+          message,
           followUp: intent.followUp,
           links: resolveLinks(intent.links, limit),
           citations: resolveLinks(intent.links.slice(0, 2)),
