@@ -15,6 +15,7 @@ Log `STARTED` ≈ CLI attempts from this script (Git/Vercel auto-builds also bur
 
 | Day (IST) | Prod STARTED | Prod OK | Preview STARTED | Preview OK | Quota REFUSED |
 |---|---:|---:|---:|---:|---:|
+| 2026-10-17 | 1 | 1 | 0 | 0 | 0 |
 | 2026-10-15 | 4 | 4 | 0 | 0 | 0 |
 | 2026-10-14 | 1 | 1 | 0 | 0 | 0 |
 | 2026-10-13 | 1 | 1 | 0 | 0 | 0 |
@@ -70,3 +71,5 @@ Log `STARTED` ≈ CLI attempts from this script (Git/Vercel auto-builds also bur
 | 2026-10-15 18:33 IST | `integration/2026-10-15-guide-kb` | `a2ca754e` | production | sp | OK | staged --skip-domain not-promoted www-unchanged sha=a2ca754e8830eb0c84b30a0dce5f43edea360b15 branch=integration/2026-10-15-guide-kb operator=sp id=dpl_8ygp7gp6mR8adKw6qGJv5epnfve3 url=https://siya-health-1z00syonw-snehpandey23s-projects.vercel.app |
 | 2026-10-15 22:25 IST | `integration/2026-10-15-guide-kb` | `11f6988a` | production | sp | STARTED | content(adhd): clarify intake forms and who conducts the visit |
 | 2026-10-15 22:25 IST | `integration/2026-10-15-guide-kb` | `11f6988a` | production | sp | OK | staged --skip-domain not-promoted www-unchanged sha=11f6988a06b2f2c8344bd1e3c3a6016dcfdecf51 branch=integration/2026-10-15-guide-kb operator=sp id=dpl_Fc8xtPmnXiegG1EizasoPQsN8Atk url=https://siya-health-7cfkza5an-snehpandey23s-projects.vercel.app |
+| 2026-10-17 14:51 IST | `integration/2026-10-17-cognitive-site` | `f2dad621` | production | sp | STARTED | Regenerate AI indexes for cognitive-first copy |
+| 2026-10-17 14:51 IST | `integration/2026-10-17-cognitive-site` | `f2dad621` | production | sp | OK | staged --skip-domain not-promoted www-unchanged sha=f2dad621d97ceb69cfcf27a6e2ed48035af6fa2c branch=integration/2026-10-17-cognitive-site operator=sp id=dpl_3tykHGYnv5cioNQNjzZTUkeJHrRp url=https://siya-health-jmi91k8ie-snehpandey23s-projects.vercel.app |
