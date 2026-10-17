@@ -1,11 +1,11 @@
 # Siya Health
 
-Generated: 2026-10-15
+Generated: 2026-10-17
 Total pages: 93
 
-- Siya Health | Integrated Care for Busy Professionals
+- Siya Health | Integrated Care &amp; Cognitive Testing for Busy Professionals
   URL: https://siya.health/
-  Summary: Physician-led integrated care for busy professionals — primary care, ADHD, weight, and hormonal health in one place. Licensed in CA, TX, PA, and FL.
+  Summary: Physician-led integrated care for busy professionals — primary care, ADHD, weight, hormonal health, and cognitive testing in one place. Licensed in California, Texas, Pennsylvania, and Florida.
 
 - About Siya Health | Care for busy professionals
   URL: https://siya.health/about
@@ -187,13 +187,13 @@ Total pages: 93
   URL: https://siya.health/brain-fog
   Summary: Brain fog is a symptom with many possible contributors — fatigue, sleep, thyroid, B12, iron, mood, ADHD. Learn what people mean by brain fog, when evaluation helps, which labs clinicians may consider, and how primary care sorts it out.
 
-- Creyos ADHD Testing Online | Part of Your Evaluation
+- Creyos ADHD Testing Online | Cognitive Assessment | Part of Your Evaluation
   URL: https://siya.health/creyos-adhd-testing
-  Summary: Creyos cognitive testing for ADHD as part of your $149 online evaluation. clinical interview plus validated tools as clinically appropriate. Licensed providers in TX, PA, FL.
+  Summary: Creyos cognitive testing for ADHD as part of your $149 online evaluation. clinical interview plus validated tools as clinically appropriate. Licensed providers in California, Texas, Pennsylvania, and Florida.
 
 - Care for busy professionals
   URL: https://siya.health/employers
-  Summary: Physician-led care for busy professionals: focus, sleep, stress, weight, hormones, and primary care, with one clinician keeping the whole picture. 2,700+ patients treated. Licensed in California, Texas, Pennsylvania, and Florida.
+  Summary: Physician-led care for busy professionals: focus, sleep, stress, weight, hormones, and primary care, with one clinician keeping the whole picture. 2,700+ patients seen. Licensed in California, Texas, Pennsylvania, and Florida.
 
 - Fatigue — Why You Are Always Tired, and When to Get Evaluated
   URL: https://siya.health/fatigue
