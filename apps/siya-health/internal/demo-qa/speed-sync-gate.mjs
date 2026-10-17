@@ -5,11 +5,13 @@
  * SIYA_SPEED_MUTATION=1 serves a build that fires cues on undivided wall-clock
  * milliseconds. That run must fail at 1.5×.
  */
-import { chromium } from 'playwright';
+import { chromium, webkit, devices } from 'playwright';
 import http from 'node:http';
 import fs from 'node:fs';
+import os from 'node:os';
 import path from 'node:path';
 import { execSync } from 'node:child_process';
+import { MUTE_SPEAKERS } from './mute-speakers.mjs';
 
 const ROOT = process.cwd();
 const OUT = path.join(ROOT, 'internal/demo-qa/walkthrough');
@@ -17,6 +19,8 @@ fs.mkdirSync(OUT, { recursive: true });
 const HASH = execSync('git rev-parse --short HEAD', { cwd: ROOT }).toString().trim();
 const MUTATION = process.env.SIYA_SPEED_MUTATION === '1';
 const MID_ONLY = process.env.SIYA_SPEED_MID === '1';
+const PHONE_ONLY = process.env.SIYA_SPEED_PHONE === '1';
+const ENGINE = process.env.SIYA_SPEED_ENGINE === 'webkit' ? 'webkit' : 'chromium';
 const VIEWS = [
   { w: 1440, h: 900, mobile: false },
   { w: 390, h: 664, mobile: true },
@@ -53,6 +57,7 @@ const server = await new Promise((r) => {
 const port = server.address().port;
 
 async function prep(page) {
+  await page.addInitScript({ content: MUTE_SPEAKERS });
   await page.goto(`http://127.0.0.1:${port}/employers/demo.html?review=1`, { waitUntil: 'domcontentloaded' });
   await page.waitForFunction(() => document.documentElement.dataset.siyaReady === '1');
   await page.click('#beginBtn');
@@ -99,6 +104,9 @@ async function measureSlide(page, id, rate) {
     let saw = false;
     let lastElapsed = e0;
     let lastAt = performance.now();
+    const trace = [];
+    let prevClock = null;
+    let lastRow = null;
     while (performance.now() - anchor < limit) {
       const active = !!document.getElementById(id)?.classList.contains('active');
       for (const el of els) {
@@ -113,6 +121,21 @@ async function measureSlide(page, id, rate) {
         const remain = Math.max(0, dur - lastElapsed);
         endAt = lastAt + remain / rate;
       }
+      const ac = demo.getAudio() && demo.getAudio().ac;
+      const clock = demo.getClockMode();
+      const row = {
+        ms: Math.round(performance.now() - anchor),
+        clock,
+        state: ac ? ac.state : 'none',
+        ct: ac ? Math.round(ac.currentTime * 1000) : null,
+        voice: Math.round(demo.getVoiceMs()),
+      };
+      if (clock !== prevClock) {
+        if (lastRow) trace.push(lastRow);
+        trace.push(row);
+        prevClock = clock;
+      }
+      lastRow = row;
       if (endAt && hit.size === els.length) break;
       await new Promise((r) => setTimeout(r, 20));
     }
@@ -126,13 +149,19 @@ async function measureSlide(page, id, rate) {
       cues: els.map((el) => ({ audioMs: +el.dataset.audioMs, wall: hit.has(el) ? hit.get(el) - anchor : null })),
       fired: log.length,
       firedMs: log.map((c) => c.audioMs),
+      trace,
     };
   }, { id, rate });
 }
 
-const browser = await chromium.launch();
-for (const view of (MUTATION ? [VIEWS[0]] : VIEWS)) {
-  const ctx = await browser.newContext({ viewport: { width: view.w, height: view.h }, isMobile: view.mobile, hasTouch: view.mobile });
+const browser = ENGINE === 'webkit'
+  ? await webkit.launch()
+  : await chromium.launch({ args: ['--mute-audio'] });
+const views = MUTATION ? [VIEWS[0]] : (PHONE_ONLY || ENGINE === 'webkit' ? [VIEWS[1]] : VIEWS);
+for (const view of views) {
+  const ctx = ENGINE === 'webkit'
+    ? await browser.newContext({ ...devices['iPhone 13'] })
+    : await browser.newContext({ viewport: { width: view.w, height: view.h }, isMobile: view.mobile, hasTouch: view.mobile });
   const page = await ctx.newPage();
   await prep(page);
   const speeds = MUTATION ? [1.5] : SPEEDS;
@@ -140,7 +169,7 @@ for (const view of (MUTATION ? [VIEWS[0]] : VIEWS)) {
   let coldPage = true;
   if (!MID_ONLY) for (const rate of speeds) {
     for (const id of slides) {
-      const label = `${view.w}x${view.h} ${id} @${rate}`;
+      const label = `${ENGINE} ${view.w}x${view.h} ${id} @${rate}`;
       let sample;
       try {
         sample = await measureSlide(page, id, rate);
@@ -171,10 +200,14 @@ for (const view of (MUTATION ? [VIEWS[0]] : VIEWS)) {
         else if (Math.abs(cue.wall - want) > tol) failures.push(`${label} cue ${cue.audioMs} at ${Math.round(cue.wall)}ms != ${Math.round(want)}ms (±${tol})`);
       }
       console.log(`${label} clock ${sample.clock} wall ${sample.wall == null ? '—' : Math.round(sample.wall)} cues ${sample.cues.length} anim ${sample.animSec == null ? '—' : sample.animSec.toFixed(3)}`);
+      if (sample.clock === 'wall' || (sample.wall != null && Math.abs(sample.wall - expectWall) / expectWall > 0.05)) {
+        console.log(`TRACE ${label}`, JSON.stringify(sample.trace || []));
+        console.log(`LOAD ${label}`, os.loadavg().map((n) => n.toFixed(2)).join(' '));
+      }
     }
   }
   if (!MUTATION) {
-    const label = `${view.w}x${view.h} mid p-time 1→1.5`;
+    const label = `${ENGINE} ${view.w}x${view.h} mid p-time 1→1.5`;
     const mid = await page.evaluate(async () => {
       const demo = window.__employerDemo;
       demo.setPlaySpeed(1);

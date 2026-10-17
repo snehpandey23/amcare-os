@@ -3,6 +3,7 @@
  * Confirms the slide clock, caption, and build scale stay tied to the new clip.
  */
 import { chromium, webkit, devices } from 'playwright';
+import { MUTE_SPEAKERS } from './mute-speakers.mjs';
 import http from 'node:http';
 import fs from 'node:fs';
 import path from 'node:path';
@@ -26,9 +27,10 @@ const SPEEDS = [0.75, 1, 1.25, 1.5];
 const failures = [];
 
 async function check(browserType, contextOptions, label) {
-  const browser = await browserType.launch();
+  const browser = label === 'iphone13' ? await browserType.launch() : await browserType.launch({ args: ['--mute-audio'] });
   const ctx = await browser.newContext(contextOptions);
   const page = await ctx.newPage();
+  await page.addInitScript({ content: MUTE_SPEAKERS });
   await page.goto(`http://127.0.0.1:${port}/employers/demo.html?review=1`, { waitUntil: 'domcontentloaded' });
   await page.waitForFunction(() => document.documentElement.dataset.siyaReady === '1');
   await page.click('#beginBtn');
@@ -130,9 +132,10 @@ try {
 }
 
 const runtime = await (async () => {
-  const browser = await chromium.launch();
+  const browser = await chromium.launch({ args: ['--mute-audio'] });
   const ctx = await browser.newContext({ viewport: { width: 1440, height: 900 } });
   const page = await ctx.newPage();
+  await page.addInitScript({ content: MUTE_SPEAKERS });
   await page.goto(`http://127.0.0.1:${port}/employers/demo.html?review=1`, { waitUntil: 'domcontentloaded' });
   await page.waitForFunction(() => document.documentElement.dataset.siyaReady === '1');
   const totals = await page.evaluate(() => {
