@@ -4,6 +4,7 @@
  */
 import { chromium, webkit, devices } from 'playwright';
 import { MUTE_SPEAKERS } from './mute-speakers.mjs';
+import { waitForLoad, logLoad } from './load-guard.mjs';
 import http from 'node:http';
 import fs from 'node:fs';
 import path from 'node:path';
@@ -122,6 +123,7 @@ async function check(browserType, contextOptions, label) {
   return { pacing, voiceOn };
 }
 
+await waitForLoad('pacing');
 const desk = await check(chromium, { viewport: { width: 1440, height: 900 } }, 'desk');
 const phone = await check(chromium, { ...devices['Pixel 7'] }, 'pixel7');
 let iphone = null;
@@ -175,7 +177,8 @@ if (runtime.off < floor || runtime.off > ceil) failures.push(`sound-off pacing $
 if (runtime.on < floor || runtime.on > ceil) failures.push(`sound-on runtime ${runtime.on} outside 3:10–4:50`);
 await new Promise((r) => server.close(r));
 if (failures.length) {
-  console.log('FAILURES', failures.length);
+  logLoad('pacing end');
+console.log('FAILURES', failures.length);
   failures.forEach((f) => console.log(' -', f));
   process.exit(1);
 }

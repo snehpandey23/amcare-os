@@ -12,6 +12,7 @@ import os from 'node:os';
 import path from 'node:path';
 import { execSync } from 'node:child_process';
 import { MUTE_SPEAKERS } from './mute-speakers.mjs';
+import { waitForLoad, logLoad } from './load-guard.mjs';
 
 const ROOT = process.cwd();
 const OUT = path.join(ROOT, 'internal/demo-qa/walkthrough');
@@ -154,6 +155,7 @@ async function measureSlide(page, id, rate) {
   }, { id, rate });
 }
 
+await waitForLoad(`speed-sync ${ENGINE}${PHONE_ONLY ? ' phone' : ''}`);
 const browser = ENGINE === 'webkit'
   ? await webkit.launch()
   : await chromium.launch({ args: ['--mute-audio'] });
@@ -262,6 +264,7 @@ for (const view of views) {
   await ctx.close();
 }
 await browser.close();
+logLoad(`speed-sync ${ENGINE}${PHONE_ONLY ? ' phone' : ''} end`);
 await new Promise((r) => server.close(r));
 
 if (MUTATION) {

@@ -14,6 +14,7 @@ import http from 'node:http';
 import fs from 'node:fs';
 import path from 'node:path';
 import { execSync } from 'node:child_process';
+import { waitForLoad, logLoad } from './load-guard.mjs';
 
 const ROOT = process.cwd();
 const OUT = path.join(ROOT, 'internal/demo-qa/walkthrough');
@@ -96,6 +97,7 @@ function checkMeas(m, meta) {
 }
 
 async function runEngine(engine, label, views = VIEWS) {
+  await waitForLoad(`no-scroll ${label}`);
   for (const [w, h] of views) {
     const browser = await engine.launch();
     const ctx = await browser.newContext({
@@ -198,6 +200,7 @@ ${failures.length ? failures.slice(0, 60).map((f) =>
 `;
 fs.writeFileSync(path.join(OUT, 'no-scroll-gate.md'), md);
 console.log(md);
+logLoad('no-scroll end');
 console.log('FAILURES', failures.length);
 await new Promise((r) => server.close(r));
 process.exit(failures.length ? 1 : 0);

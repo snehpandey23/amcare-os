@@ -12,6 +12,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { execSync } from 'node:child_process';
 import crypto from 'node:crypto';
+import { waitForLoad, logLoad } from './load-guard.mjs';
 
 const ROOT = process.cwd();
 const OUT = path.join(ROOT, 'internal/demo-qa/walkthrough');
@@ -90,6 +91,7 @@ async function within(step, fn) {
   }
 }
 
+await waitForLoad('pause');
 const browser = await chromium.launch();
 let timedOut = null;
 for (const { w, h, mobile } of VIEWS) {
@@ -181,6 +183,7 @@ for (const { w, h, mobile } of VIEWS) {
   if (timedOut) break;
 }
 await browser.close();
+logLoad('pause end');
 
 const report = { commit: HASH, failures: failures.length, sample: failures.slice(0, 40) };
 fs.writeFileSync(path.join(OUT, 'pause-freeze-gate.json'), JSON.stringify(report, null, 2));

@@ -13,6 +13,7 @@ import http from 'node:http';
 import fs from 'node:fs';
 import path from 'node:path';
 import { execSync } from 'node:child_process';
+import { waitForLoad, logLoad } from './load-guard.mjs';
 
 const ROOT = process.cwd();
 const OUT = path.join(ROOT, 'internal/demo-qa/walkthrough');
@@ -75,6 +76,7 @@ const server = await new Promise((r) => {
   s.listen(0, '127.0.0.1', () => r(s));
 });
 const port = server.address().port;
+await waitForLoad('collision');
 const browser = await chromium.launch();
 
 const slideIds = await (async () => {
@@ -398,5 +400,6 @@ fs.writeFileSync(
 console.log('FAILURES', failures.length);
 failures.slice(0, 60).forEach((f) => console.log(JSON.stringify(f)));
 await browser.close();
+logLoad('collision end');
 server.close();
 process.exit(failures.length ? 1 : 0);

@@ -5,6 +5,7 @@
  */
 import { chromium, webkit, devices } from 'playwright';
 import { MUTE_SPEAKERS } from './mute-speakers.mjs';
+import { waitForLoad, logLoad } from './load-guard.mjs';
 import http from 'node:http';
 import fs from 'node:fs';
 import path from 'node:path';
@@ -33,6 +34,7 @@ const port = server.address().port;
 const failures = [];
 const rows = [];
 
+await waitForLoad('e2e');
 async function playThrough(label, browserType, contextOptions) {
   const browser = label === 'webkit-iphone13'
     ? await browserType.launch()
@@ -132,6 +134,7 @@ const report = { target: TARGET, maxWall: MAX_WALL, minWall: MIN_WALL, maxGap: M
 fs.writeFileSync(path.join(OUT, 'e2e-runtime.json'), JSON.stringify(report, null, 2));
 fs.writeFileSync(path.join(OUT, 'e2e-runtime.md'), `# e2e runtime\n\n${rows.map((r) => `- ${r.label}: wall ${Math.round(r.wall)} ms, max gap ${Math.round(r.maxGap)} ms (${r.pair})`).join('\n')}\n\nFailures: ${failures.length}\n`);
 
+logLoad('e2e end');
 await new Promise((r) => server.close(r));
 if (failures.length) {
   console.log('FAILURES', failures.length);

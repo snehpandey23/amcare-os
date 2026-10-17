@@ -10,6 +10,7 @@ import http from 'node:http';
 import fs from 'node:fs';
 import path from 'node:path';
 import { execSync } from 'node:child_process';
+import { waitForLoad, logLoad } from './load-guard.mjs';
 
 const ROOT = process.cwd();
 const OUT = path.join(ROOT, 'internal/demo-qa/walkthrough');
@@ -47,6 +48,7 @@ const port = server.address().port;
 const failures = [];
 const trimmed = new Set();
 
+await waitForLoad('readable');
 const browser = await chromium.launch();
 for (const { w, h, mobile } of VIEWS) {
   const ctx = await browser.newContext({ viewport: { width: w, height: h }, isMobile: mobile, hasTouch: mobile });
@@ -103,6 +105,7 @@ for (const { w, h, mobile } of VIEWS) {
   await ctx.close();
 }
 await browser.close();
+logLoad('readable end');
 
 const report = { commit: HASH, failures: failures.length, sample: failures.slice(0, 60), trimmedSlides: [...trimmed] };
 fs.writeFileSync(path.join(OUT, 'readable-text-gate.json'), JSON.stringify(report, null, 2));

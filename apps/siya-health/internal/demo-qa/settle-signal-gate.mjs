@@ -12,6 +12,7 @@ import http from 'node:http';
 import fs from 'node:fs';
 import path from 'node:path';
 import { execSync } from 'node:child_process';
+import { waitForLoad, logLoad } from './load-guard.mjs';
 
 const ROOT = process.cwd();
 const OUT = path.join(ROOT, 'internal/demo-qa/walkthrough');
@@ -73,6 +74,7 @@ async function waitQuiet(page, before) {
   return last;
 }
 
+await waitForLoad('settle');
 const browser = await chromium.launch();
 for (const view of VIEWS) {
   const ctx = await browser.newContext({
@@ -146,6 +148,7 @@ for (const view of VIEWS) {
   await ctx.close();
 }
 await browser.close();
+logLoad('settle end');
 await new Promise((r) => server.close(r));
 
 const report = { commit: HASH, failures: failures.length, sample: failures.slice(0, 40) };
