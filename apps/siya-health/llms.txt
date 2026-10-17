@@ -187,9 +187,9 @@ Total pages: 93
   URL: https://siya.health/brain-fog
   Summary: Brain fog is a symptom with many possible contributors — fatigue, sleep, thyroid, B12, iron, mood, ADHD. Learn what people mean by brain fog, when evaluation helps, which labs clinicians may consider, and how primary care sorts it out.
 
-- Creyos ADHD Testing Online | Cognitive Assessment | Part of Your Evaluation
+- Creyos ADHD Testing Online | Cognitive Assessment
   URL: https://siya.health/creyos-adhd-testing
-  Summary: Creyos cognitive testing for ADHD as part of your $149 online evaluation. clinical interview plus validated tools as clinically appropriate. Licensed providers in California, Texas, Pennsylvania, and Florida.
+  Summary: Creyos cognitive testing for ADHD as part of your $149 online evaluation, as clinically appropriate. clinical interview plus validated tools as clinically appropriate. Licensed providers in California, Texas, Pennsylvania, and Florida.
 
 - Care for busy professionals
   URL: https://siya.health/employers
