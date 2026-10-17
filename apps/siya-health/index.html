@@ -279,7 +279,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                   <svg viewBox="0 0 40 40" fill="none"><circle cx="20" cy="14" r="6" stroke="currentColor" stroke-width="2"/><path d="M8 32c2-7 8-10 12-10s10 3 12 10" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
                 </span>
                 <p class="siya-h2-proof__count" aria-live="polite">
-                  <span class="siya-h2-proof__num" data-count-up="2700" data-count-suffix="+">0+</span>
+                  <span class="siya-h2-proof__num" data-count-up="2700" data-count-suffix="+">2,700+</span>
                 </p>
                 <p class="siya-h2-proof__stat-label">patients treated</p>
                 <p class="siya-h2-proof__stat-sub">many of them busy professionals</p>
@@ -289,10 +289,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                   <svg viewBox="0 0 40 40" fill="none"><path d="M8 28V12h6v16H8zm9 0V8h6v20h-6zm9 0V16h6v12h-6z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>
                 </span>
                 <p class="siya-h2-proof__count" aria-live="polite">
-                  <span class="siya-h2-proof__num" data-count-up="10000" data-count-suffix="+">0+</span>
+                  <span class="siya-h2-proof__num" data-count-up="1200" data-count-suffix="+">1,200+</span>
                 </p>
-                <p class="siya-h2-proof__stat-label">patient interactions</p>
-                <p class="siya-h2-proof__stat-sub">(appointments, MA visits, calls, and chat)</p>
+                <p class="siya-h2-proof__stat-label">evaluations completed</p>
               </div>
             </div>
           </div>
@@ -510,7 +509,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
               <img src="/assets/images/dr-sneh-pandey-founder-840.jpg" alt="Dr. Sneh Pandey, MD" width="840" height="1080" loading="eager" />
               <div>
                 <h3><a href="/providers/dr-sneh-pandey">Dr. Sneh Pandey, MD</a></h3>
-                <p class="siya-h2-founder-role">Co-founder · Medical Director</p>
+                <p class="siya-h2-founder-role">Founder &amp; CEO · Medical Director</p>
                 <p class="siya-h2-founder-cred">Board-certified in Internal Medicine and Obesity Medicine, with ADHD-CCSP training.</p>
               </div>
             </article>
@@ -518,7 +517,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
               <img src="/assets/images/dr-swati-pandey.png" alt="Dr. Swati Pandey, MD" width="796" height="1024" loading="eager" />
               <div>
                 <h3><a href="/providers/dr-swati-pandey">Dr. Swati Pandey, MD</a></h3>
-                <p class="siya-h2-founder-role">Co-founder · Clinical Advisor</p>
+                <p class="siya-h2-founder-role">Co-founder &amp; Clinical Advisor · Internal Medicine Physician</p>
                 <p class="siya-h2-founder-cred">Internal Medicine Physician. ADHD-CCSP (ADHD Clinical Services Provider Program).</p>
               </div>
             </article>
@@ -977,21 +976,14 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
           el.setAttribute("data-count-ran", "1");
           var target = parseInt(el.getAttribute("data-count-up"), 10) || 0;
           var suffix = el.getAttribute("data-count-suffix") || "";
-          if (reduce || target <= 0) {
-            el.textContent = format(target) + suffix;
+          var finalText = format(target) + suffix;
+          var printed = (el.textContent || "").replace(/\s+/g, "").trim();
+          if (!target || printed === "0" || printed === "0+") {
+            if (target) el.textContent = finalText;
             return;
           }
-          var start = null;
-          var duration = 1600;
-          function frame(ts) {
-            if (start == null) start = ts;
-            var t = Math.min(1, (ts - start) / duration);
-            var eased = 1 - Math.pow(1 - t, 3);
-            var val = Math.round(target * eased);
-            el.textContent = format(val) + suffix;
-            if (t < 1) requestAnimationFrame(frame);
-          }
-          requestAnimationFrame(frame);
+          if (printed === finalText.replace(/,/g, "") || printed === finalText.replace(/\s+/g, "")) return;
+          el.textContent = finalText;
         }
         /* Wait until scroll-reveal makes the host visible — otherwise the
            tally finishes while .siya-h2-reveal is still opacity:0 / blurred. */
