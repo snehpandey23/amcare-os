@@ -41,7 +41,44 @@ const server = await new Promise((r) => {
 const port = server.address().port;
 const failures = [];
 
+const TRACE = `(() => {
+  const log = [];
+  const visits = [];
+  window.__settleTrace = log;
+  window.__settleVisits = visits;
+  const mark = (kind, extra) => {
+    log.push(Object.assign({ kind, t: Math.round(performance.now()) }, extra || {}));
+    if (log.length > 80) log.shift();
+  };
+  let box = window.__slideSettled;
+  Object.defineProperty(window, '__slideSettled', {
+    configurable: true,
+    get() { return box; },
+    set(v) {
+      box = v;
+      mark('settle', { gen: v && v.gen, id: v && v.id });
+      if (v && v.id && visits[visits.length - 1] !== v.id) visits.push(v.id);
+    },
+  });
+  document.addEventListener('click', (e) => {
+    const b = e.target && e.target.closest && e.target.closest('#next,#prev');
+    if (b) mark(b.id);
+  }, true);
+  document.addEventListener('transitionend', (e) => {
+    const art = e.target && e.target.closest && e.target.closest('article.slide');
+    if (!art || e.propertyName !== 'opacity') return;
+    mark('transitionend', { id: art.id });
+  }, true);
+  let edgeN = 0;
+  setInterval(() => {
+    const edges = window.__voEdges || [];
+    for (let i = edgeN; i < edges.length; i++) mark('clip', { clip: edges[i].kind, id: edges[i].id });
+    edgeN = edges.length;
+  }, 100);
+})();`;
+
 async function prep(page) {
+  await page.addInitScript({ content: TRACE });
   await page.goto(`http://127.0.0.1:${port}/employers/demo.html?review=1`, { waitUntil: 'domcontentloaded' });
   await page.waitForFunction(() => document.documentElement.dataset.siyaReady === '1');
   await page.evaluate(() => {
@@ -140,6 +177,13 @@ for (const view of VIEWS) {
           } catch (e) {
             const now = await gen(page);
             failures.push(`${label} gen ${before} -> ${now}`);
+            const trace = await page.evaluate(() => ({
+              tx: window.__employerDemo && window.__employerDemo.getTx(),
+              visits: (window.__settleVisits || []).length,
+              events: window.__settleTrace || [],
+            }));
+            const settles = trace.events.filter((ev) => ev.kind === 'settle').slice(-10);
+            console.log('SETTLE_TRACE', JSON.stringify({ label, before, now, tx: trace.tx, visits: trace.visits, settles, events: trace.events.slice(-24) }));
           }
         }
       }
